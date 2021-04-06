@@ -7,7 +7,7 @@ func _ready():
 
 
 func exec():
-	OS.execute("bash", ["-c", "sed -i s/launchergodot/launcher/g ~/.bashrc"], true)
+	OS.execute("bash", ["-c", "sed -i s/godot-launcher/launcher/g ~/.bashrc"], true)
 	var result = OS.execute("bash", ["-c", "sudo reboot"], true)
 	executed(result)
 	return result
