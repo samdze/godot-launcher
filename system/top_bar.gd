@@ -55,4 +55,7 @@ func _set_mode(value):
 		Mode.DEFAULT:
 			pass
 		Mode.STATUS:
-			Launcher.get_ui().bottom_bar.set_prompts([BottomBar.ICON_NAV, BottomBar.PROMPT_NAV, BottomBar.ICON_BUTTON_MENU, BottomBar.PROMPT_EXIT], [BottomBar.ICON_BUTTON_A, BottomBar.PROMPT_ENTER, BottomBar.ICON_BUTTON_B, BottomBar.PROMPT_BACK])
+			Launcher.get_ui().bottom_bar.set_prompts(
+				[#BottomBar.ICON_NAV, BottomBar.PROMPT_NAV, 
+					BottomBar.ICON_BUTTON_MENU, BottomBar.PROMPT_EXIT],
+				[BottomBar.ICON_BUTTON_B, BottomBar.PROMPT_BACK])

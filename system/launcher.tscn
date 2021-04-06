@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://library/window_manager.gdns" type="Script" id=1]
 [ext_resource path="res://system/view_handler.gd" type="Script" id=2]
@@ -53,6 +53,26 @@ region = Rect2( 0, 72, 18, 18 )
 flags = 4
 atlas = ExtResource( 4 )
 region = Rect2( 0, 108, 18, 18 )
+
+[sub_resource type="AtlasTexture" id=9]
+flags = 4
+atlas = ExtResource( 4 )
+region = Rect2( 0, 90, 18, 18 )
+
+[sub_resource type="AtlasTexture" id=10]
+flags = 4
+atlas = ExtResource( 4 )
+region = Rect2( 18, 90, 18, 18 )
+
+[sub_resource type="AtlasTexture" id=11]
+flags = 4
+atlas = ExtResource( 4 )
+region = Rect2( 18, 0, 18, 18 )
+
+[sub_resource type="AtlasTexture" id=12]
+flags = 4
+atlas = ExtResource( 4 )
+region = Rect2( 18, 18, 18, 18 )
 
 [node name="LauncherUI" type="Control"]
 anchor_right = 1.0
@@ -192,7 +212,7 @@ script = ExtResource( 9 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-icons = [ SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ) ]
+icons = [ SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ) ]
 
 [node name="InputEvents" type="Panel" parent="BottomContainer"]
 margin_left = 4.0

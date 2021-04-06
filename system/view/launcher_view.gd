@@ -10,7 +10,7 @@ var menu_directory : String = "/home/cpi/apps/Menu"
 #var menu_directory = "C:/Development/android-studio"
 var apps_directory : String = "res://apps"
 # Bash scripts and other types of file are not imported and must be loaded from the filesystem
-var gloabl_apps_directory : String = "/home/cpi/launchergodot/apps"
+var gloabl_apps_directory : String = "/home/cpi/godot-launcher/apps"
 
 var current_directory : String = ""
 var selection_stack = []
@@ -63,7 +63,7 @@ func move_to_directory(directory : String):
 func back_directory():
 	if current_directory != menu_directory:
 		var parent_dir = current_directory.left(current_directory.rfind("/"))
-		print("Going back to " + parent_dir)
+#		print("Going back to " + parent_dir)
 		
 		var selected_entry = selection_stack.pop_back() if selection_stack.size() > 0 else 0
 		return load_directory(parent_dir, selected_entry)
@@ -86,20 +86,20 @@ func load_directory(directory, selected_entry = 0):
 			var file_name : String = dir.get_next()
 			while file_name != "":
 				if dir.current_is_dir():
-					print("Found directory: " + file_name)
+#					print("Found directory: " + file_name)
 					var underscore_index = file_name.find("_")
 					var entry_name = file_name.substr(underscore_index + 1)
-					print("- Entry name is: " + entry_name)
+#					print("- Entry name is: " + entry_name)
 					var entry = create_entry(folder_entry, entry_name)
 					entries_container.add_child(entry)
 					# TODO: doesn't work for nested folders
 					entry.init_from_directory(gloabl_apps_directory + "/" + file_name, self)
 				else:
 					if file_name.ends_with(".sh"):
-						print("Found file: " + file_name)
+#						print("Found file: " + file_name)
 						var underscore_index = file_name.find("_")
 						var entry_name = file_name.substr(underscore_index + 1).replace(".sh", "")
-						print("- Entry name is: " + entry_name)
+#						print("- Entry name is: " + entry_name)
 						var entry = create_entry(command_entry, entry_name)
 						entries_container.add_child(entry)
 						# TODO: doesn't work for nested folders
@@ -133,19 +133,19 @@ func load_directory(directory, selected_entry = 0):
 		var file_name : String = dir.get_next()
 		while file_name != "":
 			if dir.current_is_dir():
-				print("Found directory: " + file_name)
+#				print("Found directory: " + file_name)
 				var underscore_index = file_name.find("_")
 				var entry_name = file_name.substr(underscore_index + 1)
-				print("- Entry name is: " + entry_name)
+#				print("- Entry name is: " + entry_name)
 				var entry = create_entry(folder_entry, entry_name)
 				entries_container.add_child(entry)
 				entry.init_from_directory(directory + "/" + file_name, self)
 			else:
 				if file_name.ends_with(".sh"):
-					print("Found file: " + file_name)
+#					print("Found file: " + file_name)
 					var underscore_index = file_name.find("_")
 					var entry_name = file_name.substr(underscore_index + 1).replace(".sh", "")
-					print("- Entry name is: " + entry_name)
+#					print("- Entry name is: " + entry_name)
 					var entry = create_entry(command_entry, entry_name)
 					entries_container.add_child(entry)
 					# TODO: check if file is executable
@@ -158,7 +158,7 @@ func load_directory(directory, selected_entry = 0):
 		if not c is LauncherEntry:
 			continue
 		
-		print("Configuring entry " + str(index))
+#		print("Configuring entry " + str(index))
 		c.connect("focus_entered", self, "_entry_focus_entered", [c])
 		c.connect("focus_exited", self, "_entry_focus_exited", [c])
 		c.connect("gui_input", self, "_entry_input", [c])
@@ -202,7 +202,7 @@ func create_entry(scene : PackedScene, name, script = null):
 
 
 func _entry_focus_entered(entry):
-	print("Entry " + entry.name + " has received focus.")
+#	print("Entry " + entry.name + " has received focus.")
 	last_focused_entry = entry
 	entry.set_highlighted(true)
 	tween.remove(entry.container, "rect_position:y")

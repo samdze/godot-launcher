@@ -7,9 +7,14 @@ const ICON_BUTTON_Y = 2
 const ICON_BUTTON_A = 3
 const ICON_BUTTON_B = 4
 const ICON_BUTTON_MENU = 5
+const ICON_BUTTON_SELECT = 6
+const ICON_BUTTON_START = 7
+const ICON_NAV_V = 8
+const ICON_NAV_H = 9
 
 const PROMPT_NAV = "Nav"
 const PROMPT_ENTER = "Enter"
+const PROMPT_SELECT = "Select"
 const PROMPT_BACK = "Back"
 const PROMPT_SCAN = "Scan"
 const PROMPT_INFO = "Info"

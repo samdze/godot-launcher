@@ -17,4 +17,8 @@ builds/
 project/
 
 # Addons
+addons/makefile_launcher
 addons/Todo_Manager
+
+# Utility makefile
+makefile
