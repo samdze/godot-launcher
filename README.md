@@ -21,6 +21,7 @@ This launcher aims to fix all those issues and to add other nice features.
 SSH into the cpi home directory of the GameShell and run:
 ```
 git clone https://github.com/samdze/godot-launcher.git
+sudo chmod +x godot-launcher/compton godot-launcher/godot
 sed -i s/launcher/godot-launcher/g /home/cpi/.bashrc
 ```
 Restart the GameShell and you should boot into the Godot launcher.<br>

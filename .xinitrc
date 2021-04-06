@@ -4,7 +4,7 @@ case $session in
 hdmi )
 	;;
 gameshell )
-	feh --bg-center ~/godot-launcher/wallpapers/loading.png
+#	feh --bg-center ~/godot-launcher/wallpapers/loading.png
 	exec ~/godot-launcher/compton --vsync opengl --paint-on-overlay > /tmp/compton.log 2>&1 &
 	exec ~/godot-launcher/godot --audio-driver Dummy ~/godot-launcher/project.godot > /tmp/godot-launcher.log 2>&1
 	;;
