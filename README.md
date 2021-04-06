@@ -1,14 +1,16 @@
-<p aling="center">
+<p align="center">
 	<img src="https://i.imgur.com/3uJZK70.gif" />
 </p>
-# GameShell Godot Launcher
-An alternative launcher for the GameShell portable console. Made with Godot and GDNative.
 
-To explore the launcher code and tweak it as you wish, open the project.godot file with Godot 3.2.3.
-Remember to reimport the launcher and to transfer the .import folder too to apply your changes.
+# GameShell Godot Launcher
+An alternative launcher for the GameShell portable console. Made with Godot and GDNative.<br>
+**VERY EARLY ALPHA VERSION**
+
+To explore the launcher code and tweak it as you wish, open the project.godot file with Godot 3.2.3.<br>
+Remember to reimport the launcher and to transfer the .import folder too to apply your changes.<br>
 Reimporting the project from the GameShell itself is not supported at the moment.
 
-**NOTE**: the 512 MB or ram version of the GameShell is known to have issues with Godot using the lima driver.
+**NOTE**: the 512 MB or ram version of the GameShell is known to have issues with Godot using the lima driver.<br>
 Fbturbo should work ok but performances will be worse.
 
 ## Why
@@ -19,14 +21,16 @@ This launcher aims to fix all those issues and to add other nice features.
 SSH into the cpi home directory of the GameShell and run:
 ```
 git clone https://github.com/samdze/godot-launcher.git
-sed -i s/godot-launcher/launcher/g /home/cpi/.bashrc
+sed -i s/launcher/godot-launcher/g /home/cpi/.bashrc
 ```
-Restart the GameShell and you should boot into the Godot launcher.
+Restart the GameShell and you should boot into the Godot launcher.<br>
 You can rollback to the stock launcher running the "Switch Launcher" app.
 
 ## Documentation
-Press Shift + Start at any time when an app is open to show the launcher widgets.
+Press Shift + Start at any time when an app is open to show the launcher widgets.<br>
 In this state, you can then exit the app, go back to the app, see the time and the approximate remaining battery.
+
+This is a very early version of the launcher, many games and apps will not be shown and there's no way to configure wifi, bluetooth, audio volume, graphics drivers, screen brightness, etc.
 
 ```
 /home/cpi/
@@ -40,7 +44,7 @@ In this state, you can then exit the app, go back to the app, see the time and t
 │   ├── system			System files and base infrastructure to build the launcher
 │   ├── system			Theme-related files, used to define fonts, UI skins and more
 │   ├── widgets			Widgets of the system, you can tweak them or also add your own
-│   └── project.godot	The launcher project file, open it to edit the launcher with the Godot editor
+│   └── project.godot		The launcher project file, open it to edit the launcher with the Godot editor
 ├── games
 │   ├── FreeDM
 │   ├── MAME
