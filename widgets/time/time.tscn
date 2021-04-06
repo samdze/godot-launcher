@@ -1,0 +1,32 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://widgets/time/time.gd" type="Script" id=1]
+
+[node name="Time" type="MarginContainer"]
+margin_left = 286.0
+margin_top = 2.0
+margin_right = 304.0
+margin_bottom = 20.0
+size_flags_vertical = 4
+custom_constants/margin_top = 2
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Time" type="Label" parent="."]
+margin_top = 3.0
+margin_right = 36.0
+margin_bottom = 17.0
+rect_min_size = Vector2( 36, 0 )
+text = "02:00"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+[connection signal="timeout" from="Timer" to="." method="_update_status"]

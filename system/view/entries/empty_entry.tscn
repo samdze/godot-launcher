@@ -1,0 +1,102 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://system/view/folder_icon.png" type="Texture" id=1]
+[ext_resource path="res://system/loading_icon.png" type="Texture" id=2]
+[ext_resource path="res://system/view/launcher_entry.gd" type="Script" id=3]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 1, 1, 1, 1 )
+corner_radius_top_left = 42
+corner_radius_top_right = 42
+corner_radius_bottom_right = 42
+corner_radius_bottom_left = 42
+
+[node name="EmptyEntry" type="Control"]
+margin_left = 90.0
+margin_top = 54.0
+margin_right = 164.0
+margin_bottom = 128.0
+rect_min_size = Vector2( 74, 74 )
+focus_mode = 2
+size_flags_vertical = 4
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Container" type="Control" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -37.0
+margin_top = -37.0
+margin_right = 37.0
+margin_bottom = 37.0
+rect_min_size = Vector2( 74, 74 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="Panel" parent="Container"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -37.0
+margin_top = -37.0
+margin_right = 37.0
+margin_bottom = 37.0
+custom_styles/panel = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureButton" type="TextureButton" parent="Container"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -40.0
+margin_top = -40.0
+margin_right = 40.0
+margin_bottom = 40.0
+texture_normal = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Container"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -37.0
+margin_top = 51.0
+margin_right = 37.0
+margin_bottom = 65.0
+grow_horizontal = 2
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HighlightRing" type="TextureRect" parent="Container"]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -46.0
+margin_top = -46.0
+margin_right = 46.0
+margin_bottom = 46.0
+rect_rotation = 90.0
+rect_pivot_offset = Vector2( 46, 46 )
+texture = ExtResource( 2 )
+stretch_mode = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tween" type="Tween" parent="."]

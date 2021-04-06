@@ -1,0 +1,7 @@
+[gd_resource type="GDNativeLibrary" format=2]
+
+[resource]
+entry/Windows.64 = "res://library/bin/libwindow-manager.dll"
+entry/X11.32 = "res://library/bin/libwindow-manager.so"
+dependency/Windows.64 = [  ]
+dependency/X11.32 = [  ]

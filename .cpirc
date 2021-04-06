@@ -1,0 +1,28 @@
+SCREEN=`cat /sys/class/graphics/fb0/modes`
+#export DISPLAY=:0
+
+XORG_CONF="~/launchergodot/.xorg.conf"
+if [ -f /home/cpi/.lima ]
+then
+XORG_CONF="~/launchergodot/.xorg_lima.conf"
+fi
+
+if [ -f /tmp/autologin ]
+then
+   rm -f /tmp/autologin
+#  mpd ~/.mpd.conf
+      if [[ $SCREEN =~ .*320.* ]]
+      then
+			while :
+			do
+        startx /home/cpi/launchergodot/.xinitrc -- -xf86config $XORG_CONF -nocursor > /tmp/x.log 2>&1
+				sleep 1
+			done
+      else
+			while :
+			do
+        startx /home/cpi/launchergodot/.xinitrc hdmi -- -xf86config $XORG_CONF > /tmp/x.log 2>&1
+				sleep 1
+			done
+      fi
+fi

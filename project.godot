@@ -1,0 +1,159 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+_global_script_classes=[ {
+"base": "MarginContainer",
+"class": "BottomBar",
+"language": "GDScript",
+"path": "res://system/bottom_bar.gd"
+}, {
+"base": "Control",
+"class": "LauncherEntry",
+"language": "GDScript",
+"path": "res://system/view/launcher_entry.gd"
+}, {
+"base": "Control",
+"class": "LauncherUI",
+"language": "GDScript",
+"path": "res://system/launcher.gd"
+}, {
+"base": "ColorRect",
+"class": "LoadingOverlay",
+"language": "GDScript",
+"path": "res://system/loading_overlay.gd"
+}, {
+"base": "MarginContainer",
+"class": "TopBar",
+"language": "GDScript",
+"path": "res://system/top_bar.gd"
+}, {
+"base": "Control",
+"class": "View",
+"language": "GDScript",
+"path": "res://system/view.gd"
+}, {
+"base": "VBoxContainer",
+"class": "ViewHandler",
+"language": "GDScript",
+"path": "res://system/view_handler.gd"
+}, {
+"base": "Node",
+"class": "WindowManager",
+"language": "NativeScript",
+"path": "res://library/window_manager.gdns"
+} ]
+_global_script_class_icons={
+"BottomBar": "",
+"LauncherEntry": "",
+"LauncherUI": "",
+"LoadingOverlay": "",
+"TopBar": "",
+"View": "",
+"ViewHandler": "",
+"WindowManager": ""
+}
+
+[application]
+
+config/name="godot-launcher"
+run/main_scene="res://system/launcher.tscn"
+config/use_custom_user_dir=true
+config/custom_user_dir_name="godot-launcher"
+run/low_processor_mode=true
+boot_splash/image="res://system/circle_icon.png"
+boot_splash/fullsize=false
+boot_splash/bg_color=Color( 1, 1, 1, 0 )
+config/icon="res://system/view/folder_icon.png"
+
+[autoload]
+
+Launcher="*res://system/singleton.gd"
+
+[display]
+
+window/size/width=320
+window/size/height=240
+window/size/resizable=false
+window/size/test_width=320
+window/size/test_height=240
+window/vsync/vsync_via_compositor=true
+window/per_pixel_transparency/allowed=true
+window/per_pixel_transparency/enabled=true
+window/energy_saving/keep_screen_on=false
+window/stretch/aspect="keep_width"
+
+[editor_plugins]
+
+enabled=PoolStringArray( "Todo_Manager" )
+
+[input]
+
+ui_accept={
+"deadzone": 0.5,
+"events": [ Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":0,"pressure":0.0,"pressed":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":75,"unicode":0,"echo":false,"script":null)
+ ]
+}
+ui_select={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":32,"unicode":0,"echo":false,"script":null)
+ ]
+}
+ui_cancel={
+"deadzone": 0.5,
+"events": [ Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":1,"pressure":0.0,"pressed":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":74,"unicode":0,"echo":false,"script":null)
+ ]
+}
+ui_home={
+"deadzone": 0.5,
+"events": [  ]
+}
+ui_end={
+"deadzone": 0.5,
+"events": [  ]
+}
+ui_menu={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777217,"unicode":0,"echo":false,"script":null)
+ ]
+}
+ui_start={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777221,"unicode":0,"echo":false,"script":null)
+ ]
+}
+alt_start={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777349,"unicode":0,"echo":false,"script":null)
+ ]
+}
+
+[logging]
+
+file_logging/log_path="user://logs/launchert.log"
+
+[rendering]
+
+quality/driver/driver_name="GLES2"
+quality/intended_usage/framebuffer_allocation=1
+quality/intended_usage/framebuffer_allocation.mobile=1
+vram_compression/import_etc=true
+vram_compression/import_etc2=false
+quality/reflections/texture_array_reflections=false
+quality/reflections/high_quality_ggx=false
+quality/reflections/irradiance_max_size=32
+quality/shading/force_vertex_shading=true
+quality/shading/force_lambert_over_burley=true
+quality/shading/force_blinn_over_ggx=true
+quality/reflections/atlas_size=0
+quality/reflections/atlas_subdiv=0
+quality/depth/hdr=false
+quality/dynamic_fonts/use_oversampling=false
