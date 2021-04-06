@@ -37,7 +37,7 @@ This is a very early version of the launcher, many games and apps will not be sh
 ├── apps
 │   ├── emulators
 │   └── Menu
-├── launchergodot 		<- Here we are
+├── godot-launcher 		<- Here we are
 │   ├── .import			Imported files, this is generated and updated when you reload/import the launcher
 │   ├── apps			Utilities and general purpose apps, you can tweak them or also add your own
 │   ├── library			Native libreries used to create and handlle the window manager of the launcher
