@@ -1,4 +1,4 @@
-extends ToolButton
+extends Widget
 
 export(Vector2) var atlas_cell_size = Vector2(18, 18)
 

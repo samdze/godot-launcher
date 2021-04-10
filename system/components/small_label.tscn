@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://system/components/theme_applier.gd" type="Script" id=1]
+
+[node name="SmallLabel" type="Label"]
+margin_right = 40.0
+margin_bottom = 14.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+font_values = {
+"font": "small_font"
+}

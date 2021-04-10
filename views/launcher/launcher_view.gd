@@ -1,13 +1,14 @@
 extends View
 
-const empty_entry = preload("res://system/view/entries/empty_entry.tscn")
-const command_entry = preload("res://system/view/entries/command_entry.tscn")
-const folder_entry = preload("res://system/view/entries/folder_entry.tscn")
+const empty_entry = preload("entries/empty_entry.tscn")
+const command_entry = preload("entries/command_entry.tscn")
+const folder_entry = preload("entries/folder_entry.tscn")
+
+const running_app_view = preload("res://views/running_app/running_app_view.tscn")
 
 var last_focused_entry : Control = null
 
 var menu_directory : String = "/home/cpi/apps/Menu"
-#var menu_directory = "C:/Development/android-studio"
 var apps_directory : String = "res://apps"
 # Bash scripts and other types of file are not imported and must be loaded from the filesystem
 var gloabl_apps_directory : String = "/home/cpi/godot-launcher/apps"
@@ -16,15 +17,11 @@ var current_directory : String = ""
 var selection_stack = []
 var default_entry_y = 0
 var entry_highlight_shift_y = -22
+var executing = false
 
 onready var entries_container = $HBoxContainer
 onready var tween = $Tween
 
-
-
-func _init():
-	show_top_bar = true
-	show_bottom_bar = true
 
 
 func _ready():
@@ -32,11 +29,25 @@ func _ready():
 
 
 func _focus():
+	emit_signal("bars_visibility_change_requested", true, true)
+	emit_signal("title_change_requested", "GameShell")
+	emit_signal("mode_change_requested", LauncherUI.Mode.OPAQUE)
 	_update_promtps()
+	if last_focused_entry != null:
+		last_focused_entry.grab_focus()
+
+
+func _unfocus():
+	if last_focused_entry != null:
+		last_focused_entry.release_focus()
 
 
 func _active_window_changed(window_id):
+	executing = false
 	Launcher.get_ui().loading_overlay.set_loading(false)
+	print("[GODOT] Adding a new view to the views stack...")
+	Launcher.get_ui().view.add_view(running_app_view.instance())
+	print("[GODOT] New view added to the views stack.")
 
 
 func _update_promtps():
@@ -162,6 +173,8 @@ func load_directory(directory, selected_entry = 0):
 		c.connect("focus_entered", self, "_entry_focus_entered", [c])
 		c.connect("focus_exited", self, "_entry_focus_exited", [c])
 		c.connect("gui_input", self, "_entry_input", [c])
+		c.focus_neighbour_top = c.get_path()
+		c.focus_neighbour_bottom = c.get_path()
 		if index > 0:
 			c.focus_neighbour_left = entries_container.get_child(index - 1).get_path()
 		else:
@@ -187,9 +200,12 @@ func load_directory(directory, selected_entry = 0):
 	return OK
 
 
-func _input(event):
-	if Launcher.get_ui().mode == LauncherUI.Mode.LAUNCHER and not Launcher.get_ui().loading_overlay.is_loading() and event.is_action_pressed("ui_cancel"):
+func _view_input(event):
+	if not executing and event.is_action_pressed("ui_cancel"):
 		back_directory()
+	# TODO: to remove
+#	if event.is_action_pressed("ui_menu"):
+#		get_tree().quit()
 
 
 func create_entry(scene : PackedScene, name, script = null):
@@ -221,8 +237,9 @@ func _entry_focus_exited(entry):
 
 
 func _entry_input(event : InputEvent, entry : LauncherEntry):
-	if event.is_action_pressed("ui_accept") and not Launcher.get_ui().loading_overlay.is_loading() and Launcher.get_ui().mode == LauncherUI.Mode.LAUNCHER:
+	if event.is_action_pressed("ui_accept") and not executing:
 		entry.release_focus()
+		executing = true
 		Launcher.get_ui().loading_overlay.set_loading(true)
 		entry.connect("executed", self, "_execution_terminated", [entry])
 		
@@ -233,6 +250,7 @@ func _entry_input(event : InputEvent, entry : LauncherEntry):
 func _execution_terminated(error, entry : LauncherEntry):
 	entry.disconnect("executed", self, "_execution_terminated")
 	Launcher.get_ui().loading_overlay.set_loading(false)
+	executing = false
 	if last_focused_entry != null:
 		last_focused_entry.grab_focus()
 	update()

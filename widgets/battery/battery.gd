@@ -1,4 +1,4 @@
-extends ToolButton
+extends Widget
 
 export(Texture) var charging_texture
 export(Texture) var battery_texture

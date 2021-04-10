@@ -17,7 +17,7 @@ _global_script_classes=[ {
 "base": "Control",
 "class": "LauncherEntry",
 "language": "GDScript",
-"path": "res://system/view/launcher_entry.gd"
+"path": "res://views/launcher/launcher_entry.gd"
 }, {
 "base": "Control",
 "class": "LauncherUI",
@@ -44,6 +44,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://system/view_handler.gd"
 }, {
+"base": "ToolButton",
+"class": "Widget",
+"language": "GDScript",
+"path": "res://system/widget.gd"
+}, {
 "base": "Node",
 "class": "WindowManager",
 "language": "NativeScript",
@@ -57,6 +62,7 @@ _global_script_class_icons={
 "TopBar": "",
 "View": "",
 "ViewHandler": "",
+"Widget": "",
 "WindowManager": ""
 }
 
@@ -70,7 +76,7 @@ run/low_processor_mode=true
 boot_splash/image="res://system/circle_icon.png"
 boot_splash/fullsize=false
 boot_splash/bg_color=Color( 1, 1, 1, 0 )
-config/icon="res://system/view/folder_icon.png"
+config/icon="res://views/launcher/folder_icon.png"
 
 [autoload]
 

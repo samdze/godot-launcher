@@ -1,12 +1,13 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://library/window_manager.gdns" type="Script" id=1]
 [ext_resource path="res://system/view_handler.gd" type="Script" id=2]
 [ext_resource path="res://theme/theme.tres" type="Theme" id=3]
 [ext_resource path="res://system/footbar.png" type="Texture" id=4]
-[ext_resource path="res://system/components/small_label.gd" type="Script" id=5]
+[ext_resource path="res://system/components/small_label.tscn" type="PackedScene" id=5]
 [ext_resource path="res://system/launcher.gd" type="Script" id=6]
 [ext_resource path="res://system/loading_overlay.gd" type="Script" id=7]
+[ext_resource path="res://theme/default_wallpaper.png" type="Texture" id=8]
 [ext_resource path="res://system/bottom_bar.gd" type="Script" id=9]
 [ext_resource path="res://system/top_bar.gd" type="Script" id=10]
 [ext_resource path="res://system/loading_icon.png" type="Texture" id=11]
@@ -23,6 +24,14 @@ corner_detail = 4
 [sub_resource type="StyleBoxEmpty" id=2]
 content_margin_top = 1.0
 content_margin_bottom = 1.0
+
+[sub_resource type="StyleBoxFlat" id=13]
+bg_color = Color( 0.0588235, 0.705882, 0.901961, 1 )
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+corner_detail = 4
 
 [sub_resource type="AtlasTexture" id=3]
 flags = 4
@@ -119,12 +128,12 @@ texture = ExtResource( 11 )
 repeat = true
 playback/repeat = true
 
-[node name="Background" type="ColorRect" parent="."]
+[node name="Background" type="TextureRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
+texture = ExtResource( 8 )
+expand = true
+stretch_mode = 7
 
 [node name="TopContainer" type="MarginContainer" parent="."]
 anchor_right = 1.0
@@ -160,13 +169,31 @@ __meta__ = {
 
 [node name="Label" type="Label" parent="TopContainer/TopPanel/HBoxContainer"]
 margin_top = 2.0
-margin_right = 304.0
+margin_right = 72.0
 margin_bottom = 21.0
-size_flags_horizontal = 3
 custom_styles/normal = SubResource( 2 )
 custom_colors/font_color = Color( 0.32549, 0.32549, 0.32549, 1 )
 text = "GameShell"
 valign = 1
+
+[node name="Widgets" type="HBoxContainer" parent="TopContainer/TopPanel/HBoxContainer"]
+margin_left = 76.0
+margin_right = 304.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+alignment = 2
+
+[node name="Highlighter" type="Panel" parent="TopContainer/TopPanel"]
+margin_top = 24.0
+margin_right = 18.0
+margin_bottom = 26.0
+rect_min_size = Vector2( 18, 2 )
+custom_styles/panel = SubResource( 13 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tween" type="Tween" parent="TopContainer"]
 
 [node name="Main" type="VBoxContainer" parent="."]
 anchor_right = 1.0
@@ -293,15 +320,15 @@ margin_bottom = 24.0
 texture = SubResource( 3 )
 stretch_mode = 6
 
-[node name="Label" type="Label" parent="BottomContainer/InputEvents/HBoxContainer/Left/Nav"]
+[node name="SmallLabel" parent="BottomContainer/InputEvents/HBoxContainer/Left/Nav" instance=ExtResource( 5 )]
 margin_left = 20.0
 margin_top = 3.0
 margin_right = 46.0
 margin_bottom = 20.0
-custom_colors/font_color = Color( 0.32549, 0.32549, 0.32549, 1 )
 text = "Nav"
-valign = 1
-script = ExtResource( 5 )
+font_values = {
+"font": "small_font"
+}
 
 [node name="Right" type="HBoxContainer" parent="BottomContainer/InputEvents/HBoxContainer"]
 margin_left = 154.0
@@ -322,14 +349,15 @@ margin_bottom = 24.0
 texture = SubResource( 4 )
 stretch_mode = 6
 
-[node name="Label" type="Label" parent="BottomContainer/InputEvents/HBoxContainer/Right/Enter"]
+[node name="SmallLabel" parent="BottomContainer/InputEvents/HBoxContainer/Right/Enter" instance=ExtResource( 5 )]
 margin_left = 20.0
 margin_top = 3.0
 margin_right = 56.0
 margin_bottom = 20.0
-custom_colors/font_color = Color( 0.32549, 0.32549, 0.32549, 1 )
 text = "Enter"
-script = ExtResource( 5 )
+font_values = {
+"font": "small_font"
+}
 
 [node name="Back" type="HBoxContainer" parent="BottomContainer/InputEvents/HBoxContainer/Right"]
 margin_left = 97.0
@@ -343,20 +371,21 @@ margin_bottom = 24.0
 texture = SubResource( 4 )
 stretch_mode = 6
 
-[node name="Label" type="Label" parent="BottomContainer/InputEvents/HBoxContainer/Right/Back"]
+[node name="SmallLabel" parent="BottomContainer/InputEvents/HBoxContainer/Right/Back" instance=ExtResource( 5 )]
 margin_left = 20.0
 margin_top = 3.0
 margin_right = 53.0
 margin_bottom = 20.0
-custom_colors/font_color = Color( 0.32549, 0.32549, 0.32549, 1 )
 text = "Back"
-script = ExtResource( 5 )
+font_values = {
+"font": "small_font"
+}
 
 [node name="StandByTimer" type="Timer" parent="."]
 
 [node name="Tween" type="Tween" parent="."]
 [connection signal="active_window_changed" from="WindowManager" to="." method="_active_window_changed"]
 [connection signal="window_mapped" from="WindowManager" to="." method="_window_mapped"]
+[connection signal="window_name_changed" from="WindowManager" to="." method="_window_name_changed"]
 [connection signal="window_unmapped" from="WindowManager" to="." method="_window_unmapped"]
-[connection signal="view_changed" from="Main" to="." method="_view_changed"]
 [connection signal="timeout" from="StandByTimer" to="." method="_standby"]

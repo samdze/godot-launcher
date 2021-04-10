@@ -13,7 +13,6 @@ onready var tween : Tween = $Tween
 
 # Substitute label with a string of choice in a subclass to give this entry a custom name.
 func _ready():
-	label_node.add_color_override("font_color", get_color("entry_color"))
 	_set_label(label)
 
 

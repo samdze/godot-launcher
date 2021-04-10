@@ -42,7 +42,6 @@ func _thread_func(cmd):
 	prints("[Command Entry thread finished with exit code " + str(result) + "]")
 	if output.size() > 0:
 		print(str(output) + "\n")
-#	OS.delay_msec(1500)
 	call_deferred("_emit_executed", OK if result == 0 else FAILED)
 
 

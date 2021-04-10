@@ -46,7 +46,7 @@ func set_prompts(left_prompts, right_prompts):
 		var icon = TextureRect.new()
 		icon.texture = icons[left_prompts[i]]
 		icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-		var text = preload("components/small_label.gd").new()
+		var text = preload("components/small_label.tscn").instance()
 		text.valign = Label.VALIGN_CENTER
 		text.text = left_prompts[i + 1]
 		
@@ -62,7 +62,7 @@ func set_prompts(left_prompts, right_prompts):
 		var icon = TextureRect.new()
 		icon.texture = icons[right_prompts[i]]
 		icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-		var text = preload("components/small_label.gd").new()
+		var text = preload("components/small_label.tscn").instance()
 		text.valign = Label.VALIGN_CENTER
 		text.text = right_prompts[i + 1]
 		
