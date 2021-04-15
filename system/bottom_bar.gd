@@ -22,6 +22,8 @@ const PROMPT_DONE = "Done"
 const PROMPT_BACKSPACE = "Backspace"
 const PROMPT_ABC = "ABC"
 const PROMPT_EXIT = "Exit"
+const PROMPT_ADJUST = "Adjust"
+const PROMPT_APPLY = "Apply"
 
 onready var left_container = $InputEvents/HBoxContainer/Left
 onready var right_container = $InputEvents/HBoxContainer/Right

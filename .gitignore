@@ -13,8 +13,9 @@ data_*/
 # Builds
 builds/
 
-# Project support files
+# Project files
 project/
+settings.conf
 
 # Addons
 addons/makefile_launcher

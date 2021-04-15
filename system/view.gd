@@ -46,3 +46,18 @@ func _window_name_changed(name):
 func _active_window_changed(window_id):
 	
 	pass
+
+
+# Override this function to give this View a name for the modules system
+static func _get_component_name():
+	return "Default View"
+
+
+# Override this function to give this View tags for the modules system
+static func _get_component_tags():
+	return []
+
+
+# Override this function to expose user-editable settings to the Settings app
+static func _get_exported_settings():
+	return []

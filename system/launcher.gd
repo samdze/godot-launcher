@@ -1,9 +1,3 @@
-# TODO: fix BeanShell not permitting to show the widgets the first time they are called.
-#	May be an issue with Bean trying to raise itself when it detects another window on top.
-#	Setting the launcher as an "always on top" window in the manager should fix it.
-# TODO: Fix the Window Manager not capable of detecting 2048's game window name.
-# TODO: Fix widget highlighter sometimes standing in the left when calling the widgets menu.
-
 extends Control
 class_name LauncherUI
 
@@ -20,19 +14,23 @@ var top_bar_showing = false
 var bot_bar_showing = false
 
 onready var window_manager : WindowManager = $WindowManager
-onready var loading_overlay : LoadingOverlay = $Overlay/LoadingRect
-onready var top_bar : TopBar = $TopContainer
-onready var bottom_bar : BottomBar = $BottomContainer
-onready var view : ViewHandler = $Main
+onready var loading_overlay : LoadingOverlay = $Overlay/Container/LoadingRect
+onready var top_bar : TopBar = $Overlay/Container/TopContainer
+onready var bottom_bar : BottomBar = $Overlay/Container/BottomContainer
+onready var view : ViewHandler = $View
 onready var background : TextureRect = $Background
 onready var standby_timer = $StandByTimer
 onready var tween : Tween = $Tween
 
-onready var first_view : PackedScene = load("res://views/launcher/launcher_view.tscn")
-
+onready var first_view : PackedScene
 
 
 func _ready():
+	# TODO: review the setting system
+	Settings.add_exported_settings(self, [{ "section": "system", "key": "launcher_view", "label": "Launcher View", "control": preload("res://system/settings/editors/dropdown_single_entry.tscn") }])
+	
+	first_view = Modules.get_view(Config.get_or_default("system", "launcher_view", null))["scene"]
+	
 	window_manager.start()
 	
 	# Hide top and bottom bars at startup
@@ -98,6 +96,7 @@ func _standby():
 
 
 func show_widgets():
+	window_manager.set_always_on_top(window_manager.get_window_id(), true)
 	view.unfocus()
 	top_bar.mode = TopBar.Mode.WIDGETS
 	if not top_bar_showing:
@@ -111,6 +110,7 @@ func show_widgets():
 
 
 func hide_widgets():
+	window_manager.set_always_on_top(window_manager.get_window_id(), false)
 	view.focus()
 	top_bar.mode = TopBar.Mode.STATUS
 	if not top_bar_showing:
@@ -191,7 +191,7 @@ func _active_window_changed(window_id):
 	view.active_window_changed(window_id)
 	
 	# TODO: debug stuff, to remove
-	var stack = Array()# = window_manager.get_windows_stack()
+	var stack = window_manager.get_windows_stack()
 	var stack_string = ""
 	for w in stack:
 		stack_string += str(w)+"; "

@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://modules/default/battery/battery.gd" type="Script" id=1]
+[ext_resource path="res://modules/default/battery/without_charging.png" type="Texture" id=2]
+[ext_resource path="res://modules/default/battery/withcharging.png" type="Texture" id=3]
+
+
+
+
+[sub_resource type="StyleBoxEmpty" id=1]
+
+[sub_resource type="AtlasTexture" id=2]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 0, 36, 18, 18 )
+
+[node name="Battery" type="ToolButton"]
+margin_left = 286.0
+margin_top = 2.0
+margin_right = 304.0
+margin_bottom = 20.0
+size_flags_vertical = 4
+custom_styles/hover = SubResource( 1 )
+custom_styles/pressed = SubResource( 1 )
+custom_styles/focus = SubResource( 1 )
+custom_styles/disabled = SubResource( 1 )
+custom_styles/normal = SubResource( 1 )
+custom_constants/hseparation = 0
+shortcut_in_tooltip = false
+icon = SubResource( 2 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+charging_texture = ExtResource( 3 )
+battery_texture = ExtResource( 2 )
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+[connection signal="timeout" from="Timer" to="." method="_update_status"]

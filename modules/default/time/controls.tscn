@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://system/components/medium_label.tscn" type="PackedScene" id=1]
+
+[node name="Controls" type="HBoxContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MediumLabel" parent="." instance=ExtResource( 1 )]
+margin_top = 113.0
+margin_right = 142.0
+margin_bottom = 127.0
+text = "Monday 12 april, 2021"
+font_values = {
+"font": "medium_font"
+}

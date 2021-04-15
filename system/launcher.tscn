@@ -13,8 +13,9 @@
 [ext_resource path="res://system/loading_icon.png" type="Texture" id=11]
 
 [sub_resource type="StyleBoxFlat" id=1]
+content_margin_left = 4.0
+content_margin_right = 4.0
 bg_color = Color( 0.921569, 0.921569, 0.921569, 1 )
-border_color = Color( 0.298039, 0.298039, 0.298039, 1 )
 corner_radius_top_left = 4
 corner_radius_top_right = 4
 corner_radius_bottom_right = 4
@@ -25,60 +26,61 @@ corner_detail = 4
 content_margin_top = 1.0
 content_margin_bottom = 1.0
 
-[sub_resource type="StyleBoxFlat" id=13]
+[sub_resource type="StyleBoxFlat" id=3]
 bg_color = Color( 0.0588235, 0.705882, 0.901961, 1 )
+border_color = Color( 0.921569, 0.921569, 0.921569, 1 )
 corner_radius_top_left = 2
 corner_radius_top_right = 2
 corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
 corner_detail = 4
 
-[sub_resource type="AtlasTexture" id=3]
+[sub_resource type="AtlasTexture" id=4]
 flags = 4
 atlas = ExtResource( 4 )
 region = Rect2( 0, 0, 18, 18 )
 
-[sub_resource type="AtlasTexture" id=4]
+[sub_resource type="AtlasTexture" id=5]
 flags = 4
 atlas = ExtResource( 4 )
 region = Rect2( 0, 18, 18, 18 )
 
-[sub_resource type="AtlasTexture" id=5]
+[sub_resource type="AtlasTexture" id=6]
 flags = 4
 atlas = ExtResource( 4 )
 region = Rect2( 0, 36, 18, 18 )
 
-[sub_resource type="AtlasTexture" id=6]
+[sub_resource type="AtlasTexture" id=7]
 flags = 4
 atlas = ExtResource( 4 )
 region = Rect2( 0, 54, 18, 18 )
 
-[sub_resource type="AtlasTexture" id=7]
+[sub_resource type="AtlasTexture" id=8]
 flags = 4
 atlas = ExtResource( 4 )
 region = Rect2( 0, 72, 18, 18 )
 
-[sub_resource type="AtlasTexture" id=8]
+[sub_resource type="AtlasTexture" id=9]
 flags = 4
 atlas = ExtResource( 4 )
 region = Rect2( 0, 108, 18, 18 )
 
-[sub_resource type="AtlasTexture" id=9]
+[sub_resource type="AtlasTexture" id=10]
 flags = 4
 atlas = ExtResource( 4 )
 region = Rect2( 0, 90, 18, 18 )
 
-[sub_resource type="AtlasTexture" id=10]
+[sub_resource type="AtlasTexture" id=11]
 flags = 4
 atlas = ExtResource( 4 )
 region = Rect2( 18, 90, 18, 18 )
 
-[sub_resource type="AtlasTexture" id=11]
+[sub_resource type="AtlasTexture" id=12]
 flags = 4
 atlas = ExtResource( 4 )
 region = Rect2( 18, 0, 18, 18 )
 
-[sub_resource type="AtlasTexture" id=12]
+[sub_resource type="AtlasTexture" id=13]
 flags = 4
 atlas = ExtResource( 4 )
 region = Rect2( 18, 18, 18, 18 )
@@ -97,45 +99,15 @@ script = ExtResource( 1 )
 
 [node name="Overlay" type="CanvasLayer" parent="."]
 
-[node name="LoadingRect" type="ColorRect" parent="Overlay"]
-visible = false
+[node name="Container" type="Control" parent="Overlay"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color( 0, 0, 0, 0.392157 )
-script = ExtResource( 7 )
+theme = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CenterContainer" type="CenterContainer" parent="Overlay/LoadingRect"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-rect_pivot_offset = Vector2( 0.5, 0.5 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Pivot" type="Control" parent="Overlay/LoadingRect/CenterContainer"]
-margin_left = 160.0
-margin_top = 120.0
-margin_right = 160.0
-margin_bottom = 120.0
-
-[node name="Sprite" type="Sprite" parent="Overlay/LoadingRect/CenterContainer/Pivot"]
-texture = ExtResource( 11 )
-
-[node name="Tween" type="Tween" parent="Overlay/LoadingRect"]
-repeat = true
-playback/repeat = true
-
-[node name="Background" type="TextureRect" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
-texture = ExtResource( 8 )
-expand = true
-stretch_mode = 7
-
-[node name="TopContainer" type="MarginContainer" parent="."]
+[node name="TopContainer" type="MarginContainer" parent="Overlay/Container"]
 anchor_right = 1.0
 margin_bottom = 32.0
 custom_constants/margin_right = 4
@@ -147,7 +119,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TopPanel" type="Panel" parent="TopContainer"]
+[node name="TopPanel" type="Panel" parent="Overlay/Container/TopContainer"]
 margin_left = 4.0
 margin_top = 4.0
 margin_right = 316.0
@@ -157,7 +129,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HBoxContainer" type="HBoxContainer" parent="TopContainer/TopPanel"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Overlay/Container/TopContainer/TopPanel"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -167,65 +139,46 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="TopContainer/TopPanel/HBoxContainer"]
+[node name="Label" type="Label" parent="Overlay/Container/TopContainer/TopPanel/HBoxContainer"]
 margin_top = 2.0
 margin_right = 72.0
 margin_bottom = 21.0
+focus_mode = 2
 custom_styles/normal = SubResource( 2 )
 custom_colors/font_color = Color( 0.32549, 0.32549, 0.32549, 1 )
 text = "GameShell"
 valign = 1
 
-[node name="Widgets" type="HBoxContainer" parent="TopContainer/TopPanel/HBoxContainer"]
+[node name="Widgets" type="HBoxContainer" parent="Overlay/Container/TopContainer/TopPanel/HBoxContainer"]
 margin_left = 76.0
 margin_right = 304.0
 margin_bottom = 24.0
 size_flags_horizontal = 3
 alignment = 2
 
-[node name="Highlighter" type="Panel" parent="TopContainer/TopPanel"]
-margin_top = 24.0
+[node name="WidgetControls" type="PanelContainer" parent="Overlay/Container/TopContainer/TopPanel"]
+margin_top = 26.0
+margin_right = 24.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 24, 24 )
+custom_styles/panel = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Highlighter" type="Panel" parent="Overlay/Container/TopContainer/TopPanel"]
+margin_top = 23.0
 margin_right = 18.0
-margin_bottom = 26.0
-rect_min_size = Vector2( 18, 2 )
-custom_styles/panel = SubResource( 13 )
+margin_bottom = 27.0
+rect_min_size = Vector2( 18, 4 )
+custom_styles/panel = SubResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Tween" type="Tween" parent="TopContainer"]
+[node name="Tween" type="Tween" parent="Overlay/Container/TopContainer"]
 
-[node name="Main" type="VBoxContainer" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
-rect_clip_content = true
-custom_constants/separation = 0
-script = ExtResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="TopSpacer" type="Control" parent="Main"]
-margin_right = 320.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 0, 32 )
-size_flags_vertical = 5
-
-[node name="Container" type="VBoxContainer" parent="Main"]
-margin_top = 32.0
-margin_right = 320.0
-margin_bottom = 208.0
-size_flags_vertical = 3
-custom_constants/separation = 0
-
-[node name="BottomSpacer" type="Control" parent="Main"]
-margin_top = 208.0
-margin_right = 320.0
-margin_bottom = 240.0
-rect_min_size = Vector2( 0, 32 )
-size_flags_vertical = 5
-
-[node name="BottomContainer" type="MarginContainer" parent="."]
+[node name="BottomContainer" type="MarginContainer" parent="Overlay/Container"]
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -239,9 +192,9 @@ script = ExtResource( 9 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-icons = [ SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ) ]
+icons = [ SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ) ]
 
-[node name="InputEvents" type="Panel" parent="BottomContainer"]
+[node name="InputEvents" type="Panel" parent="Overlay/Container/BottomContainer"]
 margin_left = 4.0
 margin_top = 4.0
 margin_right = 316.0
@@ -252,7 +205,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HBoxContainer" type="HBoxContainer" parent="BottomContainer/InputEvents"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Overlay/Container/BottomContainer/InputEvents"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -262,65 +215,65 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Pressed" type="HBoxContainer" parent="BottomContainer/InputEvents/HBoxContainer"]
+[node name="Pressed" type="HBoxContainer" parent="Overlay/Container/BottomContainer/InputEvents/HBoxContainer"]
 visible = false
 margin_right = 149.0
 margin_bottom = 22.0
 rect_clip_content = true
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="BottomContainer/InputEvents/HBoxContainer/Pressed"]
+[node name="Label" type="Label" parent="Overlay/Container/BottomContainer/InputEvents/HBoxContainer/Pressed"]
 margin_top = 3.0
 margin_right = 50.0
 margin_bottom = 19.0
 custom_colors/font_color = Color( 0.32549, 0.32549, 0.32549, 1 )
 text = "Pressed:"
 
-[node name="Value" type="Label" parent="BottomContainer/InputEvents/HBoxContainer/Pressed"]
+[node name="Value" type="Label" parent="Overlay/Container/BottomContainer/InputEvents/HBoxContainer/Pressed"]
 margin_left = 54.0
 margin_top = 3.0
 margin_right = 54.0
 margin_bottom = 19.0
 custom_colors/font_color = Color( 0.32549, 0.32549, 0.32549, 1 )
 
-[node name="Released" type="HBoxContainer" parent="BottomContainer/InputEvents/HBoxContainer"]
+[node name="Released" type="HBoxContainer" parent="Overlay/Container/BottomContainer/InputEvents/HBoxContainer"]
 visible = false
 margin_right = 302.0
 margin_bottom = 22.0
 rect_clip_content = true
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="BottomContainer/InputEvents/HBoxContainer/Released"]
+[node name="Label" type="Label" parent="Overlay/Container/BottomContainer/InputEvents/HBoxContainer/Released"]
 margin_top = 3.0
 margin_right = 57.0
 margin_bottom = 19.0
 custom_colors/font_color = Color( 0.32549, 0.32549, 0.32549, 1 )
 text = "Released:"
 
-[node name="Value" type="Label" parent="BottomContainer/InputEvents/HBoxContainer/Released"]
+[node name="Value" type="Label" parent="Overlay/Container/BottomContainer/InputEvents/HBoxContainer/Released"]
 margin_left = 61.0
 margin_top = 3.0
 margin_right = 61.0
 margin_bottom = 19.0
 custom_colors/font_color = Color( 0.32549, 0.32549, 0.32549, 1 )
 
-[node name="Left" type="HBoxContainer" parent="BottomContainer/InputEvents/HBoxContainer"]
+[node name="Left" type="HBoxContainer" parent="Overlay/Container/BottomContainer/InputEvents/HBoxContainer"]
 margin_right = 150.0
 margin_bottom = 24.0
 size_flags_horizontal = 3
 
-[node name="Nav" type="HBoxContainer" parent="BottomContainer/InputEvents/HBoxContainer/Left"]
+[node name="Nav" type="HBoxContainer" parent="Overlay/Container/BottomContainer/InputEvents/HBoxContainer/Left"]
 margin_right = 46.0
 margin_bottom = 24.0
 custom_constants/separation = 2
 
-[node name="Icon" type="TextureRect" parent="BottomContainer/InputEvents/HBoxContainer/Left/Nav"]
+[node name="Icon" type="TextureRect" parent="Overlay/Container/BottomContainer/InputEvents/HBoxContainer/Left/Nav"]
 margin_right = 18.0
 margin_bottom = 24.0
-texture = SubResource( 3 )
+texture = SubResource( 4 )
 stretch_mode = 6
 
-[node name="SmallLabel" parent="BottomContainer/InputEvents/HBoxContainer/Left/Nav" instance=ExtResource( 5 )]
+[node name="SmallLabel" parent="Overlay/Container/BottomContainer/InputEvents/HBoxContainer/Left/Nav" instance=ExtResource( 5 )]
 margin_left = 20.0
 margin_top = 3.0
 margin_right = 46.0
@@ -330,26 +283,26 @@ font_values = {
 "font": "small_font"
 }
 
-[node name="Right" type="HBoxContainer" parent="BottomContainer/InputEvents/HBoxContainer"]
+[node name="Right" type="HBoxContainer" parent="Overlay/Container/BottomContainer/InputEvents/HBoxContainer"]
 margin_left = 154.0
 margin_right = 304.0
 margin_bottom = 24.0
 size_flags_horizontal = 3
 alignment = 2
 
-[node name="Enter" type="HBoxContainer" parent="BottomContainer/InputEvents/HBoxContainer/Right"]
+[node name="Enter" type="HBoxContainer" parent="Overlay/Container/BottomContainer/InputEvents/HBoxContainer/Right"]
 margin_left = 37.0
 margin_right = 93.0
 margin_bottom = 24.0
 custom_constants/separation = 2
 
-[node name="Icon" type="TextureRect" parent="BottomContainer/InputEvents/HBoxContainer/Right/Enter"]
+[node name="Icon" type="TextureRect" parent="Overlay/Container/BottomContainer/InputEvents/HBoxContainer/Right/Enter"]
 margin_right = 18.0
 margin_bottom = 24.0
-texture = SubResource( 4 )
+texture = SubResource( 5 )
 stretch_mode = 6
 
-[node name="SmallLabel" parent="BottomContainer/InputEvents/HBoxContainer/Right/Enter" instance=ExtResource( 5 )]
+[node name="SmallLabel" parent="Overlay/Container/BottomContainer/InputEvents/HBoxContainer/Right/Enter" instance=ExtResource( 5 )]
 margin_left = 20.0
 margin_top = 3.0
 margin_right = 56.0
@@ -359,19 +312,19 @@ font_values = {
 "font": "small_font"
 }
 
-[node name="Back" type="HBoxContainer" parent="BottomContainer/InputEvents/HBoxContainer/Right"]
+[node name="Back" type="HBoxContainer" parent="Overlay/Container/BottomContainer/InputEvents/HBoxContainer/Right"]
 margin_left = 97.0
 margin_right = 150.0
 margin_bottom = 24.0
 custom_constants/separation = 2
 
-[node name="Icon" type="TextureRect" parent="BottomContainer/InputEvents/HBoxContainer/Right/Back"]
+[node name="Icon" type="TextureRect" parent="Overlay/Container/BottomContainer/InputEvents/HBoxContainer/Right/Back"]
 margin_right = 18.0
 margin_bottom = 24.0
-texture = SubResource( 4 )
+texture = SubResource( 5 )
 stretch_mode = 6
 
-[node name="SmallLabel" parent="BottomContainer/InputEvents/HBoxContainer/Right/Back" instance=ExtResource( 5 )]
+[node name="SmallLabel" parent="Overlay/Container/BottomContainer/InputEvents/HBoxContainer/Right/Back" instance=ExtResource( 5 )]
 margin_left = 20.0
 margin_top = 3.0
 margin_right = 53.0
@@ -380,6 +333,77 @@ text = "Back"
 font_values = {
 "font": "small_font"
 }
+
+[node name="LoadingRect" type="ColorRect" parent="Overlay/Container"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0.392157 )
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="Overlay/Container/LoadingRect"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 0.5, 0.5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Pivot" type="Control" parent="Overlay/Container/LoadingRect/CenterContainer"]
+margin_left = 160.0
+margin_top = 120.0
+margin_right = 160.0
+margin_bottom = 120.0
+
+[node name="Sprite" type="Sprite" parent="Overlay/Container/LoadingRect/CenterContainer/Pivot"]
+texture = ExtResource( 11 )
+
+[node name="Tween" type="Tween" parent="Overlay/Container/LoadingRect"]
+repeat = true
+playback/repeat = true
+
+[node name="Background" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 8 )
+expand = true
+stretch_mode = 7
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="View" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_clip_content = true
+custom_constants/separation = 0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TopSpacer" type="Control" parent="View"]
+margin_right = 320.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 0, 32 )
+size_flags_vertical = 5
+
+[node name="Container" type="VBoxContainer" parent="View"]
+margin_top = 32.0
+margin_right = 320.0
+margin_bottom = 208.0
+size_flags_vertical = 3
+custom_constants/separation = 0
+
+[node name="BottomSpacer" type="Control" parent="View"]
+margin_top = 208.0
+margin_right = 320.0
+margin_bottom = 240.0
+rect_min_size = Vector2( 0, 32 )
+size_flags_vertical = 5
 
 [node name="StandByTimer" type="Timer" parent="."]
 
