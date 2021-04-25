@@ -51,10 +51,10 @@ This is a very early version of the launcher, some games and apps will not be sh
 │   ├── modules			Folder containing modular parts of the launcher
 │   │   ├── default		The stock module, implements the default widgets, apps, themes, etc.
 │   │   └── ...			You can add your own modules here!
-│   ├── project.godot	The launcher project file, open it to edit the launcher with the Godot editor
+│   ├── project.godot		The launcher project file, open it to edit the launcher with the Godot editor
 │   ├── godot			The Godot Engine executable, used to run the launcher
-│   ├── compton			The compositor, this runs together with the launcher
-│   └── settings.conf	Launcher settings using a INI-style formatting
+│   ├── compton			The compositor, this should run together with the launcher
+│   └── settings.conf		Launcher settings using a INI-style formatting
 │
 ├── games
 │   ├── FreeDM
