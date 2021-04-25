@@ -1,14 +1,12 @@
 extends LauncherEntry
 
-var settings_view : PackedScene
 
-
-func _ready():
-	settings_view = Modules.get_view(Config.get_or_default("system", "settings_view", null))["scene"]
-	_set_label("Settings")
+func get_label():
+	return "Settings"
 
 
 func exec():
-	Launcher.get_ui().view.add_view(settings_view.instance())
+	var settings_app = Modules.get_loaded_component_from_config("system", "settings_app", "default/settings").resource
+	Launcher.get_ui().app.add_app(settings_app.instance())
 	executed(OK)
 	return OK

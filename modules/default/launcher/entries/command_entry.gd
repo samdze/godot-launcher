@@ -2,17 +2,15 @@ extends LauncherEntry
 
 export(String, MULTILINE) var command
 
+var name : String
 var thread : Thread
 var running = false
-
-
-func _ready():
-	set_process(false)
 
 
 func init_from_file(directory, file_name):
 	command = "cd '" + directory + "'\n"+ \
 		"exec ./" + file_name
+	name = file_name.get_basename()
 
 
 func exec():
@@ -20,10 +18,13 @@ func exec():
 	var result = thread.start(self, "_thread_func", command)
 	if result == OK:
 		running = true
-		set_process(true)
 	else:
 		executed(FAILED)
 	return result
+
+
+func get_label() -> String:
+	return name
 
 
 func _process(delta):
@@ -49,6 +50,5 @@ func _emit_executed(error):
 	prints("Waiting for thread.")
 	thread.wait_to_finish()
 	running = false
-	set_process(false)
 	executed(error)
 	prints("Thread terminated.")

@@ -19,7 +19,7 @@ func _ready():
 	percentage_regex = RegEx.new()
 	percentage_regex.compile("\\[(\\d+)%\\]")
 	
-	_update_status(Config.get_or_default("settings", "audio_volume", null))
+	_update_status(Config.get_value_or_default("settings", "audio_volume", null))
 
 
 func _widget_selected():

@@ -14,7 +14,7 @@ func _ready():
 	config.save("res://settings.conf")
 
 
-func get_or_default(section : String, key : String, default):
+func get_value_or_default(section : String, key : String, default):
 	var value = config.get_value(section, key, default)
 	config.set_value(section, key, value)
 	return value

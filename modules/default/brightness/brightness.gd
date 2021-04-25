@@ -16,7 +16,7 @@ func _ready():
 	slider.connect("gui_input", self, "_controls_gui_input", [slider])
 	label = controls.get_node("MediumLabel")
 	
-	_update_status(Config.get_or_default("settings", "brightness", null))
+	_update_status(Config.get_value_or_default("settings", "brightness", null))
 
 
 func _widget_selected():

@@ -1,12 +1,11 @@
 extends LauncherEntry
 
 
-
-func _ready():
-	_set_label("Quit")
+func get_label():
+	return "Quit"
 
 
 func exec():
-	get_tree().quit()
+	Engine.get_main_loop().quit()
 	executed(OK)
 	return OK

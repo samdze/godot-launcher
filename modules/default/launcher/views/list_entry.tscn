@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://modules/default/launcher/views/list_entry.gd" type="Script" id=1]
+
+[node name="ListEntry" type="Button"]
+margin_right = 320.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+size_flags_vertical = 4
+clip_text = true
+align = 0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

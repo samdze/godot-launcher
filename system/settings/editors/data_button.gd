@@ -1,3 +1,0 @@
-extends Button
-
-var data

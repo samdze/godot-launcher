@@ -11,7 +11,8 @@ var widgets_directory : String = "res://widgets"
 var mode = Mode.STATUS setget _set_mode
 
 onready var widgets_container = $TopPanel/HBoxContainer/Widgets
-onready var title = $TopPanel/HBoxContainer/Label
+onready var title_container = $TopPanel/HBoxContainer/LabelContainer
+onready var title = $TopPanel/HBoxContainer/LabelContainer/Label
 onready var widget_controls = $TopPanel/WidgetControls
 onready var highligther = $TopPanel/Highlighter
 onready var tween = $Tween
@@ -19,13 +20,11 @@ onready var tween = $Tween
 
 func _ready():
 	# Create loaded widgets
-	var widgets = Modules.get_loaded_widgets()
+	var widgets = Modules.get_loaded_components(Component.Type.WIDGET)
 	for w in widgets:
 		var widget = null
-		if w["scene"] != null:
-			widget = w["scene"].instance()
-		else:
-			widget = w["script"].new()
+		widget = w.resource.instance()
+		
 		if widget != null:
 			widgets_container.add_child(widget)
 	
@@ -112,7 +111,10 @@ func _item_focus_entered(item : Control):
 	tween.remove(highligther, "rect_global_position:x")
 	tween.remove(highligther, "rect_size:x")
 	tween.interpolate_property(highligther, "rect_global_position:x", highligther.rect_global_position.x, item.rect_global_position.x, 0.1)
-	tween.interpolate_property(highligther, "rect_size:x", highligther.rect_size.x, item.rect_size.x, 0.1)
+	if item is Widget:
+		tween.interpolate_property(highligther, "rect_size:x", highligther.rect_size.x, item.rect_size.x, 0.1)
+	elif item == title:
+		tween.interpolate_property(highligther, "rect_size:x", highligther.rect_size.x, min(item.rect_size.x, title_container.rect_size.x), 0.1)
 	tween.start()
 	if item is Widget:
 		var controls = item._get_widget_controls()
@@ -120,16 +122,14 @@ func _item_focus_entered(item : Control):
 			for c in widget_controls.get_children():
 				widget_controls.remove_child(c)
 			widget_controls.rect_size = widget_controls.rect_min_size
-	#		widget_controls.propagate_notification(Container.NOTIFICATION_SORT_CHILDREN)
 			widget_controls.show()
 			widget_controls.add_child(controls)
 			
-			print("BEFORE Widget Controls size: "+str(widget_controls.rect_size) + " Controls size: " + str(controls.rect_size))
-#			widget_controls.notification(Container.NOTIFICATION_SORT_CHILDREN)
-#			widget_controls.propagate_notification(Container.NOTIFICATION_SORT_CHILDREN)
+#			print("BEFORE Widget Controls size: "+str(widget_controls.rect_size) + " Controls size: " + str(controls.rect_size))
+#			
 			widget_controls.rect_size = controls.rect_size
 			
-			print("AFTER Widget Controls size: "+str(widget_controls.rect_size) + " Controls size: " + str(controls.rect_size))
+#			print("AFTER Widget Controls size: "+str(widget_controls.rect_size) + " Controls size: " + str(controls.rect_size))
 			widget_controls.rect_global_position.x = item.rect_global_position.x + item.rect_size.x - widget_controls.rect_size.x
 		else:
 			widget_controls.hide()
@@ -154,6 +154,8 @@ func _title_gui_input(event : InputEvent):
 
 func set_title(title):
 	self.title.text = title
+	# Reset the title width
+	self.title.rect_size.x = 0
 
 
 func _set_mode(value):

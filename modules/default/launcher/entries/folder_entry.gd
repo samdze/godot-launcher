@@ -1,15 +1,20 @@
 extends LauncherEntry
 
-export(String) var directory
+var name : String
 
-var view
+export(String) var directory
 
 
 func exec():
-	var result = view.move_to_directory(directory)
-	executed(result)
+	emit_signal("move_requested", directory)
+	executed(OK)
+	return OK
 
 
-func init_from_directory(dir, view):
+func init_from_directory(dir, entry_name):
 	directory = dir
-	self.view = view
+	name = entry_name
+
+
+func get_label() -> String:
+	return name

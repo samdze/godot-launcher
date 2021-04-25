@@ -2,8 +2,7 @@
 
 [ext_resource path="res://modules/default/launcher/launcher.gd" type="Script" id=1]
 
-
-[node name="LauncherView" type="Control"]
+[node name="LauncherApp" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = 32.0
@@ -14,13 +13,3 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
-custom_constants/separation = 28
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Tween" type="Tween" parent="."]

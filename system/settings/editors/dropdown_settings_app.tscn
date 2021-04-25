@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://system/settings/editors/dropdown_component_single.tscn" type="PackedScene" id=1]
+
+[node name="DropdownSettingsApp" instance=ExtResource( 1 )]
+type = 2
+tags = "settings"
+
+[editable path="SettingEntry"]

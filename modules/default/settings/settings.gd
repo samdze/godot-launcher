@@ -1,4 +1,4 @@
-extends View
+extends App
 
 var last_focused_item : Control = null
 
@@ -6,10 +6,18 @@ onready var options_container : VBoxContainer = $SettingsView/VBoxContainer
 
 
 func _ready():
+	# Load settings and create them
+	var settings = Settings.get_exported_settings()
+	for dict in settings.values():
+		var control : SettingEditor = dict.control.instance()
+		print("Exported setting: "+ dict.section + " - " + dict.key + " - " + dict.label)
+		control._initialize_setting(dict.section, dict.key, dict.label)
+		options_container.add_child(control)
+	
 	var i = 0
 	for c in options_container.get_children():
 		var value : Control = c
-		value.connect("gui_input", self, "_gui_input")
+		value.connect("gui_input", self, "_options_gui_input")
 		value.connect("focus_entered", self, "_item_focused", [value])
 		value.connect("value_changed", self, "_value_changed", [value])
 		value.focus_neighbour_left = value.get_path()
@@ -37,13 +45,14 @@ func _focus():
 
 
 func _item_focused(item):
+	Launcher.get_ui().bottom_bar.set_prompts([BottomBar.ICON_NAV_V, BottomBar.PROMPT_NAV], [BottomBar.ICON_BUTTON_A, BottomBar.PROMPT_SELECT, BottomBar.ICON_BUTTON_B, BottomBar.PROMPT_BACK])
 	last_focused_item = item
 
 
-func _gui_input(event : InputEvent):
+func _options_gui_input(event : InputEvent):
 	if event.is_action_pressed("ui_cancel"):
-		Launcher.get_ui().view.back_view()
 		accept_event()
+		Launcher.get_ui().app.back_app()
 
 
 func _value_changed(section, key, value, option):
@@ -56,4 +65,4 @@ static func _get_component_name():
 
 
 static func _get_component_tags():
-	return [Modules.TAG_SETTINGS]
+	return [Component.TAG_SETTINGS]

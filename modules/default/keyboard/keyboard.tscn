@@ -1,0 +1,1091 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://modules/default/keyboard/keyboard.gd" type="Script" id=1]
+[ext_resource path="res://system/components/large_label.tscn" type="PackedScene" id=2]
+[ext_resource path="res://modules/default/keyboard/horizontal_arrows.png" type="Texture" id=3]
+[ext_resource path="res://system/components/theme_property_applier.gd" type="Script" id=4]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 1, 1, 1, 1 )
+expand_margin_left = 6.0
+expand_margin_right = 6.0
+expand_margin_top = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.952941, 0.952941, 0.952941, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.764706, 0.92549, 0.976471, 1 )
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+expand_margin_left = 2.0
+expand_margin_right = 2.0
+expand_margin_top = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="AtlasTexture" id=5]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 0, 0, 7, 8 )
+
+[sub_resource type="AtlasTexture" id=6]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 9, 0, 7, 8 )
+
+[node name="KeyboardApp" type="MarginContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/margin_right = 6
+custom_constants/margin_top = 2
+custom_constants/margin_left = 6
+custom_constants/margin_bottom = 2
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+first_characters_focused_key = NodePath("Layout/KeysContainer/Characters/Row3/Key15")
+first_symbols_focused_key = NodePath("Layout/KeysContainer/Symbols/Row3/Key15")
+
+[node name="Panel" type="Panel" parent="."]
+margin_left = 6.0
+margin_top = 2.0
+margin_right = 314.0
+margin_bottom = 238.0
+mouse_filter = 1
+custom_styles/panel = SubResource( 1 )
+
+[node name="Layout" type="VBoxContainer" parent="."]
+margin_left = 6.0
+margin_top = 2.0
+margin_right = 314.0
+margin_bottom = 238.0
+focus_neighbour_left = NodePath(".")
+focus_neighbour_top = NodePath(".")
+focus_neighbour_right = NodePath(".")
+focus_neighbour_bottom = NodePath(".")
+focus_next = NodePath(".")
+focus_previous = NodePath(".")
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 8
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PanelContainer" type="PanelContainer" parent="Layout"]
+margin_right = 308.0
+margin_bottom = 114.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 2 )
+
+[node name="MarginContainer" type="MarginContainer" parent="Layout/PanelContainer"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 306.0
+margin_bottom = 112.0
+custom_constants/margin_right = 4
+custom_constants/margin_top = 4
+custom_constants/margin_left = 4
+custom_constants/margin_bottom = 4
+
+[node name="TextContainer" type="ScrollContainer" parent="Layout/PanelContainer/MarginContainer"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 300.0
+margin_bottom = 106.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+follow_focus = true
+
+[node name="LargeLabel" parent="Layout/PanelContainer/MarginContainer/TextContainer" instance=ExtResource( 2 )]
+margin_right = 296.0
+margin_bottom = 102.0
+size_flags_horizontal = 3
+size_flags_vertical = 7
+text = "4r4thru4h hru4hh r4huhr 4hurh hu4hrh"
+font_values = {
+"font": "large_font"
+}
+
+[node name="Highlighter" type="Panel" parent="Layout/PanelContainer/MarginContainer/TextContainer/LargeLabel"]
+margin_left = 22.0
+margin_top = 5.0
+margin_right = 24.0
+margin_bottom = 15.0
+rect_min_size = Vector2( 2, 0 )
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+stylebox_values = {
+"panel": "highlighter"
+}
+
+[node name="KeysContainer" type="VBoxContainer" parent="Layout"]
+margin_top = 133.0
+margin_right = 308.0
+margin_bottom = 225.0
+size_flags_horizontal = 3
+size_flags_vertical = 6
+
+[node name="Characters" type="VBoxContainer" parent="Layout/KeysContainer"]
+margin_right = 308.0
+margin_bottom = 92.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Row1" type="HBoxContainer" parent="Layout/KeysContainer/Characters"]
+margin_left = 6.0
+margin_right = 302.0
+margin_bottom = 20.0
+size_flags_horizontal = 4
+
+[node name="Key27" type="Button" parent="Layout/KeysContainer/Characters/Row1"]
+margin_left = -1.90735e-06
+margin_right = 26.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 26, 0 )
+size_flags_horizontal = 10
+action_mode = 0
+text = "1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Key28" type="Button" parent="Layout/KeysContainer/Characters/Row1"]
+margin_left = 30.0
+margin_right = 56.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 26, 0 )
+size_flags_horizontal = 10
+action_mode = 0
+text = "2"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Key29" type="Button" parent="Layout/KeysContainer/Characters/Row1"]
+margin_left = 60.0
+margin_right = 86.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 26, 0 )
+size_flags_horizontal = 10
+action_mode = 0
+text = "3"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Key30" type="Button" parent="Layout/KeysContainer/Characters/Row1"]
+margin_left = 90.0
+margin_right = 116.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 26, 0 )
+size_flags_horizontal = 10
+action_mode = 0
+text = "4"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Key31" type="Button" parent="Layout/KeysContainer/Characters/Row1"]
+margin_left = 120.0
+margin_right = 146.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 26, 0 )
+size_flags_horizontal = 10
+action_mode = 0
+text = "5"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Key32" type="Button" parent="Layout/KeysContainer/Characters/Row1"]
+margin_left = 150.0
+margin_right = 176.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 26, 0 )
+size_flags_horizontal = 10
+action_mode = 0
+text = "6"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Key33" type="Button" parent="Layout/KeysContainer/Characters/Row1"]
+margin_left = 180.0
+margin_right = 206.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 26, 0 )
+size_flags_horizontal = 10
+action_mode = 0
+text = "7"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Key34" type="Button" parent="Layout/KeysContainer/Characters/Row1"]
+margin_left = 210.0
+margin_right = 236.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 26, 0 )
+size_flags_horizontal = 10
+action_mode = 0
+text = "8"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Key35" type="Button" parent="Layout/KeysContainer/Characters/Row1"]
+margin_left = 240.0
+margin_right = 266.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 26, 0 )
+size_flags_horizontal = 10
+action_mode = 0
+text = "9"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Key36" type="Button" parent="Layout/KeysContainer/Characters/Row1"]
+margin_left = 270.0
+margin_right = 296.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 26, 0 )
+size_flags_horizontal = 10
+action_mode = 0
+text = "0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Row2" type="HBoxContainer" parent="Layout/KeysContainer/Characters"]
+margin_left = 6.0
+margin_top = 24.0
+margin_right = 302.0
+margin_bottom = 44.0
+size_flags_horizontal = 4
+
+[node name="Key" type="Button" parent="Layout/KeysContainer/Characters/Row2"]
+margin_left = -1.90735e-06
+margin_right = 26.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 26, 0 )
+size_flags_horizontal = 10
+action_mode = 0
+text = "q"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Key2" type="Button" parent="Layout/KeysContainer/Characters/Row2"]
+margin_left = 30.0
+margin_right = 56.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 26, 0 )
+size_flags_horizontal = 10
+action_mode = 0
+text = "w"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Key3" type="Button" parent="Layout/KeysContainer/Characters/Row2"]
+margin_left = 60.0
+margin_right = 86.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 26, 0 )
+size_flags_horizontal = 10
+action_mode = 0
+text = "e"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Key4" type="Button" parent="Layout/KeysContainer/Characters/Row2"]
+margin_left = 90.0
+margin_right = 116.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 26, 0 )
+size_flags_horizontal = 10
+action_mode = 0
+text = "r"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Key5" type="Button" parent="Layout/KeysContainer/Characters/Row2"]
+margin_left = 120.0
+margin_right = 146.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 26, 0 )
+size_flags_horizontal = 10
+action_mode = 0
+text = "t"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Key6" type="Button" parent="Layout/KeysContainer/Characters/Row2"]
+margin_left = 150.0
+margin_right = 176.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 26, 0 )
+size_flags_horizontal = 10
+action_mode = 0
+text = "y"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Key7" type="Button" parent="Layout/KeysContainer/Characters/Row2"]
+margin_left = 180.0
+margin_right = 206.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 26, 0 )
+size_flags_horizontal = 10
+action_mode = 0
+text = "u"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Key8" type="Button" parent="Layout/KeysContainer/Characters/Row2"]
+margin_left = 210.0
+margin_right = 236.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 26, 0 )
+size_flags_horizontal = 10
+action_mode = 0
+text = "i"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Key9" type="Button" parent="Layout/KeysContainer/Characters/Row2"]
+margin_left = 240.0
+margin_right = 266.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 26, 0 )
+size_flags_horizontal = 10
+action_mode = 0
+text = "o"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Key10" type="Button" parent="Layout/KeysContainer/Characters/Row2"]
+margin_left = 270.0
+margin_right = 296.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 26, 0 )
+size_flags_horizontal = 10
+action_mode = 0
+text = "p"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Row3" type="HBoxContainer" parent="Layout/KeysContainer/Characters"]
+margin_left = 21.0
+margin_top = 48.0
+margin_right = 287.0
+margin_bottom = 68.0
+size_flags_horizontal = 4
+
+[node name="Key11" type="Button" parent="Layout/KeysContainer/Characters/Row3"]
+margin_left = -1.90735e-06
+margin_right = 26.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 26, 0 )
+size_flags_horizontal = 10
+action_mode = 0
+text = "a"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Key12" type="Button" parent="Layout/KeysContainer/Characters/Row3"]
+margin_left = 30.0
+margin_right = 56.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 26, 0 )
+size_flags_horizontal = 10
+action_mode = 0
+text = "s"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Key13" type="Button" parent="Layout/KeysContainer/Characters/Row3"]
+margin_left = 60.0
+margin_right = 86.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 26, 0 )
+size_flags_horizontal = 10
+action_mode = 0
+text = "d"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Key14" type="Button" parent="Layout/KeysContainer/Characters/Row3"]
+margin_left = 90.0
+margin_right = 116.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 26, 0 )
+size_flags_horizontal = 10
+action_mode = 0
+text = "f"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Key15" type="Button" parent="Layout/KeysContainer/Characters/Row3"]
+margin_left = 120.0
+margin_right = 146.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 26, 0 )
+size_flags_horizontal = 10
+action_mode = 0
+text = "g"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Key16" type="Button" parent="Layout/KeysContainer/Characters/Row3"]
+margin_left = 150.0
+margin_right = 176.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 26, 0 )
+size_flags_horizontal = 10
+action_mode = 0
+text = "h"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Key17" type="Button" parent="Layout/KeysContainer/Characters/Row3"]
+margin_left = 180.0
+margin_right = 206.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 26, 0 )
+size_flags_horizontal = 10
+action_mode = 0
+text = "j"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Key18" type="Button" parent="Layout/KeysContainer/Characters/Row3"]
+margin_left = 210.0
+margin_right = 236.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 26, 0 )
+size_flags_horizontal = 10
+action_mode = 0
+text = "k"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Key19" type="Button" parent="Layout/KeysContainer/Characters/Row3"]
+margin_left = 240.0
+margin_right = 266.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 26, 0 )
+size_flags_horizontal = 10
+action_mode = 0
+text = "l"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Row4" type="HBoxContainer" parent="Layout/KeysContainer/Characters"]
+margin_left = 28.0
+margin_top = 72.0
+margin_right = 280.0
+margin_bottom = 92.0
+size_flags_horizontal = 4
+
+[node name="Left" type="Button" parent="Layout/KeysContainer/Characters/Row4"]
+margin_right = 19.0
+margin_bottom = 20.0
+size_flags_horizontal = 10
+action_mode = 0
+icon = SubResource( 5 )
+align = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Key20" type="Button" parent="Layout/KeysContainer/Characters/Row4"]
+margin_left = 23.0
+margin_right = 49.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 26, 0 )
+size_flags_horizontal = 10
+action_mode = 0
+text = "z"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Key21" type="Button" parent="Layout/KeysContainer/Characters/Row4"]
+margin_left = 53.0
+margin_right = 79.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 26, 0 )
+size_flags_horizontal = 10
+action_mode = 0
+text = "x"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Key22" type="Button" parent="Layout/KeysContainer/Characters/Row4"]
+margin_left = 83.0
+margin_right = 109.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 26, 0 )
+size_flags_horizontal = 10
+action_mode = 0
+text = "c"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Key23" type="Button" parent="Layout/KeysContainer/Characters/Row4"]
+margin_left = 113.0
+margin_right = 139.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 26, 0 )
+size_flags_horizontal = 10
+action_mode = 0
+text = "v"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Key24" type="Button" parent="Layout/KeysContainer/Characters/Row4"]
+margin_left = 143.0
+margin_right = 169.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 26, 0 )
+size_flags_horizontal = 10
+action_mode = 0
+text = "b"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Key25" type="Button" parent="Layout/KeysContainer/Characters/Row4"]
+margin_left = 173.0
+margin_right = 199.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 26, 0 )
+size_flags_horizontal = 10
+action_mode = 0
+text = "n"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Key26" type="Button" parent="Layout/KeysContainer/Characters/Row4"]
+margin_left = 203.0
+margin_right = 229.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 26, 0 )
+size_flags_horizontal = 10
+action_mode = 0
+text = "m"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Right" type="Button" parent="Layout/KeysContainer/Characters/Row4"]
+margin_left = 233.0
+margin_right = 252.0
+margin_bottom = 20.0
+size_flags_horizontal = 10
+action_mode = 0
+icon = SubResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Symbols" type="VBoxContainer" parent="Layout/KeysContainer"]
+visible = false
+margin_top = 96.0
+margin_right = 308.0
+margin_bottom = 188.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Row1" type="HBoxContainer" parent="Layout/KeysContainer/Symbols"]
+margin_left = 6.0
+margin_right = 302.0
+margin_bottom = 20.0
+size_flags_horizontal = 4
+
+[node name="Key27" type="Button" parent="Layout/KeysContainer/Symbols/Row1"]
+margin_left = -1.90735e-06
+margin_right = 26.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 26, 0 )
+size_flags_horizontal = 10
+action_mode = 0
+text = "!"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Key28" type="Button" parent="Layout/KeysContainer/Symbols/Row1"]
+margin_left = 30.0
+margin_right = 56.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 26, 0 )
+size_flags_horizontal = 10
+action_mode = 0
+text = "@"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Key29" type="Button" parent="Layout/KeysContainer/Symbols/Row1"]
+margin_left = 60.0
+margin_right = 86.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 26, 0 )
+size_flags_horizontal = 10
+action_mode = 0
+text = "#"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Key30" type="Button" parent="Layout/KeysContainer/Symbols/Row1"]
+margin_left = 90.0
+margin_right = 116.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 26, 0 )
+size_flags_horizontal = 10
+action_mode = 0
+text = "$"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Key31" type="Button" parent="Layout/KeysContainer/Symbols/Row1"]
+margin_left = 120.0
+margin_right = 146.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 26, 0 )
+size_flags_horizontal = 10
+action_mode = 0
+text = "%"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Key32" type="Button" parent="Layout/KeysContainer/Symbols/Row1"]
+margin_left = 150.0
+margin_right = 176.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 26, 0 )
+size_flags_horizontal = 10
+action_mode = 0
+text = "^"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Key33" type="Button" parent="Layout/KeysContainer/Symbols/Row1"]
+margin_left = 180.0
+margin_right = 206.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 26, 0 )
+size_flags_horizontal = 10
+action_mode = 0
+text = "&"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Key34" type="Button" parent="Layout/KeysContainer/Symbols/Row1"]
+margin_left = 210.0
+margin_right = 236.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 26, 0 )
+size_flags_horizontal = 10
+action_mode = 0
+text = "*"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Key35" type="Button" parent="Layout/KeysContainer/Symbols/Row1"]
+margin_left = 240.0
+margin_right = 266.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 26, 0 )
+size_flags_horizontal = 10
+action_mode = 0
+text = "("
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Key36" type="Button" parent="Layout/KeysContainer/Symbols/Row1"]
+margin_left = 270.0
+margin_right = 296.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 26, 0 )
+size_flags_horizontal = 10
+action_mode = 0
+text = ")"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Row2" type="HBoxContainer" parent="Layout/KeysContainer/Symbols"]
+margin_left = 6.0
+margin_top = 24.0
+margin_right = 302.0
+margin_bottom = 44.0
+size_flags_horizontal = 4
+
+[node name="Key" type="Button" parent="Layout/KeysContainer/Symbols/Row2"]
+margin_left = -1.90735e-06
+margin_right = 26.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 26, 0 )
+size_flags_horizontal = 10
+action_mode = 0
+text = "-"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Key2" type="Button" parent="Layout/KeysContainer/Symbols/Row2"]
+margin_left = 30.0
+margin_right = 56.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 26, 0 )
+size_flags_horizontal = 10
+action_mode = 0
+text = "_"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Key3" type="Button" parent="Layout/KeysContainer/Symbols/Row2"]
+margin_left = 60.0
+margin_right = 86.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 26, 0 )
+size_flags_horizontal = 10
+action_mode = 0
+text = "+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Key4" type="Button" parent="Layout/KeysContainer/Symbols/Row2"]
+margin_left = 90.0
+margin_right = 116.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 26, 0 )
+size_flags_horizontal = 10
+action_mode = 0
+text = "="
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Key5" type="Button" parent="Layout/KeysContainer/Symbols/Row2"]
+margin_left = 120.0
+margin_right = 146.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 26, 0 )
+size_flags_horizontal = 10
+action_mode = 0
+text = "~"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Key6" type="Button" parent="Layout/KeysContainer/Symbols/Row2"]
+margin_left = 150.0
+margin_right = 176.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 26, 0 )
+size_flags_horizontal = 10
+action_mode = 0
+text = "`"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Key7" type="Button" parent="Layout/KeysContainer/Symbols/Row2"]
+margin_left = 180.0
+margin_right = 206.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 26, 0 )
+size_flags_horizontal = 10
+action_mode = 0
+text = "["
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Key8" type="Button" parent="Layout/KeysContainer/Symbols/Row2"]
+margin_left = 210.0
+margin_right = 236.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 26, 0 )
+size_flags_horizontal = 10
+action_mode = 0
+text = "]"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Key9" type="Button" parent="Layout/KeysContainer/Symbols/Row2"]
+margin_left = 240.0
+margin_right = 266.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 26, 0 )
+size_flags_horizontal = 10
+action_mode = 0
+text = "{"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Key10" type="Button" parent="Layout/KeysContainer/Symbols/Row2"]
+margin_left = 270.0
+margin_right = 296.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 26, 0 )
+size_flags_horizontal = 10
+action_mode = 0
+text = "}"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Row3" type="HBoxContainer" parent="Layout/KeysContainer/Symbols"]
+margin_left = 6.0
+margin_top = 48.0
+margin_right = 302.0
+margin_bottom = 68.0
+size_flags_horizontal = 4
+
+[node name="Key11" type="Button" parent="Layout/KeysContainer/Symbols/Row3"]
+margin_left = -1.90735e-06
+margin_right = 26.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 26, 0 )
+size_flags_horizontal = 10
+action_mode = 0
+text = "|"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Key12" type="Button" parent="Layout/KeysContainer/Symbols/Row3"]
+margin_left = 30.0
+margin_right = 56.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 26, 0 )
+size_flags_horizontal = 10
+action_mode = 0
+text = "\\"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Key13" type="Button" parent="Layout/KeysContainer/Symbols/Row3"]
+margin_left = 60.0
+margin_right = 86.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 26, 0 )
+size_flags_horizontal = 10
+action_mode = 0
+text = ":"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Key14" type="Button" parent="Layout/KeysContainer/Symbols/Row3"]
+margin_left = 90.0
+margin_right = 116.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 26, 0 )
+size_flags_horizontal = 10
+action_mode = 0
+text = ";"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Key15" type="Button" parent="Layout/KeysContainer/Symbols/Row3"]
+margin_left = 120.0
+margin_right = 146.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 26, 0 )
+size_flags_horizontal = 10
+action_mode = 0
+text = "\""
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Key16" type="Button" parent="Layout/KeysContainer/Symbols/Row3"]
+margin_left = 150.0
+margin_right = 176.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 26, 0 )
+size_flags_horizontal = 10
+action_mode = 0
+text = "'"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Key17" type="Button" parent="Layout/KeysContainer/Symbols/Row3"]
+margin_left = 180.0
+margin_right = 206.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 26, 0 )
+size_flags_horizontal = 10
+action_mode = 0
+text = "<"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Key18" type="Button" parent="Layout/KeysContainer/Symbols/Row3"]
+margin_left = 210.0
+margin_right = 236.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 26, 0 )
+size_flags_horizontal = 10
+action_mode = 0
+text = ">"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Key19" type="Button" parent="Layout/KeysContainer/Symbols/Row3"]
+margin_left = 240.0
+margin_right = 266.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 26, 0 )
+size_flags_horizontal = 10
+action_mode = 0
+text = ","
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Key20" type="Button" parent="Layout/KeysContainer/Symbols/Row3"]
+margin_left = 270.0
+margin_right = 296.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 26, 0 )
+size_flags_horizontal = 10
+action_mode = 0
+text = "."
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Row4" type="HBoxContainer" parent="Layout/KeysContainer/Symbols"]
+margin_left = 71.0
+margin_top = 72.0
+margin_right = 237.0
+margin_bottom = 92.0
+size_flags_horizontal = 4
+
+[node name="Left" type="Button" parent="Layout/KeysContainer/Symbols/Row4"]
+margin_right = 28.0
+margin_bottom = 20.0
+size_flags_horizontal = 2
+action_mode = 0
+icon = SubResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Key20" type="Button" parent="Layout/KeysContainer/Symbols/Row4"]
+margin_left = 32.0
+margin_right = 58.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 26, 0 )
+size_flags_horizontal = 10
+action_mode = 0
+text = "?"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Key21" type="Button" parent="Layout/KeysContainer/Symbols/Row4"]
+margin_left = 62.0
+margin_right = 88.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 26, 0 )
+size_flags_horizontal = 10
+action_mode = 0
+text = "/"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Key22" type="Button" parent="Layout/KeysContainer/Symbols/Row4"]
+margin_left = 92.0
+margin_right = 134.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 42, 0 )
+size_flags_horizontal = 10
+action_mode = 0
+text = " "
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Layout/KeysContainer/Symbols/Row4/Key22"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+text = "space"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Right" type="Button" parent="Layout/KeysContainer/Symbols/Row4"]
+margin_left = 138.0
+margin_right = 166.0
+margin_bottom = 20.0
+size_flags_horizontal = 10
+action_mode = 0
+icon = SubResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tween" type="Tween" parent="."]
+repeat = true
+playback/repeat = true

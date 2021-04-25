@@ -1,0 +1,71 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://system/components/large_label.tscn" type="PackedScene" id=1]
+[ext_resource path="res://system/components/small_label.tscn" type="PackedScene" id=2]
+[ext_resource path="res://system/settings/about/about_app.gd" type="Script" id=3]
+
+[node name="AboutApp" type="MarginContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+focus_neighbour_left = NodePath(".")
+focus_neighbour_top = NodePath(".")
+focus_neighbour_right = NodePath(".")
+focus_neighbour_bottom = NodePath(".")
+focus_next = NodePath(".")
+focus_previous = NodePath(".")
+focus_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/margin_right = 4
+custom_constants/margin_top = 2
+custom_constants/margin_left = 4
+custom_constants/margin_bottom = 2
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+margin_left = 68.0
+margin_top = 89.0
+margin_right = 251.0
+margin_bottom = 151.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 176.0
+margin_bottom = 55.0
+custom_constants/margin_right = 16
+custom_constants/margin_top = 8
+custom_constants/margin_left = 16
+custom_constants/margin_bottom = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
+margin_left = 16.0
+margin_top = 8.0
+margin_right = 153.0
+margin_bottom = 40.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 1
+
+[node name="LargeLabel" parent="PanelContainer/MarginContainer/VBoxContainer" instance=ExtResource( 1 )]
+margin_right = 137.0
+text = "X Godot Launcher"
+align = 1
+font_values = {
+"font": "large_font"
+}
+
+[node name="SmallLabel" parent="PanelContainer/MarginContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 18.0
+margin_right = 137.0
+margin_bottom = 32.0
+text = "by Samuele Zolfanelli"
+align = 1
+font_values = {
+"font": "small_font"
+}

@@ -1,9 +1,8 @@
 extends LauncherEntry
 
 
-
-func _ready():
-	_set_label("Switch Launcher")
+func get_label():
+	return "Switch Launcher"
 
 
 func exec():

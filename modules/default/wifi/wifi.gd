@@ -38,12 +38,14 @@ func _update_status():
 		
 		var percentage = -1
 		var hotspot = null
+		var ip = null
 		if wifi_status.size() >= 12:
 			percentage = int(wifi_status[6].split("\"")[1])
 			hotspot = wifi_status[5].split("\"")[1]
+			ip = wifi_status[4].split("\"")[1]
 		
 		_update_icon(percentage)
-		_update_label(hotspot)
+		_update_controls(hotspot, ip)
 		wifi_semaphore.post()
 
 
@@ -57,9 +59,9 @@ func _update_icon(percentage):
 		update()
 
 
-func _update_label(hotspot):
+func _update_controls(hotspot, ip):
 	if hotspot != null and not hotspot.empty():
-		label.text = "Connected: " + hotspot
+		label.text = "Connected: " + hotspot + "\n" + ip
 	else:
 		label.text = "Disconnected"
 
@@ -112,3 +114,29 @@ func _get_widget_controls():
 func _notification(what):
 	if what == NOTIFICATION_PREDELETE:
 		if controls: controls.queue_free()
+
+
+# Override this function to give this Widget a name for the modules system
+static func _get_component_name():
+	return "Wi-Fi"
+
+
+# Override this function to give this Widget tags for the modules system
+static func _get_component_tags():
+	return ["wifi"]
+
+
+# Override this function to expose user-editable settings to the Settings app
+static func _get_exported_settings():
+	# TODO: refactor exported settings, section, key, etc. aren't always required
+	return [
+		{ "section": "", "key": "", "label": "Wi-Fi Settings", "control": preload("settings/settings_button.tscn") }
+	]
+#
+#
+#static func _init_wifi_settings(control):
+#	control.connect("pressed", load("wifi.gd"), "_setting_button_pressed")
+#
+#
+#static func _setting_button_pressed():
+#	Launcher.get_ui().app.add_app(preload("settings/wifi_settings_app.tscn").instance())

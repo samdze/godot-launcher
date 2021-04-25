@@ -1,30 +1,44 @@
-extends View
+extends App
 
-const empty_entry = preload("entries/empty_entry.tscn")
-const command_entry = preload("entries/command_entry.tscn")
-const folder_entry = preload("entries/folder_entry.tscn")
+const Entry = preload("entry.gd")
 
-var running_app_view# = preload("res://views/running_app/running_app_view.tscn")
+#const empty_entry = preload("entries/empty_entry.tscn")
+#const command_entry = preload("entries/command_entry.tscn")
+#const folder_entry = preload("entries/folder_entry.tscn")
+#const script_entry = preload("entries/script_entry.gd")
+
+# Folder loaders that will try to load folders entry, order matters.
+const folder_loaders = [
+	preload("folders/action_folder.gd"),
+	preload("folders/default_folder.gd")
+]
+const apps_loader = preload("folders/default_folder.gd")
+
+const icons_view = preload("views/icons_view.tscn")
+const list_view = preload("views/list_view.tscn")
+
+var running_app : PackedScene# = preload("res://views/running_app/running_app_view.tscn")
 var last_focused_entry : Control = null
 
 var menu_directory : String = "/home/cpi/apps/Menu"
 var apps_directory : String = "res://apps"
 # Bash scripts and other types of file are not imported and must be loaded from the filesystem
+# TODO: convert the local apps_directory directory to a global one instead of using this hardcoded string.
 var gloabl_apps_directory : String = "/home/cpi/godot-launcher/apps"
 
 var current_directory : String = ""
 var selection_stack = []
-var default_entry_y = 0
-var entry_highlight_shift_y = -22
+#var default_entry_y = 0
+#var entry_highlight_shift_y = -22
 var executing = false
 
-onready var entries_container = $HBoxContainer
-onready var tween = $Tween
-
+var current_view = null
+#onready var entries_container = $HBoxContainer
+#onready var tween = $Tween
 
 
 func _ready():
-	running_app_view = Modules.get_view(Config.get_or_default("system", "running_app_view", null))["scene"]
+	running_app = Modules.get_loaded_component_from_config("system", "running_app", "default/running").resource
 	load_directory(menu_directory)
 
 
@@ -45,9 +59,9 @@ func _unfocus():
 func _active_window_changed(window_id):
 	executing = false
 	Launcher.get_ui().loading_overlay.set_loading(false)
-	print("[GODOT] Adding a new view to the views stack...")
-	Launcher.get_ui().view.add_view(running_app_view.instance())
-	print("[GODOT] New view added to the views stack.")
+	print("[GODOT] Adding a new app to the apps stack...")
+	Launcher.get_ui().app.add_app(running_app.instance())
+	print("[GODOT] New app added to the apps stack.")
 
 
 func _update_promtps():
@@ -68,6 +82,7 @@ func move_to_directory(directory : String):
 			selection_stack.clear()
 		
 		return load_directory(directory)
+	# TODO: add check for apps_directory
 	return FAILED
 
 
@@ -82,162 +97,52 @@ func back_directory():
 
 
 func load_directory(directory, selected_entry = 0):
-	for c in entries_container.get_children():
-		entries_container.remove_child(c)
-		c.queue_free()
+	if current_view != null:
+		remove_child(current_view)
+		current_view.queue_free()
 	
-	# If it's the root directory load the system apps too.
+	var entries = []
 	if directory == menu_directory:
-		var dir = Directory.new()
-		var res = dir.open(apps_directory)
-		if res != OK:
-			printerr("Directory ", apps_directory, " not found.")
-		else:
-			dir.list_dir_begin(true, true)
-			var file_name : String = dir.get_next()
-			while file_name != "":
-				if dir.current_is_dir():
-#					print("Found directory: " + file_name)
-					var underscore_index = file_name.find("_")
-					var entry_name = file_name.substr(underscore_index + 1)
-#					print("- Entry name is: " + entry_name)
-					var entry = create_entry(folder_entry, entry_name)
-					entries_container.add_child(entry)
-					# TODO: doesn't work for nested folders
-					entry.init_from_directory(gloabl_apps_directory + "/" + file_name, self)
-				else:
-					if file_name.ends_with(".sh"):
-#						print("Found file: " + file_name)
-						var underscore_index = file_name.find("_")
-						var entry_name = file_name.substr(underscore_index + 1).replace(".sh", "")
-#						print("- Entry name is: " + entry_name)
-						var entry = create_entry(command_entry, entry_name)
-						entries_container.add_child(entry)
-						# TODO: doesn't work for nested folders
-						# TODO: check if file is executable
-						entry.init_from_file(gloabl_apps_directory, file_name)
-					elif file_name.ends_with(".gd"):
-						# TODO: create a separate structure to save and cache system apps scripts
-						var scr = File.new()
-						var result = scr.open(apps_directory + "/" + file_name, File.READ)
-						if result != OK:
-							printerr("File ", file_name, " not found.")
-						var source = scr.get_as_text()
-						var entry_script = GDScript.new()
-						entry_script.source_code = source
-						result = entry_script.reload()
-						if result != OK:
-							printerr("Error loading script ", file_name, ": ", result)
-						var entry_name = file_name.replace(".gd", "")
-						var entry = create_entry(empty_entry, entry_name, entry_script)
-						entries_container.add_child(entry)
-						
-				file_name = dir.get_next()
+		var apps_loader_obj = apps_loader.new()
+		apps_loader_obj.directory = apps_directory
+		entries = entries + apps_loader_obj.load_directory()
 	
+	var loader_class = null
+	for l in folder_loaders:
+		if l._is_directory_loadable(directory):
+			loader_class = l
+			break
+	if loader_class == null:
+		return
 	
-	var dir = Directory.new()
-	var res = dir.open(directory)
-	if res != OK:
-		printerr("Directory ", directory, " not found.")
-	else:
-		dir.list_dir_begin(true, true)
-		var file_name : String = dir.get_next()
-		while file_name != "":
-			if dir.current_is_dir():
-#				print("Found directory: " + file_name)
-				var underscore_index = file_name.find("_")
-				var entry_name = file_name.substr(underscore_index + 1)
-#				print("- Entry name is: " + entry_name)
-				var entry = create_entry(folder_entry, entry_name)
-				entries_container.add_child(entry)
-				entry.init_from_directory(directory + "/" + file_name, self)
-			else:
-				if file_name.ends_with(".sh"):
-#					print("Found file: " + file_name)
-					var underscore_index = file_name.find("_")
-					var entry_name = file_name.substr(underscore_index + 1).replace(".sh", "")
-#					print("- Entry name is: " + entry_name)
-					var entry = create_entry(command_entry, entry_name)
-					entries_container.add_child(entry)
-					# TODO: check if file is executable
-					entry.init_from_file(directory, file_name)
-			file_name = dir.get_next()
+	var loader = loader_class.new()
+	loader.directory = directory
+	entries = entries + loader.load_directory()
 	
-	# Configure the loaded entries
-	for c in entries_container.get_children():
-		var index = c.get_index()
-		if not c is LauncherEntry:
-			continue
-		
-#		print("Configuring entry " + str(index))
-		c.connect("focus_entered", self, "_entry_focus_entered", [c])
-		c.connect("focus_exited", self, "_entry_focus_exited", [c])
-		c.connect("gui_input", self, "_entry_input", [c])
-		c.focus_neighbour_top = c.get_path()
-		c.focus_neighbour_bottom = c.get_path()
-		if index > 0:
-			c.focus_neighbour_left = entries_container.get_child(index - 1).get_path()
-		else:
-			c.focus_neighbour_left = entries_container.get_child(entries_container.get_child_count() - 1).get_path()
-		if index < entries_container.get_child_count() - 1:
-			c.focus_neighbour_right = entries_container.get_child(index + 1).get_path()
-		else:
-			c.focus_neighbour_right = entries_container.get_child(0).get_path()
+	# Choose the view to display the entries
+	current_view = icons_view.instance() if loader_class == apps_loader else list_view.instance() 
+	current_view.connect("entry_focused", self, "_entry_focused")
+	current_view.connect("entry_selected", self, "_entry_selected")
+	current_view.connect("executed", self, "_execution_terminated")
+	current_view.connect("move_requested", self, "move_to_directory")
+	
+	add_child(current_view)
+	current_view.append_entries(entries)
+	# Select the previous selected entry if going back from a directory
+	current_view.select_entry(selected_entry)
 	
 	current_directory = directory
-	
-	if entries_container.get_child_count() > 0:
-		# Select the previous selected entry if going back from a directory
-		selected_entry = clamp(selected_entry, 0, entries_container.get_child_count() - 1)
-		default_entry_y = entries_container.get_child(selected_entry).container.rect_position.y
-		
-		entries_container.notification(Container.NOTIFICATION_SORT_CHILDREN)
-		
-		entries_container.rect_position = Vector2(-entries_container.get_child(selected_entry).rect_position.x + 160 - 74/2, entries_container.rect_position.y)
-		entries_container.get_child(selected_entry).grab_focus()
 	
 	_update_promtps()
 	return OK
 
 
-func _view_input(event):
-	if not executing and event.is_action_pressed("ui_cancel"):
-		back_directory()
-	# TODO: to remove
-#	if event.is_action_pressed("ui_menu"):
-#		get_tree().quit()
-
-
-func create_entry(scene : PackedScene, name, script = null):
-	var entry = scene.instance()
-	if script != null:
-		entry.set_script(script)
-	entry.label = name
-	entry.name = name
-	return entry
-
-
-func _entry_focus_entered(entry):
-#	print("Entry " + entry.name + " has received focus.")
+func _entry_focused(entry):
 	last_focused_entry = entry
-	entry.set_highlighted(true)
-	tween.remove(entry.container, "rect_position:y")
-	tween.interpolate_property(entry.container, "rect_position:y", entry.container.rect_position.y, default_entry_y + entry_highlight_shift_y, 0.2)
-	
-	tween.remove(entries_container, "rect_position")
-	tween.interpolate_property(entries_container, "rect_position", entries_container.rect_position, Vector2(-entry.rect_position.x + 160 - 74/2, entries_container.rect_position.y), 0.2, Tween.TRANS_QUAD, Tween.EASE_OUT)
-	tween.start()
 
 
-func _entry_focus_exited(entry):
-	entry.set_highlighted(false)
-	tween.remove(entry.container, "rect_position:y")
-	tween.interpolate_property(entry.container, "rect_position:y", entry.container.rect_position.y, default_entry_y, 0.2)
-	tween.start()
-
-
-func _entry_input(event : InputEvent, entry : LauncherEntry):
-	if event.is_action_pressed("ui_accept") and not executing:
+func _entry_selected(entry):
+	if not executing:
 		entry.release_focus()
 		executing = true
 		Launcher.get_ui().loading_overlay.set_loading(true)
@@ -247,8 +152,19 @@ func _entry_input(event : InputEvent, entry : LauncherEntry):
 		print("App id returned: "+str(result))
 
 
-func _execution_terminated(error, entry : LauncherEntry):
-	entry.disconnect("executed", self, "_execution_terminated")
+func _app_input(event):
+#	if event.is_pressed():
+#		Launcher.get_ui().notifications_bar.append_notification("System-wide notifications available!", Notifications.Type.SUCCESS)
+	if not executing and event.is_action_pressed("ui_cancel"):
+		accept_event()
+		back_directory()
+	# TODO: to remove
+#	if event.is_action_pressed("ui_menu"):
+#		get_tree().quit()
+
+
+func _execution_terminated(error, entry : Entry):
+#	entry.disconnect("executed", self, "_execution_terminated")
 	Launcher.get_ui().loading_overlay.set_loading(false)
 	executing = false
 	if last_focused_entry != null:
@@ -257,14 +173,14 @@ func _execution_terminated(error, entry : LauncherEntry):
 
 
 static func _get_component_name():
-	return "Launcher"
+	return "GameShell Launcher"
 
 
 static func _get_component_tags():
-	return [Modules.TAG_LAUNCHER]
+	return [Component.TAG_LAUNCHER]
 
 
 static func _get_exported_settings():
 	return [
-		{ "section": "system", "key": "running_app", "label": "Running App View", "control": preload("res://system/settings/editors/dropdown_compo.tscn") }
+		{ "section": "system", "key": "running_app", "label": "Running App", "control": preload("res://system/settings/editors/dropdown_running_app.tscn") }
 	]

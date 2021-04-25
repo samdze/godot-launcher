@@ -12,24 +12,35 @@ var status_showing = false
 
 var top_bar_showing = false
 var bot_bar_showing = false
+var always_on_top_wanted : Array = []
+
+var first_app : PackedScene
+var settings_app_id
+var keyboard_app_id
 
 onready var window_manager : WindowManager = $WindowManager
+onready var overlay_container : Control = $Overlay/Container
 onready var loading_overlay : LoadingOverlay = $Overlay/Container/LoadingRect
 onready var top_bar : TopBar = $Overlay/Container/TopContainer
+onready var notifications_bar : Notifications = $Overlay/Container/TopContainer/NotificationsBar
 onready var bottom_bar : BottomBar = $Overlay/Container/BottomContainer
-onready var view : ViewHandler = $View
+onready var app : AppHandler = $App
 onready var background : TextureRect = $Background
 onready var standby_timer = $StandByTimer
 onready var tween : Tween = $Tween
 
-onready var first_view : PackedScene
-
 
 func _ready():
-	# TODO: review the setting system
-	Settings.add_exported_settings(self, [{ "section": "system", "key": "launcher_view", "label": "Launcher View", "control": preload("res://system/settings/editors/dropdown_single_entry.tscn") }])
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	
-	first_view = Modules.get_view(Config.get_or_default("system", "launcher_view", null))["scene"]
+	first_app = Modules.get_loaded_component_from_config("system", "launcher_app", "default/launcher").resource
+	settings_app_id = Config.get_value_or_default("system", "settings_app", "default/settings")
+	keyboard_app_id = Config.get_value_or_default("system", "keyboard_app", "default/keyboard")
+	
+	window_manager.connect("active_window_changed", self, "_active_window_changed")
+	window_manager.connect("window_mapped", self, "_window_mapped")
+	window_manager.connect("window_unmapped", self, "_window_unmapped")
+	window_manager.connect("window_name_changed", self, "_window_name_changed")
 	
 	window_manager.start()
 	
@@ -51,13 +62,19 @@ func _ready():
 	top_bar.connect("close_requested", self, "_status_close_requested")
 	top_bar.connect("kill_app_requested", self, "_status_kill_app_requested", [], CONNECT_DEFERRED)
 	
-	# Listen to the View Handler signals, when views want to change the title or the bars visibility
-	view.connect("title_change_requested", self, "_title_change_requested")
-	view.connect("bars_visibility_change_requested", self, "_bars_visibility_change_requested")
-	view.connect("mode_change_requested", self, "_mode_change_requested")
+	# Listen to Notifications
+	notifications_bar.connect("notification_show_requested", self, "_notification_show_requested")
+	notifications_bar.connect("notification_showing", self, "_notification_showing")
+	notifications_bar.connect("notification_hide_requested", self, "_notification_hide_requested")
+	notifications_bar.connect("notification_hidden", self, "_notification_hidden")
 	
-	view.add_view(first_view.instance())
-	view.focus()
+	# Listen to the App Handler signals, when Apps want to change the title or the bars visibility
+	app.connect("title_change_requested", self, "_title_change_requested")
+	app.connect("bars_visibility_change_requested", self, "_bars_visibility_change_requested")
+	app.connect("mode_change_requested", self, "_mode_change_requested")
+	
+	app.add_app(first_app.instance())
+	app.focus()
 
 
 func _set_mode(value):
@@ -73,7 +90,9 @@ func _set_mode(value):
 			var root = get_tree().root
 			root.transparent_bg = true
 			background.hide()
-	update()
+#	update()
+#	overlay_container.update()
+#	get_tree()
 
 
 func _input(event):	
@@ -95,9 +114,27 @@ func _standby():
 	standby = true
 
 
+func want_always_on_top(object):
+	var on_top = always_on_top_wanted.size() > 0
+	if not always_on_top_wanted.has(object):
+		always_on_top_wanted.append(object)
+		if always_on_top_wanted.size() > 0 and not on_top:
+			print("[GODOT] Setting always on top to TRUE")
+			window_manager.set_always_on_top(window_manager.get_window_id(), true)
+
+
+func unwant_always_on_top(object):
+	var on_top = always_on_top_wanted.size() > 0
+	if always_on_top_wanted.has(object):
+		always_on_top_wanted.erase(object)
+		if always_on_top_wanted.size() == 0 and on_top:
+			print("[GODOT] Setting always on top to FALSE")
+			window_manager.set_always_on_top(window_manager.get_window_id(), false)
+
+
 func show_widgets():
-	window_manager.set_always_on_top(window_manager.get_window_id(), true)
-	view.unfocus()
+	want_always_on_top(top_bar)
+	app.unfocus()
 	top_bar.mode = TopBar.Mode.WIDGETS
 	if not top_bar_showing:
 		_show_top_bar()
@@ -110,8 +147,8 @@ func show_widgets():
 
 
 func hide_widgets():
-	window_manager.set_always_on_top(window_manager.get_window_id(), false)
-	view.focus()
+	unwant_always_on_top(top_bar)
+	app.focus()
 	top_bar.mode = TopBar.Mode.STATUS
 	if not top_bar_showing:
 		_hide_top_bar()
@@ -147,8 +184,9 @@ func _hide_bot_bar():
 
 
 func _status_open_requested():
-	# TODO: could check if widgets can be opened, e.g. with a request to the current view
-	show_widgets()
+	# TODO: could check if widgets can be opened, e.g. with a request to the current App
+	if not loading_overlay.is_loading():
+		show_widgets()
 
 
 func _status_close_requested():
@@ -161,6 +199,23 @@ func _status_kill_app_requested():
 #		window_manager.give_focus(window_manager.get_active_window())
 		print("[GODOT] Trying to kill window " + str(active_app_window_id))
 		window_manager.kill_window(active_app_window_id)
+
+
+# Notifications handling
+func _notification_show_requested(notification):
+	notifications_bar.show_notification()
+
+
+func _notification_showing(notification):
+	want_always_on_top(notifications_bar)
+
+
+func _notification_hide_requested(notification):
+	notifications_bar.hide_notification()
+
+
+func _notification_hidden(notification):
+	unwant_always_on_top(notifications_bar)
 
 
 func _window_mapped(window_id):
@@ -182,13 +237,15 @@ func _window_unmapped(window_id):
 
 func _window_name_changed(window_id, name):
 	if window_id == window_manager.get_active_window():
-		view.window_name_changed(name)
+		app.window_name_changed(name)
 
 
 func _active_window_changed(window_id):
 	active_app_window_id = window_id
 	print("[GODOT] Activating a new window: " + str(window_id))
-	view.active_window_changed(window_id)
+	app.active_window_changed(window_id)
+#	yield(get_tree().create_timer(5.0), "timeout")
+#	window_manager.raise_window(window_manager.get_window_id())
 	
 	# TODO: debug stuff, to remove
 	var stack = window_manager.get_windows_stack()
@@ -223,3 +280,14 @@ func _bars_visibility_change_requested(show_top_bar, show_bottom_bar):
 func _mode_change_requested(mode):
 	if mode != self.mode:
 		_set_mode(mode)
+
+
+static func _get_exported_settings():
+	return [
+		{ "section": "system", "key": "launcher_app", "label": "Launcher App", "control": preload("res://system/settings/editors/dropdown_launcher_app.tscn") },
+		{ "section": "system", "key": "settings_app", "label": "Settings App", "control": preload("res://system/settings/editors/dropdown_settings_app.tscn") },
+		{ "section": "system", "key": "keyboard_app", "label": "Keyboard App", "control": preload("res://system/settings/editors/dropdown_component_single.tscn") },
+		{ "section": "system", "key": "language", "label": "Language", "control": preload("res://system/settings/editors/dropdown_component_single.tscn") },
+		{ "section": "system", "key": "theme", "label": "Theme", "control": preload("res://system/settings/editors/dropdown_theme.tscn") },
+		{ "section": "system", "key": "about", "label": "About", "control": load("res://system/settings/about/settings_button.tscn") }
+	]
