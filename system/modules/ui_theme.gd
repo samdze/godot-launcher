@@ -15,7 +15,7 @@ static func _get_component_tags():
 
 
 # Override this function to expose user-editable settings to the Settings app
-static func _get_exported_settings():
+static func _get_settings():
 	return []
 
 

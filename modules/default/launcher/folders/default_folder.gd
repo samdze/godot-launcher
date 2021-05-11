@@ -35,6 +35,7 @@ func load_directory() -> Array:
 					entry = folder_entry.new()
 					entry.init_from_directory(directory + "/" + file_name, entry_name)
 				
+				entry.path = directory + "/" + file_name
 				entries.append(entry)
 			else:
 				if file_name.ends_with(".sh"):
@@ -42,8 +43,9 @@ func load_directory() -> Array:
 					var entry_name = file_name.substr(underscore_index + 1).replace(".sh", "")
 					var entry = command_entry.new()
 					# TODO: check if file is executable
-					entry.init_from_file(directory, file_name)
+					entry.init_from_file(ProjectSettings.globalize_path(directory), file_name)
 					
+					entry.path = directory + "/" + file_name
 					entries.append(entry)
 					
 				elif file_name.ends_with(".gd"):
@@ -61,6 +63,7 @@ func load_directory() -> Array:
 						continue
 					var entry = entry_script.new()
 					
+					entry.path = directory + "/" + file_name
 					entries.append(entry)
 			
 			file_name = dir.get_next()

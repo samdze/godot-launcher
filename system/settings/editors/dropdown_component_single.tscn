@@ -20,9 +20,6 @@ type = 9223372036854775806
 margin_bottom = 34.0
 
 [node name="EditorsContainer" parent="SettingEntry" index="0"]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 297.0
 margin_bottom = 27.0
 
 [node name="LabelContainer" parent="SettingEntry/EditorsContainer" index="0"]

@@ -19,14 +19,15 @@ func _ready():
 	percentage_regex = RegEx.new()
 	percentage_regex.compile("\\[(\\d+)%\\]")
 	
-	_update_status(Config.get_value_or_default("settings", "audio_volume", null))
+	_update_status(Settings.get_value("settings/audio_volume"))
 
 
 func _widget_selected():
 	slider.grab_focus()
-	Launcher.get_ui().bottom_bar.set_prompts(
-		[BottomBar.ICON_NAV_H, BottomBar.PROMPT_ADJUST],
-		[BottomBar.ICON_BUTTON_B, BottomBar.PROMPT_BACK])
+	Launcher.emit_event("prompts", [
+		[BottomBar.ICON_NAV_H, tr("DEFAULT.PROMPT_ADJUST")],
+		[BottomBar.ICON_BUTTON_B, tr("DEFAULT.PROMPT_BACK")]
+	])
 
 
 func _controls_gui_input(event : InputEvent, control):
@@ -72,7 +73,7 @@ func _set_value(value : int) -> int:
 
 func _value_changed(value):
 	value = _set_value(value)
-	Config.set_value("settings", "audio_volume", value)
+	Settings.set_value("settings/audio_volume", value)
 	
 	_update_controls(value)
 	_update_icon(value)
@@ -85,3 +86,13 @@ func _get_widget_controls():
 func _notification(what):
 	if what == NOTIFICATION_PREDELETE:
 		if controls: controls.queue_free()
+
+
+static func _get_component_name():
+	return "Audio Volume"
+
+
+static func _get_settings():
+	return [
+		Setting.create("settings/audio_volume", 50),
+	]

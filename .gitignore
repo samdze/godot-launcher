@@ -20,6 +20,7 @@ settings.conf
 # Addons
 addons/makefile_launcher
 addons/Todo_Manager
+addons/zylann.translation_editor
 
 # Utility makefile
 makefile

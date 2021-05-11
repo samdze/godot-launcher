@@ -2,11 +2,11 @@ extends App
 
 
 func _focus():
-	emit_signal("bars_visibility_change_requested", true, true)
-	emit_signal("title_change_requested", "About")
-	emit_signal("mode_change_requested", LauncherUI.Mode.OPAQUE)
+	emit_signal("status_visibility_change_requested", true)
+	emit_signal("title_change_requested", tr("DEFAULT.ABOUT"))
+	emit_signal("mode_change_requested", System.Mode.OPAQUE)
 	grab_focus()
-	Launcher.get_ui().bottom_bar.set_prompts([], [BottomBar.ICON_BUTTON_B, BottomBar.PROMPT_BACK])
+	Launcher.emit_event("prompts", [[], [BottomBar.ICON_BUTTON_B, tr("DEFAULT.PROMPT_BACK")]])
 
 
 func _app_input(event : InputEvent):

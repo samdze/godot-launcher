@@ -1,72 +1,56 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://modules/default/keyboard/keyboard.gd" type="Script" id=1]
 [ext_resource path="res://system/components/large_label.tscn" type="PackedScene" id=2]
 [ext_resource path="res://modules/default/keyboard/horizontal_arrows.png" type="Texture" id=3]
 [ext_resource path="res://system/components/theme_property_applier.gd" type="Script" id=4]
+[ext_resource path="res://system/components/scroll_container.tscn" type="PackedScene" id=5]
 
-[sub_resource type="StyleBoxFlat" id=1]
-bg_color = Color( 1, 1, 1, 1 )
-expand_margin_left = 6.0
-expand_margin_right = 6.0
-expand_margin_top = 2.0
-expand_margin_bottom = 2.0
-
-[sub_resource type="StyleBoxFlat" id=2]
-bg_color = Color( 0.952941, 0.952941, 0.952941, 1 )
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color( 0.764706, 0.92549, 0.976471, 1 )
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
-expand_margin_left = 2.0
-expand_margin_right = 2.0
-expand_margin_top = 2.0
-expand_margin_bottom = 2.0
-
-[sub_resource type="AtlasTexture" id=5]
+[sub_resource type="AtlasTexture" id=3]
 flags = 4
 atlas = ExtResource( 3 )
 region = Rect2( 0, 0, 7, 8 )
 
-[sub_resource type="AtlasTexture" id=6]
+[sub_resource type="AtlasTexture" id=4]
 flags = 4
 atlas = ExtResource( 3 )
 region = Rect2( 9, 0, 7, 8 )
 
-[node name="KeyboardApp" type="MarginContainer"]
-anchor_right = 1.0
-anchor_bottom = 1.0
+[node name="KeyboardApp" type="PanelContainer"]
+margin_left = 6.0
+margin_top = 2.0
+margin_right = 314.0
+margin_bottom = 238.0
+mouse_filter = 1
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+first_characters_focused_key = NodePath("MarginContainer/Layout/KeysContainer/Characters/Row3/Key15")
+first_symbols_focused_key = NodePath("MarginContainer/Layout/KeysContainer/Symbols/Row3/Key15")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 315.0
+margin_bottom = 229.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/margin_right = 6
 custom_constants/margin_top = 2
 custom_constants/margin_left = 6
 custom_constants/margin_bottom = 2
-script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-first_characters_focused_key = NodePath("Layout/KeysContainer/Characters/Row3/Key15")
-first_symbols_focused_key = NodePath("Layout/KeysContainer/Symbols/Row3/Key15")
 
-[node name="Panel" type="Panel" parent="."]
+[node name="Layout" type="VBoxContainer" parent="MarginContainer"]
 margin_left = 6.0
 margin_top = 2.0
-margin_right = 314.0
-margin_bottom = 238.0
-mouse_filter = 1
-custom_styles/panel = SubResource( 1 )
-
-[node name="Layout" type="VBoxContainer" parent="."]
-margin_left = 6.0
-margin_top = 2.0
-margin_right = 314.0
-margin_bottom = 238.0
+margin_right = 302.0
+margin_bottom = 220.0
 focus_neighbour_left = NodePath(".")
 focus_neighbour_top = NodePath(".")
 focus_neighbour_right = NodePath(".")
@@ -80,35 +64,40 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PanelContainer" type="PanelContainer" parent="Layout"]
-margin_right = 308.0
-margin_bottom = 114.0
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/Layout"]
+margin_right = 296.0
+margin_bottom = 105.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_styles/panel = SubResource( 2 )
+script = ExtResource( 4 )
+stylebox_values = {
+"panel": "popup"
+}
 
-[node name="MarginContainer" type="MarginContainer" parent="Layout/PanelContainer"]
-margin_left = 2.0
-margin_top = 2.0
-margin_right = 306.0
-margin_bottom = 112.0
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/Layout/PanelContainer"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 289.0
+margin_bottom = 98.0
 custom_constants/margin_right = 4
 custom_constants/margin_top = 4
 custom_constants/margin_left = 4
 custom_constants/margin_bottom = 4
 
-[node name="TextContainer" type="ScrollContainer" parent="Layout/PanelContainer/MarginContainer"]
+[node name="TextContainer" parent="MarginContainer/Layout/PanelContainer/MarginContainer" instance=ExtResource( 5 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 4.0
 margin_top = 4.0
-margin_right = 300.0
-margin_bottom = 106.0
+margin_right = 278.0
+margin_bottom = 87.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 follow_focus = true
 
-[node name="LargeLabel" parent="Layout/PanelContainer/MarginContainer/TextContainer" instance=ExtResource( 2 )]
-margin_right = 296.0
-margin_bottom = 102.0
+[node name="LargeLabel" parent="MarginContainer/Layout/PanelContainer/MarginContainer/TextContainer" instance=ExtResource( 2 )]
+margin_right = 274.0
+margin_bottom = 83.0
 size_flags_horizontal = 3
 size_flags_vertical = 7
 text = "4r4thru4h hru4hh r4huhr 4hurh hu4hrh"
@@ -116,7 +105,7 @@ font_values = {
 "font": "large_font"
 }
 
-[node name="Highlighter" type="Panel" parent="Layout/PanelContainer/MarginContainer/TextContainer/LargeLabel"]
+[node name="Highlighter" type="Panel" parent="MarginContainer/Layout/PanelContainer/MarginContainer/TextContainer/LargeLabel"]
 margin_left = 22.0
 margin_top = 5.0
 margin_right = 24.0
@@ -130,27 +119,25 @@ stylebox_values = {
 "panel": "highlighter"
 }
 
-[node name="KeysContainer" type="VBoxContainer" parent="Layout"]
-margin_top = 133.0
-margin_right = 308.0
-margin_bottom = 225.0
+[node name="KeysContainer" type="VBoxContainer" parent="MarginContainer/Layout"]
+margin_top = 119.0
+margin_right = 296.0
+margin_bottom = 211.0
 size_flags_horizontal = 3
 size_flags_vertical = 6
 
-[node name="Characters" type="VBoxContainer" parent="Layout/KeysContainer"]
-margin_right = 308.0
+[node name="Characters" type="VBoxContainer" parent="MarginContainer/Layout/KeysContainer"]
+margin_right = 296.0
 margin_bottom = 92.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Row1" type="HBoxContainer" parent="Layout/KeysContainer/Characters"]
-margin_left = 6.0
-margin_right = 302.0
+[node name="Row1" type="HBoxContainer" parent="MarginContainer/Layout/KeysContainer/Characters"]
+margin_right = 296.0
 margin_bottom = 20.0
 size_flags_horizontal = 4
 
-[node name="Key27" type="Button" parent="Layout/KeysContainer/Characters/Row1"]
-margin_left = -1.90735e-06
+[node name="Key27" type="Button" parent="MarginContainer/Layout/KeysContainer/Characters/Row1"]
 margin_right = 26.0
 margin_bottom = 20.0
 rect_min_size = Vector2( 26, 0 )
@@ -161,7 +148,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Key28" type="Button" parent="Layout/KeysContainer/Characters/Row1"]
+[node name="Key28" type="Button" parent="MarginContainer/Layout/KeysContainer/Characters/Row1"]
 margin_left = 30.0
 margin_right = 56.0
 margin_bottom = 20.0
@@ -173,7 +160,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Key29" type="Button" parent="Layout/KeysContainer/Characters/Row1"]
+[node name="Key29" type="Button" parent="MarginContainer/Layout/KeysContainer/Characters/Row1"]
 margin_left = 60.0
 margin_right = 86.0
 margin_bottom = 20.0
@@ -185,7 +172,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Key30" type="Button" parent="Layout/KeysContainer/Characters/Row1"]
+[node name="Key30" type="Button" parent="MarginContainer/Layout/KeysContainer/Characters/Row1"]
 margin_left = 90.0
 margin_right = 116.0
 margin_bottom = 20.0
@@ -197,7 +184,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Key31" type="Button" parent="Layout/KeysContainer/Characters/Row1"]
+[node name="Key31" type="Button" parent="MarginContainer/Layout/KeysContainer/Characters/Row1"]
 margin_left = 120.0
 margin_right = 146.0
 margin_bottom = 20.0
@@ -209,7 +196,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Key32" type="Button" parent="Layout/KeysContainer/Characters/Row1"]
+[node name="Key32" type="Button" parent="MarginContainer/Layout/KeysContainer/Characters/Row1"]
 margin_left = 150.0
 margin_right = 176.0
 margin_bottom = 20.0
@@ -221,7 +208,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Key33" type="Button" parent="Layout/KeysContainer/Characters/Row1"]
+[node name="Key33" type="Button" parent="MarginContainer/Layout/KeysContainer/Characters/Row1"]
 margin_left = 180.0
 margin_right = 206.0
 margin_bottom = 20.0
@@ -233,7 +220,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Key34" type="Button" parent="Layout/KeysContainer/Characters/Row1"]
+[node name="Key34" type="Button" parent="MarginContainer/Layout/KeysContainer/Characters/Row1"]
 margin_left = 210.0
 margin_right = 236.0
 margin_bottom = 20.0
@@ -245,7 +232,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Key35" type="Button" parent="Layout/KeysContainer/Characters/Row1"]
+[node name="Key35" type="Button" parent="MarginContainer/Layout/KeysContainer/Characters/Row1"]
 margin_left = 240.0
 margin_right = 266.0
 margin_bottom = 20.0
@@ -257,7 +244,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Key36" type="Button" parent="Layout/KeysContainer/Characters/Row1"]
+[node name="Key36" type="Button" parent="MarginContainer/Layout/KeysContainer/Characters/Row1"]
 margin_left = 270.0
 margin_right = 296.0
 margin_bottom = 20.0
@@ -269,15 +256,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Row2" type="HBoxContainer" parent="Layout/KeysContainer/Characters"]
-margin_left = 6.0
+[node name="Row2" type="HBoxContainer" parent="MarginContainer/Layout/KeysContainer/Characters"]
 margin_top = 24.0
-margin_right = 302.0
+margin_right = 296.0
 margin_bottom = 44.0
 size_flags_horizontal = 4
 
-[node name="Key" type="Button" parent="Layout/KeysContainer/Characters/Row2"]
-margin_left = -1.90735e-06
+[node name="Key" type="Button" parent="MarginContainer/Layout/KeysContainer/Characters/Row2"]
 margin_right = 26.0
 margin_bottom = 20.0
 rect_min_size = Vector2( 26, 0 )
@@ -288,7 +273,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Key2" type="Button" parent="Layout/KeysContainer/Characters/Row2"]
+[node name="Key2" type="Button" parent="MarginContainer/Layout/KeysContainer/Characters/Row2"]
 margin_left = 30.0
 margin_right = 56.0
 margin_bottom = 20.0
@@ -300,7 +285,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Key3" type="Button" parent="Layout/KeysContainer/Characters/Row2"]
+[node name="Key3" type="Button" parent="MarginContainer/Layout/KeysContainer/Characters/Row2"]
 margin_left = 60.0
 margin_right = 86.0
 margin_bottom = 20.0
@@ -312,7 +297,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Key4" type="Button" parent="Layout/KeysContainer/Characters/Row2"]
+[node name="Key4" type="Button" parent="MarginContainer/Layout/KeysContainer/Characters/Row2"]
 margin_left = 90.0
 margin_right = 116.0
 margin_bottom = 20.0
@@ -324,7 +309,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Key5" type="Button" parent="Layout/KeysContainer/Characters/Row2"]
+[node name="Key5" type="Button" parent="MarginContainer/Layout/KeysContainer/Characters/Row2"]
 margin_left = 120.0
 margin_right = 146.0
 margin_bottom = 20.0
@@ -336,7 +321,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Key6" type="Button" parent="Layout/KeysContainer/Characters/Row2"]
+[node name="Key6" type="Button" parent="MarginContainer/Layout/KeysContainer/Characters/Row2"]
 margin_left = 150.0
 margin_right = 176.0
 margin_bottom = 20.0
@@ -348,7 +333,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Key7" type="Button" parent="Layout/KeysContainer/Characters/Row2"]
+[node name="Key7" type="Button" parent="MarginContainer/Layout/KeysContainer/Characters/Row2"]
 margin_left = 180.0
 margin_right = 206.0
 margin_bottom = 20.0
@@ -360,7 +345,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Key8" type="Button" parent="Layout/KeysContainer/Characters/Row2"]
+[node name="Key8" type="Button" parent="MarginContainer/Layout/KeysContainer/Characters/Row2"]
 margin_left = 210.0
 margin_right = 236.0
 margin_bottom = 20.0
@@ -372,7 +357,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Key9" type="Button" parent="Layout/KeysContainer/Characters/Row2"]
+[node name="Key9" type="Button" parent="MarginContainer/Layout/KeysContainer/Characters/Row2"]
 margin_left = 240.0
 margin_right = 266.0
 margin_bottom = 20.0
@@ -384,7 +369,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Key10" type="Button" parent="Layout/KeysContainer/Characters/Row2"]
+[node name="Key10" type="Button" parent="MarginContainer/Layout/KeysContainer/Characters/Row2"]
 margin_left = 270.0
 margin_right = 296.0
 margin_bottom = 20.0
@@ -396,15 +381,14 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Row3" type="HBoxContainer" parent="Layout/KeysContainer/Characters"]
-margin_left = 21.0
+[node name="Row3" type="HBoxContainer" parent="MarginContainer/Layout/KeysContainer/Characters"]
+margin_left = 15.0
 margin_top = 48.0
-margin_right = 287.0
+margin_right = 281.0
 margin_bottom = 68.0
 size_flags_horizontal = 4
 
-[node name="Key11" type="Button" parent="Layout/KeysContainer/Characters/Row3"]
-margin_left = -1.90735e-06
+[node name="Key11" type="Button" parent="MarginContainer/Layout/KeysContainer/Characters/Row3"]
 margin_right = 26.0
 margin_bottom = 20.0
 rect_min_size = Vector2( 26, 0 )
@@ -415,7 +399,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Key12" type="Button" parent="Layout/KeysContainer/Characters/Row3"]
+[node name="Key12" type="Button" parent="MarginContainer/Layout/KeysContainer/Characters/Row3"]
 margin_left = 30.0
 margin_right = 56.0
 margin_bottom = 20.0
@@ -427,7 +411,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Key13" type="Button" parent="Layout/KeysContainer/Characters/Row3"]
+[node name="Key13" type="Button" parent="MarginContainer/Layout/KeysContainer/Characters/Row3"]
 margin_left = 60.0
 margin_right = 86.0
 margin_bottom = 20.0
@@ -439,7 +423,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Key14" type="Button" parent="Layout/KeysContainer/Characters/Row3"]
+[node name="Key14" type="Button" parent="MarginContainer/Layout/KeysContainer/Characters/Row3"]
 margin_left = 90.0
 margin_right = 116.0
 margin_bottom = 20.0
@@ -451,7 +435,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Key15" type="Button" parent="Layout/KeysContainer/Characters/Row3"]
+[node name="Key15" type="Button" parent="MarginContainer/Layout/KeysContainer/Characters/Row3"]
 margin_left = 120.0
 margin_right = 146.0
 margin_bottom = 20.0
@@ -463,7 +447,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Key16" type="Button" parent="Layout/KeysContainer/Characters/Row3"]
+[node name="Key16" type="Button" parent="MarginContainer/Layout/KeysContainer/Characters/Row3"]
 margin_left = 150.0
 margin_right = 176.0
 margin_bottom = 20.0
@@ -475,7 +459,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Key17" type="Button" parent="Layout/KeysContainer/Characters/Row3"]
+[node name="Key17" type="Button" parent="MarginContainer/Layout/KeysContainer/Characters/Row3"]
 margin_left = 180.0
 margin_right = 206.0
 margin_bottom = 20.0
@@ -487,7 +471,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Key18" type="Button" parent="Layout/KeysContainer/Characters/Row3"]
+[node name="Key18" type="Button" parent="MarginContainer/Layout/KeysContainer/Characters/Row3"]
 margin_left = 210.0
 margin_right = 236.0
 margin_bottom = 20.0
@@ -499,7 +483,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Key19" type="Button" parent="Layout/KeysContainer/Characters/Row3"]
+[node name="Key19" type="Button" parent="MarginContainer/Layout/KeysContainer/Characters/Row3"]
 margin_left = 240.0
 margin_right = 266.0
 margin_bottom = 20.0
@@ -511,25 +495,25 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Row4" type="HBoxContainer" parent="Layout/KeysContainer/Characters"]
-margin_left = 28.0
+[node name="Row4" type="HBoxContainer" parent="MarginContainer/Layout/KeysContainer/Characters"]
+margin_left = 22.0
 margin_top = 72.0
-margin_right = 280.0
+margin_right = 274.0
 margin_bottom = 92.0
 size_flags_horizontal = 4
 
-[node name="Left" type="Button" parent="Layout/KeysContainer/Characters/Row4"]
+[node name="Left" type="Button" parent="MarginContainer/Layout/KeysContainer/Characters/Row4"]
 margin_right = 19.0
 margin_bottom = 20.0
 size_flags_horizontal = 10
 action_mode = 0
-icon = SubResource( 5 )
+icon = SubResource( 3 )
 align = 0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Key20" type="Button" parent="Layout/KeysContainer/Characters/Row4"]
+[node name="Key20" type="Button" parent="MarginContainer/Layout/KeysContainer/Characters/Row4"]
 margin_left = 23.0
 margin_right = 49.0
 margin_bottom = 20.0
@@ -541,7 +525,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Key21" type="Button" parent="Layout/KeysContainer/Characters/Row4"]
+[node name="Key21" type="Button" parent="MarginContainer/Layout/KeysContainer/Characters/Row4"]
 margin_left = 53.0
 margin_right = 79.0
 margin_bottom = 20.0
@@ -553,7 +537,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Key22" type="Button" parent="Layout/KeysContainer/Characters/Row4"]
+[node name="Key22" type="Button" parent="MarginContainer/Layout/KeysContainer/Characters/Row4"]
 margin_left = 83.0
 margin_right = 109.0
 margin_bottom = 20.0
@@ -565,7 +549,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Key23" type="Button" parent="Layout/KeysContainer/Characters/Row4"]
+[node name="Key23" type="Button" parent="MarginContainer/Layout/KeysContainer/Characters/Row4"]
 margin_left = 113.0
 margin_right = 139.0
 margin_bottom = 20.0
@@ -577,7 +561,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Key24" type="Button" parent="Layout/KeysContainer/Characters/Row4"]
+[node name="Key24" type="Button" parent="MarginContainer/Layout/KeysContainer/Characters/Row4"]
 margin_left = 143.0
 margin_right = 169.0
 margin_bottom = 20.0
@@ -589,7 +573,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Key25" type="Button" parent="Layout/KeysContainer/Characters/Row4"]
+[node name="Key25" type="Button" parent="MarginContainer/Layout/KeysContainer/Characters/Row4"]
 margin_left = 173.0
 margin_right = 199.0
 margin_bottom = 20.0
@@ -601,7 +585,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Key26" type="Button" parent="Layout/KeysContainer/Characters/Row4"]
+[node name="Key26" type="Button" parent="MarginContainer/Layout/KeysContainer/Characters/Row4"]
 margin_left = 203.0
 margin_right = 229.0
 margin_bottom = 20.0
@@ -613,18 +597,18 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Right" type="Button" parent="Layout/KeysContainer/Characters/Row4"]
+[node name="Right" type="Button" parent="MarginContainer/Layout/KeysContainer/Characters/Row4"]
 margin_left = 233.0
 margin_right = 252.0
 margin_bottom = 20.0
 size_flags_horizontal = 10
 action_mode = 0
-icon = SubResource( 6 )
+icon = SubResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Symbols" type="VBoxContainer" parent="Layout/KeysContainer"]
+[node name="Symbols" type="VBoxContainer" parent="MarginContainer/Layout/KeysContainer"]
 visible = false
 margin_top = 96.0
 margin_right = 308.0
@@ -632,13 +616,13 @@ margin_bottom = 188.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Row1" type="HBoxContainer" parent="Layout/KeysContainer/Symbols"]
+[node name="Row1" type="HBoxContainer" parent="MarginContainer/Layout/KeysContainer/Symbols"]
 margin_left = 6.0
 margin_right = 302.0
 margin_bottom = 20.0
 size_flags_horizontal = 4
 
-[node name="Key27" type="Button" parent="Layout/KeysContainer/Symbols/Row1"]
+[node name="Key27" type="Button" parent="MarginContainer/Layout/KeysContainer/Symbols/Row1"]
 margin_left = -1.90735e-06
 margin_right = 26.0
 margin_bottom = 20.0
@@ -650,7 +634,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Key28" type="Button" parent="Layout/KeysContainer/Symbols/Row1"]
+[node name="Key28" type="Button" parent="MarginContainer/Layout/KeysContainer/Symbols/Row1"]
 margin_left = 30.0
 margin_right = 56.0
 margin_bottom = 20.0
@@ -662,7 +646,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Key29" type="Button" parent="Layout/KeysContainer/Symbols/Row1"]
+[node name="Key29" type="Button" parent="MarginContainer/Layout/KeysContainer/Symbols/Row1"]
 margin_left = 60.0
 margin_right = 86.0
 margin_bottom = 20.0
@@ -674,7 +658,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Key30" type="Button" parent="Layout/KeysContainer/Symbols/Row1"]
+[node name="Key30" type="Button" parent="MarginContainer/Layout/KeysContainer/Symbols/Row1"]
 margin_left = 90.0
 margin_right = 116.0
 margin_bottom = 20.0
@@ -686,7 +670,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Key31" type="Button" parent="Layout/KeysContainer/Symbols/Row1"]
+[node name="Key31" type="Button" parent="MarginContainer/Layout/KeysContainer/Symbols/Row1"]
 margin_left = 120.0
 margin_right = 146.0
 margin_bottom = 20.0
@@ -698,7 +682,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Key32" type="Button" parent="Layout/KeysContainer/Symbols/Row1"]
+[node name="Key32" type="Button" parent="MarginContainer/Layout/KeysContainer/Symbols/Row1"]
 margin_left = 150.0
 margin_right = 176.0
 margin_bottom = 20.0
@@ -710,7 +694,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Key33" type="Button" parent="Layout/KeysContainer/Symbols/Row1"]
+[node name="Key33" type="Button" parent="MarginContainer/Layout/KeysContainer/Symbols/Row1"]
 margin_left = 180.0
 margin_right = 206.0
 margin_bottom = 20.0
@@ -722,7 +706,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Key34" type="Button" parent="Layout/KeysContainer/Symbols/Row1"]
+[node name="Key34" type="Button" parent="MarginContainer/Layout/KeysContainer/Symbols/Row1"]
 margin_left = 210.0
 margin_right = 236.0
 margin_bottom = 20.0
@@ -734,7 +718,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Key35" type="Button" parent="Layout/KeysContainer/Symbols/Row1"]
+[node name="Key35" type="Button" parent="MarginContainer/Layout/KeysContainer/Symbols/Row1"]
 margin_left = 240.0
 margin_right = 266.0
 margin_bottom = 20.0
@@ -746,7 +730,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Key36" type="Button" parent="Layout/KeysContainer/Symbols/Row1"]
+[node name="Key36" type="Button" parent="MarginContainer/Layout/KeysContainer/Symbols/Row1"]
 margin_left = 270.0
 margin_right = 296.0
 margin_bottom = 20.0
@@ -758,14 +742,14 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Row2" type="HBoxContainer" parent="Layout/KeysContainer/Symbols"]
+[node name="Row2" type="HBoxContainer" parent="MarginContainer/Layout/KeysContainer/Symbols"]
 margin_left = 6.0
 margin_top = 24.0
 margin_right = 302.0
 margin_bottom = 44.0
 size_flags_horizontal = 4
 
-[node name="Key" type="Button" parent="Layout/KeysContainer/Symbols/Row2"]
+[node name="Key" type="Button" parent="MarginContainer/Layout/KeysContainer/Symbols/Row2"]
 margin_left = -1.90735e-06
 margin_right = 26.0
 margin_bottom = 20.0
@@ -777,7 +761,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Key2" type="Button" parent="Layout/KeysContainer/Symbols/Row2"]
+[node name="Key2" type="Button" parent="MarginContainer/Layout/KeysContainer/Symbols/Row2"]
 margin_left = 30.0
 margin_right = 56.0
 margin_bottom = 20.0
@@ -789,7 +773,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Key3" type="Button" parent="Layout/KeysContainer/Symbols/Row2"]
+[node name="Key3" type="Button" parent="MarginContainer/Layout/KeysContainer/Symbols/Row2"]
 margin_left = 60.0
 margin_right = 86.0
 margin_bottom = 20.0
@@ -801,7 +785,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Key4" type="Button" parent="Layout/KeysContainer/Symbols/Row2"]
+[node name="Key4" type="Button" parent="MarginContainer/Layout/KeysContainer/Symbols/Row2"]
 margin_left = 90.0
 margin_right = 116.0
 margin_bottom = 20.0
@@ -813,7 +797,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Key5" type="Button" parent="Layout/KeysContainer/Symbols/Row2"]
+[node name="Key5" type="Button" parent="MarginContainer/Layout/KeysContainer/Symbols/Row2"]
 margin_left = 120.0
 margin_right = 146.0
 margin_bottom = 20.0
@@ -825,7 +809,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Key6" type="Button" parent="Layout/KeysContainer/Symbols/Row2"]
+[node name="Key6" type="Button" parent="MarginContainer/Layout/KeysContainer/Symbols/Row2"]
 margin_left = 150.0
 margin_right = 176.0
 margin_bottom = 20.0
@@ -837,7 +821,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Key7" type="Button" parent="Layout/KeysContainer/Symbols/Row2"]
+[node name="Key7" type="Button" parent="MarginContainer/Layout/KeysContainer/Symbols/Row2"]
 margin_left = 180.0
 margin_right = 206.0
 margin_bottom = 20.0
@@ -849,7 +833,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Key8" type="Button" parent="Layout/KeysContainer/Symbols/Row2"]
+[node name="Key8" type="Button" parent="MarginContainer/Layout/KeysContainer/Symbols/Row2"]
 margin_left = 210.0
 margin_right = 236.0
 margin_bottom = 20.0
@@ -861,7 +845,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Key9" type="Button" parent="Layout/KeysContainer/Symbols/Row2"]
+[node name="Key9" type="Button" parent="MarginContainer/Layout/KeysContainer/Symbols/Row2"]
 margin_left = 240.0
 margin_right = 266.0
 margin_bottom = 20.0
@@ -873,7 +857,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Key10" type="Button" parent="Layout/KeysContainer/Symbols/Row2"]
+[node name="Key10" type="Button" parent="MarginContainer/Layout/KeysContainer/Symbols/Row2"]
 margin_left = 270.0
 margin_right = 296.0
 margin_bottom = 20.0
@@ -885,14 +869,14 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Row3" type="HBoxContainer" parent="Layout/KeysContainer/Symbols"]
+[node name="Row3" type="HBoxContainer" parent="MarginContainer/Layout/KeysContainer/Symbols"]
 margin_left = 6.0
 margin_top = 48.0
 margin_right = 302.0
 margin_bottom = 68.0
 size_flags_horizontal = 4
 
-[node name="Key11" type="Button" parent="Layout/KeysContainer/Symbols/Row3"]
+[node name="Key11" type="Button" parent="MarginContainer/Layout/KeysContainer/Symbols/Row3"]
 margin_left = -1.90735e-06
 margin_right = 26.0
 margin_bottom = 20.0
@@ -904,7 +888,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Key12" type="Button" parent="Layout/KeysContainer/Symbols/Row3"]
+[node name="Key12" type="Button" parent="MarginContainer/Layout/KeysContainer/Symbols/Row3"]
 margin_left = 30.0
 margin_right = 56.0
 margin_bottom = 20.0
@@ -916,7 +900,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Key13" type="Button" parent="Layout/KeysContainer/Symbols/Row3"]
+[node name="Key13" type="Button" parent="MarginContainer/Layout/KeysContainer/Symbols/Row3"]
 margin_left = 60.0
 margin_right = 86.0
 margin_bottom = 20.0
@@ -928,7 +912,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Key14" type="Button" parent="Layout/KeysContainer/Symbols/Row3"]
+[node name="Key14" type="Button" parent="MarginContainer/Layout/KeysContainer/Symbols/Row3"]
 margin_left = 90.0
 margin_right = 116.0
 margin_bottom = 20.0
@@ -940,7 +924,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Key15" type="Button" parent="Layout/KeysContainer/Symbols/Row3"]
+[node name="Key15" type="Button" parent="MarginContainer/Layout/KeysContainer/Symbols/Row3"]
 margin_left = 120.0
 margin_right = 146.0
 margin_bottom = 20.0
@@ -952,7 +936,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Key16" type="Button" parent="Layout/KeysContainer/Symbols/Row3"]
+[node name="Key16" type="Button" parent="MarginContainer/Layout/KeysContainer/Symbols/Row3"]
 margin_left = 150.0
 margin_right = 176.0
 margin_bottom = 20.0
@@ -964,7 +948,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Key17" type="Button" parent="Layout/KeysContainer/Symbols/Row3"]
+[node name="Key17" type="Button" parent="MarginContainer/Layout/KeysContainer/Symbols/Row3"]
 margin_left = 180.0
 margin_right = 206.0
 margin_bottom = 20.0
@@ -976,7 +960,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Key18" type="Button" parent="Layout/KeysContainer/Symbols/Row3"]
+[node name="Key18" type="Button" parent="MarginContainer/Layout/KeysContainer/Symbols/Row3"]
 margin_left = 210.0
 margin_right = 236.0
 margin_bottom = 20.0
@@ -988,7 +972,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Key19" type="Button" parent="Layout/KeysContainer/Symbols/Row3"]
+[node name="Key19" type="Button" parent="MarginContainer/Layout/KeysContainer/Symbols/Row3"]
 margin_left = 240.0
 margin_right = 266.0
 margin_bottom = 20.0
@@ -1000,7 +984,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Key20" type="Button" parent="Layout/KeysContainer/Symbols/Row3"]
+[node name="Key20" type="Button" parent="MarginContainer/Layout/KeysContainer/Symbols/Row3"]
 margin_left = 270.0
 margin_right = 296.0
 margin_bottom = 20.0
@@ -1012,24 +996,24 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Row4" type="HBoxContainer" parent="Layout/KeysContainer/Symbols"]
+[node name="Row4" type="HBoxContainer" parent="MarginContainer/Layout/KeysContainer/Symbols"]
 margin_left = 71.0
 margin_top = 72.0
 margin_right = 237.0
 margin_bottom = 92.0
 size_flags_horizontal = 4
 
-[node name="Left" type="Button" parent="Layout/KeysContainer/Symbols/Row4"]
+[node name="Left" type="Button" parent="MarginContainer/Layout/KeysContainer/Symbols/Row4"]
 margin_right = 28.0
 margin_bottom = 20.0
 size_flags_horizontal = 2
 action_mode = 0
-icon = SubResource( 5 )
+icon = SubResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Key20" type="Button" parent="Layout/KeysContainer/Symbols/Row4"]
+[node name="Key20" type="Button" parent="MarginContainer/Layout/KeysContainer/Symbols/Row4"]
 margin_left = 32.0
 margin_right = 58.0
 margin_bottom = 20.0
@@ -1041,7 +1025,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Key21" type="Button" parent="Layout/KeysContainer/Symbols/Row4"]
+[node name="Key21" type="Button" parent="MarginContainer/Layout/KeysContainer/Symbols/Row4"]
 margin_left = 62.0
 margin_right = 88.0
 margin_bottom = 20.0
@@ -1053,7 +1037,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Key22" type="Button" parent="Layout/KeysContainer/Symbols/Row4"]
+[node name="Key22" type="Button" parent="MarginContainer/Layout/KeysContainer/Symbols/Row4"]
 margin_left = 92.0
 margin_right = 134.0
 margin_bottom = 20.0
@@ -1065,7 +1049,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="Layout/KeysContainer/Symbols/Row4/Key22"]
+[node name="Label" type="Label" parent="MarginContainer/Layout/KeysContainer/Symbols/Row4/Key22"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 text = "space"
@@ -1075,13 +1059,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Right" type="Button" parent="Layout/KeysContainer/Symbols/Row4"]
+[node name="Right" type="Button" parent="MarginContainer/Layout/KeysContainer/Symbols/Row4"]
 margin_left = 138.0
 margin_right = 166.0
 margin_bottom = 20.0
 size_flags_horizontal = 10
 action_mode = 0
-icon = SubResource( 6 )
+icon = SubResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

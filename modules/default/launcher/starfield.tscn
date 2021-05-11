@@ -1,0 +1,45 @@
+[gd_scene load_steps=3 format=2]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+// Starfield
+// Adapted from https://www.shadertoy.com/view/Ml2XDt by P_Malin
+// Garo/ArcOfDream
+uniform lowp vec4 background_color : hint_color;
+uniform lowp vec4 star_color : hint_color;
+uniform lowp float magnitude : hint_range(1., 100.);
+uniform lowp float star_count : hint_range(1., 1000.);
+uniform lowp float time_scale : hint_range(-2., 2.);
+
+void fragment()
+{
+	lowp vec4 f = background_color;
+	lowp vec2 p = UV*magnitude;
+	p.x -= magnitude/2.;
+	p.y -= magnitude/2.;
+
+    lowp float ba = floor(atan(p.x, p.y) * star_count);
+	lowp float h = cos(ba);
+	lowp float z = h / dot(p,p);
+    f += star_color * exp(fract(z + h * ba + vec4(TIME*time_scale)) / -0.001) / z;
+//	f += star_color * clamp(vec4(0.), vec4(1.), exp(fract(z + h * ba + vec4(TIME*time_scale)) / -0.001) / z);
+
+	COLOR=vec4(f.rgb, 1.);
+}"
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+shader_param/background_color = Color( 1, 1, 1, 1 )
+shader_param/star_color = Color( 1, 1, 1, 1 )
+shader_param/magnitude = 5.038
+shader_param/star_count = 68.551
+shader_param/time_scale = -0.422
+
+[node name="Starfield" type="ColorRect"]
+material = SubResource( 2 )
+margin_right = 320.0
+margin_bottom = 240.0
+__meta__ = {
+"_edit_use_anchors_": false
+}

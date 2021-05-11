@@ -76,7 +76,7 @@ func get_selected():
 
 func _toggled(button_pressed : bool):
 	if button_pressed:
-		Launcher.get_ui().bottom_bar.set_prompts([BottomBar.ICON_NAV_V, BottomBar.PROMPT_NAV], [BottomBar.ICON_BUTTON_A, BottomBar.PROMPT_SELECT, BottomBar.ICON_BUTTON_B, BottomBar.PROMPT_BACK])
+		Launcher.emit_event("prompts", [[BottomBar.ICON_NAV_V, tr("DEFAULT.PROMPT_NAVIGATION")], [BottomBar.ICON_BUTTON_A, tr("DEFAULT.PROMPT_SELECT"), BottomBar.ICON_BUTTON_B, tr("DEFAULT.PROMPT_BACK")]])
 		_open_popup()
 	else:
 		_close_popup()
@@ -89,7 +89,8 @@ func _open_popup():
 	var height = items_container.rect_size.y
 	var width = items_container.rect_size.x
 	var container_rect = _get_nearest_scroll_or_app_global_rect()
-	var popup_height = min(container_rect.size.y, height + scroll_container.margin_top - scroll_container.margin_bottom)
+	# TODO: include stylebox content margin instead of adding 2
+	var popup_height = min(container_rect.size.y, height + scroll_container.margin_top - scroll_container.margin_bottom + 2)
 	var popup_width = max(min(container_rect.size.x, width + scroll_container.margin_left - scroll_container.margin_right), self.rect_size.x + 2)
 	var scroll_height = popup_height - scroll_container.margin_top + scroll_container.margin_bottom
 	var scroll_width = popup_width - scroll_container.margin_left + scroll_container.margin_right
@@ -154,17 +155,20 @@ func _ensure_visible(control : Control):
 	if is_a_parent_of(control):
 		var global_rect = scroll_container.get_global_rect();
 		var other_rect = control.get_global_rect();
-		var right_margin = 0;
+		var stylebox : StyleBox = scroll_container.get_stylebox("bg")
+		var right_margin = stylebox.content_margin_right;
 		if scroll_container.get_v_scrollbar().visible:
 			right_margin += scroll_container.get_v_scrollbar().get_size().x
+		var left_margin = stylebox.content_margin_left;
 		
-		var bottom_margin = 0;
+		var bottom_margin = stylebox.content_margin_bottom
 		if scroll_container.get_h_scrollbar().visible:
 			bottom_margin += scroll_container.get_h_scrollbar().get_size().y
-
-		var diff = max(min(other_rect.position.y, global_rect.position.y), other_rect.position.y + other_rect.size.y - global_rect.size.y + bottom_margin);
+		var top_margin = stylebox.content_margin_top
+		
+		var diff = max(min(other_rect.position.y - top_margin, global_rect.position.y), other_rect.position.y + other_rect.size.y - global_rect.size.y + bottom_margin);
 		scroll_container.scroll_vertical = scroll_container.scroll_vertical + (diff - global_rect.position.y)
-		diff = max(min(other_rect.position.x, global_rect.position.x), other_rect.position.x + other_rect.size.x - global_rect.size.x + right_margin);
+		diff = max(min(other_rect.position.x - left_margin, global_rect.position.x), other_rect.position.x + other_rect.size.x - global_rect.size.x + right_margin);
 		scroll_container.scroll_horizontal = scroll_container.scroll_horizontal + (diff - global_rect.position.x)
 
 

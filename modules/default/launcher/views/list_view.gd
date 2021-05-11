@@ -1,14 +1,8 @@
-extends Control
-
-signal entry_focused(entry)
-signal entry_selected(entry)
-signal executed(error, entry)
-signal move_requested(to_directory)
+extends "../view.gd"
 
 const ui_entry = preload("list_entry.tscn")
 
-onready var entries_container = $MarginContainer/ScrollContainer/VBoxContainer
-#onready var tween = $Tween
+onready var entries_container = $ScrollContainer/VBoxContainer
 
 
 func clear_entries():

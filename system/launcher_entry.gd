@@ -4,6 +4,8 @@ class_name LauncherEntry
 signal executed(error)
 signal move_requested(to_directory)
 
+var path : String
+
 
 # Extend this class and override this method to define what happens when this entry is selected.
 # Call "executed(error)" at the end of the method or when you're done if it's an asynchronous task.

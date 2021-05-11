@@ -1,0 +1,107 @@
+[gd_scene load_steps=4 format=2]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+uniform vec2 resolution = vec2(320, 240);
+uniform vec4 background_color : hint_color = vec4(0.9, 0.9, 0.9, 1.);
+uniform float top_range : hint_range(-1., 1.);
+uniform float bottom_range : hint_range(-1., 1.);
+uniform float height1 : hint_range(0., 1.);
+uniform float height2 : hint_range(0., 1.);
+uniform bool do_flat;
+
+//void draw_corner(in vec2 size, in vec4 coord, out float pct) {
+//	vec2 tl = step(vec2(coord.x, coord.y), size);
+//	vec2 br = floor((size-coord.xy) - vec2(coord.z, coord.w));
+//	pct = tl.x * tl.y * br.x * br.y;
+//	clamp(0., 1., pct);
+//}
+
+float plot(vec2 st, float pct) {
+	return smoothstep(pct-top_range, pct, st.y) -
+		   smoothstep(pct, pct+bottom_range, st.y);
+}
+
+float plot_flat(vec2 st, float pct) {
+	return step(pct-top_range, st.y) -
+		   step(pct+bottom_range, st.y);
+}
+
+void fragment() {
+	vec2 st = UV;
+	float y = (sin(st.x + TIME*0.3)*2.) * 
+	(sin(st.x*2.3 + TIME*0.23)*0.2) *
+	(sin(st.x*4.3 + TIME*0.9)*0.3) + height1;
+	
+	float y2 = (cos(st.x + TIME*0.3)*2.) * 
+	(cos(st.x*1.3 - TIME*0.23)*0.2) *
+	(cos(st.x*2.3 - TIME*0.9)*0.3) + height2;
+	vec3 colly = vec3(mix(y, y2, 0.6));
+	
+	float pct;
+	float pct2;
+	
+	if(do_flat){
+		pct = plot_flat(UV, y);
+		pct2 = plot_flat(UV, y2);
+	}
+	else {
+		pct = plot(UV, y);
+		pct2 = plot(UV, y2);
+	}
+
+	colly = background_color.rgb +
+	        (pct  * vec3(0.5) * 0.5) +
+	        (pct2 * vec3(0.5) * 0.5);
+	COLOR = vec4(colly, 1.0);
+}"
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+shader_param/resolution = Vector2( 320, 240 )
+shader_param/background_color = Color( 0.454902, 0.454902, 0.454902, 1 )
+shader_param/top_range = -0.006
+shader_param/bottom_range = 1.0
+shader_param/height1 = 0.507
+shader_param/height2 = 0.56
+shader_param/do_flat = false
+
+[sub_resource type="Animation" id=3]
+resource_name = "New Anim"
+length = 30.0
+loop = true
+step = 1.0
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("Sprite:material:shader_param/top_range")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0, -0.222, 8.92826e-05, 3.3, -0.001, 0.01, -3.563, 0.00473347, 3.3, -0.005, -0.01, -3.29401, 0.00403714, 3.3, 0, 0.2, -3.3, 0, 3.3, 0, 0.001, -3.3, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 5, 10, 15, 20 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("Sprite:material:shader_param/bottom_range")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 3.3, 0, -0.06, -3.3, 0, 3.3, 0, 0.01, -3.3, 0, 3.3, 0, 0.2, -3.3, 0, 3.3, 0, -0.3, -3.3, 0, 3.3, 0 ),
+"times": PoolRealArray( 0, 5, 10, 15, 20 )
+}
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Sprite" type="ColorRect" parent="."]
+material = SubResource( 2 )
+margin_right = 320.0
+margin_bottom = 240.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+"anims/New Anim" = SubResource( 3 )

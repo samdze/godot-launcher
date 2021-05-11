@@ -1,29 +1,72 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://modules/default/settings/settings.gd" type="Script" id=1]
+[ext_resource path="res://system/components/scroll_container.tscn" type="PackedScene" id=2]
+[ext_resource path="res://system/components/theme_property_applier.gd" type="Script" id=3]
+[ext_resource path="res://system/components/small_label.tscn" type="PackedScene" id=4]
 
-[sub_resource type="StyleBoxFlat" id=1]
-bg_color = Color( 1, 1, 1, 1 )
-
-[node name="SettingsApp" type="MarginContainer"]
+[node name="SettingsApp" type="PanelContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_constants/margin_right = 4
-custom_constants/margin_top = 2
-custom_constants/margin_left = 4
-custom_constants/margin_bottom = 2
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="SettingsView" type="ScrollContainer" parent="."]
-margin_left = 4.0
-margin_top = 2.0
-margin_right = 316.0
-margin_bottom = 238.0
+[node name="MarginContainer" type="MarginContainer" parent="."]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 313.0
+margin_bottom = 233.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/margin_right = 2
+custom_constants/margin_top = 0
+custom_constants/margin_left = 2
+custom_constants/margin_bottom = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ReloadAndSettings" type="VBoxContainer" parent="MarginContainer"]
+margin_left = 2.0
+margin_right = 304.0
+margin_bottom = 226.0
+
+[node name="ReloadContainer" type="PanelContainer" parent="MarginContainer/ReloadAndSettings"]
+margin_right = 302.0
+margin_bottom = 28.0
+script = ExtResource( 3 )
+stylebox_values = {
+"panel": "focus"
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/ReloadAndSettings/ReloadContainer"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 295.0
+margin_bottom = 21.0
+custom_constants/margin_right = 2
+custom_constants/margin_left = 2
+
+[node name="SmallLabel" parent="MarginContainer/ReloadAndSettings/ReloadContainer/MarginContainer" instance=ExtResource( 4 )]
+margin_left = 2.0
+margin_right = 286.0
+text = "DEFAULT.RELOAD_ON_EXIT"
+valign = 1
+clip_text = true
+font_values = {
+"font": "small_font"
+}
+
+[node name="SettingsView" parent="MarginContainer/ReloadAndSettings" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 32.0
+margin_right = 302.0
+margin_bottom = 226.0
 focus_neighbour_left = NodePath(".")
 focus_neighbour_top = NodePath(".")
 focus_neighbour_right = NodePath(".")
@@ -33,13 +76,9 @@ focus_previous = NodePath(".")
 focus_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_styles/bg = SubResource( 1 )
 follow_focus = true
 scroll_horizontal_enabled = false
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="VBoxContainer" type="VBoxContainer" parent="SettingsView"]
-margin_right = 312.0
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/ReloadAndSettings/SettingsView"]
+margin_right = 302.0
 size_flags_horizontal = 3

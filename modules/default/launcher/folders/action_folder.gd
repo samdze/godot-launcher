@@ -54,6 +54,7 @@ func load_directory() -> Array:
 					# TODO: check if file is executable
 					entry.init_from_config(config, file_name)
 					
+					entry.path = directory + "/" + file_name
 					entries.append(entry)
 			
 			file_name = dir.get_next()

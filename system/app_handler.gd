@@ -1,18 +1,22 @@
-extends VBoxContainer
+extends Control
 class_name AppHandler
 
 signal app_changed(old_app, new_app)
-signal bars_visibility_change_requested(show_top_bar, show_bottom_bar)
+signal status_visibility_change_requested(show)
 signal title_change_requested(title)
 signal mode_change_requested(mode)
+signal event(name, arguments)
+
+export(NodePath) var widgets_spacer
+export(NodePath) var prompts_spacer
+export(NodePath) var app_container
 
 var apps_stack = []
 var focused = false
 
-onready var top_spacer = $TopSpacer
-onready var bottom_spacer = $BottomSpacer
-onready var container = $Container
-
+onready var top_spacer = get_node(widgets_spacer)
+onready var bottom_spacer = get_node(prompts_spacer)
+onready var container = get_node(app_container)
 
 
 func _input(event):
@@ -33,7 +37,7 @@ func unfocus():
 
 
 func set_app(app):
-	_clear_apps()
+	_clear_apps(false)
 	apps_stack.append(app)
 	_update_app()
 
@@ -56,10 +60,21 @@ func get_current_app():
 	return apps_stack.back() if apps_stack.size() > 0 else null
 
 
-func _clear_apps():
+func clear_apps(keep_first = true):
+	_clear_apps(keep_first)
+	_update_app()
+
+
+func _clear_apps(keep_first = true):
 	for v in apps_stack:
-		v.queue_free()
+		if not keep_first or v != apps_stack.front():
+			v.queue_free()
+	var first = null
+	if keep_first:
+		first = apps_stack.front() if apps_stack.size() > 0 else null
 	apps_stack.clear()
+	if first != null:
+		apps_stack.append(first)
 
 
 func _update_app():
@@ -79,7 +94,7 @@ func _update_app():
 		if focused:
 			current._unfocus()
 		current.disconnect("title_change_requested", self, "_title_change_requested")
-		current.disconnect("bars_visibility_change_requested", self, "_bars_visibility_change_requested")
+		current.disconnect("status_visibility_change_requested", self, "_status_visibility_change_requested")
 		current.disconnect("mode_change_requested", self, "_mode_change_requested")
 	
 	for c in container.get_children():
@@ -90,7 +105,7 @@ func _update_app():
 	if app != null:
 		container.add_child(app)
 		app.connect("title_change_requested", self, "_title_change_requested")
-		app.connect("bars_visibility_change_requested", self, "_bars_visibility_change_requested")
+		app.connect("status_visibility_change_requested", self, "_status_visibility_change_requested")
 		app.connect("mode_change_requested", self, "_mode_change_requested")
 		if focused:
 			app._focus()
@@ -100,14 +115,29 @@ func _update_app():
 	emit_signal("app_changed", current, app)
 
 
+func _event(name, arguments):
+	# The App Handler passes events to the currently active App.
+	var results = []
+	var app = apps_stack.back() if apps_stack.size() > 0 else null
+	if app != null:
+		var res = app._event(name, arguments)
+		if res != null:
+			if res is Array:
+				results += res
+			else:
+				results.append(res)
+	
+	return results
+
+
 func _title_change_requested(title):
 	emit_signal("title_change_requested", title)
 
 
-func _bars_visibility_change_requested(show_top_bar, show_bottom_bar):
-	top_spacer.visible = show_top_bar
-	bottom_spacer.visible = show_bottom_bar
-	emit_signal("bars_visibility_change_requested", show_top_bar, show_bottom_bar)
+func _status_visibility_change_requested(show):
+	top_spacer.visible = show
+	bottom_spacer.visible = show
+	emit_signal("status_visibility_change_requested", show)
 
 
 func _mode_change_requested(mode):

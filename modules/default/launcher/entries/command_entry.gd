@@ -28,7 +28,7 @@ func get_label() -> String:
 
 
 func _process(delta):
-	if not thread.is_active():
+	if not thread.is_active() and running:
 		_emit_executed(FAILED)
 
 

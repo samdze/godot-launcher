@@ -1,9 +1,4 @@
-extends Control
-
-signal entry_focused(entry)
-signal entry_selected(entry)
-signal executed(error, entry)
-signal move_requested(to_directory)
+extends "../view.gd"
 
 const ui_entry = preload("icons_entry.tscn")
 
@@ -51,21 +46,20 @@ func select_entry(index):
 	if entries_container.get_child_count() > 0:
 		index = clamp(index, 0, entries_container.get_child_count() - 1)
 		default_entry_y = entries_container.get_child(index).container.rect_position.y
-
+		
 		entries_container.notification(Container.NOTIFICATION_SORT_CHILDREN)
-
-		entries_container.rect_position = Vector2(-entries_container.get_child(index).rect_position.x + 160 - 74/2, entries_container.rect_position.y)
+		
+		entries_container.rect_position = Vector2(-entries_container.get_child(index).rect_position.x + self.rect_size.x / 2.0 - entries_container.get_child(index).rect_size.x / 2.0, entries_container.rect_position.y)
 		entries_container.get_child(index).grab_focus()
 
 
 func _entry_focus_entered(entry):
-#	print("Entry " + entry.name + " has received focus.")
 	entry.set_highlighted(true)
 	tween.remove(entry.container, "rect_position:y")
 	tween.interpolate_property(entry.container, "rect_position:y", entry.container.rect_position.y, default_entry_y + highlight_entry_shift_y, 0.2)
 	
 	tween.remove(entries_container, "rect_position")
-	tween.interpolate_property(entries_container, "rect_position", entries_container.rect_position, Vector2(-entry.rect_position.x + 160 - 74/2, entries_container.rect_position.y), 0.2, Tween.TRANS_QUAD, Tween.EASE_OUT)
+	tween.interpolate_property(entries_container, "rect_position", entries_container.rect_position, Vector2(-entry.rect_position.x + self.rect_size.x / 2.0 - entry.rect_size.x / 2.0, entries_container.rect_position.y), 0.2, Tween.TRANS_QUAD, Tween.EASE_OUT)
 	tween.start()
 	
 	emit_signal("entry_focused", entry)

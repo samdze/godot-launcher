@@ -1,455 +1,40 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://library/window_manager.gdns" type="Script" id=1]
+[ext_resource path="res://system/components/theme_property_applier.gd" type="Script" id=1]
 [ext_resource path="res://system/app_handler.gd" type="Script" id=2]
-[ext_resource path="res://modules/default/light_theme/light_theme.tres" type="Theme" id=3]
-[ext_resource path="res://system/footbar.png" type="Texture" id=4]
-[ext_resource path="res://system/components/small_label.tscn" type="PackedScene" id=5]
 [ext_resource path="res://system/launcher.gd" type="Script" id=6]
-[ext_resource path="res://system/loading_overlay.gd" type="Script" id=7]
-[ext_resource path="res://modules/default/light_theme/default_wallpaper.png" type="Texture" id=8]
-[ext_resource path="res://system/bottom_bar.gd" type="Script" id=9]
-[ext_resource path="res://system/top_bar.gd" type="Script" id=10]
-[ext_resource path="res://system/loading_icon.png" type="Texture" id=11]
-[ext_resource path="res://system/components/large_label.tscn" type="PackedScene" id=12]
 [ext_resource path="res://system/components/theme_applier.gd" type="Script" id=13]
-[ext_resource path="res://system/components/theme_property_applier.gd" type="Script" id=14]
-[ext_resource path="res://modules/default/light_theme/varelaround_regular_medium.tres" type="DynamicFont" id=15]
-[ext_resource path="res://system/notifications.gd" type="Script" id=16]
-
-[sub_resource type="StyleBoxEmpty" id=1]
-content_margin_top = 1.0
-content_margin_bottom = 0.0
-
-[sub_resource type="StyleBoxFlat" id=2]
-bg_color = Color( 0.356863, 0.882353, 0.4, 1 )
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
-
-[sub_resource type="AtlasTexture" id=3]
-flags = 4
-atlas = ExtResource( 4 )
-region = Rect2( 0, 0, 18, 18 )
-
-[sub_resource type="AtlasTexture" id=4]
-flags = 4
-atlas = ExtResource( 4 )
-region = Rect2( 0, 18, 18, 18 )
-
-[sub_resource type="AtlasTexture" id=5]
-flags = 4
-atlas = ExtResource( 4 )
-region = Rect2( 0, 36, 18, 18 )
-
-[sub_resource type="AtlasTexture" id=6]
-flags = 4
-atlas = ExtResource( 4 )
-region = Rect2( 0, 54, 18, 18 )
-
-[sub_resource type="AtlasTexture" id=7]
-flags = 4
-atlas = ExtResource( 4 )
-region = Rect2( 0, 72, 18, 18 )
-
-[sub_resource type="AtlasTexture" id=8]
-flags = 4
-atlas = ExtResource( 4 )
-region = Rect2( 0, 108, 18, 18 )
-
-[sub_resource type="AtlasTexture" id=9]
-flags = 4
-atlas = ExtResource( 4 )
-region = Rect2( 0, 90, 18, 18 )
-
-[sub_resource type="AtlasTexture" id=10]
-flags = 4
-atlas = ExtResource( 4 )
-region = Rect2( 18, 90, 18, 18 )
-
-[sub_resource type="AtlasTexture" id=11]
-flags = 4
-atlas = ExtResource( 4 )
-region = Rect2( 18, 0, 18, 18 )
-
-[sub_resource type="AtlasTexture" id=12]
-flags = 4
-atlas = ExtResource( 4 )
-region = Rect2( 18, 18, 18, 18 )
 
 [node name="LauncherUI" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-theme = ExtResource( 3 )
 script = ExtResource( 6 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="WindowManager" type="Node" parent="."]
-script = ExtResource( 1 )
-
 [node name="ThemeApplier" type="Node" parent="."]
 script = ExtResource( 13 )
 apply_to = NodePath("..")
 
-[node name="Overlay" type="CanvasLayer" parent="."]
+[node name="Services" type="Node" parent="."]
 
-[node name="Container" type="Control" parent="Overlay"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-mouse_filter = 2
-theme = ExtResource( 3 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="BackgroundLayer" type="CanvasLayer" parent="."]
+layer = -128
 
-[node name="TopContainer" type="MarginContainer" parent="Overlay/Container"]
-anchor_right = 1.0
-margin_bottom = 32.0
-custom_constants/margin_right = 4
-custom_constants/margin_top = 4
-custom_constants/margin_left = 4
-custom_constants/margin_bottom = 4
-script = ExtResource( 10 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="TopPanel" type="Panel" parent="Overlay/Container/TopContainer"]
-margin_left = 4.0
-margin_top = 4.0
-margin_right = 316.0
-margin_bottom = 28.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Overlay/Container/TopContainer/TopPanel"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 4.0
-margin_right = -4.0
-size_flags_vertical = 4
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="LabelContainer" type="Control" parent="Overlay/Container/TopContainer/TopPanel/HBoxContainer"]
-margin_right = 150.0
-margin_bottom = 24.0
-rect_min_size = Vector2( 96, 0 )
-rect_clip_content = true
-size_flags_horizontal = 3
-size_flags_vertical = 7
-
-[node name="Label" parent="Overlay/Container/TopContainer/TopPanel/HBoxContainer/LabelContainer" instance=ExtResource( 12 )]
-anchor_bottom = 1.0
-margin_right = 1.0
-margin_bottom = 0.0
-focus_mode = 2
-size_flags_vertical = 1
-custom_styles/normal = SubResource( 1 )
-text = "GameShell"
-valign = 1
-font_values = {
-"font": "large_font"
-}
-
-[node name="Widgets" type="HBoxContainer" parent="Overlay/Container/TopContainer/TopPanel/HBoxContainer"]
-margin_left = 154.0
-margin_right = 304.0
-margin_bottom = 24.0
-size_flags_horizontal = 3
-alignment = 2
-
-[node name="WidgetControls" type="PanelContainer" parent="Overlay/Container/TopContainer/TopPanel"]
-visible = false
-margin_top = 26.0
-margin_right = 24.0
-margin_bottom = 50.0
-rect_min_size = Vector2( 24, 24 )
-script = ExtResource( 14 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-stylebox_values = {
-"panel": "popup"
-}
-
-[node name="Highlighter" type="Panel" parent="Overlay/Container/TopContainer/TopPanel"]
-visible = false
-margin_top = 23.0
-margin_right = 18.0
-margin_bottom = 27.0
-rect_min_size = Vector2( 18, 4 )
-script = ExtResource( 14 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-stylebox_values = {
-"panel": "highlighter"
-}
-
-[node name="NotificationsBar" type="Control" parent="Overlay/Container/TopContainer"]
-show_behind_parent = true
-margin_left = 4.0
-margin_top = 4.0
-margin_right = 316.0
-margin_bottom = 28.0
-script = ExtResource( 16 )
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Overlay/Container/TopContainer/NotificationsBar"]
-margin_top = 28.0
-margin_right = 312.0
-margin_bottom = 42.0
-custom_constants/separation = 0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="LeftSpace" type="Control" parent="Overlay/Container/TopContainer/NotificationsBar/HBoxContainer"]
-margin_right = 12.0
-margin_bottom = 17.0
-rect_min_size = Vector2( 12, 0 )
-
-[node name="PanelContainer" type="PanelContainer" parent="Overlay/Container/TopContainer/NotificationsBar/HBoxContainer"]
-margin_left = 12.0
-margin_right = 300.0
-margin_bottom = 17.0
-grow_horizontal = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_styles/panel = SubResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="MarginContainer" type="MarginContainer" parent="Overlay/Container/TopContainer/NotificationsBar/HBoxContainer/PanelContainer"]
-margin_right = 288.0
-margin_bottom = 17.0
-custom_constants/margin_right = 4
-custom_constants/margin_left = 4
-
-[node name="Label" type="Label" parent="Overlay/Container/TopContainer/NotificationsBar/HBoxContainer/PanelContainer/MarginContainer"]
-margin_left = 4.0
-margin_right = 284.0
-margin_bottom = 17.0
-size_flags_horizontal = 3
-custom_fonts/font = ExtResource( 15 )
-custom_colors/font_color = Color( 1, 1, 1, 1 )
-text = "Notification!"
-clip_text = true
-
-[node name="RightSpace" type="Control" parent="Overlay/Container/TopContainer/NotificationsBar/HBoxContainer"]
-margin_left = 300.0
-margin_right = 312.0
-margin_bottom = 17.0
-rect_min_size = Vector2( 12, 0 )
-
-[node name="Tween" type="Tween" parent="Overlay/Container/TopContainer/NotificationsBar"]
-
-[node name="Tween" type="Tween" parent="Overlay/Container/TopContainer"]
-
-[node name="BottomContainer" type="MarginContainer" parent="Overlay/Container"]
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_top = -32.0
-grow_vertical = 0
-custom_constants/margin_right = 4
-custom_constants/margin_top = 4
-custom_constants/margin_left = 4
-custom_constants/margin_bottom = 4
-script = ExtResource( 9 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-icons = [ SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ) ]
-
-[node name="InputEvents" type="Panel" parent="Overlay/Container/BottomContainer"]
-margin_left = 4.0
-margin_top = 4.0
-margin_right = 316.0
-margin_bottom = 28.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Overlay/Container/BottomContainer/InputEvents"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 4.0
-margin_right = -4.0
-rect_clip_content = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Pressed" type="HBoxContainer" parent="Overlay/Container/BottomContainer/InputEvents/HBoxContainer"]
-visible = false
-margin_right = 149.0
-margin_bottom = 22.0
-rect_clip_content = true
-size_flags_horizontal = 3
-
-[node name="Label" type="Label" parent="Overlay/Container/BottomContainer/InputEvents/HBoxContainer/Pressed"]
-margin_top = 3.0
-margin_right = 50.0
-margin_bottom = 19.0
-custom_colors/font_color = Color( 0.32549, 0.32549, 0.32549, 1 )
-text = "Pressed:"
-
-[node name="Value" type="Label" parent="Overlay/Container/BottomContainer/InputEvents/HBoxContainer/Pressed"]
-margin_left = 54.0
-margin_top = 3.0
-margin_right = 54.0
-margin_bottom = 19.0
-custom_colors/font_color = Color( 0.32549, 0.32549, 0.32549, 1 )
-
-[node name="Released" type="HBoxContainer" parent="Overlay/Container/BottomContainer/InputEvents/HBoxContainer"]
-visible = false
-margin_right = 302.0
-margin_bottom = 22.0
-rect_clip_content = true
-size_flags_horizontal = 3
-
-[node name="Label" type="Label" parent="Overlay/Container/BottomContainer/InputEvents/HBoxContainer/Released"]
-margin_top = 3.0
-margin_right = 57.0
-margin_bottom = 19.0
-custom_colors/font_color = Color( 0.32549, 0.32549, 0.32549, 1 )
-text = "Released:"
-
-[node name="Value" type="Label" parent="Overlay/Container/BottomContainer/InputEvents/HBoxContainer/Released"]
-margin_left = 61.0
-margin_top = 3.0
-margin_right = 61.0
-margin_bottom = 19.0
-custom_colors/font_color = Color( 0.32549, 0.32549, 0.32549, 1 )
-
-[node name="Left" type="HBoxContainer" parent="Overlay/Container/BottomContainer/InputEvents/HBoxContainer"]
-margin_right = 150.0
-margin_bottom = 24.0
-size_flags_horizontal = 3
-
-[node name="Nav" type="HBoxContainer" parent="Overlay/Container/BottomContainer/InputEvents/HBoxContainer/Left"]
-margin_right = 43.0
-margin_bottom = 24.0
-custom_constants/separation = 2
-
-[node name="Icon" type="TextureRect" parent="Overlay/Container/BottomContainer/InputEvents/HBoxContainer/Left/Nav"]
-margin_right = 18.0
-margin_bottom = 24.0
-texture = SubResource( 3 )
-stretch_mode = 6
-
-[node name="SmallLabel" parent="Overlay/Container/BottomContainer/InputEvents/HBoxContainer/Left/Nav" instance=ExtResource( 5 )]
-margin_left = 20.0
-margin_top = 3.0
-margin_right = 43.0
-margin_bottom = 20.0
-text = "Nav"
-font_values = {
-"font": "small_font"
-}
-
-[node name="Right" type="HBoxContainer" parent="Overlay/Container/BottomContainer/InputEvents/HBoxContainer"]
-margin_left = 154.0
-margin_right = 304.0
-margin_bottom = 24.0
-size_flags_horizontal = 3
-alignment = 2
-
-[node name="Enter" type="HBoxContainer" parent="Overlay/Container/BottomContainer/InputEvents/HBoxContainer/Right"]
-margin_left = 46.0
-margin_right = 98.0
-margin_bottom = 24.0
-custom_constants/separation = 2
-
-[node name="Icon" type="TextureRect" parent="Overlay/Container/BottomContainer/InputEvents/HBoxContainer/Right/Enter"]
-margin_right = 18.0
-margin_bottom = 24.0
-texture = SubResource( 4 )
-stretch_mode = 6
-
-[node name="SmallLabel" parent="Overlay/Container/BottomContainer/InputEvents/HBoxContainer/Right/Enter" instance=ExtResource( 5 )]
-margin_left = 20.0
-margin_top = 3.0
-margin_right = 52.0
-margin_bottom = 20.0
-text = "Enter"
-font_values = {
-"font": "small_font"
-}
-
-[node name="Back" type="HBoxContainer" parent="Overlay/Container/BottomContainer/InputEvents/HBoxContainer/Right"]
-margin_left = 102.0
-margin_right = 150.0
-margin_bottom = 24.0
-custom_constants/separation = 2
-
-[node name="Icon" type="TextureRect" parent="Overlay/Container/BottomContainer/InputEvents/HBoxContainer/Right/Back"]
-margin_right = 18.0
-margin_bottom = 24.0
-texture = SubResource( 4 )
-stretch_mode = 6
-
-[node name="SmallLabel" parent="Overlay/Container/BottomContainer/InputEvents/HBoxContainer/Right/Back" instance=ExtResource( 5 )]
-margin_left = 20.0
-margin_top = 3.0
-margin_right = 48.0
-margin_bottom = 20.0
-text = "Back"
-font_values = {
-"font": "small_font"
-}
-
-[node name="LoadingRect" type="ColorRect" parent="Overlay/Container"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-mouse_filter = 1
-color = Color( 0, 0, 0, 0.392157 )
-script = ExtResource( 7 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="CenterContainer" type="CenterContainer" parent="Overlay/Container/LoadingRect"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-rect_pivot_offset = Vector2( 0.5, 0.5 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Pivot" type="Control" parent="Overlay/Container/LoadingRect/CenterContainer"]
-margin_left = 160.0
-margin_top = 120.0
-margin_right = 160.0
-margin_bottom = 120.0
-
-[node name="Sprite" type="Sprite" parent="Overlay/Container/LoadingRect/CenterContainer/Pivot"]
-texture = ExtResource( 11 )
-
-[node name="Tween" type="Tween" parent="Overlay/Container/LoadingRect"]
-repeat = true
-playback/repeat = true
-
-[node name="ThemeApplier" type="Node" parent="Overlay"]
+[node name="ThemeApplier" type="Node" parent="BackgroundLayer"]
 script = ExtResource( 13 )
-apply_to = NodePath("../Container")
+apply_to = NodePath("../Background")
 
-[node name="Background" type="TextureRect" parent="."]
+[node name="Background" type="Panel" parent="BackgroundLayer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-texture = ExtResource( 8 )
-expand = true
-stretch_mode = 7
+script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
+}
+stylebox_values = {
+"panel": "bg"
 }
 
 [node name="App" type="VBoxContainer" parent="."]
@@ -461,6 +46,9 @@ script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+widgets_spacer = NodePath("TopSpacer")
+prompts_spacer = NodePath("BottomSpacer")
+app_container = NodePath("Container")
 
 [node name="TopSpacer" type="Control" parent="App"]
 margin_right = 320.0
@@ -472,6 +60,7 @@ size_flags_vertical = 5
 margin_top = 32.0
 margin_right = 320.0
 margin_bottom = 208.0
+size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 0
 

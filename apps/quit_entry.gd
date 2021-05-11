@@ -2,6 +2,9 @@ extends LauncherEntry
 
 
 func get_label():
+	match TranslationServer.get_locale():
+		"it":
+			return "Esci"
 	return "Quit"
 
 

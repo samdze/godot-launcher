@@ -7,7 +7,7 @@ enum Layout { CHARACTERS, SYMBOLS }
 export(NodePath) var first_characters_focused_key
 export(NodePath) var first_symbols_focused_key
 
-var title : String = "Keyboard"
+var title : String = tr("DEFAULT.KEYBOARD")
 var active_layout = Layout.CHARACTERS
 var typed_text : String = ""
 var cursor_position : int = 0
@@ -15,11 +15,11 @@ var cursor_position : int = 0
 var last_focused_key : Control = null
 var _text_font : Font = null
 
-onready var scroll_container = $Layout/PanelContainer/MarginContainer/TextContainer
-onready var text : Label = $Layout/PanelContainer/MarginContainer/TextContainer/LargeLabel
-onready var highlighter : Control = $Layout/PanelContainer/MarginContainer/TextContainer/LargeLabel/Highlighter
-onready var characters : Control = $Layout/KeysContainer/Characters
-onready var symbols : Control = $Layout/KeysContainer/Symbols
+onready var scroll_container = $MarginContainer/Layout/PanelContainer/MarginContainer/TextContainer
+onready var text : Label = $MarginContainer/Layout/PanelContainer/MarginContainer/TextContainer/LargeLabel
+onready var highlighter : Control = $MarginContainer/Layout/PanelContainer/MarginContainer/TextContainer/LargeLabel/Highlighter
+onready var characters : Control = $MarginContainer/Layout/KeysContainer/Characters
+onready var symbols : Control = $MarginContainer/Layout/KeysContainer/Symbols
 onready var tween : Tween = $Tween
 
 
@@ -73,20 +73,20 @@ func _switch_layout(layout = null, update_prompts = false):
 		Layout.CHARACTERS:
 			characters.show()
 			if update_prompts:
-				Launcher.get_ui().bottom_bar.set_prompts([BottomBar.ICON_NAV, BottomBar.PROMPT_NAV],
-					[BottomBar.ICON_BUTTON_START, BottomBar.PROMPT_DONE,
-					BottomBar.ICON_BUTTON_X, BottomBar.PROMPT_CASE_SWITCH,
-					BottomBar.ICON_BUTTON_Y, BottomBar.PROMPT_SYMBOLS_SWITCH,
-					BottomBar.ICON_BUTTON_A, BottomBar.PROMPT_SELECT,
-					BottomBar.ICON_BUTTON_B, BottomBar.PROMPT_BACKSPACE])
+				Launcher.emit_event("prompts", [[BottomBar.ICON_NAV, tr("DEFAULT.PROMPT_NAVIGATION")],
+					[BottomBar.ICON_BUTTON_START, tr("DEFAULT.PROMPT_DONE"),
+					BottomBar.ICON_BUTTON_X, tr("DEFAULT.PROMPT_CASE"),
+					BottomBar.ICON_BUTTON_Y, tr("DEFAULT.PROMPT_SYMBOLS"),
+					BottomBar.ICON_BUTTON_A, tr("DEFAULT.PROMPT_SELECT"),
+					BottomBar.ICON_BUTTON_B, tr("DEFAULT.PROMPT_BACKSPACE")]])
 		Layout.SYMBOLS:
 			symbols.show()
 			if update_prompts:
-				Launcher.get_ui().bottom_bar.set_prompts([BottomBar.ICON_NAV, BottomBar.PROMPT_NAV],
-					[BottomBar.ICON_BUTTON_START, BottomBar.PROMPT_DONE,
-					BottomBar.ICON_BUTTON_Y, BottomBar.PROMPT_CHAR_SWITCH,
-					BottomBar.ICON_BUTTON_A, BottomBar.PROMPT_SELECT,
-					BottomBar.ICON_BUTTON_B, BottomBar.PROMPT_BACKSPACE])
+				Launcher.emit_event("prompts", [[BottomBar.ICON_NAV, tr("DEFAULT.PROMPT_NAVIGATION")],
+					[BottomBar.ICON_BUTTON_START, tr("DEFAULT.PROMPT_DONE"),
+					BottomBar.ICON_BUTTON_Y, tr("DEFAULT.PROMPT_CHARACTERS"),
+					BottomBar.ICON_BUTTON_A, tr("DEFAULT.PROMPT_SELECT"),
+					BottomBar.ICON_BUTTON_B, tr("DEFAULT.PROMPT_BACKSPACE")]])
 
 
 func _focus_first_key():
@@ -128,28 +128,46 @@ func _ensure_cursor_visible():
 	var global_rect = scroll_container.get_global_rect();
 	var other_rect = highlighter.get_global_rect();
 	other_rect.size = Vector2(other_rect.size.x, other_rect.size.y)
-	var right_margin = 0;
+	
+	var stylebox : StyleBox = scroll_container.get_stylebox("bg")
+	var right_margin = stylebox.content_margin_right;
 	if scroll_container.get_v_scrollbar().visible:
 		right_margin += scroll_container.get_v_scrollbar().get_size().x
+	var left_margin = stylebox.content_margin_left;
 	
-	var bottom_margin = 0;
+	var bottom_margin = stylebox.content_margin_bottom
 	if scroll_container.get_h_scrollbar().visible:
 		bottom_margin += scroll_container.get_h_scrollbar().get_size().y
-
-	var diff = max(min(other_rect.position.y, global_rect.position.y), other_rect.position.y + other_rect.size.y - global_rect.size.y + bottom_margin);
+	var top_margin = stylebox.content_margin_top
+	
+	var diff = max(min(other_rect.position.y - top_margin, global_rect.position.y), other_rect.position.y + other_rect.size.y - global_rect.size.y + bottom_margin);
 	scroll_container.scroll_vertical = scroll_container.scroll_vertical + (diff - global_rect.position.y)
-	diff = max(min(other_rect.position.x, global_rect.position.x), other_rect.position.x + other_rect.size.x - global_rect.size.x + right_margin);
+	diff = max(min(other_rect.position.x - left_margin, global_rect.position.x), other_rect.position.x + other_rect.size.x - global_rect.size.x + right_margin);
 	scroll_container.scroll_horizontal = scroll_container.scroll_horizontal + (diff - global_rect.position.x)
+	
+	
+#	var right_margin = 0;
+#	if scroll_container.get_v_scrollbar().visible:
+#		right_margin += scroll_container.get_v_scrollbar().get_size().x
+#
+#	var bottom_margin = 0;
+#	if scroll_container.get_h_scrollbar().visible:
+#		bottom_margin += scroll_container.get_h_scrollbar().get_size().y
+#
+#	var diff = max(min(other_rect.position.y, global_rect.position.y), other_rect.position.y + other_rect.size.y - global_rect.size.y + bottom_margin);
+#	scroll_container.scroll_vertical = scroll_container.scroll_vertical + (diff - global_rect.position.y)
+#	diff = max(min(other_rect.position.x, global_rect.position.x), other_rect.position.x + other_rect.size.x - global_rect.size.x + right_margin);
+#	scroll_container.scroll_horizontal = scroll_container.scroll_horizontal + (diff - global_rect.position.x)
 
 
 func _focus():
-	emit_signal("bars_visibility_change_requested", true, true)
+	emit_signal("status_visibility_change_requested", true)
 	emit_signal("title_change_requested", title)
-	emit_signal("mode_change_requested", LauncherUI.Mode.OPAQUE)
-	Launcher.get_ui().bottom_bar.set_prompts([BottomBar.ICON_NAV, BottomBar.PROMPT_NAV],
-		[BottomBar.ICON_BUTTON_START, BottomBar.PROMPT_DONE, BottomBar.ICON_BUTTON_X, BottomBar.PROMPT_CASE_SWITCH,
-		BottomBar.ICON_BUTTON_Y, BottomBar.PROMPT_SYMBOLS_SWITCH,
-		BottomBar.ICON_BUTTON_A, BottomBar.PROMPT_SELECT, BottomBar.ICON_BUTTON_B, BottomBar.PROMPT_BACKSPACE])
+	emit_signal("mode_change_requested", System.Mode.OPAQUE)
+	Launcher.emit_event("prompts", [[BottomBar.ICON_NAV, tr("DEFAULT.PROMPT_NAVIGATION")],
+		[BottomBar.ICON_BUTTON_START, tr("DEFAULT.PROMPT_DONE"), BottomBar.ICON_BUTTON_X, tr("DEFAULT.PROMPT_CASE"),
+		BottomBar.ICON_BUTTON_Y, tr("DEFAULT.PROMPT_SYMBOLS"),
+		BottomBar.ICON_BUTTON_A, tr("DEFAULT.PROMPT_SELECT"), BottomBar.ICON_BUTTON_B, tr("DEFAULT.PROMPT_BACKSPACE")]])
 	
 	_switch_layout(active_layout, true)
 	if last_focused_key != null:

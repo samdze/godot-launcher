@@ -1,28 +1,49 @@
-extends Resource
+extends Reference
 class_name Setting
 
-export(Array) var setting_pairs = []
-export(String) var label = ""
-export(PackedScene) var control
-export(GDScript) var init_script
-export(String) var init_func_name = ""
+signal changed()
 
-# TODO: refactor Setting system
-static func create(control : PackedScene):
-	
-	return load("res://system/settings/setting.gd").new("", "", "", control, null, "")
+var section_key : String setget _set_section_key
+var section_key_pair : Array
 
 
-func _init(section, key, label, control, init_script, init_func_name):
-	self.section = section
-	self.key = key
-	self.control = control
-	self.init_script = init_script
-	self.init_func_name = init_func_name
+func set_value(value):
+	# Does it correctly check after values are serialized?
+	if not Settings.config.has_section_key(section_key_pair[0], section_key_pair[1]) or Settings.config.get_value(section_key_pair[0], section_key_pair[1]) != value:
+		Settings.config.set_value(section_key_pair[0], section_key_pair[1], value)
+		emit_signal("changed")
 
 
-func instance() -> Control:
-	var instanced = control.instance()
-	if init_script != null and init_script.has_method(init_func_name):
-		init_script.call(init_func_name, instanced)
-	return instanced
+func get_value():
+	return Settings.config.get_value(section_key_pair[0], section_key_pair[1])
+
+
+func _set_section_key(value):
+	section_key = value
+	section_key_pair = section_key.split("/")
+
+
+static func create(section_key : String, default) -> Init:
+	var setting_init = Init.new()
+	setting_init.section_key = section_key
+	setting_init.default = default
+	return setting_init
+
+
+static func export(sections_keys : Array, label : String, control : PackedScene) -> Export:
+	var setting_export = Export.new()
+	setting_export.sections_keys = sections_keys
+	setting_export.label = label
+	setting_export.control = control
+	return setting_export
+
+
+class Init extends Reference:
+	var section_key : String
+	var default
+
+
+class Export extends Reference:
+	var sections_keys : Array
+	var label : String
+	var control : PackedScene

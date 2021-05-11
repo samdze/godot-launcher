@@ -5,6 +5,8 @@
 [node name="IconsView" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -13,6 +15,8 @@ __meta__ = {
 [node name="EntriesContainer" type="HBoxContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 custom_constants/separation = 28
 __meta__ = {
 "_edit_use_anchors_": false

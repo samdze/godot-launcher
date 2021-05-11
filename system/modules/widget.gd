@@ -15,8 +15,14 @@ func _get_widget_controls():
 
 # Override this function to react when this widget is selected.
 # You can give focus to a control in its controls and/or change input prompts
-# on the bottom bar.
+# on the Prompts bar.
 func _widget_selected():
+	
+	pass
+
+
+# Override this function to react to system events.
+func _event(name, arguments):
 	
 	pass
 
@@ -32,7 +38,7 @@ static func _get_component_tags():
 
 
 # Override this function to expose user-editable settings to the Settings app
-static func _get_exported_settings():
+static func _get_settings():
 	return []
 
 

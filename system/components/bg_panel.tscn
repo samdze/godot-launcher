@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://system/components/theme_property_applier.gd" type="Script" id=1]
+
+[node name="Background" type="Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+stylebox_values = {
+"panel": "bg"
+}

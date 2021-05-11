@@ -1,9 +1,8 @@
 extends SettingEditor
 
-signal value_changed(section, key, value)
-
 export(Component.Type) var type
 export(String) var tags
+export(bool) var reload_needed = false
 
 var setting_section : String
 var setting_key : String
@@ -17,15 +16,15 @@ onready var dropdown : BaseButton = $SettingEntry/EditorsContainer/Dropdown
 
 func _ready():
 	var tags_array = tags.split(",")
-	print("Tags array: " + str(tags_array))
-	print("Tags array size: " + str(tags_array.size()))
+#	print("Tags array: " + str(tags_array))
+#	print("Tags array size: " + str(tags_array.size()))
 	if tags_array.size() == 1 and tags_array[0].empty():
 		tags_array = []
 	var selected_entry = null
 	options = Modules.get_loaded_components(type, tags_array)
-	selected_entry = Modules.get_loaded_component_from_config(setting_section, setting_key, "")
+	selected_entry = Modules.get_loaded_component_from_settings(setting_section + "/" + setting_key)
 	
-	print("Returned components: "+str(options))
+#	print("Returned components: "+str(options))
 	
 	connect("focus_entered", self, "_focus_entered")
 	connect("focus_exited", self, "_focus_exited")
@@ -62,9 +61,10 @@ func _generate_items(options, selected_option = null) -> Control:
 	return selected
 
 
-func _initialize_setting(section : String, key : String, label : String):
-	setting_section = section
-	setting_key = key
+func _initialize_setting(sections_keys : Array, label : String):
+	var first_pair = sections_keys[0].split("/")
+	setting_section = first_pair[0]
+	setting_key = first_pair[1]
 	setting_label = label
 
 
@@ -92,4 +92,4 @@ func _selection_focus_toggled(pressed):
 func _item_selected(item):
 	# Option selected, save/apply selection
 	dropdown.emit_signal("toggled", false)
-	emit_signal("value_changed", setting_section, setting_key, item.get_meta("data").id)
+	emit_signal("value_changed", setting_section + "/" + setting_key, item.get_meta("data").id, reload_needed)

@@ -46,7 +46,7 @@ This is a very early version of the launcher, some games and apps will not be sh
 ├── godot-launcher 		<- Here we are
 │   ├── .import			Imported files, this needs to be generated and updated when you modify the launcher
 │   ├── apps			Utilities and app launchers, you can tweak them or also add your own
-│   ├── library			Native libreries used to create and handlle the window manager of the launcher
+│   ├── library			Native libreries used to create and handle the window manager of the launcher
 │   ├── system			System files and base infrastructure to build the launcher
 │   ├── modules			Folder containing modular parts of the launcher
 │   │   ├── default		The stock module, implements the default widgets, apps, themes, etc.

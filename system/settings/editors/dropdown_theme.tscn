@@ -4,5 +4,6 @@
 
 [node name="DropdownTheme" instance=ExtResource( 1 )]
 type = 8
+reload_needed = true
 
 [editable path="SettingEntry"]

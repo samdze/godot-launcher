@@ -36,6 +36,7 @@ func _process(delta):
 
 
 func executed(error):
+	set_process(false)
 	entry_script.disconnect("move_requested", self, "move_requested")
 	emit_signal("executed", error)
 

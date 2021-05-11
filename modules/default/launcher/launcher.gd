@@ -2,11 +2,6 @@ extends App
 
 const Entry = preload("entry.gd")
 
-#const empty_entry = preload("entries/empty_entry.tscn")
-#const command_entry = preload("entries/command_entry.tscn")
-#const folder_entry = preload("entries/folder_entry.tscn")
-#const script_entry = preload("entries/script_entry.gd")
-
 # Folder loaders that will try to load folders entry, order matters.
 const folder_loaders = [
 	preload("folders/action_folder.gd"),
@@ -17,35 +12,32 @@ const apps_loader = preload("folders/default_folder.gd")
 const icons_view = preload("views/icons_view.tscn")
 const list_view = preload("views/list_view.tscn")
 
-var running_app : PackedScene# = preload("res://views/running_app/running_app_view.tscn")
+var running_app : PackedScene
 var last_focused_entry : Control = null
 
 var menu_directory : String = "/home/cpi/apps/Menu"
 var apps_directory : String = "res://apps"
-# Bash scripts and other types of file are not imported and must be loaded from the filesystem
-# TODO: convert the local apps_directory directory to a global one instead of using this hardcoded string.
-var gloabl_apps_directory : String = "/home/cpi/godot-launcher/apps"
 
 var current_directory : String = ""
 var selection_stack = []
-#var default_entry_y = 0
-#var entry_highlight_shift_y = -22
 var executing = false
 
 var current_view = null
-#onready var entries_container = $HBoxContainer
-#onready var tween = $Tween
 
 
 func _ready():
-	running_app = Modules.get_loaded_component_from_config("system", "running_app", "default/running").resource
+	if OS.has_feature("x86_64"):
+		menu_directory = "E:\\Documenti\\Git\\apps\\Menu"
+	
+	running_app = Modules.get_loaded_component_from_settings("system/running_app").resource
+	
 	load_directory(menu_directory)
 
 
 func _focus():
-	emit_signal("bars_visibility_change_requested", true, true)
+	emit_signal("status_visibility_change_requested", true)
 	emit_signal("title_change_requested", "GameShell")
-	emit_signal("mode_change_requested", LauncherUI.Mode.OPAQUE)
+	emit_signal("mode_change_requested", System.Mode.OPAQUE)
 	_update_promtps()
 	if last_focused_entry != null:
 		last_focused_entry.grab_focus()
@@ -57,18 +49,25 @@ func _unfocus():
 
 
 func _active_window_changed(window_id):
-	executing = false
-	Launcher.get_ui().loading_overlay.set_loading(false)
-	print("[GODOT] Adding a new app to the apps stack...")
-	Launcher.get_ui().app.add_app(running_app.instance())
-	print("[GODOT] New app added to the apps stack.")
+	if window_id != WindowManager.library.get_window_id():
+		executing = false
+		Launcher.emit_event("set_loading", [false])
+		print("[GODOT] Adding a new app to the apps stack...")
+		var running_instance = running_app.instance()
+		running_instance.app_window_id = window_id
+		Launcher.get_ui().app.add_app(running_instance)
+		print("[GODOT] New app added to the apps stack.")
 
 
 func _update_promtps():
 	if current_directory == menu_directory:
-		Launcher.get_ui().bottom_bar.set_prompts([BottomBar.ICON_NAV, BottomBar.PROMPT_NAV], [BottomBar.ICON_BUTTON_A, BottomBar.PROMPT_ENTER])
+		var res = Launcher.emit_event("prompts", [[BottomBar.ICON_NAV, tr("DEFAULT.PROMPT_NAVIGATION")], [BottomBar.ICON_BUTTON_A, tr("DEFAULT.PROMPT_OPEN")]])
+		print("Root directory responses: " + str(res.size()))
+#		Launcher.get_ui().bottom_bar.set_prompts([BottomBar.ICON_NAV, tr("DEFAULT.PROMPT_NAVIGATION")], [BottomBar.ICON_BUTTON_A, tr("DEFAULT.PROMPT_OPEN")])
 	else:
-		Launcher.get_ui().bottom_bar.set_prompts([BottomBar.ICON_NAV, BottomBar.PROMPT_NAV], [BottomBar.ICON_BUTTON_A, BottomBar.PROMPT_ENTER, BottomBar.ICON_BUTTON_B, BottomBar.PROMPT_BACK])
+		var res = Launcher.emit_event("prompts", [[BottomBar.ICON_NAV, tr("DEFAULT.PROMPT_NAVIGATION")], [BottomBar.ICON_BUTTON_A, tr("DEFAULT.PROMPT_OPEN"), BottomBar.ICON_BUTTON_B, tr("DEFAULT.PROMPT_BACK")]])
+		print("Sub-directory responses: " + str(res.size()))
+#		Launcher.get_ui().bottom_bar.set_prompts([BottomBar.ICON_NAV, tr("DEFAULT.PROMPT_NAVIGATION")], [BottomBar.ICON_BUTTON_A, tr("DEFAULT.PROMPT_OPEN"), BottomBar.ICON_BUTTON_B, tr("DEFAULT.PROMPT_BACK")])
 
 
 func move_to_directory(directory : String):
@@ -145,7 +144,7 @@ func _entry_selected(entry):
 	if not executing:
 		entry.release_focus()
 		executing = true
-		Launcher.get_ui().loading_overlay.set_loading(true)
+		Launcher.emit_event("set_loading", [true])
 		entry.connect("executed", self, "_execution_terminated", [entry])
 		
 		var result = entry.exec()
@@ -154,7 +153,7 @@ func _entry_selected(entry):
 
 func _app_input(event):
 #	if event.is_pressed():
-#		Launcher.get_ui().notifications_bar.append_notification("System-wide notifications available!", Notifications.Type.SUCCESS)
+#		Launcher.emit_event("notification", ["System-wide notifications available!", "success"])
 	if not executing and event.is_action_pressed("ui_cancel"):
 		accept_event()
 		back_directory()
@@ -165,7 +164,7 @@ func _app_input(event):
 
 func _execution_terminated(error, entry : Entry):
 #	entry.disconnect("executed", self, "_execution_terminated")
-	Launcher.get_ui().loading_overlay.set_loading(false)
+	Launcher.emit_event("set_loading", [false])
 	executing = false
 	if last_focused_entry != null:
 		last_focused_entry.grab_focus()
@@ -180,7 +179,12 @@ static func _get_component_tags():
 	return [Component.TAG_LAUNCHER]
 
 
-static func _get_exported_settings():
+static func _get_settings():
 	return [
-		{ "section": "system", "key": "running_app", "label": "Running App", "control": preload("res://system/settings/editors/dropdown_running_app.tscn") }
+		Setting.create("system/icons", "default/icons"),
+		Setting.create("system/running_app", "default/running"),
+		
+		Setting.export(["system/icons"], TranslationServer.translate("DEFAULT.FOLDER_LAUNCHER") + "/" + TranslationServer.translate("DEFAULT.ICONS"), load("res://system/settings/editors/dropdown_icons.tscn")),
+		Setting.export(["system/running_app"], TranslationServer.translate("DEFAULT.FOLDER_LAUNCHER") + "/" + TranslationServer.translate("DEFAULT.RUNNING_APP"), load("res://system/settings/editors/dropdown_running_app.tscn")),
+		Setting.export([], TranslationServer.translate("DEFAULT.SWITCH_LAUNCHER"), load("res://modules/default/launcher/settings/switch_launcher_button.tscn"))
 	]
