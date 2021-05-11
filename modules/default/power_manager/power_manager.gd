@@ -29,6 +29,7 @@ onready var shutdown_timer = $ShutdownTimer
 func _ready():
 	# Setting every timer to 0 bacause we handle timers manually.
 	OS.execute("bash", ["-c", "xset dpms 0 0 0"], true, [], false)
+	OS.execute("bash", ["-c", "xset s off "], true, [], false)
 	
 	dim_timer.connect("timeout", self, "_dim_timeout")
 	off_timer.connect("timeout", self, "_off_timeour")
