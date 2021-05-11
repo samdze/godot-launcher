@@ -1,11 +1,11 @@
 <p align="center">
-	<img src="https://i.imgur.com/3uJZK70.gif" />
+	<img src="https://i.imgur.com/jO6pNqj.gif" />
 </p>
 
 # Single-board Computer Godot Launcher
 An alternative launcher for single-board computers. Made with Godot and GDNative.<br>
 The launcher is primarily made to run on the GameShell portable console but can also run on other sbcs thanks to modules.<br>
-**VERY EARLY ALPHA VERSION**
+**ALPHA VERSION**
 
 To explore the launcher code and tweak it as you wish, open the project.godot file with Godot 3.2.3.<br>
 Remember to reimport the launcher and to transfer the .import folder too to apply your changes.<br>

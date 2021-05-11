@@ -21,3 +21,13 @@ addons/zylann.translation_editor
 
 # Utility makefile
 makefile
+
+# Ignore everything that's not default
+modules/*
+!modules/default
+apps/*
+!apps/keyboard_entry.gd
+!apps/PICO-8.sh
+!apps/quit_entry.gd
+!apps/reload_entry.gd
+!apps/settings_entry.gd
