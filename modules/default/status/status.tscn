@@ -77,6 +77,10 @@ region = Rect2( 18, 18, 18, 18 )
 [node name="StatusLayer" type="CanvasLayer"]
 script = ExtResource( 13 )
 
+[node name="ThemeApplier" type="Node" parent="."]
+script = ExtResource( 12 )
+apply_to = NodePath("../Status")
+
 [node name="Status" type="Control" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -491,7 +495,3 @@ repeat = true
 playback/repeat = true
 
 [node name="Tween" type="Tween" parent="."]
-
-[node name="ThemeApplier" type="Node" parent="."]
-script = ExtResource( 12 )
-apply_to = NodePath("../Status")

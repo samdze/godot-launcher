@@ -99,7 +99,7 @@ func _reset_timers(mode):
 
 func set_brightness(value):
 	if backlight != value:
-		Settings.set_value("settings/brightness", clamp(value, 0, 9))
+		Settings.set_value("settings/brightness", int(clamp(value, 0, 9)))
 
 
 func get_brightness() -> int:
@@ -108,7 +108,7 @@ func get_brightness() -> int:
 
 func set_power_mode(value : int):
 	if mode != value:
-		Settings.set_value("settings/power_mode", clamp(value, 0, Mode.size() - 1))
+		Settings.set_value("settings/power_mode", int(clamp(value, 0, Mode.size() - 1)))
 
 
 func get_power_mode() -> int:

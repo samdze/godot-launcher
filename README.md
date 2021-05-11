@@ -2,9 +2,9 @@
 	<img src="https://i.imgur.com/3uJZK70.gif" />
 </p>
 
-# GameShell Godot Launcher
-An alternative launcher for the GameShell portable console. Made with Godot and GDNative.<br>
-The launcher could also run on other single-board computers, better support may be added in the future.<br>
+# Single-board Computer Godot Launcher
+An alternative launcher for single-board computers. Made with Godot and GDNative.<br>
+The launcher is primarily made to run on the GameShell portable console but can also run on other sbcs thanks to modules.<br>
 **VERY EARLY ALPHA VERSION**
 
 To explore the launcher code and tweak it as you wish, open the project.godot file with Godot 3.2.3.<br>

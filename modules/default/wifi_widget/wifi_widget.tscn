@@ -1,7 +1,11 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://modules/default/brightness_widget/brightness.gd" type="Script" id=1]
-[ext_resource path="res://modules/default/brightness_widget/widget_icons.png" type="Texture" id=2]
+[ext_resource path="res://modules/default/wifi_widget/wifi_widget.gd" type="Script" id=1]
+[ext_resource path="res://modules/default/wifi_widget/wifi.png" type="Texture" id=2]
+
+
+
+
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
@@ -10,7 +14,7 @@ flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 0, 0, 18, 18 )
 
-[node name="Brightness" type="ToolButton"]
+[node name="Wifi" type="ToolButton"]
 margin_left = 264.0
 margin_top = 2.0
 margin_right = 282.0
@@ -28,3 +32,8 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+[connection signal="timeout" from="Timer" to="." method="_update_status"]

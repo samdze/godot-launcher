@@ -32,11 +32,8 @@ func add_settings_definitions(owner, settings : Array):
 		if settings_definitions.has(s.section_key):
 			printerr("Setting " + s.section_key + " of " + str(owner) + " is already defined by another Component!")
 		else:
-			var setting = Setting.new()
-			setting.section_key = s.section_key
-			settings_objects[s.section_key] = setting
 			settings_definitions[s.section_key] = s
-			# Update the setting if non-existent
+			# Add the setting if non-existent
 			get_value(s.section_key, s.default)
 
 

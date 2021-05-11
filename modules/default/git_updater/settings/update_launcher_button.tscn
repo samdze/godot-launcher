@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://modules/default/git_updater/settings/update_launcher_button.gd" type="Script" id=1]
+
+[node name="UpdateLauncherButton" type="Button"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+action_mode = 0
+text = "Update Launcher"
+align = 0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

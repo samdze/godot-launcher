@@ -1,7 +1,5 @@
 extends Widget
 
-var percentage_regex : RegEx
-
 var controls : Control
 var slider : HSlider
 var label : Label
@@ -16,10 +14,7 @@ func _ready():
 	slider.connect("gui_input", self, "_controls_gui_input", [slider])
 	label = controls.get_node("MediumLabel")
 	
-	percentage_regex = RegEx.new()
-	percentage_regex.compile("\\[(\\d+)%\\]")
-	
-	_update_status(Settings.get_value("settings/audio_volume"))
+	_update_status()
 
 
 func _widget_selected():
@@ -36,7 +31,12 @@ func _controls_gui_input(event : InputEvent, control):
 
 
 func _update_status(default = null):
-	_value_changed(default if default != null else _get_value())
+	var result = Launcher.emit_event("get_audio_volume")
+	var value = 0
+	if result.size() > 0:
+		value = int(result[0])
+	_update_icon(value)
+	_update_controls(value)
 
 
 func _update_icon(percentage):
@@ -55,28 +55,15 @@ func _update_controls(percentage):
 	label.text = str(int((percentage + 2.5) / 5) * 5) + "%"
 
 
-func _get_value() -> int:
-	var out = []
-	OS.execute("bash", ["-c", "amixer sget Master | grep 'Mono:'"], true, out, false)
-	if out.size() > 0:
-		var res = percentage_regex.search(out[0])
-		if res != null:
-			return int(res.get_string(1))
-	return 0
-
-
-func _set_value(value : int) -> int:
-	value = clamp(value, 0, 100)
-	OS.execute("bash", ["-c", "amixer set Master " + str(value) + "%"], true)
-	return value
-
-
 func _value_changed(value):
-	value = _set_value(value)
-	Settings.set_value("settings/audio_volume", value)
-	
-	_update_controls(value)
-	_update_icon(value)
+	Launcher.emit_event("set_audio_volume", [value])
+
+
+func _event(name, arguments):
+	match name:
+		"audio_volume_changed":
+			_update_status()
+			return true
 
 
 func _get_widget_controls():
@@ -89,10 +76,4 @@ func _notification(what):
 
 
 static func _get_component_name():
-	return "Audio Volume"
-
-
-static func _get_settings():
-	return [
-		Setting.create("settings/audio_volume", 50),
-	]
+	return "Audio Volume Widget"

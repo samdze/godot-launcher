@@ -53,6 +53,7 @@ DEFAULT.TIME_SUNDAY,Sunday,Domenica
 DEFAULT.TIME_THURSDAY,Thursday,Giovedì
 DEFAULT.TIME_TUESDAY,Tuesday,Martedì
 DEFAULT.TIME_WEDNESDAY,Wednesday,Mercoledì
+DEFAULT.UPDATE_LAUNCHER,Update Launcher,Aggiorna Launcher
 DEFAULT.WIFI_CONNECTED,Connected: {0},Connesso: {0}
 DEFAULT.WIFI_CONNECTION_FAILED,Failed to connect to {0}.,Connessione a {0} fallita.
 DEFAULT.WIFI_CONNECTION_SUCCESS,Successfully connected to {0}!,Connessione a {0} riuscita!

@@ -1,6 +1,7 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://modules/default/time_widget/time.gd" type="Script" id=1]
+[ext_resource path="res://modules/default/time_widget/time_widget.gd" type="Script" id=1]
+
 
 
 [sub_resource type="StyleBoxEmpty" id=1]

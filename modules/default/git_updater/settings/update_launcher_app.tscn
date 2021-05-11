@@ -1,0 +1,46 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://modules/default/git_updater/settings/update_launcher_app.gd" type="Script" id=1]
+[ext_resource path="res://system/components/scroll_container.tscn" type="PackedScene" id=2]
+
+[node name="UpdateLauncher" type="PanelContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 313.0
+margin_bottom = 233.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/margin_right = 2
+custom_constants/margin_top = 0
+custom_constants/margin_left = 2
+custom_constants/margin_bottom = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScrollContainer" parent="MarginContainer" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 2.0
+margin_right = 304.0
+margin_bottom = 226.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+follow_focus = true
+scroll_horizontal_enabled = false
+
+[node name="HotspotsContainer" type="VBoxContainer" parent="MarginContainer/ScrollContainer"]
+margin_right = 302.0
+margin_bottom = 226.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
