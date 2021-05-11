@@ -1,5 +1,5 @@
 SCREEN=`cat /sys/class/graphics/fb0/modes`
-#export DISPLAY=:0
+export DISPLAY=:0
 
 XORG_CONF="~/godot-launcher/.xorg.conf"
 if [ -f /home/cpi/.lima ]
