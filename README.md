@@ -22,20 +22,23 @@ This launcher aims to fix all those issues and to add other nice features.
 SSH into the cpi home directory of the GameShell and run:
 ```
 git clone https://github.com/samdze/godot-launcher.git
-sudo chmod +x godot-launcher/compton godot-launcher/godot
 sed -i s/launcher/godot-launcher/g /home/cpi/.bashrc
 ```
 Restart the GameShell and you should boot into the Godot launcher.<br>
 You can rollback to the stock launcher running the "Switch Launcher" app.
 
+On other sbcs, start an X session executing compton and godot how it's done in .xinitrc.
+Also export the DISPLAY environment variable.
+
 ## Documentation
-Press Shift + Start at any time when an app is open to show the launcher widgets.<br>
+On the GameShell, press Shift + Start at any time when an app is open to show the launcher widgets.<br>
 In this state, you can then exit the app, go back to the app, see the time, the approximate remaining battery and the Wi-Fi connection status, tweak screen brightness and audio volume.
+For other sbcs, an input remapper will be available in the future.
 
 There's also a default Settings app that lets you change a few things about the launcher.
-It works but it's settings are limited and aren't supposed to be edited right now.
+This launcher is made to be modular and custom settings can be added by other modules.
 
-This is a very early version of the launcher, some games and apps will not be shown and there's no way to configure bluetooth, graphics drivers, standby times etc.
+This is an early version of the launcher, some games and apps may not be shown and there's no way to configure bluetooth, graphics drivers etc.
 
 ```
 /home/cpi/
@@ -54,7 +57,8 @@ This is a very early version of the launcher, some games and apps will not be sh
 │   ├── project.godot		The launcher project file, open it to edit the launcher with the Godot editor
 │   ├── godot			The Godot Engine executable, used to run the launcher
 │   ├── compton			The compositor, this should run together with the launcher
-│   └── settings.conf		Launcher settings using a INI-style formatting
+│   ├── settings.conf		Launcher settings using a INI-style formatting
+│   └── version.json		Version info, useful when checking for updates
 │
 ├── games
 │   ├── FreeDM

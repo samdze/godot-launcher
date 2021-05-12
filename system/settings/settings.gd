@@ -63,20 +63,6 @@ func disconnect_setting(section_key : String, target : Object, func_name : Strin
 		printerr("Non-existent Setting " + section_key + "!")
 
 
-#func remove_exported_settings(owner):
-#	self.settings.erase(owner)
-
-
-#func update():
-#	settings_definitions.clear()
-#	settings_exports.clear()
-#	for a in settings.values():
-#		for s in a:
-#			# s is a dictionary defining an exported setting
-#			# { "section": "settings", "key": "wallpaper", "label": "Wallpaper", "control": preload("res://system/components/medium_label.tscn") }
-#			settings_definitions[s.section + "/" + s.key] = s
-
-
 func get_value(section_key : String, default = null):
 	if settings_objects.has(section_key):
 		return settings_objects[section_key].get_value()
@@ -87,11 +73,6 @@ func get_value(section_key : String, default = null):
 		setting.set_value(default)
 		settings_objects[section_key] = setting
 	return default
-	
-#	var pair = section_key.split("/")
-#	var value = config.get_value(pair[0], pair[1], default)
-#	config.set_value(pair[0], pair[1], value)
-#	return value
 
 
 func set_value(section_key : String, value):
@@ -102,9 +83,6 @@ func set_value(section_key : String, value):
 		setting.section_key = section_key
 		setting.set_value(value)
 		settings_objects[section_key] = setting
-	
-#	var pair = section_key.split("/")
-#	config.set_value(pair[0], pair[1], value)
 
 
 func reset_to_default(section_key : String):

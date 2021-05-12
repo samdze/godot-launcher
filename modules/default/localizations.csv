@@ -1,5 +1,8 @@
 id,en,it
 DEFAULT.ABOUT,About,Informazioni
+DEFAULT.CURRENT_UPDATE_RELEASE_DATE,"Current system version release date:
+{year}/{month}/{day}","Data di rilascio della versione attuale del sistema:
+{day}/{month}/{year}"
 DEFAULT.FOLDER_LAUNCHER,Launcher,Launcher
 DEFAULT.FOLDER_SYSTEM,System,Sistema
 DEFAULT.ICONS,Icons,Icone
@@ -16,6 +19,8 @@ DEFAULT.PROMPT_BACK,Back,Indietro
 DEFAULT.PROMPT_BACKSPACE,Backsp.,Backsp.
 DEFAULT.PROMPT_CASE,aA,aA
 DEFAULT.PROMPT_CHARACTERS,Char.,Carat.
+DEFAULT.PROMPT_CHECK_UPDATES,Check Updates,Controlla Aggiornamenti
+DEFAULT.PROMPT_CONFIRM,Confirm,Conferma
 DEFAULT.PROMPT_DONE,Done,Fatto
 DEFAULT.PROMPT_ENTER,Enter,Invio
 DEFAULT.PROMPT_EXIT,Exit,Esci
@@ -32,6 +37,8 @@ DEFAULT.SETTINGS,Settings,Impostazioni
 DEFAULT.SETTINGS_APP,Settings App,App Impostazioni
 DEFAULT.STATUS,Status,Status
 DEFAULT.SWITCH_LAUNCHER,Switch Launcher,Cambia Launcher
+DEFAULT.SYSTEM_UP_TO_DATE,The system is up to date!,Il sistema è aggiornato!
+DEFAULT.SYSTEM_VERSION,System version: {0},Versione del sistema: {0}
 DEFAULT.THEME,Theme,Tema
 DEFAULT.TIME_APRIL,April,Aprile
 DEFAULT.TIME_AUGUST,August,Agosto
@@ -53,7 +60,18 @@ DEFAULT.TIME_SUNDAY,Sunday,Domenica
 DEFAULT.TIME_THURSDAY,Thursday,Giovedì
 DEFAULT.TIME_TUESDAY,Tuesday,Martedì
 DEFAULT.TIME_WEDNESDAY,Wednesday,Mercoledì
-DEFAULT.UPDATE_LAUNCHER,Update Launcher,Aggiorna Launcher
+DEFAULT.UPDATE,Update,Aggiorna
+DEFAULT.UPDATE_AVAILABLE,Update available: {0},Aggiornamento disponibile: {0}
+DEFAULT.UPDATE_CHECK_ERROR,Error searching for updates. Check your internet connection or try later.,Errore durante la ricerca di aggiornamenti. Controlla la tua connessione internet o riprova più tardi.
+DEFAULT.UPDATE_WARNING,"Updating, any changes to the core launcher and default modules will be overwritten.
+
+Custom modules may not work anymore if the update brings internal changes.
+
+Do you wish to continue?","Aggiornando, le modifiche effettuate al launcher e ai moduli predefiniti verranno sovrascritte.
+
+I moduli personalizzati potrebbero non funzionare più se l'aggiornamento apporta modifiche interne.
+
+Vuoi continuare?"
 DEFAULT.WIFI_CONNECTED,Connected: {0},Connesso: {0}
 DEFAULT.WIFI_CONNECTION_FAILED,Failed to connect to {0}.,Connessione a {0} fallita.
 DEFAULT.WIFI_CONNECTION_SUCCESS,Successfully connected to {0}!,Connessione a {0} riuscita!
