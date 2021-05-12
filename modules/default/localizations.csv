@@ -63,6 +63,7 @@ DEFAULT.TIME_WEDNESDAY,Wednesday,Mercoledì
 DEFAULT.UPDATE,Update,Aggiorna
 DEFAULT.UPDATE_AVAILABLE,Update available: {0},Aggiornamento disponibile: {0}
 DEFAULT.UPDATE_CHECK_ERROR,Error searching for updates. Check your internet connection or try later.,Errore durante la ricerca di aggiornamenti. Controlla la tua connessione internet o riprova più tardi.
+DEFAULT.UPDATE_ERROR,Error during the update. Check your internet connection or try later.,Errore durante l'aggiornamento. Controlla la tua connessione internet o riprova più tardi.
 DEFAULT.UPDATE_WARNING,"Updating, any changes to the core launcher and default modules will be overwritten.
 
 Custom modules may not work anymore if the update brings internal changes.

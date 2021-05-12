@@ -2,7 +2,7 @@ extends App
 
 enum Operation { CHECK, UPDATE }
 enum State { IDLE, UPDATE_AVAILABLE, CONFIRM_UPDATE }
-enum Check { ERROR, MINOR_UPDATE_AVAILABLE, UPDATE_AVAILABLE, UP_TO_DATE }
+enum Check { ERROR, COMMIT_UPDATE_AVAILABLE, UPDATE_AVAILABLE, UP_TO_DATE }
 
 var processing = false
 var thread : Thread = null
@@ -146,33 +146,47 @@ func _update_system():
 	semaphore.post()
 
 
-func _check_completed(check_result):
-	processing = false
-	Launcher.emit_event("set_loading", [false])
-
-
-func _update_completed():
+func _check_completed(check_result, data):
 	processing = false
 	Launcher.emit_event("set_loading", [false])
 	
-	pass
+	match check_result:
+		Check.ERROR:
+			message.text = tr("DEFAULT.UPDATE_CHECK_ERROR")
+			_set_state(State.IDLE)
+		Check.COMMIT_UPDATE_AVAILABLE:
+			message.text = tr("DEFAULT.UPDATE_AVAILABLE").format([data.version])
+			_set_state(State.UPDATE_AVAILABLE)
+		Check.UPDATE_AVAILABLE:
+			message.text = tr("DEFAULT.UPDATE_AVAILABLE").format([data.version])
+			_set_state(State.UPDATE_AVAILABLE)
+		Check.UP_TO_DATE:
+			message.text = tr("DEFAULT.SYSTEM_UP_TO_DATE")
+			_set_state(State.IDLE)
+
+
+func _update_completed(result):
+	if result == OK:
+		get_tree().quit()
+	else:
+		processing = false
+		Launcher.emit_event("set_loading", [false])
+		message.text = tr("DEFAULT.UPDATE_ERROR")
+		_set_state(State.IDLE)
 
 
 func _request_completed(result, response_code, headers, body, semaphore, res):
 	if result == OK:
 		var response = parse_json(body.get_string_from_utf8())
 		if response.version != Launcher.get_version():
-			message.text = tr("DEFAULT.UPDATE_AVAILABLE").format([response.version])
-			_set_state(State.UPDATE_AVAILABLE)
 			res.append(Check.UPDATE_AVAILABLE)
 		else:
-			message.text = tr("DEFAULT.SYSTEM_UP_TO_DATE")
 			res.append(Check.UP_TO_DATE)
+		res.append(response.version)
 	else:
 		res.append(Check.ERROR)
-		message.text = tr("DEFAULT.UPDATE_CHECK_ERROR")
-	if semaphore != null:
-		semaphore.post()
+		res.append("")
+	semaphore.post()
 
 
 func _thread_function(data):
@@ -194,8 +208,9 @@ func _thread_function(data):
 			
 			print("Result of first check is " + str(result))
 			if result[0] == Check.UP_TO_DATE:
-				# Check last commit instead of version
-				var exit_code = OS.execute("bash", ["-c", "git remote update"], true, [])
+				# Check latest commit instead of version
+				var exit_code = OS.execute("bash", ["-c", "git remote update"], true, output, true)
+				print("Exit code " + str(exit_code) + " for 'git remote update' with result: " + str(output))
 				if exit_code != 0:
 					result[0] = Check.ERROR
 				else:
@@ -207,16 +222,22 @@ func _thread_function(data):
 					var local_commit = output[0]
 					
 					if remote_commit != local_commit:
-						result[0] = Check.MINOR_UPDATE_AVAILABLE
+						result[0] = Check.COMMIT_UPDATE_AVAILABLE
+						result[1] = result[1] + "+"
 			
-			call_deferred("_check_completed", result)
+			call_deferred("_check_completed", result[0], { "version": result[1] })
 		elif operation == Operation.UPDATE:
 			# Update the launcher
+			var result = FAILED
+			var exit_code = OS.execute("bash", ["-c", "git fetch --all"], true, output, true)
+			print("Fetch (" + str(exit_code) + "): " + str(output))
+			if exit_code == 0:
+				exit_code = OS.execute("bash", ["-c", "git reset --hard origin/main"], true, output, true)
+				print("Reset (" + str(exit_code) + "): " + str(output))
+				if exit_code == 0:
+					result = OK
 			
-#			git fetch --all
-#			git reset --hard origin/main
-			
-			call_deferred("_update_completed")
+			call_deferred("_update_completed", result)
 
 
 func _notification(what):
