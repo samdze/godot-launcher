@@ -23,7 +23,7 @@ func _ready():
 	semaphore = Semaphore.new()
 	thread = Thread.new()
 	thread.start(self, "_thread_function", null)
-	system_version.text = tr("DEFAULT.SYSTEM_VERSION").format([Launcher.get_version()])
+	system_version.text = tr("DEFAULT.LAUNCHER_VERSION").format([Launcher.get_version()])
 	state = State.IDLE
 	
 	var output = []
@@ -62,7 +62,7 @@ func _ready():
 # Signals like bars_visibility_change_requested and title_change_requested are best called here.
 func _focus():
 	emit_signal("status_visibility_change_requested", true)
-	emit_signal("title_change_requested", tr("DEFAULT.UPDATE"))
+	emit_signal("title_change_requested", tr("DEFAULT.UPDATE_LAUNCHER"))
 	emit_signal("mode_change_requested", System.Mode.OPAQUE)
 	_update_prompts()
 
@@ -89,7 +89,7 @@ func _update_prompts():
 		State.UPDATE_AVAILABLE:
 			Launcher.emit_event("prompts", [
 				[],
-				[BottomBar.ICON_BUTTON_Y, tr("DEFAULT.UPDATE"), BottomBar.ICON_BUTTON_B, tr("DEFAULT.PROMPT_BACK")]
+				[BottomBar.ICON_BUTTON_Y, tr("DEFAULT.PROMPT_UPDATE"), BottomBar.ICON_BUTTON_B, tr("DEFAULT.PROMPT_BACK")]
 			])
 		State.CONFIRM_UPDATE:
 			Launcher.emit_event("prompts", [
@@ -161,7 +161,7 @@ func _check_completed(check_result, data):
 			message.text = tr("DEFAULT.UPDATE_AVAILABLE").format([data.version])
 			_set_state(State.UPDATE_AVAILABLE)
 		Check.UP_TO_DATE:
-			message.text = tr("DEFAULT.SYSTEM_UP_TO_DATE")
+			message.text = tr("DEFAULT.LAUNCHER_UP_TO_DATE")
 			_set_state(State.IDLE)
 
 

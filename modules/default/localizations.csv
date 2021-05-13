@@ -1,7 +1,11 @@
 id,en,it
 DEFAULT.ABOUT,About,Informazioni
-DEFAULT.CURRENT_UPDATE_RELEASE_DATE,"Current system version release date:
-{year}/{month}/{day}","Data di rilascio della versione attuale del sistema:
+DEFAULT.BATTERY_10_REMAINING,10% battery remaining.,10% di batteria rimanente.
+DEFAULT.BATTERY_20_REMAINING,20% battery remaining.,20% di batteria rimanente.
+DEFAULT.BATTERY_5_REMAINING,5% battery remaining.,5% di batteria rimanente.
+DEFAULT.BATTERY_FULL,Battery fully charged.,Batteria completamente carica.
+DEFAULT.CURRENT_UPDATE_RELEASE_DATE,"Current launcher version release date:
+{year}/{month}/{day}","Data di rilascio della versione attuale del launcher:
 {day}/{month}/{year}"
 DEFAULT.FOLDER_LAUNCHER,Launcher,Launcher
 DEFAULT.FOLDER_SYSTEM,System,Sistema
@@ -10,6 +14,8 @@ DEFAULT.KEYBOARD,Keyboard,Tastiera
 DEFAULT.KEYBOARD_APP,Keyboard App,App Tastiera
 DEFAULT.LANGUAGE,Language,Lingua
 DEFAULT.LAUNCHER_APP,Launcher App,App Launcher
+DEFAULT.LAUNCHER_UP_TO_DATE,The launcher is up to date!,Il launcher è aggiornato!
+DEFAULT.LAUNCHER_VERSION,Launcher version: {0},Versione del launcher: {0}
 DEFAULT.POWER_MODE,Power Mode,Consumo Energetico
 DEFAULT.POWER_MODE_ALWAYS_ON,Always On,Sempre Acceso
 DEFAULT.POWER_MODE_BALANCED,Balanced,Bilanciato
@@ -30,6 +36,7 @@ DEFAULT.PROMPT_OPEN,Open,Apri
 DEFAULT.PROMPT_SCAN,Scan,Scansiona
 DEFAULT.PROMPT_SELECT,Select,Selez.
 DEFAULT.PROMPT_SYMBOLS,Symb.,Simb.
+DEFAULT.PROMPT_UPDATE,Update,Aggiorna
 DEFAULT.RELOADING_FAILED,Reloading failed!,Ricaricamento fallito!
 DEFAULT.RELOAD_ON_EXIT,Exit to reload the launcher and apply pending changes,Esci per riavviare il launcher e applicare le modifiche
 DEFAULT.RUNNING_APP,Running App,App Esecuzione
@@ -37,8 +44,6 @@ DEFAULT.SETTINGS,Settings,Impostazioni
 DEFAULT.SETTINGS_APP,Settings App,App Impostazioni
 DEFAULT.STATUS,Status,Status
 DEFAULT.SWITCH_LAUNCHER,Switch Launcher,Cambia Launcher
-DEFAULT.SYSTEM_UP_TO_DATE,The system is up to date!,Il sistema è aggiornato!
-DEFAULT.SYSTEM_VERSION,System version: {0},Versione del sistema: {0}
 DEFAULT.THEME,Theme,Tema
 DEFAULT.TIME_APRIL,April,Aprile
 DEFAULT.TIME_AUGUST,August,Agosto
@@ -60,10 +65,10 @@ DEFAULT.TIME_SUNDAY,Sunday,Domenica
 DEFAULT.TIME_THURSDAY,Thursday,Giovedì
 DEFAULT.TIME_TUESDAY,Tuesday,Martedì
 DEFAULT.TIME_WEDNESDAY,Wednesday,Mercoledì
-DEFAULT.UPDATE,Update,Aggiorna
 DEFAULT.UPDATE_AVAILABLE,Update available: {0},Aggiornamento disponibile: {0}
 DEFAULT.UPDATE_CHECK_ERROR,Error searching for updates. Check your internet connection or try later.,Errore durante la ricerca di aggiornamenti. Controlla la tua connessione internet o riprova più tardi.
 DEFAULT.UPDATE_ERROR,Error during the update. Check your internet connection or try later.,Errore durante l'aggiornamento. Controlla la tua connessione internet o riprova più tardi.
+DEFAULT.UPDATE_LAUNCHER,Update Launcher,Aggiorna Launcher
 DEFAULT.UPDATE_WARNING,"Updating, any changes to the core launcher and default modules will be overwritten.
 
 Custom modules may not work anymore if the update brings internal changes.

@@ -1,5 +1,6 @@
 <p align="center">
 	<img src="https://i.imgur.com/jO6pNqj.gif" />
+	<img src="https://i.imgur.com/ehwy0tH.gif" />
 </p>
 
 # Single-board Computer Godot Launcher

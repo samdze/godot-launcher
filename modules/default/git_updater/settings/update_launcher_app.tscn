@@ -51,7 +51,7 @@ margin_top = 89.0
 margin_right = 286.0
 margin_bottom = 103.0
 size_flags_vertical = 6
-text = "The system is up to date!"
+text = "The launcher is up to date!"
 align = 1
 autowrap = true
 font_values = {
@@ -59,9 +59,9 @@ font_values = {
 }
 
 [node name="PanelContainer" type="PanelContainer" parent="MarginContainer/ScrollContainer/Container"]
-margin_left = 69.0
+margin_left = 63.0
 margin_top = 196.0
-margin_right = 217.0
+margin_right = 222.0
 margin_bottom = 226.0
 size_flags_horizontal = 4
 script = ExtResource( 4 )
@@ -75,7 +75,7 @@ stylebox_values = {
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/ScrollContainer/Container/PanelContainer"]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 141.0
+margin_right = 152.0
 margin_bottom = 23.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -87,10 +87,10 @@ custom_constants/margin_bottom = 1
 [node name="CurrentVersion" type="Label" parent="MarginContainer/ScrollContainer/Container/PanelContainer/MarginContainer"]
 margin_left = 4.0
 margin_top = 1.0
-margin_right = 130.0
+margin_right = 141.0
 margin_bottom = 15.0
 size_flags_horizontal = 4
-text = "System version: 1.0"
+text = "Launcher version: 1.0"
 align = 1
 __meta__ = {
 "_edit_use_anchors_": false
