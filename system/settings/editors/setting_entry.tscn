@@ -21,7 +21,7 @@ __meta__ = {
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 297.0
-margin_bottom = 21.0
+margin_bottom = 27.0
 focus_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -30,8 +30,9 @@ __meta__ = {
 }
 
 [node name="LabelContainer" type="MarginContainer" parent="EditorsContainer"]
+margin_top = 3.0
 margin_right = 290.0
-margin_bottom = 14.0
+margin_bottom = 17.0
 size_flags_horizontal = 3
 size_flags_vertical = 4
 size_flags_stretch_ratio = 0.6
@@ -43,6 +44,6 @@ margin_right = 290.0
 margin_bottom = 14.0
 rect_min_size = Vector2( 64, 0 )
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.6
 text = "Launcher"
+valign = 1
 autowrap = true

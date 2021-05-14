@@ -3,7 +3,7 @@ extends "../entry.gd"
 var label : String = "" setget _set_label
 var icon : Texture = null setget _set_icon
 
-onready var label_node : Label = $Container/Label
+onready var label_node : Label = $Container/LabelContainer/MarginContainer/Label
 onready var icon_node : TextureRect = $Container/TextureRect
 onready var frame_node : TextureRect = $Container/CircleFrame
 onready var icon_label : Label = $Container/IconLabel

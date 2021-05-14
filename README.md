@@ -19,6 +19,10 @@ Fbturbo should work ok but performances will be worse.
 The stock launcher found in the GameShell lacks a few fundamental features when it comes to window management, multitasking and tweakability.
 This launcher aims to fix all those issues and to add other nice features.
 
+<p align="center">
+	<img src="https://i.imgur.com/WiazXsL.png" />
+</p>
+
 ## Installation
 SSH into the cpi home directory of the GameShell and run:
 ```
@@ -29,7 +33,7 @@ Restart the GameShell and you should boot into the Godot launcher.<br>
 You can rollback to the stock launcher running the "Switch Launcher" app.
 
 On other sbcs, start an X session executing compton and godot how it's done in .xinitrc.
-Also export the DISPLAY environment variable.
+Also export the DISPLAY environment variable. Better documentation will be available in the future.
 
 ## Documentation
 On the GameShell, press Shift + Start at any time when an app is open to show the launcher widgets.<br>

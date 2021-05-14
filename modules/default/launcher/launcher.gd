@@ -24,11 +24,14 @@ var executing = false
 
 var current_view = null
 
+onready var background : TextureRect = $BackgroundLayer/Background
+
 
 func _ready():
 	if OS.has_feature("x86_64"):
 		menu_directory = "E:\\Documenti\\Git\\apps\\Menu"
 	
+	background.texture = get_icon("wallpaper", "Control")
 	running_app = Modules.get_loaded_component_from_settings("system/running_app").resource
 	
 	load_directory(menu_directory)
@@ -61,13 +64,9 @@ func _active_window_changed(window_id):
 
 func _update_promtps():
 	if current_directory == menu_directory:
-		var res = Launcher.emit_event("prompts", [[BottomBar.ICON_NAV, tr("DEFAULT.PROMPT_NAVIGATION")], [BottomBar.ICON_BUTTON_A, tr("DEFAULT.PROMPT_OPEN")]])
-		print("Root directory responses: " + str(res.size()))
-#		Launcher.get_ui().bottom_bar.set_prompts([BottomBar.ICON_NAV, tr("DEFAULT.PROMPT_NAVIGATION")], [BottomBar.ICON_BUTTON_A, tr("DEFAULT.PROMPT_OPEN")])
+		var res = Launcher.emit_event("prompts", [[BottomBar.ICON_NAV_H, tr("DEFAULT.PROMPT_NAVIGATION")], [BottomBar.ICON_BUTTON_A, tr("DEFAULT.PROMPT_OPEN")]])
 	else:
-		var res = Launcher.emit_event("prompts", [[BottomBar.ICON_NAV, tr("DEFAULT.PROMPT_NAVIGATION")], [BottomBar.ICON_BUTTON_A, tr("DEFAULT.PROMPT_OPEN"), BottomBar.ICON_BUTTON_B, tr("DEFAULT.PROMPT_BACK")]])
-		print("Sub-directory responses: " + str(res.size()))
-#		Launcher.get_ui().bottom_bar.set_prompts([BottomBar.ICON_NAV, tr("DEFAULT.PROMPT_NAVIGATION")], [BottomBar.ICON_BUTTON_A, tr("DEFAULT.PROMPT_OPEN"), BottomBar.ICON_BUTTON_B, tr("DEFAULT.PROMPT_BACK")])
+		var res = Launcher.emit_event("prompts", [[BottomBar.ICON_NAV_H, tr("DEFAULT.PROMPT_NAVIGATION")], [BottomBar.ICON_BUTTON_A, tr("DEFAULT.PROMPT_OPEN"), BottomBar.ICON_BUTTON_B, tr("DEFAULT.PROMPT_BACK")]])
 
 
 func move_to_directory(directory : String):

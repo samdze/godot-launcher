@@ -39,7 +39,6 @@ size_flags_horizontal = 3
 text = "VodafoneHome"
 
 [node name="QualityIcon" type="TextureRect" parent="HBoxContainer"]
-self_modulate = Color( 0, 0, 0, 1 )
 margin_left = 235.0
 margin_right = 251.0
 margin_bottom = 20.0
@@ -58,7 +57,6 @@ text = "100%"
 valign = 1
 
 [node name="ProtectionIcon" type="TextureRect" parent="HBoxContainer"]
-self_modulate = Color( 0, 0, 0, 1 )
 margin_left = 295.0
 margin_right = 311.0
 margin_bottom = 20.0

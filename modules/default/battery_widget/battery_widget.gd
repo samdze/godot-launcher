@@ -22,23 +22,24 @@ func _update_status():
 	var texture = charging_texture if plugged else battery_texture
 	
 	var y = 0
-	
-	if percentage >= 85:
-		y = atlas_cell_size.y * 8
-	elif percentage >= 70:
-		y = atlas_cell_size.y * 7
-	elif percentage >= 60:
-		y = atlas_cell_size.y * 6
-	elif percentage >= 45:
-		y = atlas_cell_size.y * 5
-	elif percentage >= 30:
-		y = atlas_cell_size.y * 4
-	elif percentage >= 15:
-		y = atlas_cell_size.y * 3
-	elif percentage >= 5:
-		y = atlas_cell_size.y * 2
-	elif percentage >= 3:
+	if percentage < 11:
+		y = 0
+	elif percentage < 22:
 		y = atlas_cell_size.y
+	elif percentage < 33:
+		y = atlas_cell_size.y * 2
+	elif percentage < 44:
+		y = atlas_cell_size.y * 3
+	elif percentage < 55:
+		y = atlas_cell_size.y * 4
+	elif percentage < 66:
+		y = atlas_cell_size.y * 5
+	elif percentage < 77:
+		y = atlas_cell_size.y * 6
+	elif percentage < 88:
+		y = atlas_cell_size.y * 7
+	elif percentage <= 100:
+		y = atlas_cell_size.y * 8
 	
 	if icon.region.position.y != y or icon.atlas != texture:
 		icon.atlas = texture

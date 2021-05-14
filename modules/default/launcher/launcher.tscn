@@ -1,43 +1,6 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=2 format=2]
 
 [ext_resource path="res://modules/default/launcher/launcher.gd" type="Script" id=1]
-[ext_resource path="res://modules/default/light_theme/default_wallpaper.png" type="Texture" id=2]
-
-[sub_resource type="Shader" id=1]
-code = "shader_type canvas_item;
-
-// Starfield
-// Adapted from https://www.shadertoy.com/view/Ml2XDt by P_Malin
-// Garo/ArcOfDream
-uniform vec4 background_color : hint_color;
-uniform vec4 star_color : hint_color;
-uniform float magnitude : hint_range(1.0, 100.);
-uniform float star_count : hint_range(1.0, 1000.);
-uniform float time_scale : hint_range(-2.0, 2.0);
-
-void fragment()
-{
-	vec4 f = background_color;
-	vec2 p = UV*magnitude;
-	p.x -= magnitude/2.0;
-	p.y -= magnitude/2.0;
-
-    float ba = floor(atan(p.x, p.y) * star_count);
-	float h = cos(ba);
-	float z = h / dot(p,p);
-    f += star_color * exp(fract(z + h * ba + vec4(TIME*time_scale)) / -0.001) / z;
-//	f += star_color * clamp(vec4(0.), vec4(1.), exp(fract(z + h * ba + vec4(TIME*time_scale)) / -0.001) / z);
-
-	COLOR=vec4(f.rgb, 1.0);
-}"
-
-[sub_resource type="ShaderMaterial" id=2]
-shader = SubResource( 1 )
-shader_param/background_color = Color( 1, 1, 1, 1 )
-shader_param/star_color = Color( 1, 1, 1, 1 )
-shader_param/magnitude = 5.038
-shader_param/star_count = 68.551
-shader_param/time_scale = -0.3
 
 [node name="LauncherApp" type="Control"]
 anchor_right = 1.0
@@ -52,19 +15,9 @@ __meta__ = {
 [node name="BackgroundLayer" type="CanvasLayer" parent="."]
 layer = -10
 
-[node name="Starfield" type="ColorRect" parent="BackgroundLayer"]
-visible = false
-material = SubResource( 2 )
-anchor_right = 1.0
-anchor_bottom = 1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="Background" type="TextureRect" parent="BackgroundLayer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-texture = ExtResource( 2 )
 expand = true
 stretch_mode = 7
 __meta__ = {

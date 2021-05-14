@@ -9,10 +9,13 @@ var pages_folders = {}
 var pending_changes = {}
 
 onready var reload_message : Control = $MarginContainer/ReloadAndSettings/ReloadContainer
+onready var reload_label : Label = $MarginContainer/ReloadAndSettings/ReloadContainer/MarginContainer/SmallLabel
+onready var scroll_container : ScrollContainer = $MarginContainer/ReloadAndSettings/SettingsView
 onready var options_container : VBoxContainer = $MarginContainer/ReloadAndSettings/SettingsView/VBoxContainer
 
 
 func _ready():
+	reload_label.add_color_override("font_color", get_color("font_color_hover", "Button"))
 	reload_message.hide()
 	
 	# Load settings and create them
@@ -102,6 +105,8 @@ func _load_directory(directory, selected_entry = 0):
 		else:
 			value.focus_neighbour_bottom = options_container.get_child(0).get_path()
 		i += 1
+	
+	scroll_container.scroll_vertical = 0
 	
 	selected_entry = clamp(selected_entry, 0, options_container.get_child_count() - 1)
 	options_container.get_child(selected_entry).call_deferred("grab_focus")

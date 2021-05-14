@@ -1,10 +1,11 @@
-[gd_resource type="Theme" load_steps=30 format=2]
+[gd_resource type="Theme" load_steps=32 format=2]
 
 [ext_resource path="res://modules/default/light_theme/varelaround_regular_large.tres" type="DynamicFont" id=1]
 [ext_resource path="res://modules/default/light_theme/varelaround_regular_medium.tres" type="DynamicFont" id=2]
 [ext_resource path="res://modules/default/light_theme/varelaround_regular_small.tres" type="DynamicFont" id=3]
 [ext_resource path="res://system/modules/ui_theme.gd" type="Script" id=4]
 [ext_resource path="res://modules/default/light_theme/gui_items.png" type="Texture" id=5]
+[ext_resource path="res://modules/default/light_theme/default_wallpaper.png" type="Texture" id=6]
 
 [sub_resource type="StyleBoxFlat" id=1]
 content_margin_left = 4.0
@@ -192,6 +193,19 @@ corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 corner_detail = 4
 
+[sub_resource type="StyleBoxFlat" id=25]
+content_margin_left = 2.0
+content_margin_right = 2.0
+content_margin_top = 2.0
+content_margin_bottom = 2.0
+bg_color = Color( 1, 1, 1, 1 )
+border_color = Color( 1, 1, 1, 1 )
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+corner_detail = 4
+
 [sub_resource type="StyleBoxFlat" id=19]
 bg_color = Color( 0.952941, 0.952941, 0.952941, 1 )
 border_width_left = 2
@@ -259,6 +273,9 @@ Button/styles/focus = SubResource( 2 )
 Button/styles/hover = SubResource( 2 )
 Button/styles/normal = SubResource( 1 )
 Button/styles/pressed = SubResource( 2 )
+Control/colors/contrast = Color( 0.32549, 0.32549, 0.32549, 1 )
+Control/colors/main = Color( 1, 1, 1, 1 )
+Control/icons/wallpaper = ExtResource( 6 )
 HScrollBar/styles/grabber = SubResource( 3 )
 HScrollBar/styles/grabber_highlight = SubResource( 4 )
 HScrollBar/styles/grabber_pressed = SubResource( 4 )
@@ -286,6 +303,7 @@ PanelContainer/styles/notification_success = SubResource( 16 )
 PanelContainer/styles/notification_warning = SubResource( 17 )
 PanelContainer/styles/panel = SubResource( 18 )
 PanelContainer/styles/popup = SubResource( 12 )
+PanelContainer/styles/rounded = SubResource( 25 )
 PopupPanel/styles/panel = SubResource( 19 )
 ScrollContainer/styles/bg = SubResource( 20 )
 ScrollContainer/styles/no_scroll = SubResource( 20 )

@@ -15,7 +15,7 @@ var last_update_release_date = null
 
 onready var http = $HTTPRequest
 onready var message : Label = $MarginContainer/ScrollContainer/Container/Message
-onready var system_version : Label = $MarginContainer/ScrollContainer/Container/PanelContainer/MarginContainer/CurrentVersion
+onready var system_version : Button = $MarginContainer/ScrollContainer/Container/CurrentVersion
 onready var confirm_panel = $MarginContainer/UpdateConfirm
 
 

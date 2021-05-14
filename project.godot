@@ -40,6 +40,11 @@ _global_script_classes=[ {
 "path": "res://system/launcher_entry.gd"
 }, {
 "base": "Node",
+"class": "ModulateApplier",
+"language": "GDScript",
+"path": "res://system/components/modulate_applier.gd"
+}, {
+"base": "Node",
 "class": "Service",
 "language": "GDScript",
 "path": "res://system/modules/service.gd"
@@ -91,6 +96,7 @@ _global_script_class_icons={
 "Component": "",
 "Icons": "",
 "LauncherEntry": "",
+"ModulateApplier": "",
 "Service": "",
 "Setting": "",
 "SettingEditor": "",
@@ -112,7 +118,7 @@ run/low_processor_mode=true
 boot_splash/image="res://modules/default/launcher/circle_icon.png"
 boot_splash/fullsize=false
 boot_splash/bg_color=Color( 1, 1, 1, 0 )
-config/icon="res://views/launcher/folder_icon.png"
+config/icon="res://modules/default/launcher/folder_icon.png"
 
 [autoload]
 

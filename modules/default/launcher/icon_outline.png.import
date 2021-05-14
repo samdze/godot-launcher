@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/widget_icons.png-9be77bbb248077c193993aa2dd54f9d1.stex"
+path="res://.import/icon_outline.png-99e622517c11dcde9d0efc3dbfab991b.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://modules/default/brightness_widget/widget_icons.png"
-dest_files=[ "res://.import/widget_icons.png-9be77bbb248077c193993aa2dd54f9d1.stex" ]
+source_file="res://modules/default/launcher/icon_outline.png"
+dest_files=[ "res://.import/icon_outline.png-99e622517c11dcde9d0efc3dbfab991b.stex" ]
 
 [params]
 

@@ -38,7 +38,7 @@ func ensure_visible(control : Control):
 			bottom_margin += get_h_scrollbar().get_size().y
 		var top_margin = stylebox.content_margin_top
 		
-		var diff = max(min(other_rect.position.y - top_margin, global_rect.position.y), other_rect.position.y + other_rect.size.y - global_rect.size.y + bottom_margin);
+		var diff = max(min(other_rect.position.y - top_margin, global_rect.position.y), other_rect.position.y + other_rect.size.y - global_rect.size.y + bottom_margin)
 		scroll_vertical = scroll_vertical + (diff - global_rect.position.y)
-		diff = max(min(other_rect.position.x - left_margin, global_rect.position.x), other_rect.position.x + other_rect.size.x - global_rect.size.x + right_margin);
+		diff = max(min(other_rect.position.x - left_margin, global_rect.position.x), other_rect.position.x + other_rect.size.x - global_rect.size.x + right_margin)
 		scroll_horizontal = scroll_horizontal + (diff - global_rect.position.x)

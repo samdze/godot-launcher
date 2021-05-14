@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/wifi.png-033846a43575c01cb926c656fcf73546.stex"
+path="res://.import/volume_icons.png-6168361c1eda64f55b79f64647bf5051.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://modules/default/wifi_widget/wifi.png"
-dest_files=[ "res://.import/wifi.png-033846a43575c01cb926c656fcf73546.stex" ]
+source_file="res://modules/default/volume_widget/volume_icons.png"
+dest_files=[ "res://.import/volume_icons.png-6168361c1eda64f55b79f64647bf5051.stex" ]
 
 [params]
 

@@ -1,19 +1,15 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://modules/default/battery_widget/battery_widget.gd" type="Script" id=1]
-[ext_resource path="res://modules/default/battery_widget/without_charging.png" type="Texture" id=2]
-[ext_resource path="res://modules/default/battery_widget/withcharging.png" type="Texture" id=3]
-
-
-
-
-
+[ext_resource path="res://modules/default/battery_widget/battery_charging_icons.png" type="Texture" id=2]
+[ext_resource path="res://modules/default/battery_widget/battery_icons.png" type="Texture" id=3]
+[ext_resource path="res://system/components/modulate_applier.gd" type="Script" id=4]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
 [sub_resource type="AtlasTexture" id=2]
 flags = 4
-atlas = ExtResource( 2 )
+atlas = ExtResource( 3 )
 region = Rect2( 0, 36, 18, 18 )
 
 [node name="Battery" type="ToolButton"]
@@ -34,9 +30,15 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-charging_texture = ExtResource( 3 )
-battery_texture = ExtResource( 2 )
+charging_texture = ExtResource( 2 )
+battery_texture = ExtResource( 3 )
 
 [node name="Timer" type="Timer" parent="."]
 autostart = true
+
+[node name="ModulateApplier" type="Node" parent="."]
+script = ExtResource( 4 )
+apply_to = NodePath("..")
+modulate_type = 1
+color_property = "contrast"
 [connection signal="timeout" from="Timer" to="." method="_update_status"]

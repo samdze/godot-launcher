@@ -1,11 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://modules/default/wifi_widget/wifi_widget.gd" type="Script" id=1]
-[ext_resource path="res://modules/default/wifi_widget/wifi.png" type="Texture" id=2]
-
-
-
-
+[ext_resource path="res://modules/default/wifi_widget/wifi_icons.png" type="Texture" id=2]
+[ext_resource path="res://system/components/modulate_applier.gd" type="Script" id=3]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
@@ -36,4 +33,10 @@ __meta__ = {
 [node name="Timer" type="Timer" parent="."]
 wait_time = 2.0
 autostart = true
+
+[node name="ModulateApplier" type="Node" parent="."]
+script = ExtResource( 3 )
+apply_to = NodePath("..")
+modulate_type = 1
+color_property = "contrast"
 [connection signal="timeout" from="Timer" to="." method="_update_status"]

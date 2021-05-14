@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/withcharging.png-3c979641cb3901d6e79d9e71b4c06179.stex"
+path="res://.import/wifi_icons.png-6e3ae5080de50836045bb771dac8d1d5.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://modules/default/battery_widget/withcharging.png"
-dest_files=[ "res://.import/withcharging.png-3c979641cb3901d6e79d9e71b4c06179.stex" ]
+source_file="res://modules/default/wifi_widget/wifi_icons.png"
+dest_files=[ "res://.import/wifi_icons.png-6e3ae5080de50836045bb771dac8d1d5.stex" ]
 
 [params]
 
