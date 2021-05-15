@@ -5,8 +5,13 @@ const ui_entry = preload("icons_entry.tscn")
 var default_entry_y = 0
 var highlight_entry_shift_y = -22
 
+onready var background = $BackgroundLayer/Background
 onready var entries_container = $EntriesContainer
 onready var tween = $Tween
+
+
+func _ready():
+	background.texture = get_icon("wallpaper", "Control")
 
 
 func clear_entries():

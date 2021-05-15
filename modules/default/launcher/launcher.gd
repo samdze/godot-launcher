@@ -24,14 +24,11 @@ var executing = false
 
 var current_view = null
 
-onready var background : TextureRect = $BackgroundLayer/Background
-
 
 func _ready():
 	if OS.has_feature("x86_64"):
 		menu_directory = "E:\\Documenti\\Git\\apps\\Menu"
 	
-	background.texture = get_icon("wallpaper", "Control")
 	running_app = Modules.get_loaded_component_from_settings("system/running_app").resource
 	
 	load_directory(menu_directory)

@@ -12,13 +12,13 @@ func clear_entries():
 	pass
 
 
-# Override this function to add new entries to this view.
+# Override this function to provide a way to add new entries to this view.
 func append_entries(entries : Array):
 	
 	pass
 
 
-# Override this function to focus a previously added entry by index.
+# Override this function to provide a way to focus a previously added entry by index.
 func select_entry(index):
 	
 	pass
