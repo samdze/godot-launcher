@@ -132,6 +132,7 @@ Launcher="*res://system/singleton.gd"
 window/size/width=320
 window/size/height=240
 window/size/resizable=false
+window/size/fullscreen=true
 window/size/test_width=320
 window/size/test_height=240
 window/vsync/vsync_via_compositor=true
@@ -139,6 +140,7 @@ window/per_pixel_transparency/allowed=true
 window/per_pixel_transparency/enabled=true
 window/energy_saving/keep_screen_on=false
 window/stretch/aspect="keep_width"
+window/size/fullscreen.editor=false
 
 [editor_plugins]
 
