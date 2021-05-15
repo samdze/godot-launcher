@@ -87,20 +87,13 @@ func _load_module(module_name : String):
 		return
 	# Each folder should contain a component
 	dir.list_dir_begin(true, true)
+	var components_to_load = []
 	var file_name : String = dir.get_next()
 	while file_name != "":
 		if dir.current_is_dir():
-			var component_resource = null
-			# Componnets must have .tscn or .tres extension
-			if ResourceLoader.exists("res://modules/" + module_name + "/" + file_name + "/" + file_name + ".tscn"):
-				component_resource = ResourceLoader.load("res://modules/" + module_name + "/" + file_name + "/" + file_name + ".tscn")
-			elif ResourceLoader.exists("res://modules/" + module_name + "/" + file_name + "/" + file_name + ".tres"):
-				component_resource = ResourceLoader.load("res://modules/" + module_name + "/" + file_name + "/" + file_name + ".tres")
-			if component_resource != null:
-				# Valid Component found, load it
-				_load_component(module_name, component_resource)
+			components_to_load.append(file_name)
 		elif file_name.get_extension() == "translation":
-			# This is a translation resource, load it
+			# This is a translation resource, load it before anything else in this module.
 			has_localizations = true
 			var translation : Translation = ResourceLoader.load("res://modules/" + module_name + "/" + file_name)
 			if translation.locale == "en":
@@ -109,6 +102,17 @@ func _load_module(module_name : String):
 			print("Module " + module_name.to_upper() + " - Translation \"" + file_name + "\" found.")
 		
 		file_name = dir.get_next()
+	
+	for c_name in components_to_load:
+		var component_resource = null
+		# Componnets must have .tscn or .tres extension
+		if ResourceLoader.exists("res://modules/" + module_name + "/" + c_name + "/" + c_name + ".tscn"):
+			component_resource = ResourceLoader.load("res://modules/" + module_name + "/" + c_name + "/" + c_name + ".tscn")
+		elif ResourceLoader.exists("res://modules/" + module_name + "/" + c_name + "/" + c_name + ".tres"):
+			component_resource = ResourceLoader.load("res://modules/" + module_name + "/" + c_name + "/" + c_name + ".tres")
+		if component_resource != null:
+			# Valid Component found, load it
+			_load_component(module_name, component_resource)
 	
 	if has_localizations and not has_english_translation:
 		printerr("Module " + module_name.to_upper() + " doesn't have an english translation!")
