@@ -10,6 +10,7 @@ DEFAULT.CURRENT_UPDATE_RELEASE_DATE,"Current launcher version release date:
 DEFAULT.FOLDER_LAUNCHER,Launcher,Launcher
 DEFAULT.FOLDER_SYSTEM,System,Sistema
 DEFAULT.ICONS,Icons,Icone
+DEFAULT.INPUT_SETTINGS,Input Settings,Impostazioni Input
 DEFAULT.KEYBOARD,Keyboard,Tastiera
 DEFAULT.KEYBOARD_APP,Keyboard App,App Tastiera
 DEFAULT.LANGUAGE,Language,Lingua

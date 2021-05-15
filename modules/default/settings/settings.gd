@@ -75,7 +75,7 @@ func _ready():
 func _load_directory(directory, selected_entry = 0):
 	current_directory = directory
 	
-	if is_a_parent_of(get_focus_owner()):
+	if get_focus_owner() != null and is_a_parent_of(get_focus_owner()):
 		get_focus_owner().release_focus()
 	for c in options_container.get_children():
 		var value : Control = c

@@ -131,6 +131,7 @@ Launcher="*res://system/singleton.gd"
 
 window/size/width=320
 window/size/height=240
+window/size/resizable=false
 window/size/test_width=320
 window/size/test_height=240
 window/vsync/vsync_via_compositor=true
@@ -142,10 +143,6 @@ window/stretch/aspect="keep_width"
 [editor_plugins]
 
 enabled=PoolStringArray( "Todo_Manager", "makefile_launcher", "zylann.translation_editor" )
-
-[gui]
-
-theme/custom="res://modules/default/light_theme/light_theme.tres"
 
 [input]
 

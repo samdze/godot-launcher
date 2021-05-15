@@ -3,6 +3,5 @@
 [ext_resource path="res://modules/default/dark_theme/varelaround_regular.ttf" type="DynamicFontData" id=1]
 
 [resource]
-size = 10
-extra_spacing_top = 1
+size = 48
 font_data = ExtResource( 1 )

@@ -16,6 +16,7 @@ func _ready():
 	
 #	config.set_value("system", "language", config.get_value("system", "language", "en"))
 	TranslationServer.set_locale(config.get_value("system", "language", "en"))
+	print("Language set to " + TranslationServer.get_locale_name(TranslationServer.get_locale()))
 	
 	for section in config.get_sections():
 		for key in config.get_section_keys(section):

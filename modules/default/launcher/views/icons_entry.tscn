@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://modules/default/launcher/folder_icon.png" type="Texture" id=1]
 [ext_resource path="res://system/components/large_label.tscn" type="PackedScene" id=2]
@@ -6,7 +6,6 @@
 [ext_resource path="res://modules/default/launcher/views/icons_entry.gd" type="Script" id=4]
 [ext_resource path="res://modules/default/launcher/icon_outline.png" type="Texture" id=5]
 [ext_resource path="res://system/components/theme_property_applier.gd" type="Script" id=6]
-[ext_resource path="res://modules/default/light_theme/varelaround_regular_xxlarge.tres" type="DynamicFont" id=7]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 1, 1, 1, 1 )
@@ -91,7 +90,6 @@ __meta__ = {
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
-custom_fonts/font = ExtResource( 7 )
 custom_colors/font_color = Color( 0.32549, 0.32549, 0.32549, 1 )
 text = "Go"
 align = 1
@@ -101,7 +99,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 font_values = {
-
+"font": "xxlarge"
 }
 constant_values = {
 

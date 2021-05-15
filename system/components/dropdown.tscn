@@ -1,13 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://modules/default/light_theme/gui_items.png" type="Texture" id=1]
+[ext_resource path="res://system/components/object_property_applier.gd" type="Script" id=1]
 [ext_resource path="res://system/components/dropdown.gd" type="Script" id=2]
 [ext_resource path="res://system/components/scroll_container.tscn" type="PackedScene" id=3]
-
-[sub_resource type="AtlasTexture" id=1]
-flags = 4
-atlas = ExtResource( 1 )
-region = Rect2( 0, 18, 18, 18 )
 
 [node name="Dropdown" type="Button"]
 margin_left = 101.0
@@ -46,16 +41,20 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureRect" type="TextureRect" parent="Controls"]
+[node name="ArrowsIcon" type="TextureRect" parent="Controls"]
 margin_left = 173.0
 margin_right = 191.0
 margin_bottom = 20.0
 grow_horizontal = 2
 rect_min_size = Vector2( 18, 0 )
-texture = SubResource( 1 )
 stretch_mode = 6
+script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
+}
+control_type = "OptionButton"
+texture_values = {
+"texture": "arrow"
 }
 
 [node name="PopupPanel" type="PopupPanel" parent="."]

@@ -30,7 +30,7 @@ git clone https://github.com/samdze/godot-launcher.git
 sed -i s/launcher/godot-launcher/g /home/cpi/.bashrc
 ```
 Restart the GameShell and you should boot into the Godot launcher.<br>
-You can rollback to the stock launcher running the "Switch Launcher" app.
+You can rollback to the stock launcher selecting "Switch Launcher" inside the Settings app.
 
 On other sbcs, start an X session executing compton and godot how it's done in .xinitrc.
 Also export the DISPLAY environment variable. Better documentation will be available in the future.
