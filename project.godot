@@ -140,7 +140,7 @@ window/per_pixel_transparency/allowed=true
 window/per_pixel_transparency/enabled=true
 window/energy_saving/keep_screen_on=false
 window/stretch/aspect="keep_width"
-window/size/fullscreen.editor=false
+window/size/fullscreen.Windows=false
 
 [editor_plugins]
 
