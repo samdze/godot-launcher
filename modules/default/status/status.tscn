@@ -1,12 +1,12 @@
 [gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://modules/default/status/bottom_bar.gd" type="Script" id=1]
+[ext_resource path="res://modules/default/status/bottom_icons.png" type="Texture" id=2]
 [ext_resource path="res://system/components/large_label.tscn" type="PackedScene" id=3]
 [ext_resource path="res://system/components/small_label.tscn" type="PackedScene" id=4]
 [ext_resource path="res://system/components/theme_property_applier.gd" type="Script" id=6]
 [ext_resource path="res://modules/default/status/loading.gd" type="Script" id=7]
 [ext_resource path="res://modules/default/status/notifications.gd" type="Script" id=8]
-[ext_resource path="res://modules/default/status/footbar.png" type="Texture" id=9]
 [ext_resource path="res://modules/default/status/loading_icon.png" type="Texture" id=10]
 [ext_resource path="res://modules/default/status/top_bar.gd" type="Script" id=11]
 [ext_resource path="res://system/components/theme_applier.gd" type="Script" id=12]
@@ -25,53 +25,53 @@ corner_radius_bottom_left = 4
 
 [sub_resource type="AtlasTexture" id=3]
 flags = 4
-atlas = ExtResource( 9 )
+atlas = ExtResource( 2 )
 region = Rect2( 0, 0, 18, 18 )
 
 [sub_resource type="AtlasTexture" id=4]
 flags = 4
-atlas = ExtResource( 9 )
-region = Rect2( 0, 18, 18, 18 )
+atlas = ExtResource( 2 )
+region = Rect2( 36, 18, 18, 18 )
 
 [sub_resource type="AtlasTexture" id=5]
 flags = 4
-atlas = ExtResource( 9 )
-region = Rect2( 0, 36, 18, 18 )
+atlas = ExtResource( 2 )
+region = Rect2( 54, 18, 18, 18 )
 
 [sub_resource type="AtlasTexture" id=6]
 flags = 4
-atlas = ExtResource( 9 )
-region = Rect2( 0, 54, 18, 18 )
+atlas = ExtResource( 2 )
+region = Rect2( 0, 18, 18, 18 )
 
 [sub_resource type="AtlasTexture" id=7]
 flags = 4
-atlas = ExtResource( 9 )
-region = Rect2( 0, 72, 18, 18 )
+atlas = ExtResource( 2 )
+region = Rect2( 18, 18, 18, 18 )
 
 [sub_resource type="AtlasTexture" id=8]
 flags = 4
-atlas = ExtResource( 9 )
-region = Rect2( 0, 108, 18, 18 )
+atlas = ExtResource( 2 )
+region = Rect2( 90, 0, 18, 18 )
 
 [sub_resource type="AtlasTexture" id=9]
 flags = 4
-atlas = ExtResource( 9 )
-region = Rect2( 0, 90, 18, 18 )
+atlas = ExtResource( 2 )
+region = Rect2( 54, 0, 18, 18 )
 
 [sub_resource type="AtlasTexture" id=10]
 flags = 4
-atlas = ExtResource( 9 )
-region = Rect2( 18, 90, 18, 18 )
+atlas = ExtResource( 2 )
+region = Rect2( 72, 0, 18, 18 )
 
 [sub_resource type="AtlasTexture" id=11]
 flags = 4
-atlas = ExtResource( 9 )
+atlas = ExtResource( 2 )
 region = Rect2( 18, 0, 18, 18 )
 
 [sub_resource type="AtlasTexture" id=12]
 flags = 4
-atlas = ExtResource( 9 )
-region = Rect2( 18, 18, 18, 18 )
+atlas = ExtResource( 2 )
+region = Rect2( 36, 0, 18, 18 )
 
 [node name="StatusLayer" type="CanvasLayer"]
 script = ExtResource( 13 )

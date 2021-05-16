@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/footbar.png-1ab4e683c22f09792a017ddb93542b6b.stex"
+path="res://.import/bottom_icons.png-557a58ea31dda9c8fe7fe8f00c084e0f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://modules/default/status/footbar.png"
-dest_files=[ "res://.import/footbar.png-1ab4e683c22f09792a017ddb93542b6b.stex" ]
+source_file="res://modules/default/status/bottom_icons.png"
+dest_files=[ "res://.import/bottom_icons.png-557a58ea31dda9c8fe7fe8f00c084e0f.stex" ]
 
 [params]
 

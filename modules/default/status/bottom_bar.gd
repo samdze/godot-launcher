@@ -34,6 +34,7 @@ func set_prompts(left_prompts, right_prompts):
 		hbox.add_constant_override("separation", 2)
 		var icon = TextureRect.new()
 		icon.texture = icons[left_prompts[i]]
+		icon.self_modulate = get_color("contrast", "Control")
 		icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 		var text = preload("res://system/components/small_label.tscn").instance()
 		text.valign = Label.VALIGN_CENTER
@@ -50,6 +51,7 @@ func set_prompts(left_prompts, right_prompts):
 		hbox.add_constant_override("separation", 2)
 		var icon = TextureRect.new()
 		icon.texture = icons[right_prompts[i]]
+		icon.self_modulate = get_color("contrast", "Control")
 		icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 		var text = preload("res://system/components/small_label.tscn").instance()
 		text.valign = Label.VALIGN_CENTER
