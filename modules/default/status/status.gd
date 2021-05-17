@@ -31,7 +31,8 @@ func _ready():
 func _input(event):
 	match mode:
 		Mode.STATUS:
-			if event.is_action_pressed("alt_start") and not loading.is_loading():
+			if event.is_action_pressed("ui_menu") and not loading.is_loading():
+				get_tree().set_input_as_handled()
 				emit_signal("open_requested")
 
 

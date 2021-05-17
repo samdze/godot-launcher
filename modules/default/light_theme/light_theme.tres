@@ -8,7 +8,7 @@
 [ext_resource path="res://modules/default/light_theme/default_wallpaper.png" type="Texture" id=6]
 [ext_resource path="res://modules/default/light_theme/varelaround_regular_xxlarge.tres" type="DynamicFont" id=7]
 
-[sub_resource type="StyleBoxFlat" id=1]
+[sub_resource type="StyleBoxFlat" id=11]
 content_margin_left = 4.0
 content_margin_right = 4.0
 content_margin_top = 2.0
@@ -19,7 +19,7 @@ corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
-[sub_resource type="StyleBoxFlat" id=2]
+[sub_resource type="StyleBoxFlat" id=12]
 content_margin_left = 4.0
 content_margin_right = 4.0
 content_margin_top = 2.0
@@ -30,7 +30,7 @@ corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
-[sub_resource type="StyleBoxFlat" id=3]
+[sub_resource type="StyleBoxFlat" id=13]
 bg_color = Color( 0.952941, 0.952941, 0.952941, 1 )
 border_width_left = 1
 border_width_top = 1
@@ -42,7 +42,7 @@ corner_radius_top_right = 3
 corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 
-[sub_resource type="StyleBoxFlat" id=4]
+[sub_resource type="StyleBoxFlat" id=14]
 content_margin_left = 1.0
 content_margin_right = 1.0
 content_margin_top = 1.0
@@ -58,7 +58,7 @@ corner_radius_top_right = 3
 corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 
-[sub_resource type="StyleBoxFlat" id=5]
+[sub_resource type="StyleBoxFlat" id=15]
 content_margin_left = 0.0
 content_margin_right = 0.0
 content_margin_top = 4.0
@@ -74,19 +74,19 @@ corner_radius_top_right = 2
 corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
 
-[sub_resource type="AtlasTexture" id=6]
+[sub_resource type="AtlasTexture" id=16]
 flags = 4
 atlas = ExtResource( 5 )
 region = Rect2( 0, 0, 16, 16 )
 
-[sub_resource type="AtlasTexture" id=7]
+[sub_resource type="AtlasTexture" id=17]
 flags = 4
 atlas = ExtResource( 5 )
 region = Rect2( 16, 0, 16, 16 )
 
-[sub_resource type="StyleBoxEmpty" id=8]
+[sub_resource type="StyleBoxEmpty" id=18]
 
-[sub_resource type="StyleBoxFlat" id=9]
+[sub_resource type="StyleBoxFlat" id=19]
 content_margin_left = 0.0
 content_margin_right = 0.0
 content_margin_top = 4.0
@@ -107,7 +107,7 @@ flags = 4
 atlas = ExtResource( 5 )
 region = Rect2( 0, 18, 18, 18 )
 
-[sub_resource type="StyleBoxFlat" id=11]
+[sub_resource type="StyleBoxFlat" id=20]
 content_margin_left = 0.0
 content_margin_right = 0.0
 content_margin_top = 0.0
@@ -116,7 +116,7 @@ bg_color = Color( 1, 1, 1, 1 )
 border_color = Color( 0.764706, 0.92549, 0.976471, 1 )
 corner_detail = 1
 
-[sub_resource type="StyleBoxFlat" id=12]
+[sub_resource type="StyleBoxFlat" id=21]
 bg_color = Color( 0.0588235, 0.705882, 0.901961, 1 )
 border_color = Color( 0.921569, 0.921569, 0.921569, 1 )
 corner_radius_top_left = 2
@@ -125,7 +125,7 @@ corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
 corner_detail = 4
 
-[sub_resource type="StyleBoxFlat" id=13]
+[sub_resource type="StyleBoxFlat" id=22]
 content_margin_left = 4.0
 content_margin_right = 4.0
 content_margin_top = 2.0
@@ -145,7 +145,7 @@ expand_margin_right = 2.0
 expand_margin_top = 2.0
 expand_margin_bottom = 2.0
 
-[sub_resource type="StyleBoxFlat" id=14]
+[sub_resource type="StyleBoxFlat" id=23]
 content_margin_left = 2.0
 content_margin_right = 2.0
 content_margin_top = 2.0
@@ -158,35 +158,35 @@ corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 corner_detail = 4
 
-[sub_resource type="StyleBoxFlat" id=15]
+[sub_resource type="StyleBoxFlat" id=24]
 bg_color = Color( 0.894118, 0.25098, 0.431373, 1 )
 corner_radius_top_left = 4
 corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
-[sub_resource type="StyleBoxFlat" id=16]
+[sub_resource type="StyleBoxFlat" id=25]
 bg_color = Color( 0.0588235, 0.705882, 0.901961, 1 )
 corner_radius_top_left = 4
 corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
-[sub_resource type="StyleBoxFlat" id=17]
+[sub_resource type="StyleBoxFlat" id=26]
 bg_color = Color( 0.356863, 0.882353, 0.4, 1 )
 corner_radius_top_left = 4
 corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
-[sub_resource type="StyleBoxFlat" id=18]
+[sub_resource type="StyleBoxFlat" id=27]
 bg_color = Color( 0.929412, 0.698039, 0.0823529, 1 )
 corner_radius_top_left = 4
 corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
-[sub_resource type="StyleBoxFlat" id=19]
+[sub_resource type="StyleBoxFlat" id=28]
 content_margin_left = 2.0
 content_margin_right = 2.0
 content_margin_top = 2.0
@@ -199,7 +199,7 @@ corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 corner_detail = 4
 
-[sub_resource type="StyleBoxFlat" id=20]
+[sub_resource type="StyleBoxFlat" id=29]
 content_margin_left = 2.0
 content_margin_right = 2.0
 content_margin_top = 2.0
@@ -212,7 +212,7 @@ corner_radius_bottom_right = 12
 corner_radius_bottom_left = 12
 corner_detail = 4
 
-[sub_resource type="StyleBoxFlat" id=21]
+[sub_resource type="StyleBoxFlat" id=30]
 bg_color = Color( 0.952941, 0.952941, 0.952941, 1 )
 border_width_left = 2
 border_width_top = 2
@@ -228,31 +228,31 @@ expand_margin_right = 2.0
 expand_margin_top = 2.0
 expand_margin_bottom = 2.0
 
-[sub_resource type="StyleBoxEmpty" id=22]
+[sub_resource type="StyleBoxEmpty" id=31]
 content_margin_left = 1.0
 content_margin_right = 1.0
 content_margin_top = 1.0
 content_margin_bottom = 1.0
 
-[sub_resource type="StyleBoxEmpty" id=23]
+[sub_resource type="StyleBoxEmpty" id=32]
 content_margin_left = 1.0
 content_margin_right = 1.0
 content_margin_top = 1.0
 content_margin_bottom = 2.0
 
-[sub_resource type="StyleBoxEmpty" id=24]
+[sub_resource type="StyleBoxEmpty" id=33]
 content_margin_left = 1.0
 content_margin_right = 2.0
 content_margin_top = 1.0
 content_margin_bottom = 2.0
 
-[sub_resource type="StyleBoxEmpty" id=25]
+[sub_resource type="StyleBoxEmpty" id=34]
 content_margin_left = 1.0
 content_margin_right = 2.0
 content_margin_top = 1.0
 content_margin_bottom = 1.0
 
-[sub_resource type="StyleBoxFlat" id=26]
+[sub_resource type="StyleBoxFlat" id=35]
 content_margin_left = 4.0
 content_margin_right = 4.0
 content_margin_top = 0.0
@@ -274,24 +274,24 @@ Button/colors/font_color = Color( 0.32549, 0.32549, 0.32549, 1 )
 Button/colors/font_color_disabled = Color( 0.32549, 0.32549, 0.32549, 1 )
 Button/colors/font_color_hover = Color( 1, 1, 1, 1 )
 Button/colors/font_color_pressed = Color( 1, 1, 1, 1 )
-Button/styles/disabled = SubResource( 1 )
-Button/styles/focus = SubResource( 2 )
-Button/styles/hover = SubResource( 2 )
-Button/styles/normal = SubResource( 1 )
-Button/styles/pressed = SubResource( 2 )
+Button/styles/disabled = SubResource( 11 )
+Button/styles/focus = SubResource( 12 )
+Button/styles/hover = SubResource( 12 )
+Button/styles/normal = SubResource( 11 )
+Button/styles/pressed = SubResource( 12 )
 Control/colors/contrast = Color( 0.32549, 0.32549, 0.32549, 1 )
 Control/colors/main = Color( 1, 1, 1, 1 )
 Control/icons/wallpaper = ExtResource( 6 )
-HScrollBar/styles/grabber = SubResource( 3 )
-HScrollBar/styles/grabber_highlight = SubResource( 4 )
-HScrollBar/styles/grabber_pressed = SubResource( 4 )
-HScrollBar/styles/scroll = SubResource( 5 )
-HSlider/icons/grabber = SubResource( 6 )
-HSlider/icons/grabber_disabled = SubResource( 6 )
-HSlider/icons/grabber_highlight = SubResource( 7 )
-HSlider/styles/grabber_area = SubResource( 8 )
-HSlider/styles/grabber_area_highlight = SubResource( 8 )
-HSlider/styles/slider = SubResource( 9 )
+HScrollBar/styles/grabber = SubResource( 13 )
+HScrollBar/styles/grabber_highlight = SubResource( 14 )
+HScrollBar/styles/grabber_pressed = SubResource( 14 )
+HScrollBar/styles/scroll = SubResource( 15 )
+HSlider/icons/grabber = SubResource( 16 )
+HSlider/icons/grabber_disabled = SubResource( 16 )
+HSlider/icons/grabber_highlight = SubResource( 17 )
+HSlider/styles/grabber_area = SubResource( 18 )
+HSlider/styles/grabber_area_highlight = SubResource( 18 )
+HSlider/styles/slider = SubResource( 19 )
 Label/colors/entry_color = Color( 0, 0, 0, 1 )
 Label/colors/font_color = Color( 0.32549, 0.32549, 0.32549, 1 )
 Label/fonts/large_font = ExtResource( 1 )
@@ -300,29 +300,33 @@ Label/fonts/xxlarge = ExtResource( 7 )
 LineEdit/colors/cursor_color = Color( 0.32549, 0.32549, 0.32549, 1 )
 LineEdit/colors/font_color = Color( 0.32549, 0.32549, 0.32549, 1 )
 LineEdit/fonts/font = ExtResource( 1 )
+MarginContainer/constants/margin_bottom = 2
+MarginContainer/constants/margin_left = 4
+MarginContainer/constants/margin_right = 4
+MarginContainer/constants/margin_top = 2
 OptionButton/icons/arrow = SubResource( 10 )
-Panel/styles/bg = SubResource( 11 )
-Panel/styles/highlighter = SubResource( 12 )
-Panel/styles/panel = SubResource( 13 )
-PanelContainer/styles/focus = SubResource( 14 )
-PanelContainer/styles/notification_error = SubResource( 15 )
-PanelContainer/styles/notification_message = SubResource( 16 )
-PanelContainer/styles/notification_success = SubResource( 17 )
-PanelContainer/styles/notification_warning = SubResource( 18 )
-PanelContainer/styles/panel = SubResource( 19 )
-PanelContainer/styles/popup = SubResource( 13 )
-PanelContainer/styles/rounded = SubResource( 20 )
-PopupPanel/styles/panel = SubResource( 21 )
-ScrollContainer/styles/bg = SubResource( 22 )
-ScrollContainer/styles/no_scroll = SubResource( 22 )
-ScrollContainer/styles/scroll_h = SubResource( 23 )
-ScrollContainer/styles/scroll_hv = SubResource( 24 )
-ScrollContainer/styles/scroll_v = SubResource( 25 )
+Panel/styles/bg = SubResource( 20 )
+Panel/styles/highlighter = SubResource( 21 )
+Panel/styles/panel = SubResource( 22 )
+PanelContainer/styles/focus = SubResource( 23 )
+PanelContainer/styles/notification_error = SubResource( 24 )
+PanelContainer/styles/notification_message = SubResource( 25 )
+PanelContainer/styles/notification_success = SubResource( 26 )
+PanelContainer/styles/notification_warning = SubResource( 27 )
+PanelContainer/styles/panel = SubResource( 28 )
+PanelContainer/styles/popup = SubResource( 22 )
+PanelContainer/styles/rounded = SubResource( 29 )
+PopupPanel/styles/panel = SubResource( 30 )
+ScrollContainer/styles/bg = SubResource( 31 )
+ScrollContainer/styles/no_scroll = SubResource( 31 )
+ScrollContainer/styles/scroll_h = SubResource( 32 )
+ScrollContainer/styles/scroll_hv = SubResource( 33 )
+ScrollContainer/styles/scroll_v = SubResource( 34 )
 TextEdit/colors/font_color = Color( 0.32549, 0.32549, 0.32549, 1 )
 TextEdit/fonts/font = ExtResource( 1 )
-VScrollBar/styles/grabber = SubResource( 3 )
-VScrollBar/styles/grabber_highlight = SubResource( 4 )
-VScrollBar/styles/grabber_pressed = SubResource( 4 )
-VScrollBar/styles/scroll = SubResource( 26 )
+VScrollBar/styles/grabber = SubResource( 13 )
+VScrollBar/styles/grabber_highlight = SubResource( 14 )
+VScrollBar/styles/grabber_pressed = SubResource( 14 )
+VScrollBar/styles/scroll = SubResource( 35 )
 script = ExtResource( 4 )
 name = "Light Theme"

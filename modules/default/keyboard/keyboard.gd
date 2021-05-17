@@ -183,10 +183,10 @@ func _app_input(event : InputEvent):
 		accept_event()
 		emit_signal("text_entered", true, text.text)
 		Launcher.get_ui().app.back_app()
-	if event.is_action_pressed("ui_menu"):
-		accept_event()
-		emit_signal("text_entered", false, text.text)
-		Launcher.get_ui().app.back_app()
+#	if event.is_action_pressed("ui_menu"):
+#		accept_event()
+#		emit_signal("text_entered", false, text.text)
+#		Launcher.get_ui().app.back_app()
 	if event.is_action_pressed("ui_cancel"):
 		accept_event()
 		_delete_string_at_cursor(1)

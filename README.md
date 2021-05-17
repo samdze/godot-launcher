@@ -36,14 +36,15 @@ On other sbcs, start an X session executing compton and godot how it's done in .
 Also export the DISPLAY environment variable. Better documentation will be available in the future.
 
 ## Documentation
-On the GameShell, press Shift + Start at any time when an app is open to show the launcher widgets.<br>
+On the GameShell, press MENU at any time when an app is open to show the launcher widgets.<br>
 In this state, you can then exit the app, go back to the app, see the time, the approximate remaining battery and the Wi-Fi connection status, tweak screen brightness and audio volume.
-For other sbcs, an input remapper will be available in the future.
 
-There's also a default Settings app that lets you change a few things about the launcher.
+The default Settings app lets you change a few things about the launcher, including input mappings.
 This launcher is made to be modular and custom settings can be added by other modules.
 
 This is an early version of the launcher, some games and apps may not be shown and there's no way to configure bluetooth, graphics drivers etc.
+
+If your device isn't a GameShell, the launcher isn't quite ready to be fully usable, although it can run with a few tweaks.
 
 ```
 /home/cpi/

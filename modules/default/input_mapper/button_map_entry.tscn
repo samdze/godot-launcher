@@ -1,0 +1,75 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://modules/default/input_mapper/mapping_entry.gd" type="Script" id=1]
+
+[node name="MappingEntry" type="PanelContainer"]
+margin_right = 288.0
+margin_bottom = 40.0
+focus_mode = 2
+size_flags_horizontal = 3
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Name" type="Label" parent="."]
+visible = false
+margin_top = 13.0
+margin_right = 34.0
+margin_bottom = 27.0
+size_flags_horizontal = 3
+text = "Name"
+valign = 1
+clip_text = true
+
+[node name="EditorsContainer" type="HBoxContainer" parent="."]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 281.0
+margin_bottom = 33.0
+focus_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LabelContainer" type="MarginContainer" parent="EditorsContainer"]
+margin_top = 6.0
+margin_right = 101.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+size_flags_vertical = 4
+size_flags_stretch_ratio = 0.6
+custom_constants/margin_left = 2
+
+[node name="Label" type="Label" parent="EditorsContainer/LabelContainer"]
+margin_left = 2.0
+margin_right = 101.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 64, 0 )
+size_flags_horizontal = 3
+text = "Launcher"
+valign = 1
+autowrap = true
+
+[node name="Mapping" type="Button" parent="EditorsContainer"]
+margin_left = 105.0
+margin_right = 274.0
+margin_bottom = 26.0
+focus_neighbour_left = NodePath(".")
+focus_neighbour_top = NodePath(".")
+focus_neighbour_right = NodePath(".")
+focus_neighbour_bottom = NodePath(".")
+focus_next = NodePath(".")
+focus_previous = NodePath(".")
+focus_mode = 0
+size_flags_horizontal = 3
+toggle_mode = true
+shortcut_in_tooltip = false
+button_mask = 0
+text = "Mapping"
+clip_text = true
+__meta__ = {
+"_edit_use_anchors_": false
+}

@@ -10,6 +10,10 @@ margin_bottom = 22.0
 focus_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+custom_constants/margin_right = 0
+custom_constants/margin_top = 0
+custom_constants/margin_left = 0
+custom_constants/margin_bottom = 0
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -19,13 +23,8 @@ type = 9223372036854775806
 [node name="SettingEntry" parent="." instance=ExtResource( 3 )]
 margin_bottom = 34.0
 
-[node name="EditorsContainer" parent="SettingEntry" index="0"]
-margin_bottom = 27.0
-
 [node name="LabelContainer" parent="SettingEntry/EditorsContainer" index="0"]
-margin_top = 3.0
 margin_right = 107.0
-margin_bottom = 17.0
 
 [node name="Label" parent="SettingEntry/EditorsContainer/LabelContainer" index="0"]
 margin_right = 107.0

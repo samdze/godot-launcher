@@ -8,10 +8,10 @@ var pages_folders = {}
 
 var pending_changes = {}
 
-onready var reload_message : Control = $MarginContainer/ReloadAndSettings/ReloadContainer
-onready var reload_label : Label = $MarginContainer/ReloadAndSettings/ReloadContainer/MarginContainer/SmallLabel
-onready var scroll_container : ScrollContainer = $MarginContainer/ReloadAndSettings/SettingsView
-onready var options_container : VBoxContainer = $MarginContainer/ReloadAndSettings/SettingsView/VBoxContainer
+onready var reload_message : Control = $ReloadAndSettings/ReloadContainer
+onready var reload_label : Label = $ReloadAndSettings/ReloadContainer/MarginContainer/SmallLabel
+onready var scroll_container : ScrollContainer = $ReloadAndSettings/SettingsView
+onready var options_container : VBoxContainer = $ReloadAndSettings/SettingsView/VBoxContainer
 
 
 func _ready():

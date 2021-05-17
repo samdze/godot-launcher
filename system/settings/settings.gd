@@ -1,5 +1,10 @@
 extends Node
 
+const actions = [
+	"ui_accept", "ui_cancel", "ui_button_x", "ui_button_y", "ui_right",
+	"ui_up", "ui_left", "ui_down", "ui_start", "ui_menu"
+]
+
 var config : ConfigFile
 
 var settings = {}
@@ -17,6 +22,11 @@ func _ready():
 #	config.set_value("system", "language", config.get_value("system", "language", "en"))
 	TranslationServer.set_locale(config.get_value("system", "language", "en"))
 	print("Language set to " + TranslationServer.get_locale_name(TranslationServer.get_locale()))
+	
+	for a in actions:
+		config.set_value("system", "input-" + a, config.get_value("system", "input-" + a, InputMap.get_action_list(a)[0]))
+		InputMap.action_erase_events(a)
+		InputMap.action_add_event(a, config.get_value("system", "input-" + a))
 	
 	for section in config.get_sections():
 		for key in config.get_section_keys(section):
