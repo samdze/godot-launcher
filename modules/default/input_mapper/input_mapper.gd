@@ -137,6 +137,7 @@ func _app_input(event : InputEvent):
 #				var joy_event : InputEventJoypadButton = event as InputEventJoypadButton
 #				pass
 	if not listening and event.is_action_pressed("ui_cancel"):
+		get_tree().set_input_as_handled()
 		Launcher.get_ui().app.back_app()
 
 

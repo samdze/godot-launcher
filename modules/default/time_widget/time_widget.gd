@@ -6,15 +6,18 @@ var months = []
 var controls : Control
 var label : Label
 
+onready var margin_container = $MarginContainer
 onready var time = $MarginContainer/Time
 
 
 func _ready():
+	margin_container.connect("resized", self, "_container_resized")
 	_init_strings()
 	
 	controls = preload("controls.tscn").instance()
 	label = controls.get_node("MediumLabel")
 	_update_status()
+	_container_resized()
 
 
 func _update_status():
@@ -28,6 +31,11 @@ func _update_status():
 		"year": str(date.year)
 	})
 	update()
+
+
+func _container_resized():
+	rect_min_size = margin_container.rect_size
+	rect_size = margin_container.rect_size
 
 
 func _get_widget_controls():

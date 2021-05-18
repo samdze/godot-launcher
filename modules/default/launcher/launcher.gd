@@ -164,6 +164,8 @@ func _execution_terminated(error, entry : Entry):
 	executing = false
 	if last_focused_entry != null and last_focused_entry.is_inside_tree():
 		last_focused_entry.grab_focus()
+	if is_inside_tree():
+		_update_promtps()
 	update()
 
 
