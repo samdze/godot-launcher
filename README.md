@@ -24,7 +24,7 @@ This launcher aims to fix all those issues and to add other nice features.
 </p>
 
 ## Installation
-SSH into the cpi home directory of the GameShell and run:
+On the GameShell: ssh into the cpi home directory and run:
 ```
 git clone https://github.com/samdze/godot-launcher.git
 sed -i s/launcher/godot-launcher/g /home/cpi/.bashrc
@@ -32,8 +32,12 @@ sed -i s/launcher/godot-launcher/g /home/cpi/.bashrc
 Restart the GameShell and you should boot into the Godot launcher.<br>
 You can rollback to the stock launcher selecting "Switch Launcher" inside the Settings app.
 
-On other sbcs, start an X session executing compton and godot how it's done in .xinitrc.
-Also export the DISPLAY environment variable. Better documentation will be available in the future.
+On other sbcs, start an X session executing the .xinitrc file.
+```
+git clone https://github.com/samdze/godot-launcher.git
+startx godot-launcher/.xinitrc -- -nocursor
+```
+Better documentation will be available in the future.
 
 ## Documentation
 On the GameShell, press MENU at any time when an app is open to show the launcher widgets.<br>

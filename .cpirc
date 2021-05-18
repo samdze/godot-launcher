@@ -1,28 +1,15 @@
-SCREEN=`cat /sys/class/graphics/fb0/modes`
-export DISPLAY=:0
-
-XORG_CONF="~/godot-launcher/.xorg.conf"
+XORG_CONF="~/launcher/.xorg.conf"
 if [ -f /home/cpi/.lima ]
 then
-XORG_CONF="~/godot-launcher/.xorg_lima.conf"
+XORG_CONF="~/launcher/.xorg_lima.conf"
 fi
 
 if [ -f /tmp/autologin ]
 then
-   rm -f /tmp/autologin
-#  mpd ~/.mpd.conf
-      if [[ $SCREEN =~ .*320.* ]]
-      then
-			while :
-			do
+	rm -f /tmp/autologin
+	while :
+	do
         startx /home/cpi/godot-launcher/.xinitrc -- -xf86config $XORG_CONF -nocursor > /tmp/x.log 2>&1
-				sleep 1
-			done
-      else
-			while :
-			do
-        startx /home/cpi/godot-launcher/.xinitrc hdmi -- -xf86config $XORG_CONF > /tmp/x.log 2>&1
-				sleep 1
-			done
-      fi
+		sleep 1
+	done
 fi
