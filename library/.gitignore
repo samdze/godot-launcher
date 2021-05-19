@@ -1,8 +1,11 @@
 # Project files
 .vscode/
 #godot-cpp/
-#include/
+include/
 #src/
 
 #SConstruct
 .sconsign.dblite
+
+# Build artifacts
+*.obj
