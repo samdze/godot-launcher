@@ -1,8 +1,8 @@
-# Project files and GDNative sources
+# Project files
 .vscode/
-godot-cpp/
-include/
-src/
+#godot-cpp/
+#include/
+#src/
 
-SConstruct
+#SConstruct
 .sconsign.dblite
