@@ -4,11 +4,11 @@ const map_entry = preload("button_map_entry.tscn")
 
 var previous_mapping = {}
 var mapping_order = [
-	"A", "B", "X", "Y", "→", "↑", "←", "↓", "MENU", "START", "OPTION"
+	"A", "B", "X", "Y", "→", "↑", "←", "↓", "MENU", "START", "HOME"
 ]
 var actions_order = [
 	"ui_accept", "ui_cancel", "ui_button_x", "ui_button_y", "ui_right",
-	"ui_up", "ui_left", "ui_down", "ui_menu", "ui_start"
+	"ui_up", "ui_left", "ui_down", "ui_menu", "ui_start", "ui_home"
 ]
 var map_index = 0
 var listening = false
@@ -29,7 +29,8 @@ func _ready():
 		tr("DEFAULT.INPUT_BUTTON_LEFT"),
 		tr("DEFAULT.INPUT_BUTTON_DOWN"),
 		"MENU",
-		"START"
+		"START",
+		"HOME"
 	]
 	
 	for c in list_container.get_children():

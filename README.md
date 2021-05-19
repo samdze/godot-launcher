@@ -1,6 +1,6 @@
 <p align="center">
-	<img src="https://i.imgur.com/jO6pNqj.gif" />
-	<img src="https://i.imgur.com/ehwy0tH.gif" />
+	<img src="https://i.imgur.com/Qw2MiJb.gif" />
+	<img src="https://i.imgur.com/BgUXz5O.gif" />
 </p>
 
 # Single-board Computer Godot Launcher
@@ -21,6 +21,7 @@ This launcher aims to fix all those issues and to add other nice features.
 
 <p align="center">
 	<img src="https://i.imgur.com/WiazXsL.png" />
+	<img src="https://i.imgur.com/g2naCtR.png" />
 </p>
 
 ## Installation
@@ -40,7 +41,7 @@ startx godot-launcher/.xinitrc -- -nocursor
 Better documentation will be available in the future.
 
 ## Documentation
-On the GameShell, press MENU at any time when an app is open to show the launcher widgets.<br>
+On the GameShell, press Shift + START at any time when an app is open to show the launcher widgets.<br>
 In this state, you can then exit the app, go back to the app, see the time, the approximate remaining battery and the Wi-Fi connection status, tweak screen brightness and audio volume.
 
 The default Settings app lets you change a few things about the launcher, including input mappings.

@@ -2,7 +2,7 @@ extends Node
 
 const actions = [
 	"ui_accept", "ui_cancel", "ui_button_x", "ui_button_y", "ui_right",
-	"ui_up", "ui_left", "ui_down", "ui_start", "ui_menu"
+	"ui_up", "ui_left", "ui_down", "ui_start", "ui_menu", "ui_home"
 ]
 
 var config : ConfigFile

@@ -23,7 +23,7 @@ func _ready():
 		var ev = InputEventKey.new()
 		ev.pressed = true
 		ev.scancode = KEY_SLASH
-		InputMap.action_add_event("ui_menu", ev)
+		InputMap.action_add_event("ui_home", ev)
 	
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	
