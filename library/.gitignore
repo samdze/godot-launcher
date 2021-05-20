@@ -9,3 +9,5 @@ include/
 
 # Build artifacts
 *.obj
+*.exp
+*.lib

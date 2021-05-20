@@ -660,7 +660,7 @@ void WindowManager::_run(Array userdata) {
 
 						wc.x = config_ev->x;
 						wc.y = config_ev->y;
-						Godot::print(String("[WM] Screen size: ") + OS::get_singleton()->get_screen_size(0));
+						Godot::print(String("[WM] Screen size: ") + OS::get_singleton()->get_screen_size(0) + String(", requested window position: ") + Variant(wc.x) + String(", ") + Variant(wc.y));
 						wc.width = OS::get_singleton()->get_screen_size(0).x;//config_ev->width;
 						wc.height = OS::get_singleton()->get_screen_size(0).y;//config_ev->height;
 						wc.border_width = 0;//config_ev->border_width;
@@ -671,8 +671,19 @@ void WindowManager::_run(Array userdata) {
 							wc.sibling = config_ev->above;
 							wc.stack_mode = config_ev->detail;
 						}
-						// Setting window position and size doesn't work all the times yet. Need to investigate.
-						XConfigureWindow(display, config_ev->window, /*config_ev->value_mask | */UINT_MAX, &wc);
+						XConfigureWindow(display, config_ev->window, /*config_ev->value_mask | */ 	0x0001 |   			// x
+																															0x0002 |   			// y
+																															0x0004 |   			// width
+																															0x0008 |   			// height
+																															0x0010 |   			// border-width
+																															0x0020 |   			// sibling
+																															0x0040, &wc);		// stack-mode
+						// Send another request to properly configure window position as sometimes it doesn't work with the first one.
+						wc.x = 0;
+						wc.y = 0;
+						XConfigureWindow(display, config_ev->window, /*config_ev->value_mask | */ 	0x0001 |   			// x
+																															0x0002,   			// y
+																															&wc);
 						//printf("- Request by %ld permitted\n", ev.xconfigurerequest.window);
 						//printf("- Shifted on the visibility stack with sibling %ld\n", wc.sibling);
 					}

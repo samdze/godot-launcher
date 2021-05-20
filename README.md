@@ -81,12 +81,10 @@ If your device isn't a GameShell, the launcher isn't quite ready to be fully usa
 ```
 
 ## Compiling native libraries
-A SCons 3.5+ installation is needed.
-
+A SCons 3.5+ installation is needed.<br>
 The steps below are assumed to be performed on a GameShell (armv7) device.
 
-Build the Godot GDNative bindings found in library/godot-cpp inside the repository:
-
+Build the Godot GDNative bindings found in library/godot-cpp inside the repository:<br>
 https://github.com/godotengine/godot-cpp/tree/3.2#compiling-the-c-bindings-library
 
 Then compile the native window manager library; inside the library directory:
