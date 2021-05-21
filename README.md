@@ -6,7 +6,8 @@
 # Modular Launcher for Linux devices and Single-Board Computers
 An alternative, console-like, launcher for single-board computers. Made with Godot and GDNative.<br>
 The launcher is primarily made to run on the GameShell portable console but can also run on other sbcs thanks to modules.<br>
-**ALPHA VERSION**
+
+**BETA VERSION**
 
 To explore the launcher code and tweak it as you wish, open the project.godot file with Godot 3.2.3.<br>
 Remember to reimport the launcher and to transfer the .import folder too to apply your changes.<br>
@@ -25,6 +26,9 @@ This launcher aims to fix all those issues and to add other nice features.
 </p>
 
 ## Installation
+The precompiled binaries in the repository are for armv7 devices only.
+Future releases may include prepackaged binaries for other architectures too.
+
 On the GameShell: ssh into the cpi home directory and run:
 ```
 git clone https://github.com/samdze/godot-launcher.git
@@ -34,14 +38,14 @@ Restart the GameShell and you should boot into the Godot launcher.<br>
 You can rollback to the stock launcher selecting "Switch Launcher" inside the Settings app.
 
 On other sbcs, start an X session executing the .xinitrc file.
-```
-git clone https://github.com/samdze/godot-launcher.git
-startx godot-launcher/.xinitrc -- -nocursor
-```
 Be sure to have libconfig9 installed. It's needed to run compton.
 ```
 sudo apt install libconfig9
+git clone https://github.com/samdze/godot-launcher.git
+startx godot-launcher/.xinitrc -- -nocursor
 ```
+The launcher is quite untested on devices other than the GameShell, and features like Wi-Fi settings, sound volume settings, brightness settings are not expected to work.
+Testing and feedbacks are very welcome.
 
 Better documentation will be available in the future.
 
@@ -54,20 +58,19 @@ This launcher is made to be modular and custom settings can be added by other mo
 
 This is an early version of the launcher, some games and apps may not be shown and there's no way to configure bluetooth, graphics drivers etc.
 
-If your device isn't a GameShell, the launcher isn't quite ready to be fully usable, although it can run with a few tweaks.
+If your device isn't a GameShell, the launcher isn't quite ready to be fully usable, although it can run with a few tweaks.<br>
+
+E.g. the launcher expects to find apps and games in the `/home/cpi/apps/Menu` directory.<br>
+This can be changed modifying the `menu_directory` variable here:<br>
+https://github.com/samdze/godot-launcher/blob/main/modules/default/launcher/launcher.gd#L18
+
+The default launcher application looks for apps and games the same way the GameShell stock launcher does.
+Shell scripts will appear by default, binaries have to be placed inside a folder with the same name.
 
 ### Default input mapping
-A: K<br>
-B: J<br>
-X: I<br>
-Y: U<br>
-Right: Right<br>
-Up: Up<br>
-Left: Left<br>
-Down: Down<br>
-START: Enter<br>
-MENU: Escape<br>
-HOME: KP Add<br>
+|   A | B   | X   |   Y |Right| Up  | Left| Down|START| MENU| HOME|
+| :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
+| K | J | I | U | Right | Up | Left | Down | Enter | Escape | KP Add |
 
 ```
 /home/cpi/
@@ -109,3 +112,9 @@ Then compile the native window manager library; inside the library directory:
 ```
 scons -j4
 ```
+
+To compile Godot itself, check out my repository, works on other arm devices too:<br>
+https://github.com/samdze/godot-gameshell
+
+Compton is compiled directly from the repository:<br>
+https://github.com/chjj/compton
