@@ -42,10 +42,11 @@ Be sure to have libconfig9 installed. It's needed to run compton.
 ```
 sudo apt install libconfig9
 git clone https://github.com/samdze/godot-launcher.git
-startx godot-launcher/.xinitrc -- -nocursor
+startx /folder/to/godot-launcher/.xinitrc -- -nocursor
 ```
 The launcher is quite untested on devices other than the GameShell, and features like Wi-Fi settings, sound volume settings, brightness settings are not expected to work.
-Testing and feedbacks are very welcome.
+Testing and feedbacks are very welcome.<br>
+Please open an issue if you find bugs or non-functioning features.
 
 Better documentation will be available in the future.
 
