@@ -5,6 +5,10 @@ var always_on_top_wanted : Array = []
 onready var library : WindowManager = $NativeLibrary
 
 
+func _ready():
+	library.start()
+
+
 func want_always_on_top(object):
 	var on_top = always_on_top_wanted.size() > 0
 	if not always_on_top_wanted.has(object):

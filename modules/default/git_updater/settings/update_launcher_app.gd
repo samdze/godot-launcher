@@ -23,7 +23,7 @@ func _ready():
 	semaphore = Semaphore.new()
 	thread = Thread.new()
 	thread.start(self, "_thread_function", null)
-	system_version.text = tr("DEFAULT.LAUNCHER_VERSION").format([Launcher.get_version()])
+	system_version.text = tr("DEFAULT.LAUNCHER_VERSION").format([System.get_version()])
 	state = State.IDLE
 	
 	var output = []
@@ -59,11 +59,11 @@ func _ready():
 
 
 # Called when the App gains focus, setup the App here.
-# Signals like bars_visibility_change_requested and title_change_requested are best called here.
+# Signals like window_mode_request and title_change_request are best called here.
 func _focus():
-	emit_signal("status_visibility_change_requested", true)
-	emit_signal("title_change_requested", tr("DEFAULT.UPDATE_LAUNCHER"))
-	emit_signal("mode_change_requested", System.Mode.OPAQUE)
+	emit_signal("window_mode_request", false)
+	emit_signal("title_change_request", tr("DEFAULT.UPDATE_LAUNCHER"))
+	emit_signal("display_mode_request", Launcher.Mode.OPAQUE)
 	_update_prompts()
 
 
@@ -82,19 +82,19 @@ func _set_state(value):
 func _update_prompts():
 	match state:
 		State.IDLE:
-			Launcher.emit_event("prompts", [
+			System.emit_event("prompts", [
 				[],
-				[BottomBar.ICON_BUTTON_Y, tr("DEFAULT.PROMPT_CHECK_UPDATES"), BottomBar.ICON_BUTTON_B, tr("DEFAULT.PROMPT_BACK")]
+				[Desktop.Input.Y, tr("DEFAULT.PROMPT_CHECK_UPDATES"), Desktop.Input.B, tr("DEFAULT.PROMPT_BACK")]
 			])
 		State.UPDATE_AVAILABLE:
-			Launcher.emit_event("prompts", [
+			System.emit_event("prompts", [
 				[],
-				[BottomBar.ICON_BUTTON_Y, tr("DEFAULT.PROMPT_UPDATE"), BottomBar.ICON_BUTTON_B, tr("DEFAULT.PROMPT_BACK")]
+				[Desktop.Input.Y, tr("DEFAULT.PROMPT_UPDATE"), Desktop.Input.B, tr("DEFAULT.PROMPT_BACK")]
 			])
 		State.CONFIRM_UPDATE:
-			Launcher.emit_event("prompts", [
+			System.emit_event("prompts", [
 				[],
-				[BottomBar.ICON_BUTTON_A, tr("DEFAULT.PROMPT_CONFIRM"), BottomBar.ICON_BUTTON_B, tr("DEFAULT.PROMPT_BACK")]
+				[Desktop.Input.A, tr("DEFAULT.PROMPT_CONFIRM"), Desktop.Input.B, tr("DEFAULT.PROMPT_BACK")]
 			])
 
 
@@ -112,14 +112,14 @@ func _app_input(event : InputEvent):
 		State.IDLE:
 			if event.is_action_pressed("ui_cancel"):
 				accept_event()
-				Launcher.get_ui().app.back_app()
+				System.get_launcher().app.back_app()
 			if event.is_action_pressed("ui_button_y"):
 				accept_event()
 				_check_updates()
 		State.UPDATE_AVAILABLE:
 			if event.is_action_pressed("ui_cancel"):
 				accept_event()
-				Launcher.get_ui().app.back_app()
+				System.get_launcher().app.back_app()
 			if event.is_action_pressed("ui_button_y"):
 				accept_event()
 				_set_state(State.CONFIRM_UPDATE)
@@ -134,21 +134,21 @@ func _app_input(event : InputEvent):
 
 func _check_updates():
 	processing = true
-	Launcher.emit_event("set_loading", [true])
+	System.emit_event("set_loading", [true])
 	operation = Operation.CHECK
 	semaphore.post()
 
 
 func _update_system():
 	processing = true
-	Launcher.emit_event("set_loading", [true])
+	System.emit_event("set_loading", [true])
 	operation = Operation.UPDATE
 	semaphore.post()
 
 
 func _check_completed(check_result, data):
 	processing = false
-	Launcher.emit_event("set_loading", [false])
+	System.emit_event("set_loading", [false])
 	
 	match check_result:
 		Check.ERROR:
@@ -170,7 +170,7 @@ func _update_completed(result):
 		get_tree().quit()
 	else:
 		processing = false
-		Launcher.emit_event("set_loading", [false])
+		System.emit_event("set_loading", [false])
 		message.text = tr("DEFAULT.UPDATE_ERROR")
 		_set_state(State.IDLE)
 
@@ -178,7 +178,7 @@ func _update_completed(result):
 func _request_completed(result, response_code, headers, body, semaphore, res):
 	if result == OK:
 		var response = parse_json(body.get_string_from_utf8())
-		if response.version != Launcher.get_version():
+		if response.version != System.get_version():
 			res.append(Check.UPDATE_AVAILABLE)
 		else:
 			res.append(Check.UP_TO_DATE)

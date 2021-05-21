@@ -35,9 +35,9 @@ func _ready():
 
 
 func _focus():
-	emit_signal("status_visibility_change_requested", true)
-	emit_signal("title_change_requested", "GameShell")
-	emit_signal("mode_change_requested", System.Mode.OPAQUE)
+	emit_signal("window_mode_request", false)
+	emit_signal("title_change_request", "GameShell")
+	emit_signal("display_mode_request", Launcher.Mode.OPAQUE)
 	_update_promtps()
 	if last_focused_entry != null:
 		last_focused_entry.grab_focus()
@@ -51,19 +51,19 @@ func _unfocus():
 func _active_window_changed(window_id):
 	if window_id != WindowManager.library.get_window_id():
 		executing = false
-		Launcher.emit_event("set_loading", [false])
+		System.emit_event("set_loading", [false])
 		print("[GODOT] Adding a new app to the apps stack...")
 		var running_instance = running_app.instance()
 		running_instance.app_window_id = window_id
-		Launcher.get_ui().app.add_app(running_instance)
+		System.get_launcher().app.add_app(running_instance)
 		print("[GODOT] New app added to the apps stack.")
 
 
 func _update_promtps():
 	if current_directory == menu_directory:
-		var res = Launcher.emit_event("prompts", [[BottomBar.ICON_NAV_H, tr("DEFAULT.PROMPT_NAVIGATION")], [BottomBar.ICON_BUTTON_A, tr("DEFAULT.PROMPT_OPEN")]])
+		var res = System.emit_event("prompts", [[Desktop.Input.MOVE, tr("DEFAULT.PROMPT_NAVIGATION")], [Desktop.Input.A, tr("DEFAULT.PROMPT_OPEN")]])
 	else:
-		var res = Launcher.emit_event("prompts", [[BottomBar.ICON_NAV_H, tr("DEFAULT.PROMPT_NAVIGATION")], [BottomBar.ICON_BUTTON_A, tr("DEFAULT.PROMPT_OPEN"), BottomBar.ICON_BUTTON_B, tr("DEFAULT.PROMPT_BACK")]])
+		var res = System.emit_event("prompts", [[Desktop.Input.MOVE, tr("DEFAULT.PROMPT_NAVIGATION")], [Desktop.Input.A, tr("DEFAULT.PROMPT_OPEN"), Desktop.Input.B, tr("DEFAULT.PROMPT_BACK")]])
 
 
 func move_to_directory(directory : String):
@@ -119,7 +119,7 @@ func load_directory(directory, selected_entry = 0):
 	current_view.connect("entry_focused", self, "_entry_focused")
 	current_view.connect("entry_selected", self, "_entry_selected")
 	current_view.connect("executed", self, "_execution_terminated")
-	current_view.connect("move_requested", self, "move_to_directory")
+	current_view.connect("move_request", self, "move_to_directory")
 	
 	add_child(current_view)
 	current_view.append_entries(entries)
@@ -140,7 +140,7 @@ func _entry_selected(entry):
 	if not executing:
 		entry.release_focus()
 		executing = true
-		Launcher.emit_event("set_loading", [true])
+		System.emit_event("set_loading", [true])
 		entry.connect("executed", self, "_execution_terminated", [entry])
 		
 		var result = entry.exec()
@@ -149,7 +149,7 @@ func _entry_selected(entry):
 
 func _app_input(event):
 #	if event.is_pressed():
-#		Launcher.emit_event("notification", ["System-wide notifications available!", "success"])
+#		System.emit_event("notification", ["System-wide notifications available!", "success"])
 	if not executing and event.is_action_pressed("ui_cancel"):
 		accept_event()
 		back_directory()
@@ -160,7 +160,7 @@ func _app_input(event):
 
 func _execution_terminated(error, entry : Entry):
 #	entry.disconnect("executed", self, "_execution_terminated")
-	Launcher.emit_event("set_loading", [false])
+	System.emit_event("set_loading", [false])
 	executing = false
 	if last_focused_entry != null and last_focused_entry.is_inside_tree():
 		last_focused_entry.grab_focus()

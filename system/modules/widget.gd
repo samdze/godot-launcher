@@ -2,7 +2,7 @@ extends ToolButton
 class_name Widget
 
 # Emit this signal when you want to release focus from the widget controls.
-signal unfocus_controls_requested()
+signal unfocus_controls_request()
 
 
 # Override this function and return a node tree representing the widget controls

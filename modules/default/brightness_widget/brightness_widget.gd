@@ -21,19 +21,19 @@ func _ready():
 
 func _widget_selected():
 	slider.grab_focus()
-	Launcher.emit_event("prompts", [
-		[BottomBar.ICON_NAV_H, tr("DEFAULT.PROMPT_ADJUST")],
-		[BottomBar.ICON_BUTTON_B, tr("DEFAULT.PROMPT_BACK")]
+	System.emit_event("prompts", [
+		[Desktop.Input.MOVE_H, tr("DEFAULT.PROMPT_ADJUST")],
+		[Desktop.Input.B, tr("DEFAULT.PROMPT_BACK")]
 	])
 
 
 func _controls_gui_input(event : InputEvent, control):
 	if event.is_action_pressed("ui_cancel"):
-		emit_signal("unfocus_controls_requested")
+		emit_signal("unfocus_controls_request")
 
 
 func _update_status():
-	var result = Launcher.emit_event("get_brightness")
+	var result = System.emit_event("get_brightness")
 	var value = 0
 	if result.size() > 0:
 		value = int(result[0])
@@ -59,7 +59,7 @@ func _update_controls(value):
 
 
 func _value_changed(value):
-	Launcher.emit_event("set_brightness", [value])
+	System.emit_event("set_brightness", [value])
 
 
 func _event(name, arguments):

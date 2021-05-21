@@ -25,7 +25,7 @@ func append_entries(entries : Array):
 		c.connect("focus_exited", self, "_entry_focus_exited", [c])
 		c.connect("gui_input", self, "_entry_input", [c])
 		c.connect("executed", self, "_executed", [c])
-		c.connect("move_requested", self, "_move_requested")
+		c.connect("move_request", self, "_move_request")
 		c.focus_neighbour_left = c.get_path()
 		c.focus_neighbour_right = c.get_path()
 		if index > 0:
@@ -59,5 +59,5 @@ func _executed(error, entry):
 	emit_signal("executed", error, entry)
 
 
-func _move_requested(to_directory : String):
-	emit_signal("move_requested", to_directory)
+func _move_request(to_directory : String):
+	emit_signal("move_request", to_directory)

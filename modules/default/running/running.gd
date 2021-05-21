@@ -9,12 +9,12 @@ func _ready():
 
 
 func _focus():
-	emit_signal("status_visibility_change_requested", false)
+	emit_signal("window_mode_request", true)
 	var window = WindowManager.library.get_active_window()
 #	print("[GODOT] Setting app title of window " + str(window) +  "...")
-	emit_signal("title_change_requested", WindowManager.library.get_window_title(window))
+	emit_signal("title_change_request", WindowManager.library.get_window_title(window))
 	print("[GODOT] App title set")
-	emit_signal("mode_change_requested", System.Mode.TRANSPARENT)
+	emit_signal("display_mode_request", Launcher.Mode.TRANSPARENT)
 	grab_focus()
 
 
@@ -32,7 +32,7 @@ func _destroy():
 
 
 func _window_name_changed(name):
-	emit_signal("title_change_requested", name)
+	emit_signal("title_change_request", name)
 
 
 func _active_window_changed(window_id):
@@ -40,12 +40,12 @@ func _active_window_changed(window_id):
 	if window_id != WindowManager.library.get_window_id() and window_id != app_window_id:
 		var running_instance = running_app.instance()
 		running_instance.app_window_id = window_id
-		Launcher.get_ui().app.add_app(running_instance)
+		System.get_launcher().app.add_app(running_instance)
 #		_focus()
 	elif window_id == WindowManager.library.get_window_id():
-		Launcher.get_ui().app.back_app()
+		System.get_launcher().app.back_app()
 #	else:
-#		Launcher.get_ui().app.back_app()
+#		System.get_launcher().app.back_app()
 
 
 static func _get_component_name():

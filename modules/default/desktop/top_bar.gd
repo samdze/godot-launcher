@@ -1,8 +1,8 @@
 extends MarginContainer
 
 signal controls_unfocused()
-signal close_requested()
-signal home_requested()
+signal close_request()
+signal home_request()
 
 onready var widgets_container = $TopPanel/HBoxContainer/Widgets
 onready var title_container = $TopPanel/HBoxContainer/LabelContainer
@@ -22,7 +22,7 @@ func _ready():
 		if widget != null:
 			widgets_container.add_child(widget)
 	
-	connect("close_requested", self, "_close_requested")
+	connect("close_request", self, "_close_request")
 	
 	# Configure widgets and title
 	title.connect("focus_entered", self, "_item_focus_entered", [title])
@@ -41,7 +41,7 @@ func _ready():
 		
 		w.connect("focus_entered", self, "_item_focus_entered", [w])
 		w.connect("pressed", self, "_widget_selected", [w])
-		w.connect("unfocus_controls_requested", self, "_unfocus_controls_requested", [w])
+		w.connect("unfocus_controls_request", self, "_unfocus_controls_request", [w])
 		w.connect("gui_input", self, "_gui_input")
 		print("Configuring widget " + w.name)
 		w.focus_neighbour_top = w.get_path()
@@ -64,13 +64,13 @@ func _gui_input(event : InputEvent):
 #	match mode:
 #		Mode.WIDGETS:
 	if event.is_action_pressed("ui_menu"):
-		emit_signal("home_requested")
-		emit_signal("close_requested")
+		emit_signal("home_request")
+		emit_signal("close_request")
 	if event.is_action_pressed("ui_cancel"):
-		emit_signal("close_requested")
+		emit_signal("close_request")
 
 
-func _close_requested():
+func _close_request():
 	var focused = get_focus_owner()
 	if is_a_parent_of(focused):
 		focused.release_focus()
@@ -109,7 +109,7 @@ func _widget_selected(widget : Widget):
 	widget._widget_selected()
 
 
-func _unfocus_controls_requested(widget : Widget):
+func _unfocus_controls_request(widget : Widget):
 	widget.grab_focus()
 	emit_signal("controls_unfocused")
 #	_update_prompts()
@@ -117,7 +117,7 @@ func _unfocus_controls_requested(widget : Widget):
 
 func _title_gui_input(event : InputEvent):
 	if event.is_action_pressed("ui_accept"):
-		emit_signal("close_requested")
+		emit_signal("close_request")
 
 
 func set_title(title):

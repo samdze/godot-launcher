@@ -11,12 +11,12 @@ func reload():
 	loaded_components.clear()
 	
 	# Load system module
-	var system_exports = System._get_settings()
+	var system_exports = Launcher._get_settings()
 	if system_exports != null and system_exports.size() > 0:
 		var system_component = Component.new()
 		system_component.id = "system"
 		system_component.module = ""
-		system_component.name = "System"
+		system_component.name = "Launcher"
 		system_component.resource = preload("res://system/launcher.tscn")
 		system_component.type = Component.Type.SYSTEM
 		system_component.tags = [Component.TAG_SYSTEM]
@@ -60,7 +60,7 @@ func get_loaded_component_from_settings(section_key : String) -> Component:
 	return null
 
 
-# Returns an array of Components, by default the System component is excluded
+# Returns an array of Components, by default the Launcher component is excluded
 func get_loaded_components(types : int = Component.Type.ANY, tags : Array = []) -> Array:
 	var components = []
 	for v in loaded_components.values():

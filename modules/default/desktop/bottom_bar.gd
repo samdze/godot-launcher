@@ -1,16 +1,21 @@
 extends MarginContainer
-class_name BottomBar
 
-const ICON_NAV = 0
-const ICON_BUTTON_X = 1
-const ICON_BUTTON_Y = 2
-const ICON_BUTTON_A = 3
-const ICON_BUTTON_B = 4
-const ICON_BUTTON_MENU = 5
-const ICON_BUTTON_SELECT = 6
-const ICON_BUTTON_START = 7
-const ICON_NAV_V = 8
-const ICON_NAV_H = 9
+const icon_mappings = {
+	Desktop.Input.MOVE: 0,
+	Desktop.Input.A: 1,
+	Desktop.Input.B: 2,
+	Desktop.Input.X: 3,
+	Desktop.Input.Y: 4,
+#	Desktop.Input.RIGHT: -1,
+#	Desktop.Input.UP: -1,
+#	Desktop.Input.LEFT: -1,
+#	Desktop.Input.DOWN: -1,
+	Desktop.Input.START: 7,
+	Desktop.Input.MENU: 5,
+#	Desktop.Input.HOME: 0,
+	Desktop.Input.MOVE_H: 9,
+	Desktop.Input.MOVE_V: 8
+}
 
 onready var left_container = $InputEvents/HBoxContainer/Left
 onready var right_container = $InputEvents/HBoxContainer/Right
@@ -33,7 +38,10 @@ func set_prompts(left_prompts, right_prompts):
 		var hbox = HBoxContainer.new()
 		hbox.add_constant_override("separation", 2)
 		var icon = TextureRect.new()
-		icon.texture = icons[left_prompts[i]]
+		var texture = null
+		if icon_mappings.has(left_prompts[i]):
+			texture = icons[icon_mappings[left_prompts[i]]]
+		icon.texture = texture
 		icon.self_modulate = get_color("contrast", "Control")
 		icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 		var text = preload("res://system/components/small_label.tscn").instance()
@@ -50,7 +58,10 @@ func set_prompts(left_prompts, right_prompts):
 		var hbox = HBoxContainer.new()
 		hbox.add_constant_override("separation", 2)
 		var icon = TextureRect.new()
-		icon.texture = icons[right_prompts[i]]
+		var texture = null
+		if icon_mappings.has(right_prompts[i]):
+			texture = icons[icon_mappings[right_prompts[i]]]
+		icon.texture = texture
 		icon.self_modulate = get_color("contrast", "Control")
 		icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 		var text = preload("res://system/components/small_label.tscn").instance()

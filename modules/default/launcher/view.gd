@@ -3,7 +3,7 @@ extends Control
 signal entry_focused(entry)
 signal entry_selected(entry)
 signal executed(error, entry)
-signal move_requested(to_directory)
+signal move_request(to_directory)
 
 
 # Override this function to provide a way to remove all the entries.

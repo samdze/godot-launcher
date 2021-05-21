@@ -8,4 +8,4 @@ func _initialize_setting(section_key : Array, label : String):
 
 # Button exposes this function on its own
 func _pressed():
-	Launcher.get_ui().app.add_app(preload("../input_mapper.tscn").instance())
+	System.get_launcher().app.add_app(preload("../input_mapper.tscn").instance())

@@ -66,9 +66,9 @@ func _ready():
 
 
 func _focus():
-	emit_signal("status_visibility_change_requested", true)
-	emit_signal("title_change_requested", tr("DEFAULT.INPUT_SETTINGS"))
-	emit_signal("mode_change_requested", System.Mode.OPAQUE)
+	emit_signal("window_mode_request", false)
+	emit_signal("title_change_request", tr("DEFAULT.INPUT_SETTINGS"))
+	emit_signal("display_mode_request", Launcher.Mode.OPAQUE)
 	
 #	previous_mapping.clear()
 #	for a in InputMap.get_actions():
@@ -84,7 +84,7 @@ func _focus():
 	else:
 		grab_focus()
 #	_update_prompt()
-	Launcher.emit_event("prompts", [[BottomBar.ICON_NAV_V, tr("DEFAULT.PROMPT_NAVIGATION")], [BottomBar.ICON_BUTTON_A, tr("DEFAULT.PROMPT_REMAP"), BottomBar.ICON_BUTTON_B, tr("DEFAULT.PROMPT_BACK")]])
+	System.emit_event("prompts", [[Desktop.Input.MOVE_V, tr("DEFAULT.PROMPT_NAVIGATION")], [Desktop.Input.A, tr("DEFAULT.PROMPT_REMAP"), Desktop.Input.B, tr("DEFAULT.PROMPT_BACK")]])
 
 
 func _unfocus():
@@ -103,13 +103,14 @@ func _event_received(event, entry, action_index):
 	Settings.set_value("system/input-" + actions_order[action_index], event)
 	entry.mapping_button.text = event.as_text()
 	listening = false
-	Launcher.emit_event("prompts", [[BottomBar.ICON_NAV_V, tr("DEFAULT.PROMPT_NAVIGATION")], [BottomBar.ICON_BUTTON_A, tr("DEFAULT.PROMPT_REMAP"), BottomBar.ICON_BUTTON_B, tr("DEFAULT.PROMPT_BACK")]])
+	System.emit_event("prompts", [[Desktop.Input.MOVE_V, tr("DEFAULT.PROMPT_NAVIGATION")], [Desktop.Input.A, tr("DEFAULT.PROMPT_REMAP"), Desktop.Input.B, tr("DEFAULT.PROMPT_BACK")]])
 
 
 func _started_listening(entry, action_index):
+	InputMap.action_erase_events(actions_order[action_index])
 	entry.mapping_button.text = tr("DEFAULT.INPUT_WAITING")
 	listening = true
-	Launcher.emit_event("prompts", [[], []])
+	System.emit_event("prompts", [[], []])
 
 
 func _entry_focus_entered(entry):
@@ -139,7 +140,7 @@ func _app_input(event : InputEvent):
 #				pass
 	if not listening and event.is_action_pressed("ui_cancel"):
 		get_tree().set_input_as_handled()
-		Launcher.get_ui().app.back_app()
+		System.get_launcher().app.back_app()
 
 
 func _update_next_mapping(event):

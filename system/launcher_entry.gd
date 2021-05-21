@@ -2,7 +2,7 @@ extends Reference
 class_name LauncherEntry
 
 signal executed(error)
-signal move_requested(to_directory)
+signal move_request(to_directory)
 
 var path : String
 

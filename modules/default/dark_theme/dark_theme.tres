@@ -4,7 +4,7 @@
 [ext_resource path="res://modules/default/dark_theme/varelaround_regular_large.tres" type="DynamicFont" id=2]
 [ext_resource path="res://modules/default/dark_theme/varelaround_regular_medium.tres" type="DynamicFont" id=3]
 [ext_resource path="res://system/modules/ui_theme.gd" type="Script" id=4]
-[ext_resource path="res://modules/default/dark_theme/default_wallpaper.png" type="Texture" id=6]
+[ext_resource path="res://modules/default/dark_theme/default_wallpaper.png" type="Texture" id=5]
 [ext_resource path="res://modules/default/dark_theme/varelaround_regular_xxlarge.tres" type="DynamicFont" id=7]
 [ext_resource path="res://modules/default/dark_theme/gui_items.png" type="Texture" id=8]
 
@@ -331,7 +331,7 @@ Button/styles/normal = SubResource( 1 )
 Button/styles/pressed = SubResource( 2 )
 Control/colors/contrast = Color( 0.8, 0.8, 0.8, 1 )
 Control/colors/main = Color( 0.12549, 0.12549, 0.12549, 1 )
-Control/icons/wallpaper = ExtResource( 6 )
+Control/icons/wallpaper = ExtResource( 5 )
 HScrollBar/styles/grabber = SubResource( 3 )
 HScrollBar/styles/grabber_highlight = SubResource( 4 )
 HScrollBar/styles/grabber_pressed = SubResource( 4 )

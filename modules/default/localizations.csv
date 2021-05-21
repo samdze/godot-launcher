@@ -7,6 +7,7 @@ DEFAULT.BATTERY_FULL,Battery fully charged.,Batteria completamente carica.
 DEFAULT.CURRENT_UPDATE_RELEASE_DATE,"Current launcher version release date:
 {year}/{month}/{day}","Data di rilascio della versione attuale del launcher:
 {day}/{month}/{year}"
+DEFAULT.DESKTOP,Desktop,Desktop
 DEFAULT.FOLDER_LAUNCHER,Launcher,Launcher
 DEFAULT.FOLDER_SYSTEM,System,Sistema
 DEFAULT.ICONS,Icons,Icone
@@ -49,7 +50,6 @@ DEFAULT.RELOAD_ON_EXIT,Exit to reload the launcher and apply pending changes,Esc
 DEFAULT.RUNNING_APP,Running App,App Esecuzione
 DEFAULT.SETTINGS,Settings,Impostazioni
 DEFAULT.SETTINGS_APP,Settings App,App Impostazioni
-DEFAULT.STATUS,Status,Status
 DEFAULT.SWITCH_LAUNCHER,Switch Launcher,Cambia Launcher
 DEFAULT.THEME,Theme,Tema
 DEFAULT.TIME_APRIL,April,Aprile

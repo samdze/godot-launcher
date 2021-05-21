@@ -82,7 +82,7 @@ func _load_directory(directory, selected_entry = 0):
 		value.disconnect("gui_input", self, "_options_gui_input")
 		value.disconnect("focus_entered", self, "_item_focused")
 		value.disconnect("value_changed", self, "_value_changed")
-		value.disconnect("move_requested", self, "_move_requested")
+		value.disconnect("move_request", self, "_move_request")
 		options_container.remove_child(value)
 	
 	for c in pages_controls[current_directory]:
@@ -93,7 +93,7 @@ func _load_directory(directory, selected_entry = 0):
 		value.connect("gui_input", self, "_options_gui_input")
 		value.connect("focus_entered", self, "_item_focused", [value])
 		value.connect("value_changed", self, "_value_changed", [value])
-		value.connect("move_requested", self, "_move_requested")
+		value.connect("move_request", self, "_move_request")
 		value.focus_neighbour_left = value.get_path()
 		value.focus_neighbour_right = value.get_path()
 		if i > 0:
@@ -135,9 +135,9 @@ func back_directory():
 
 
 func _focus():
-	emit_signal("status_visibility_change_requested", true)
-	emit_signal("title_change_requested", tr("DEFAULT.SETTINGS"))
-	emit_signal("mode_change_requested", System.Mode.OPAQUE)
+	emit_signal("window_mode_request", false)
+	emit_signal("title_change_request", tr("DEFAULT.SETTINGS"))
+	emit_signal("display_mode_request", Launcher.Mode.OPAQUE)
 	
 	if last_focused_item != null:
 		last_focused_item.grab_focus()
@@ -146,7 +146,7 @@ func _focus():
 
 
 func _item_focused(item):
-	Launcher.emit_event("prompts", [[BottomBar.ICON_NAV_V, tr("DEFAULT.PROMPT_NAVIGATION")], [BottomBar.ICON_BUTTON_A, tr("DEFAULT.PROMPT_SELECT"), BottomBar.ICON_BUTTON_B, tr("DEFAULT.PROMPT_BACK")]])
+	System.emit_event("prompts", [[Desktop.Input.MOVE_V, tr("DEFAULT.PROMPT_NAVIGATION")], [Desktop.Input.A, tr("DEFAULT.PROMPT_SELECT"), Desktop.Input.B, tr("DEFAULT.PROMPT_BACK")]])
 	last_focused_item = item
 
 
@@ -156,7 +156,7 @@ func _options_gui_input(event : InputEvent):
 		if current_directory != "":
 			back_directory()
 		else:
-			Launcher.get_ui().app.back_app()
+			System.get_launcher().app.back_app()
 
 
 func _value_changed(section_key, value, reload_needed, option):
@@ -179,7 +179,7 @@ func _value_changed(section_key, value, reload_needed, option):
 	Settings.set_value(section_key, value)
 
 
-func _move_requested(to_directory):
+func _move_request(to_directory):
 	accept_event()
 	move_to_directory(to_directory)
 
@@ -199,7 +199,7 @@ static func _get_component_tags():
 
 static func _get_settings():
 	return [
-		Setting.export(["system/status"], TranslationServer.translate("DEFAULT.FOLDER_SYSTEM") + "/" + TranslationServer.translate("DEFAULT.STATUS"), load("res://system/settings/editors/dropdown_status.tscn")),
+		Setting.export(["system/desktop"], TranslationServer.translate("DEFAULT.FOLDER_SYSTEM") + "/" + TranslationServer.translate("DEFAULT.DESKTOP"), load("res://system/settings/editors/dropdown_desktop.tscn")),
 		Setting.export(["system/launcher_app"], TranslationServer.translate("DEFAULT.FOLDER_SYSTEM") + "/" + TranslationServer.translate("DEFAULT.LAUNCHER_APP"), load("res://system/settings/editors/dropdown_launcher_app.tscn")),
 		Setting.export(["system/settings_app"], TranslationServer.translate("DEFAULT.FOLDER_SYSTEM") + "/" + TranslationServer.translate("DEFAULT.SETTINGS_APP"), load("res://system/settings/editors/dropdown_settings_app.tscn")),
 		Setting.export(["system/keyboard_app"], TranslationServer.translate("DEFAULT.FOLDER_SYSTEM") + "/" + TranslationServer.translate("DEFAULT.KEYBOARD_APP"), load("res://system/settings/editors/dropdown_keyboard_app.tscn")),

@@ -671,19 +671,19 @@ void WindowManager::_run(Array userdata) {
 							wc.sibling = config_ev->above;
 							wc.stack_mode = config_ev->detail;
 						}
-						XConfigureWindow(display, config_ev->window, /*config_ev->value_mask | */ 	0x0001 |   			// x
-																															0x0002 |   			// y
-																															0x0004 |   			// width
-																															0x0008 |   			// height
-																															0x0010 |   			// border-width
-																															0x0020 |   			// sibling
-																															0x0040, &wc);		// stack-mode
+						XConfigureWindow(display, config_ev->window,
+							0x0001 |		// x
+							0x0002 |		// y
+							0x0004 |		// width
+							0x0008 |		// height
+							0x0010 |		// border-width
+							0x0020 |		// sibling
+							0x0040,		// stack-mode
+							&wc);
 						// Send another request to properly configure window position as sometimes it doesn't work with the first one.
 						wc.x = 0;
 						wc.y = 0;
-						XConfigureWindow(display, config_ev->window, /*config_ev->value_mask | */ 	0x0001 |   			// x
-																															0x0002,   			// y
-																															&wc);
+						XConfigureWindow(display, config_ev->window, 0x0001 | 0x0002, &wc);
 						//printf("- Request by %ld permitted\n", ev.xconfigurerequest.window);
 						//printf("- Shifted on the visibility stack with sibling %ld\n", wc.sibling);
 					}

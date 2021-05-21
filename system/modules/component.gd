@@ -1,7 +1,7 @@
 extends Reference
 class_name Component
 
-const TAG_SYSTEM = "system"				# System tag, for internal use only
+const TAG_SYSTEM = "system"				# Launcher tag, for internal use only
 const TAG_LAUNCHER = "launcher"			# Used to indicate the first App, generally the launcher
 const TAG_RUNNING = "running"			# Apps that handle programs running in the foreground
 const TAG_SETTINGS = "settings"			# Apps that can be used as settings apps

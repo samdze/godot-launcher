@@ -2,21 +2,24 @@ extends Control
 class_name AppHandler
 
 signal app_changed(old_app, new_app)
-signal status_visibility_change_requested(show)
-signal title_change_requested(title)
-signal mode_change_requested(mode)
+signal window_mode_request(fullscreen)
+signal title_change_request(title)
+signal display_mode_request(mode)
 signal event(name, arguments)
 
-export(NodePath) var widgets_spacer
-export(NodePath) var prompts_spacer
 export(NodePath) var app_container
 
 var apps_stack = []
 var focused = false
 
-onready var top_spacer = get_node(widgets_spacer)
-onready var bottom_spacer = get_node(prompts_spacer)
 onready var container = get_node(app_container)
+
+
+func _ready():
+	WindowManager.library.connect("active_window_changed", self, "_active_window_changed")
+	WindowManager.library.connect("window_mapped", self, "_window_mapped")
+	WindowManager.library.connect("window_unmapped", self, "_window_unmapped")
+	WindowManager.library.connect("window_name_changed", self, "_window_name_changed")
 
 
 func _input(event):
@@ -93,9 +96,9 @@ func _update_app():
 	if current != null:
 		if focused:
 			current._unfocus()
-		current.disconnect("title_change_requested", self, "_title_change_requested")
-		current.disconnect("status_visibility_change_requested", self, "_status_visibility_change_requested")
-		current.disconnect("mode_change_requested", self, "_mode_change_requested")
+		current.disconnect("title_change_request", self, "_title_change_request")
+		current.disconnect("window_mode_request", self, "_window_mode_request")
+		current.disconnect("display_mode_request", self, "_display_mode_request")
 	
 	for c in container.get_children():
 		container.remove_child(c)
@@ -104,9 +107,9 @@ func _update_app():
 	
 	if app != null:
 		container.add_child(app)
-		app.connect("title_change_requested", self, "_title_change_requested")
-		app.connect("status_visibility_change_requested", self, "_status_visibility_change_requested")
-		app.connect("mode_change_requested", self, "_mode_change_requested")
+		app.connect("title_change_request", self, "_title_change_request")
+		app.connect("window_mode_request", self, "_window_mode_request")
+		app.connect("display_mode_request", self, "_display_mode_request")
 		if focused:
 			app._focus()
 	
@@ -130,26 +133,32 @@ func _event(name, arguments):
 	return results
 
 
-func _title_change_requested(title):
-	emit_signal("title_change_requested", title)
+func _title_change_request(title):
+	emit_signal("title_change_request", title)
 
 
-func _status_visibility_change_requested(show):
-	top_spacer.visible = show
-	bottom_spacer.visible = show
-	emit_signal("status_visibility_change_requested", show)
+func _window_mode_request(fullscreen):
+	emit_signal("window_mode_request", fullscreen)
 
 
-func _mode_change_requested(mode):
-	emit_signal("mode_change_requested", mode)
+func _display_mode_request(mode):
+	emit_signal("display_mode_request", mode)
 
 
-func window_name_changed(name):
-	if apps_stack.size() > 0:
+func _window_name_changed(window_id, name):
+	if window_id == WindowManager.library.get_active_window() and apps_stack.size() > 0:
 		apps_stack.back()._window_name_changed(name)
 
 
-func active_window_changed(window_id):
+func _window_mapped(window_id):
+	pass
+
+
+func _window_unmapped(window_id):
+	pass
+
+
+func _active_window_changed(window_id):
 	if apps_stack.size() > 0:
 		print("[GODOT] Giving the activating window to App " + apps_stack.back().name)
 		apps_stack.back()._active_window_changed(window_id)

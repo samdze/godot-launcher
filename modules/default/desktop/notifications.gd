@@ -1,7 +1,7 @@
 extends Control
 
-signal notification_show_requested(notification)
-signal notification_hide_requested(notification)
+signal notification_show_request(notification)
+signal notification_hide_request(notification)
 signal notification_showing(notification)
 signal notification_shown(notification)
 signal notification_hiding(notification)
@@ -48,7 +48,7 @@ func show_notification():
 		tween.interpolate_property(right_spacer, "rect_min_size:x", right_margin, 0, 0.15, 0, 2, 0.25)
 		tween.interpolate_callback(self, 0.35, "_notification_shown", current_notification)
 		
-		tween.interpolate_callback(self, 3.35, "emit_signal", "notification_hide_requested", current_notification)
+		tween.interpolate_callback(self, 3.35, "emit_signal", "notification_hide_request", current_notification)
 		
 		tween.start()
 		emit_signal("notification_showing", current_notification)
@@ -110,4 +110,4 @@ func _notification_hidden(notification : Notification):
 
 func _notify_queue():
 	if not displaying and notifications_queue.size() > 0:
-		emit_signal("notification_show_requested", notifications_queue.front())
+		emit_signal("notification_show_request", notifications_queue.front())

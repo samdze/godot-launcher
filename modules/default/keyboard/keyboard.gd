@@ -73,20 +73,20 @@ func _switch_layout(layout = null, update_prompts = false):
 		Layout.CHARACTERS:
 			characters.show()
 			if update_prompts:
-				Launcher.emit_event("prompts", [[BottomBar.ICON_NAV, tr("DEFAULT.PROMPT_NAVIGATION")],
-					[BottomBar.ICON_BUTTON_START, tr("DEFAULT.PROMPT_DONE"),
-					BottomBar.ICON_BUTTON_X, tr("DEFAULT.PROMPT_CASE"),
-					BottomBar.ICON_BUTTON_Y, tr("DEFAULT.PROMPT_SYMBOLS"),
-					BottomBar.ICON_BUTTON_A, tr("DEFAULT.PROMPT_SELECT"),
-					BottomBar.ICON_BUTTON_B, tr("DEFAULT.PROMPT_BACKSPACE")]])
+				System.emit_event("prompts", [[Desktop.Input.MOVE, tr("DEFAULT.PROMPT_NAVIGATION")],
+					[Desktop.Input.START, tr("DEFAULT.PROMPT_DONE"),
+					Desktop.Input.X, tr("DEFAULT.PROMPT_CASE"),
+					Desktop.Input.Y, tr("DEFAULT.PROMPT_SYMBOLS"),
+					Desktop.Input.A, tr("DEFAULT.PROMPT_SELECT"),
+					Desktop.Input.B, tr("DEFAULT.PROMPT_BACKSPACE")]])
 		Layout.SYMBOLS:
 			symbols.show()
 			if update_prompts:
-				Launcher.emit_event("prompts", [[BottomBar.ICON_NAV, tr("DEFAULT.PROMPT_NAVIGATION")],
-					[BottomBar.ICON_BUTTON_START, tr("DEFAULT.PROMPT_DONE"),
-					BottomBar.ICON_BUTTON_Y, tr("DEFAULT.PROMPT_CHARACTERS"),
-					BottomBar.ICON_BUTTON_A, tr("DEFAULT.PROMPT_SELECT"),
-					BottomBar.ICON_BUTTON_B, tr("DEFAULT.PROMPT_BACKSPACE")]])
+				System.emit_event("prompts", [[Desktop.Input.MOVE, tr("DEFAULT.PROMPT_NAVIGATION")],
+					[Desktop.Input.START, tr("DEFAULT.PROMPT_DONE"),
+					Desktop.Input.Y, tr("DEFAULT.PROMPT_CHARACTERS"),
+					Desktop.Input.A, tr("DEFAULT.PROMPT_SELECT"),
+					Desktop.Input.B, tr("DEFAULT.PROMPT_BACKSPACE")]])
 
 
 func _focus_first_key():
@@ -161,13 +161,13 @@ func _ensure_cursor_visible():
 
 
 func _focus():
-	emit_signal("status_visibility_change_requested", true)
-	emit_signal("title_change_requested", title)
-	emit_signal("mode_change_requested", System.Mode.OPAQUE)
-	Launcher.emit_event("prompts", [[BottomBar.ICON_NAV, tr("DEFAULT.PROMPT_NAVIGATION")],
-		[BottomBar.ICON_BUTTON_START, tr("DEFAULT.PROMPT_DONE"), BottomBar.ICON_BUTTON_X, tr("DEFAULT.PROMPT_CASE"),
-		BottomBar.ICON_BUTTON_Y, tr("DEFAULT.PROMPT_SYMBOLS"),
-		BottomBar.ICON_BUTTON_A, tr("DEFAULT.PROMPT_SELECT"), BottomBar.ICON_BUTTON_B, tr("DEFAULT.PROMPT_BACKSPACE")]])
+	emit_signal("window_mode_request", false)
+	emit_signal("title_change_request", title)
+	emit_signal("display_mode_request", Launcher.Mode.OPAQUE)
+	System.emit_event("prompts", [[Desktop.Input.MOVE, tr("DEFAULT.PROMPT_NAVIGATION")],
+		[Desktop.Input.START, tr("DEFAULT.PROMPT_DONE"), Desktop.Input.X, tr("DEFAULT.PROMPT_CASE"),
+		Desktop.Input.Y, tr("DEFAULT.PROMPT_SYMBOLS"),
+		Desktop.Input.A, tr("DEFAULT.PROMPT_SELECT"), Desktop.Input.B, tr("DEFAULT.PROMPT_BACKSPACE")]])
 	
 	_switch_layout(active_layout, true)
 	if last_focused_key != null:
@@ -182,11 +182,11 @@ func _app_input(event : InputEvent):
 	if event.is_action_pressed("ui_start"):
 		accept_event()
 		emit_signal("text_entered", true, text.text)
-		Launcher.get_ui().app.back_app()
+		System.get_launcher().app.back_app()
 #	if event.is_action_pressed("ui_menu"):
 #		accept_event()
 #		emit_signal("text_entered", false, text.text)
-#		Launcher.get_ui().app.back_app()
+#		System.get_launcher().app.back_app()
 	if event.is_action_pressed("ui_cancel"):
 		accept_event()
 		_delete_string_at_cursor(1)

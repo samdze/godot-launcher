@@ -1,11 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://system/components/theme_property_applier.gd" type="Script" id=1]
-[ext_resource path="res://system/app_handler.gd" type="Script" id=2]
 [ext_resource path="res://system/launcher.gd" type="Script" id=6]
 [ext_resource path="res://system/components/theme_applier.gd" type="Script" id=13]
 
-[node name="LauncherUI" type="Control"]
+[node name="Launcher" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 6 )
@@ -15,7 +14,7 @@ __meta__ = {
 
 [node name="ThemeApplier" type="Node" parent="."]
 script = ExtResource( 13 )
-apply_to = NodePath("..")
+apply_to = NodePath("../../Launcher")
 
 [node name="Services" type="Node" parent="."]
 
@@ -24,7 +23,7 @@ layer = -128
 
 [node name="ThemeApplier" type="Node" parent="BackgroundLayer"]
 script = ExtResource( 13 )
-apply_to = NodePath("../Background")
+apply_to = NodePath("../../../Launcher/BackgroundLayer/Background")
 
 [node name="Background" type="Panel" parent="BackgroundLayer"]
 anchor_right = 1.0
@@ -37,41 +36,4 @@ stylebox_values = {
 "panel": "bg"
 }
 
-[node name="App" type="VBoxContainer" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
-rect_clip_content = true
-custom_constants/separation = 0
-script = ExtResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-widgets_spacer = NodePath("TopSpacer")
-prompts_spacer = NodePath("BottomSpacer")
-app_container = NodePath("Container")
-
-[node name="TopSpacer" type="Control" parent="App"]
-margin_right = 320.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 0, 32 )
-size_flags_vertical = 5
-
-[node name="Container" type="VBoxContainer" parent="App"]
-margin_top = 32.0
-margin_right = 320.0
-margin_bottom = 208.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_constants/separation = 0
-
-[node name="BottomSpacer" type="Control" parent="App"]
-margin_top = 208.0
-margin_right = 320.0
-margin_bottom = 240.0
-rect_min_size = Vector2( 0, 32 )
-size_flags_vertical = 5
-
-[node name="StandByTimer" type="Timer" parent="."]
-
 [node name="Tween" type="Tween" parent="."]
-[connection signal="timeout" from="StandByTimer" to="." method="_standby"]

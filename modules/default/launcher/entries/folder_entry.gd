@@ -6,7 +6,7 @@ export(String) var directory
 
 
 func exec():
-	emit_signal("move_requested", directory)
+	emit_signal("move_request", directory)
 	executed(OK)
 	return OK
 

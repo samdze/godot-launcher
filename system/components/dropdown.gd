@@ -76,7 +76,7 @@ func get_selected():
 
 func _toggled(button_pressed : bool):
 	if button_pressed:
-		Launcher.emit_event("prompts", [[BottomBar.ICON_NAV_V, tr("DEFAULT.PROMPT_NAVIGATION")], [BottomBar.ICON_BUTTON_A, tr("DEFAULT.PROMPT_SELECT"), BottomBar.ICON_BUTTON_B, tr("DEFAULT.PROMPT_BACK")]])
+		System.emit_event("prompts", [[Desktop.Input.MOVE_V, tr("DEFAULT.PROMPT_NAVIGATION")], [Desktop.Input.A, tr("DEFAULT.PROMPT_SELECT"), Desktop.Input.B, tr("DEFAULT.PROMPT_BACK")]])
 		_open_popup()
 	else:
 		_close_popup()

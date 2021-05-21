@@ -14,4 +14,4 @@ func init_from_directory(to_directory : String):
 
 # Button exposes this function on its own
 func _pressed():
-	emit_signal("move_requested", directory)
+	emit_signal("move_request", directory)

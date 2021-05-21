@@ -138,4 +138,4 @@ static func _get_settings():
 #
 #
 #static func _setting_button_pressed():
-#	Launcher.get_ui().app.add_app(preload("settings/wifi_settings_app.tscn").instance())
+#	System.get_launcher().app.add_app(preload("settings/wifi_settings_app.tscn").instance())

@@ -68,7 +68,7 @@ func init(script : LauncherEntry):
 	
 	var search_icon_path = entry_path.replace(apps_path, "").get_basename() + ".png"
 	var launcher_directory = "/" + ProjectSettings.globalize_path("res://").get_base_dir().get_file()
-#	print("Launcher base directory: " + launcher_directory)
+#	print("System base directory: " + launcher_directory)
 	if search_icon_path.find(launcher_directory) == 0:
 		search_icon_path = search_icon_path.right(launcher_directory.length())
 	var search_icon_ext_path = entry_path.replace(apps_path, "") + ".png"

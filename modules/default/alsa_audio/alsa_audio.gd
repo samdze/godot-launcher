@@ -24,7 +24,7 @@ func _ready():
 func _update_audio_volume(value : int):
 	OS.execute("bash", ["-c", "amixer set Master " + str(value) + "%"], true)
 	
-	Launcher.emit_event("audio_volume_changed", [value])
+	System.emit_event("audio_volume_changed", [value])
 
 
 func _audio_volume_changed():

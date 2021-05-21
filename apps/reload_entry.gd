@@ -13,7 +13,7 @@ func get_label():
 
 func exec():
 	thread = Thread.new()
-	Launcher.emit_event("set_loading", [true])
+	System.emit_event("set_loading", [true])
 	var result = thread.start(self, "_import_thread")
 	return result
 
@@ -23,8 +23,8 @@ func _execution_terminated(result):
 	if result == OK:
 		Engine.get_main_loop().quit()
 	else:
-		Launcher.emit_event("notification", [tr("DEFAULT.RELOADING_FAILED"), "error"])
-	Launcher.emit_event("set_loading", [false])
+		System.emit_event("notification", [tr("DEFAULT.RELOADING_FAILED"), "error"])
+	System.emit_event("set_loading", [false])
 	executed(result)
 
 

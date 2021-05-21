@@ -9,8 +9,8 @@ func get_label():
 
 
 func exec():
-	Launcher.emit_event("set_loading", [false])
-	Launcher.emit_event("prompts", [[BottomBar.ICON_NAV_V, tr("DEFAULT.PROMPT_NAVIGATION")], [BottomBar.ICON_BUTTON_A, tr("DEFAULT.PROMPT_SELECT"), BottomBar.ICON_BUTTON_B, tr("DEFAULT.PROMPT_BACK")]])
+	System.emit_event("set_loading", [false])
+	System.emit_event("prompts", [[Desktop.Input.MOVE_V, tr("DEFAULT.PROMPT_NAVIGATION")], [Desktop.Input.A, tr("DEFAULT.PROMPT_SELECT"), Desktop.Input.B, tr("DEFAULT.PROMPT_BACK")]])
 	var popup = PopupPanel.new()
 	popup.connect("popup_hide", self, "_popup_hidden")
 	var vbox = VBoxContainer.new()
@@ -42,7 +42,7 @@ func exec():
 	
 	popup.add_child(vbox)
 	
-	Launcher.get_ui().add_child(popup)
+	System.get_launcher().add_child(popup)
 	popup.popup_centered(Vector2(160, 64))
 	
 	quit.focus_neighbour_bottom = shutdown.get_path()

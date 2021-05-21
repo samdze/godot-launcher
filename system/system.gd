@@ -14,8 +14,8 @@ func get_version() -> String:
 	return version
 
 
-func get_ui() -> System:
-	return get_tree().current_scene as System
+func get_launcher() -> Launcher:
+	return get_tree().current_scene as Launcher
 
 
 func emit_event(name, arguments = []):

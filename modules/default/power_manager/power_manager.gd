@@ -52,7 +52,7 @@ func _input(event):
 
 func _update_power_mode(mode : int):
 	_reset_timers(mode)
-	Launcher.emit_event("power_mode_changed", [mode])
+	System.emit_event("power_mode_changed", [mode])
 
 
 func _power_mode_changed():
@@ -62,7 +62,7 @@ func _power_mode_changed():
 
 func _update_backlight(value : int):
 	OS.execute("bash", ["-c", "echo " + str(value) + " > /proc/driver/backlight"])
-	Launcher.emit_event("brightness_changed", [value])
+	System.emit_event("brightness_changed", [value])
 
 
 func _brightness_changed():

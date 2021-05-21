@@ -19,20 +19,25 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://system/app_handler.gd"
 }, {
-"base": "MarginContainer",
-"class": "BottomBar",
-"language": "GDScript",
-"path": "res://modules/default/status/bottom_bar.gd"
-}, {
 "base": "Reference",
 "class": "Component",
 "language": "GDScript",
 "path": "res://system/modules/component.gd"
 }, {
+"base": "Node",
+"class": "Desktop",
+"language": "GDScript",
+"path": "res://system/modules/desktop.gd"
+}, {
 "base": "Resource",
 "class": "Icons",
 "language": "GDScript",
 "path": "res://system/modules/icons.gd"
+}, {
+"base": "Control",
+"class": "Launcher",
+"language": "GDScript",
+"path": "res://system/launcher.gd"
 }, {
 "base": "Reference",
 "class": "LauncherEntry",
@@ -60,16 +65,6 @@ _global_script_classes=[ {
 "path": "res://system/settings/setting_editor.gd"
 }, {
 "base": "Node",
-"class": "Status",
-"language": "GDScript",
-"path": "res://system/modules/status.gd"
-}, {
-"base": "Control",
-"class": "System",
-"language": "GDScript",
-"path": "res://system/launcher.gd"
-}, {
-"base": "Node",
 "class": "ThemeApplier",
 "language": "GDScript",
 "path": "res://system/components/theme_applier.gd"
@@ -92,16 +87,15 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "App": "",
 "AppHandler": "",
-"BottomBar": "",
 "Component": "",
+"Desktop": "",
 "Icons": "",
+"Launcher": "",
 "LauncherEntry": "",
 "ModulateApplier": "",
 "Service": "",
 "Setting": "",
 "SettingEditor": "",
-"Status": "",
-"System": "",
 "ThemeApplier": "",
 "UITheme": "",
 "Widget": "",
@@ -125,7 +119,7 @@ config/icon="res://modules/default/launcher/folder_icon.png"
 Settings="*res://system/settings/settings.gd"
 WindowManager="*res://system/window_manager.tscn"
 Modules="*res://system/modules/modules.gd"
-Launcher="*res://system/singleton.gd"
+System="*res://system/system.gd"
 
 [display]
 

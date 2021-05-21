@@ -53,9 +53,9 @@ func _timer_timeout():
 		i += 1
 	
 	if new_step > current_step and current_step >= 0:
-		Launcher.emit_event("notification", [notification_messages[new_step], notification_styles[new_step]])
+		System.emit_event("notification", [notification_messages[new_step], notification_styles[new_step]])
 	elif new_step == -1 and current_step == 0 and OS.get_power_state() == OS.POWERSTATE_CHARGED:
-		Launcher.emit_event("notification", [notification_messages[0], notification_styles[0]])
+		System.emit_event("notification", [notification_messages[0], notification_styles[0]])
 	current_step = new_step
 	
 	if OS.get_power_state() != OS.POWERSTATE_CHARGING and percentage <= 1:

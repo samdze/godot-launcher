@@ -40,14 +40,14 @@ func _ready():
 	thread.start(self, "_thread_function", null)
 
 # Called when the App gains focus, setup the App here.
-# Signals like bars_visibility_change_requested and title_change_requested are best called here.
+# Signals like window_mode_request and title_change_request are best called here.
 func _focus():
-	emit_signal("status_visibility_change_requested", true)
-	emit_signal("title_change_requested", tr("DEFAULT.WIFI_SETTINGS"))
-	emit_signal("mode_change_requested", System.Mode.OPAQUE)
-	Launcher.emit_event("prompts", [
-		[BottomBar.ICON_NAV_V, tr("DEFAULT.PROMPT_NAVIGATION")],
-		[BottomBar.ICON_BUTTON_A, tr("DEFAULT.PROMPT_SELECT"), BottomBar.ICON_BUTTON_Y, tr("DEFAULT.PROMPT_SCAN"), BottomBar.ICON_BUTTON_B, tr("DEFAULT.PROMPT_BACK")]
+	emit_signal("window_mode_request", false)
+	emit_signal("title_change_request", tr("DEFAULT.WIFI_SETTINGS"))
+	emit_signal("display_mode_request", Launcher.Mode.OPAQUE)
+	System.emit_event("prompts", [
+		[Desktop.Input.MOVE_V, tr("DEFAULT.PROMPT_NAVIGATION")],
+		[Desktop.Input.A, tr("DEFAULT.PROMPT_SELECT"), Desktop.Input.Y, tr("DEFAULT.PROMPT_SCAN"), Desktop.Input.B, tr("DEFAULT.PROMPT_BACK")]
 	])
 	if last_focused_hotspot != null:
 		last_focused_hotspot.grab_focus()
@@ -64,7 +64,7 @@ func _unfocus():
 func _app_input(event : InputEvent):
 	if event.is_action_pressed("ui_cancel") and not processing:
 		accept_event()
-		Launcher.get_ui().app.back_app()
+		System.get_launcher().app.back_app()
 	if event.is_action_pressed("ui_button_y") and not processing:
 		accept_event()
 		_scan_hotspots()
@@ -78,7 +78,7 @@ func _hotspot_pressed(network_details : NetworkDetails):
 		var keyboard = Modules.get_loaded_component_from_settings("system/keyboard_app").resource.instance()
 		keyboard.title = tr("DEFAULT.WIFI_PASSWORD")
 		keyboard.connect("text_entered", self, "_password_entered", [network_details])
-		Launcher.get_ui().app.add_app(keyboard)
+		System.get_launcher().app.add_app(keyboard)
 
 
 func _password_entered(confirmed, password : String, network_details : NetworkDetails):
@@ -92,7 +92,7 @@ func _hotspot_connect_attempt(confirmed, network_details : NetworkDetails):
 	if not confirmed:
 		return
 	processing = true
-	Launcher.emit_event("set_loading", [true])
+	System.emit_event("set_loading", [true])
 	operation = Operation.CONNECT
 	connecting_network = network_details
 	
@@ -105,14 +105,14 @@ func _hotspot_focused(hotspot : Control):
 
 func _scan_hotspots():
 	processing = true
-	Launcher.emit_event("set_loading", [true])
+	System.emit_event("set_loading", [true])
 	operation = Operation.SCAN
 	semaphore.post()
 
 
 func _scan_completed(networks_details : Array):
 	processing = false
-	Launcher.emit_event("set_loading", [false])
+	System.emit_event("set_loading", [false])
 	
 	for c in hotspots_container.get_children():
 		hotspots_container.remove_child(c)
@@ -147,13 +147,13 @@ func _scan_completed(networks_details : Array):
 
 func _connection_attempted(result):
 	processing = false
-	Launcher.emit_event("set_loading", [false])
+	System.emit_event("set_loading", [false])
 	print("Connection attempted with result: " + str(result))
 	
 	if result == 0:
-		Launcher.emit_event("notification", [tr("DEFAULT.WIFI_CONNECTION_SUCCESS").format([connecting_network.name]), "success"])
+		System.emit_event("notification", [tr("DEFAULT.WIFI_CONNECTION_SUCCESS").format([connecting_network.name]), "success"])
 	else:
-		Launcher.emit_event("notification", [tr("DEFAULT.WIFI_CONNECTION_FAILED").format([connecting_network.name]), "error"])
+		System.emit_event("notification", [tr("DEFAULT.WIFI_CONNECTION_FAILED").format([connecting_network.name]), "error"])
 	connecting_network = null
 
 

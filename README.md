@@ -3,8 +3,8 @@
 	<img src="https://i.imgur.com/BgUXz5O.gif" />
 </p>
 
-# Single-board Computer Godot Launcher
-An alternative launcher for single-board computers. Made with Godot and GDNative.<br>
+# Modular Launcher for Linux devices and Single-Board Computers
+An alternative, console-like, launcher for single-board computers. Made with Godot and GDNative.<br>
 The launcher is primarily made to run on the GameShell portable console but can also run on other sbcs thanks to modules.<br>
 **ALPHA VERSION**
 
@@ -38,6 +38,11 @@ On other sbcs, start an X session executing the .xinitrc file.
 git clone https://github.com/samdze/godot-launcher.git
 startx godot-launcher/.xinitrc -- -nocursor
 ```
+Be sure to have libconfig9 installed. It's needed to run compton.
+```
+sudo apt install libconfig9
+```
+
 Better documentation will be available in the future.
 
 ## Documentation
@@ -50,6 +55,19 @@ This launcher is made to be modular and custom settings can be added by other mo
 This is an early version of the launcher, some games and apps may not be shown and there's no way to configure bluetooth, graphics drivers etc.
 
 If your device isn't a GameShell, the launcher isn't quite ready to be fully usable, although it can run with a few tweaks.
+
+### Default input mapping
+A: K<br>
+B: J<br>
+X: I<br>
+Y: U<br>
+Right: Right<br>
+Up: Up<br>
+Left: Left<br>
+Down: Down<br>
+START: Enter<br>
+MENU: Escape<br>
+HOME: KP Add<br>
 
 ```
 /home/cpi/

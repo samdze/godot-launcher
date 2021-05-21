@@ -1,16 +1,24 @@
 extends Node
-class_name Status
+class_name Desktop
 
-signal open_requested()
+signal open_request()
 signal opened()
-signal close_requested()
+signal close_request()
 signal closed()
-signal home_requested()
+signal home_request()
+
+enum Input { MOVE = 0, A, B, X, Y, RIGHT, UP, LEFT, DOWN,
+	START, MENU, HOME, MOVE_V, MOVE_H }
 
 
 func set_title(title):
 	
 	pass
+
+
+func get_app_handler() -> AppHandler:
+	
+	return null
 
 
 func open():
@@ -19,6 +27,16 @@ func open():
 
 
 func close():
+	
+	pass
+
+
+func take_space():
+	
+	pass
+
+
+func free_space():
 	
 	pass
 
@@ -39,12 +57,12 @@ func _event(name, arguments):
 	pass
 
 
-# Override this function to give this Status a name for the modules system
+# Override this function to give this Desktop a name for the modules system
 static func _get_component_name():
-	return "Default Status"
+	return "Default Desktop"
 
 
-# Override this function to give this Status tags for the modules system
+# Override this function to give this Desktop tags for the modules system
 static func _get_component_tags():
 	return []
 
