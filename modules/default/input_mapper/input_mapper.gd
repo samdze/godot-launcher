@@ -15,7 +15,6 @@ var listening = false
 var last_item_focused = null
 
 onready var list_container = $ScrollContainer/HBoxContainer/ButtonsList
-onready var button_label = $ScrollContainer/HBoxContainer/MappingButton/HBoxContainer/PressLabel
 
 
 func _ready():
@@ -117,13 +116,13 @@ func _entry_focus_entered(entry):
 	last_item_focused = entry
 
 
-func _update_prompt():
-	if map_index < list_container.get_child_count():
-		list_container.get_child(map_index).get_node("Mapping").grab_focus()
-	if map_index <= mapping_order.size() - 1:
-		button_label.text = mapping_order[map_index]
-	else:
-		button_label.text = "✓"
+#func _update_prompt():
+#	if map_index < list_container.get_child_count():
+#		list_container.get_child(map_index).get_node("Mapping").grab_focus()
+#	if map_index <= mapping_order.size() - 1:
+#		button_label.text = mapping_order[map_index]
+#	else:
+#		button_label.text = "✓"
 
 
 func _app_input(event : InputEvent):
@@ -143,11 +142,11 @@ func _app_input(event : InputEvent):
 		System.get_launcher().app.back_app()
 
 
-func _update_next_mapping(event):
-	InputMap.action_add_event(actions_order[map_index], event)
-	list_container.get_child(map_index).get_node("Mapping").text = event.as_text()
-	map_index += 1
-	_update_prompt()
+#func _update_next_mapping(event):
+#	InputMap.action_add_event(actions_order[map_index], event)
+#	list_container.get_child(map_index).get_node("Mapping").text = event.as_text()
+#	map_index += 1
+#	_update_prompt()
 
 
 # Called when the App is about to be destroyed and freed from memory.

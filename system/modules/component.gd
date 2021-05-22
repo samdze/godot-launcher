@@ -17,7 +17,7 @@ enum Type {
 	THEME = 8,
 	SERVICE = 16,
 	ICONS = 32,
-	STATUS = 64
+	DESKTOP = 64
 }
 
 var id : String				# Unique id of the component

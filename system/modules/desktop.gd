@@ -73,4 +73,4 @@ static func _get_settings():
 
 
 static func _get_component_type():
-	return Component.Type.STATUS
+	return Component.Type.DESKTOP

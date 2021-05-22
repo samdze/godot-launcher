@@ -38,11 +38,11 @@ Restart the GameShell and you should boot into the Godot launcher.<br>
 You can rollback to the stock launcher selecting "Switch Launcher" inside the Settings app.
 
 On other sbcs, start an X session executing the .xinitrc file.
-Be sure to have libconfig9 installed. It's needed to run compton.
+Clone the launcher in you home directory and be sure to have libconfig9 installed. It's needed to run compton.
 ```
 sudo apt install libconfig9
 git clone https://github.com/samdze/godot-launcher.git
-startx /folder/to/godot-launcher/.xinitrc -- -nocursor
+startx /home/user/godot-launcher/.xinitrc -- -nocursor
 ```
 The launcher is quite untested on devices other than the GameShell, and features like Wi-Fi settings, sound volume settings, brightness settings are not expected to work.
 Testing and feedbacks are very welcome.<br>
