@@ -1,29 +1,27 @@
 extends MarginContainer
 
 const icon_mappings = {
-	Desktop.Input.MOVE: 0,
-	Desktop.Input.A: 1,
-	Desktop.Input.B: 2,
-	Desktop.Input.X: 3,
-	Desktop.Input.Y: 4,
-#	Desktop.Input.RIGHT: -1,
-#	Desktop.Input.UP: -1,
-#	Desktop.Input.LEFT: -1,
-#	Desktop.Input.DOWN: -1,
-	Desktop.Input.START: 7,
-	Desktop.Input.MENU: 5,
-#	Desktop.Input.HOME: 0,
-	Desktop.Input.MOVE_H: 9,
-	Desktop.Input.MOVE_V: 8
+	Desktop.Input.MOVE: "button_nav",
+	Desktop.Input.A: "button_a",
+	Desktop.Input.B: "button_b",
+	Desktop.Input.X: "button_x",
+	Desktop.Input.Y: "button_y",
+	Desktop.Input.RIGHT: "button_right",
+	Desktop.Input.UP: "button_up",
+	Desktop.Input.LEFT: "button_left",
+	Desktop.Input.DOWN: "button_down",
+	Desktop.Input.START: "button_start",
+	Desktop.Input.MENU: "button_menu",
+	Desktop.Input.HOME: "button_home",
+	Desktop.Input.MOVE_H: "button_nav_h",
+	Desktop.Input.MOVE_V: "button_nav_v"
 }
 
 onready var left_container = $InputEvents/HBoxContainer/Left
 onready var right_container = $InputEvents/HBoxContainer/Right
 
-export(Array, Texture) var icons
 
-
-# Left_prompts and right_prompts are arrays of ICON_*s and strings.
+# Left_prompts and right_prompts are arrays of Desktop.Input.*s and strings.
 # Each couple of values define the icon and the text of the prompt.
 func set_prompts(left_prompts, right_prompts):
 	for c in left_container.get_children():
@@ -40,7 +38,7 @@ func set_prompts(left_prompts, right_prompts):
 		var icon = TextureRect.new()
 		var texture = null
 		if icon_mappings.has(left_prompts[i]):
-			texture = icons[icon_mappings[left_prompts[i]]]
+			texture = get_icon(icon_mappings[left_prompts[i]], "Control")
 		icon.texture = texture
 		icon.self_modulate = get_color("contrast", "Control")
 		icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
@@ -60,7 +58,7 @@ func set_prompts(left_prompts, right_prompts):
 		var icon = TextureRect.new()
 		var texture = null
 		if icon_mappings.has(right_prompts[i]):
-			texture = icons[icon_mappings[right_prompts[i]]]
+			texture = get_icon(icon_mappings[right_prompts[i]], "Control")
 		icon.texture = texture
 		icon.self_modulate = get_color("contrast", "Control")
 		icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED

@@ -2,8 +2,11 @@ extends ColorRect
 
 var loading = false
 
+onready var icon = $CenterContainer/Pivot/Sprite
+
 
 func _ready():
+	icon.self_modulate = get_color("highlight", "Control")
 	hide()
 
 

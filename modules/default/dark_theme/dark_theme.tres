@@ -1,10 +1,11 @@
-[gd_resource type="Theme" load_steps=39 format=2]
+[gd_resource type="Theme" load_steps=54 format=2]
 
 [ext_resource path="res://modules/default/dark_theme/varelaround_regular_small.tres" type="DynamicFont" id=1]
 [ext_resource path="res://modules/default/dark_theme/varelaround_regular_large.tres" type="DynamicFont" id=2]
 [ext_resource path="res://modules/default/dark_theme/varelaround_regular_medium.tres" type="DynamicFont" id=3]
 [ext_resource path="res://system/modules/ui_theme.gd" type="Script" id=4]
 [ext_resource path="res://modules/default/dark_theme/default_wallpaper.png" type="Texture" id=5]
+[ext_resource path="res://modules/default/dark_theme/buttons_icons.png" type="Texture" id=6]
 [ext_resource path="res://modules/default/dark_theme/varelaround_regular_xxlarge.tres" type="DynamicFont" id=7]
 [ext_resource path="res://modules/default/dark_theme/gui_items.png" type="Texture" id=8]
 
@@ -29,6 +30,76 @@ corner_radius_top_left = 4
 corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
+
+[sub_resource type="AtlasTexture" id=32]
+flags = 4
+atlas = ExtResource( 6 )
+region = Rect2( 0, 18, 18, 18 )
+
+[sub_resource type="AtlasTexture" id=33]
+flags = 4
+atlas = ExtResource( 6 )
+region = Rect2( 18, 18, 18, 18 )
+
+[sub_resource type="AtlasTexture" id=34]
+flags = 4
+atlas = ExtResource( 6 )
+region = Rect2( 108, 0, 18, 18 )
+
+[sub_resource type="AtlasTexture" id=35]
+flags = 4
+atlas = ExtResource( 6 )
+region = Rect2( 90, 18, 18, 18 )
+
+[sub_resource type="AtlasTexture" id=36]
+flags = 4
+atlas = ExtResource( 6 )
+region = Rect2( 90, 0, 18, 18 )
+
+[sub_resource type="AtlasTexture" id=37]
+flags = 4
+atlas = ExtResource( 6 )
+region = Rect2( 72, 18, 18, 18 )
+
+[sub_resource type="AtlasTexture" id=38]
+flags = 4
+atlas = ExtResource( 6 )
+region = Rect2( 0, 0, 18, 18 )
+
+[sub_resource type="AtlasTexture" id=39]
+flags = 4
+atlas = ExtResource( 6 )
+region = Rect2( 36, 0, 18, 18 )
+
+[sub_resource type="AtlasTexture" id=40]
+flags = 4
+atlas = ExtResource( 6 )
+region = Rect2( 18, 0, 18, 18 )
+
+[sub_resource type="AtlasTexture" id=41]
+flags = 4
+atlas = ExtResource( 6 )
+region = Rect2( 54, 0, 18, 18 )
+
+[sub_resource type="AtlasTexture" id=42]
+flags = 4
+atlas = ExtResource( 6 )
+region = Rect2( 108, 18, 18, 18 )
+
+[sub_resource type="AtlasTexture" id=43]
+flags = 4
+atlas = ExtResource( 6 )
+region = Rect2( 72, 0, 18, 18 )
+
+[sub_resource type="AtlasTexture" id=44]
+flags = 4
+atlas = ExtResource( 6 )
+region = Rect2( 36, 18, 18, 18 )
+
+[sub_resource type="AtlasTexture" id=45]
+flags = 4
+atlas = ExtResource( 6 )
+region = Rect2( 54, 18, 18, 18 )
 
 [sub_resource type="StyleBoxFlat" id=3]
 bg_color = Color( 0.12549, 0.12549, 0.12549, 1 )
@@ -330,7 +401,22 @@ Button/styles/hover = SubResource( 2 )
 Button/styles/normal = SubResource( 1 )
 Button/styles/pressed = SubResource( 2 )
 Control/colors/contrast = Color( 0.8, 0.8, 0.8, 1 )
+Control/colors/highlight = Color( 0.0588235, 0.705882, 0.901961, 1 )
 Control/colors/main = Color( 0.12549, 0.12549, 0.12549, 1 )
+Control/icons/button_a = SubResource( 32 )
+Control/icons/button_b = SubResource( 33 )
+Control/icons/button_down = SubResource( 34 )
+Control/icons/button_home = SubResource( 35 )
+Control/icons/button_left = SubResource( 36 )
+Control/icons/button_menu = SubResource( 37 )
+Control/icons/button_nav = SubResource( 38 )
+Control/icons/button_nav_h = SubResource( 39 )
+Control/icons/button_nav_v = SubResource( 40 )
+Control/icons/button_right = SubResource( 41 )
+Control/icons/button_start = SubResource( 42 )
+Control/icons/button_up = SubResource( 43 )
+Control/icons/button_x = SubResource( 44 )
+Control/icons/button_y = SubResource( 45 )
 Control/icons/wallpaper = ExtResource( 5 )
 HScrollBar/styles/grabber = SubResource( 3 )
 HScrollBar/styles/grabber_highlight = SubResource( 4 )

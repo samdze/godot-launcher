@@ -1,7 +1,6 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://modules/default/desktop/bottom_bar.gd" type="Script" id=1]
-[ext_resource path="res://modules/default/desktop/bottom_icons.png" type="Texture" id=2]
 [ext_resource path="res://system/components/large_label.tscn" type="PackedScene" id=3]
 [ext_resource path="res://system/components/small_label.tscn" type="PackedScene" id=4]
 [ext_resource path="res://system/app_handler.gd" type="Script" id=5]
@@ -26,57 +25,12 @@ corner_radius_bottom_left = 4
 
 [sub_resource type="AtlasTexture" id=3]
 flags = 4
-atlas = ExtResource( 2 )
+atlas = ExtResource( 10 )
 region = Rect2( 0, 0, 18, 18 )
 
-[sub_resource type="AtlasTexture" id=14]
+[sub_resource type="AtlasTexture" id=4]
 flags = 4
-atlas = ExtResource( 2 )
-region = Rect2( 0, 18, 18, 18 )
-
-[sub_resource type="AtlasTexture" id=5]
-flags = 4
-atlas = ExtResource( 2 )
-region = Rect2( 18, 18, 18, 18 )
-
-[sub_resource type="AtlasTexture" id=6]
-flags = 4
-atlas = ExtResource( 2 )
-region = Rect2( 36, 18, 18, 18 )
-
-[sub_resource type="AtlasTexture" id=7]
-flags = 4
-atlas = ExtResource( 2 )
-region = Rect2( 54, 18, 18, 18 )
-
-[sub_resource type="AtlasTexture" id=8]
-flags = 4
-atlas = ExtResource( 2 )
-region = Rect2( 90, 0, 18, 18 )
-
-[sub_resource type="AtlasTexture" id=9]
-flags = 4
-atlas = ExtResource( 2 )
-region = Rect2( 54, 0, 18, 18 )
-
-[sub_resource type="AtlasTexture" id=10]
-flags = 4
-atlas = ExtResource( 2 )
-region = Rect2( 72, 0, 18, 18 )
-
-[sub_resource type="AtlasTexture" id=11]
-flags = 4
-atlas = ExtResource( 2 )
-region = Rect2( 18, 0, 18, 18 )
-
-[sub_resource type="AtlasTexture" id=12]
-flags = 4
-atlas = ExtResource( 2 )
-region = Rect2( 36, 0, 18, 18 )
-
-[sub_resource type="AtlasTexture" id=13]
-flags = 4
-atlas = ExtResource( 2 )
+atlas = ExtResource( 10 )
 region = Rect2( 36, 18, 18, 18 )
 
 [node name="Desktop" type="Control"]
@@ -298,7 +252,6 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-icons = [ SubResource( 3 ), SubResource( 14 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ) ]
 
 [node name="InputEvents" type="Panel" parent="Overlay/Status/BottomContainer"]
 margin_left = 4.0
@@ -415,7 +368,7 @@ custom_constants/separation = 2
 [node name="Icon" type="TextureRect" parent="Overlay/Status/BottomContainer/InputEvents/HBoxContainer/Right/Enter"]
 margin_right = 18.0
 margin_bottom = 24.0
-texture = SubResource( 13 )
+texture = SubResource( 4 )
 stretch_mode = 6
 
 [node name="SmallLabel" parent="Overlay/Status/BottomContainer/InputEvents/HBoxContainer/Right/Enter" instance=ExtResource( 4 )]
@@ -449,7 +402,7 @@ custom_constants/separation = 2
 [node name="Icon" type="TextureRect" parent="Overlay/Status/BottomContainer/InputEvents/HBoxContainer/Right/Back"]
 margin_right = 18.0
 margin_bottom = 24.0
-texture = SubResource( 13 )
+texture = SubResource( 4 )
 stretch_mode = 6
 
 [node name="SmallLabel" parent="Overlay/Status/BottomContainer/InputEvents/HBoxContainer/Right/Back" instance=ExtResource( 4 )]

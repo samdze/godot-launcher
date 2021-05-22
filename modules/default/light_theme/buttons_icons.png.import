@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/bottom_icons.png-caa7949097b24aa02d55d9fae48f6edc.stex"
+path="res://.import/buttons_icons.png-3056096a0b1570320d20a5858553604a.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://modules/default/desktop/bottom_icons.png"
-dest_files=[ "res://.import/bottom_icons.png-caa7949097b24aa02d55d9fae48f6edc.stex" ]
+source_file="res://modules/default/light_theme/buttons_icons.png"
+dest_files=[ "res://.import/buttons_icons.png-3056096a0b1570320d20a5858553604a.stex" ]
 
 [params]
 
