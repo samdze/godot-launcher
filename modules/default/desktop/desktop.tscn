@@ -1,8 +1,7 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://modules/default/desktop/bottom_bar.gd" type="Script" id=1]
 [ext_resource path="res://system/components/large_label.tscn" type="PackedScene" id=3]
-[ext_resource path="res://system/components/small_label.tscn" type="PackedScene" id=4]
 [ext_resource path="res://system/app_handler.gd" type="Script" id=5]
 [ext_resource path="res://system/components/theme_property_applier.gd" type="Script" id=6]
 [ext_resource path="res://modules/default/desktop/loading.gd" type="Script" id=7]
@@ -22,16 +21,6 @@ corner_radius_top_left = 4
 corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
-
-[sub_resource type="AtlasTexture" id=3]
-flags = 4
-atlas = ExtResource( 10 )
-region = Rect2( 0, 0, 18, 18 )
-
-[sub_resource type="AtlasTexture" id=4]
-flags = 4
-atlas = ExtResource( 10 )
-region = Rect2( 36, 18, 18, 18 )
 
 [node name="Desktop" type="Control"]
 anchor_right = 1.0
@@ -105,7 +94,7 @@ custom_styles/normal = SubResource( 1 )
 text = "GameShell"
 valign = 1
 font_values = {
-"font": "large_font"
+"font": "large"
 }
 constant_values = {
 
@@ -319,113 +308,12 @@ margin_right = 150.0
 margin_bottom = 24.0
 size_flags_horizontal = 3
 
-[node name="Nav" type="HBoxContainer" parent="Overlay/Status/BottomContainer/InputEvents/HBoxContainer/Left"]
-margin_right = 44.0
-margin_bottom = 24.0
-custom_constants/separation = 2
-
-[node name="Icon" type="TextureRect" parent="Overlay/Status/BottomContainer/InputEvents/HBoxContainer/Left/Nav"]
-margin_right = 18.0
-margin_bottom = 24.0
-texture = SubResource( 3 )
-stretch_mode = 6
-
-[node name="SmallLabel" parent="Overlay/Status/BottomContainer/InputEvents/HBoxContainer/Left/Nav" instance=ExtResource( 4 )]
-margin_left = 20.0
-margin_top = 5.0
-margin_right = 44.0
-margin_bottom = 19.0
-text = "Nav"
-font_values = {
-"font": "small_font"
-}
-constant_values = {
-
-}
-color_values = {
-
-}
-stylebox_values = {
-
-}
-texture_values = {
-
-}
-
 [node name="Right" type="HBoxContainer" parent="Overlay/Status/BottomContainer/InputEvents/HBoxContainer"]
 margin_left = 154.0
 margin_right = 304.0
 margin_bottom = 24.0
 size_flags_horizontal = 3
 alignment = 2
-
-[node name="Enter" type="HBoxContainer" parent="Overlay/Status/BottomContainer/InputEvents/HBoxContainer/Right"]
-margin_left = 43.0
-margin_right = 96.0
-margin_bottom = 24.0
-custom_constants/separation = 2
-
-[node name="Icon" type="TextureRect" parent="Overlay/Status/BottomContainer/InputEvents/HBoxContainer/Right/Enter"]
-margin_right = 18.0
-margin_bottom = 24.0
-texture = SubResource( 4 )
-stretch_mode = 6
-
-[node name="SmallLabel" parent="Overlay/Status/BottomContainer/InputEvents/HBoxContainer/Right/Enter" instance=ExtResource( 4 )]
-margin_left = 20.0
-margin_top = 5.0
-margin_right = 53.0
-margin_bottom = 19.0
-text = "Enter"
-font_values = {
-"font": "small_font"
-}
-constant_values = {
-
-}
-color_values = {
-
-}
-stylebox_values = {
-
-}
-texture_values = {
-
-}
-
-[node name="Back" type="HBoxContainer" parent="Overlay/Status/BottomContainer/InputEvents/HBoxContainer/Right"]
-margin_left = 100.0
-margin_right = 150.0
-margin_bottom = 24.0
-custom_constants/separation = 2
-
-[node name="Icon" type="TextureRect" parent="Overlay/Status/BottomContainer/InputEvents/HBoxContainer/Right/Back"]
-margin_right = 18.0
-margin_bottom = 24.0
-texture = SubResource( 4 )
-stretch_mode = 6
-
-[node name="SmallLabel" parent="Overlay/Status/BottomContainer/InputEvents/HBoxContainer/Right/Back" instance=ExtResource( 4 )]
-margin_left = 20.0
-margin_top = 5.0
-margin_right = 50.0
-margin_bottom = 19.0
-text = "Back"
-font_values = {
-"font": "small_font"
-}
-constant_values = {
-
-}
-color_values = {
-
-}
-stylebox_values = {
-
-}
-texture_values = {
-
-}
 
 [node name="LoadingRect" type="ColorRect" parent="Overlay/Status"]
 visible = false
@@ -474,21 +362,21 @@ app_container = NodePath("Container")
 
 [node name="TopSpacer" type="Control" parent="App"]
 margin_right = 320.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 0, 32 )
+margin_bottom = 28.0
+rect_min_size = Vector2( 0, 28 )
 size_flags_vertical = 5
 
 [node name="Container" type="VBoxContainer" parent="App"]
-margin_top = 32.0
+margin_top = 28.0
 margin_right = 320.0
-margin_bottom = 208.0
+margin_bottom = 212.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 0
 
 [node name="BottomSpacer" type="Control" parent="App"]
-margin_top = 208.0
+margin_top = 212.0
 margin_right = 320.0
 margin_bottom = 240.0
-rect_min_size = Vector2( 0, 32 )
+rect_min_size = Vector2( 0, 28 )
 size_flags_vertical = 5

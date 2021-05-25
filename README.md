@@ -1,11 +1,15 @@
 <p align="center">
+	<img src="https://i.imgur.com/kdU1ezB.gif" />
 	<img src="https://i.imgur.com/Qw2MiJb.gif" />
-	<img src="https://i.imgur.com/BgUXz5O.gif" />
 </p>
 
 # Modular Launcher for Linux devices and Single-Board Computers
 An alternative, console-like, launcher for single-board computers. Made with Godot and GDNative.<br>
 The launcher is primarily made to run on the GameShell portable console but can also run on other sbcs thanks to modules.<br>
+
+<p align="center">
+	<img src="https://i.imgur.com/BgUXz5O.gif" />
+</p>
 
 **BETA VERSION**
 
@@ -29,6 +33,7 @@ This launcher aims to fix all those issues and to add other nice features.
 The precompiled binaries in the repository are for armv7 devices only.
 Future releases may include prepackaged binaries for other architectures too.
 
+#### GameShell
 On the GameShell: ssh into the cpi home directory and run:
 ```
 git clone https://github.com/samdze/godot-launcher.git
@@ -37,12 +42,14 @@ sed -i s/launcher/godot-launcher/g /home/cpi/.bashrc
 Restart the GameShell and you should boot into the Godot launcher.<br>
 You can rollback to the stock launcher selecting "Switch Launcher" inside the Settings app.
 
+#### Other Linux Devices
 On other sbcs, start an X session executing the .xinitrc file.
-Clone the launcher in you home directory and be sure to have libconfig9 installed. It's needed to run compton.
+Install the required shared libraries and clone the launcher in you home directory.
+Run the launcher as a normal user, the root user is not necessary.
 ```
-sudo apt install libconfig9
+sudo apt install libconfig9 libxcursor1 libpulse-dev
 git clone https://github.com/samdze/godot-launcher.git
-startx /home/user/godot-launcher/.xinitrc -- -nocursor
+startx /home/<user>/godot-launcher/.xinitrc -- -nocursor
 ```
 The launcher is quite untested on devices other than the GameShell, and features like Wi-Fi settings, sound volume settings, brightness settings are not expected to work.
 Testing and feedbacks are very welcome.<br>
@@ -51,7 +58,9 @@ Please open an issue if you find bugs or non-functioning features.
 Better documentation will be available in the future.
 
 ## Documentation
-On the GameShell, press Shift + START at any time when an app is open to show the launcher widgets.<br>
+The first time you open the launcher, the first boot setup will let you map your inputs and choose the language.
+
+On the GameShell, press SELECT (or any other button you mapped) at any time when an app is open to show the launcher widgets.<br>
 In this state, you can then exit the app, go back to the app, see the time, the approximate remaining battery and the Wi-Fi connection status, tweak screen brightness and audio volume.
 
 The default Settings app lets you change a few things about the launcher, including input mappings.

@@ -50,6 +50,7 @@ DEFAULT.RELOAD_ON_EXIT,Exit to reload the launcher and apply pending changes,Esc
 DEFAULT.RUNNING_APP,Running App,App Esecuzione
 DEFAULT.SETTINGS,Settings,Impostazioni
 DEFAULT.SETTINGS_APP,Settings App,App Impostazioni
+DEFAULT.SETUP_COMPLETED,Setup completed!,Configurazione completata!
 DEFAULT.SWITCH_LAUNCHER,Switch Launcher,Cambia Launcher
 DEFAULT.THEME,Theme,Tema
 DEFAULT.TIME_APRIL,April,Aprile

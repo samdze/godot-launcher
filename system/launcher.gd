@@ -18,6 +18,8 @@ onready var tween : Tween = $Tween
 func _ready():
 	# Configure the launcher for testing
 	if OS.has_feature("x86_64"):
+#		OS.window_resizable = true
+		
 		var ev = InputEventKey.new()
 		ev.pressed = true
 		ev.scancode = KEY_SLASH
@@ -40,6 +42,7 @@ func _ready():
 	desktop.connect("open_request", self, "_status_open_request")
 	desktop.connect("close_request", self, "_status_close_request")
 	desktop.connect("home_request", self, "_desktop_home_request", [], CONNECT_DEFERRED)
+	desktop.free_space()
 	
 	# Listen to the App Handler signals, when Apps want to change the title or the bars visibility
 	app = desktop.get_app_handler()
@@ -192,7 +195,7 @@ func emit_event(name, arguments = []):
 static func _get_settings():
 	return [
 		Setting.create("system/desktop", "default/desktop"),
-		Setting.create("system/launcher_app", "default/launcher"),
+		Setting.create("system/launcher_app", "default/welcome_setup"),
 		Setting.create("system/settings_app", "default/settings"),
 		Setting.create("system/keyboard_app", "default/keyboard"),
 		Setting.create("system/language", "en"),

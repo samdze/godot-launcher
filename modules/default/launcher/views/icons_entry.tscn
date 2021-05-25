@@ -145,7 +145,7 @@ text = " "
 align = 1
 valign = 1
 font_values = {
-"font": "large_font"
+"font": "large"
 }
 color_values = {
 "font_color": "entry_color"

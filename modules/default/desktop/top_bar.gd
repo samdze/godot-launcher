@@ -43,7 +43,7 @@ func _ready():
 		w.connect("pressed", self, "_widget_selected", [w])
 		w.connect("unfocus_controls_request", self, "_unfocus_controls_request", [w])
 		w.connect("gui_input", self, "_gui_input")
-		print("Configuring widget " + w.name)
+		
 		w.focus_neighbour_top = w.get_path()
 		w.focus_neighbour_bottom = w.get_path()
 		

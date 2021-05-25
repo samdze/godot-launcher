@@ -42,7 +42,10 @@ func _generate_items(locales, selected_option = null) -> Control:
 		button.set_meta("data", l)
 		button.clip_text = true
 		button.size_flags_horizontal = SIZE_EXPAND_FILL
-		button.text = TranslationServer.get_locale_name(l)
+		if System.get_languages().has(l):
+			button.text = System.get_languages()[l]
+		else:
+			button.text = TranslationServer.get_locale_name(l)
 		button.align = Button.ALIGN_LEFT
 		button.toggle_mode = true
 		button.action_mode = BaseButton.ACTION_MODE_BUTTON_PRESS

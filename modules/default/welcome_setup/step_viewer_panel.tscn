@@ -1,0 +1,7 @@
+[gd_scene format=2]
+
+[node name="StepPanel" type="Panel"]
+margin_left = 108.0
+margin_right = 140.0
+margin_bottom = 6.0
+rect_min_size = Vector2( 32, 6 )

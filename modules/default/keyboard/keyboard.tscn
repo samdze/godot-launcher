@@ -6,12 +6,12 @@
 [ext_resource path="res://system/components/theme_property_applier.gd" type="Script" id=4]
 [ext_resource path="res://system/components/scroll_container.tscn" type="PackedScene" id=5]
 
-[sub_resource type="AtlasTexture" id=3]
+[sub_resource type="AtlasTexture" id=1]
 flags = 4
 atlas = ExtResource( 3 )
 region = Rect2( 0, 0, 7, 8 )
 
-[sub_resource type="AtlasTexture" id=4]
+[sub_resource type="AtlasTexture" id=2]
 flags = 4
 atlas = ExtResource( 3 )
 region = Rect2( 9, 0, 7, 8 )
@@ -34,23 +34,17 @@ first_symbols_focused_key = NodePath("MarginContainer/Layout/KeysContainer/Symbo
 [node name="MarginContainer" type="MarginContainer" parent="."]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 315.0
+margin_right = 303.0
 margin_bottom = 229.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_constants/margin_right = 6
-custom_constants/margin_top = 2
-custom_constants/margin_left = 6
-custom_constants/margin_bottom = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Layout" type="VBoxContainer" parent="MarginContainer"]
-margin_left = 6.0
-margin_top = 2.0
-margin_right = 302.0
-margin_bottom = 220.0
+margin_right = 296.0
+margin_bottom = 222.0
 focus_neighbour_left = NodePath(".")
 focus_neighbour_top = NodePath(".")
 focus_neighbour_right = NodePath(".")
@@ -66,7 +60,7 @@ __meta__ = {
 
 [node name="PanelContainer" type="PanelContainer" parent="MarginContainer/Layout"]
 margin_right = 296.0
-margin_bottom = 105.0
+margin_bottom = 107.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource( 4 )
@@ -78,7 +72,7 @@ stylebox_values = {
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 289.0
-margin_bottom = 98.0
+margin_bottom = 100.0
 custom_constants/margin_right = 4
 custom_constants/margin_top = 4
 custom_constants/margin_left = 4
@@ -90,14 +84,14 @@ anchor_bottom = 0.0
 margin_left = 4.0
 margin_top = 4.0
 margin_right = 278.0
-margin_bottom = 87.0
+margin_bottom = 89.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 follow_focus = true
 
 [node name="LargeLabel" parent="MarginContainer/Layout/PanelContainer/MarginContainer/TextContainer" instance=ExtResource( 2 )]
 margin_right = 274.0
-margin_bottom = 83.0
+margin_bottom = 85.0
 size_flags_horizontal = 3
 size_flags_vertical = 7
 text = "4r4thru4h hru4hh r4huhr 4hurh hu4hrh"
@@ -120,9 +114,9 @@ stylebox_values = {
 }
 
 [node name="KeysContainer" type="VBoxContainer" parent="MarginContainer/Layout"]
-margin_top = 119.0
+margin_top = 122.0
 margin_right = 296.0
-margin_bottom = 211.0
+margin_bottom = 214.0
 size_flags_horizontal = 3
 size_flags_vertical = 6
 
@@ -507,7 +501,7 @@ margin_right = 19.0
 margin_bottom = 20.0
 size_flags_horizontal = 10
 action_mode = 0
-icon = SubResource( 3 )
+icon = SubResource( 1 )
 align = 0
 __meta__ = {
 "_edit_use_anchors_": false
@@ -603,7 +597,7 @@ margin_right = 252.0
 margin_bottom = 20.0
 size_flags_horizontal = 10
 action_mode = 0
-icon = SubResource( 4 )
+icon = SubResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -1008,7 +1002,7 @@ margin_right = 28.0
 margin_bottom = 20.0
 size_flags_horizontal = 2
 action_mode = 0
-icon = SubResource( 3 )
+icon = SubResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -1065,7 +1059,7 @@ margin_right = 166.0
 margin_bottom = 20.0
 size_flags_horizontal = 10
 action_mode = 0
-icon = SubResource( 4 )
+icon = SubResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

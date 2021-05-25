@@ -12,14 +12,20 @@ var settings_objects = {}
 var settings_definitions = {}
 var settings_exports = []
 
-var listeners = {}
-
 
 func _ready():
 	config = ConfigFile.new()
 	var result = config.load("res://settings.conf")
 	
-#	config.set_value("system", "language", config.get_value("system", "language", "en"))
+	reset()
+
+
+func reset():
+	settings.clear()
+	settings_objects.clear()
+	settings_definitions.clear()
+	settings_exports.clear()
+	
 	TranslationServer.set_locale(config.get_value("system", "language", "en"))
 	print("Language set to " + TranslationServer.get_locale_name(TranslationServer.get_locale()))
 	

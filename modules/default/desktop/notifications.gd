@@ -79,14 +79,14 @@ func get_pending_notifications_count() -> int:
 
 
 func append_notification(message : String, type : String):
-	var style : String = "notification_message"
+	var style : String = "message"
 	match type:
 		"warning":
-			style = "notification_warning"
+			style = "warning"
 		"success":
-			style = "notification_success"
+			style = "success"
 		"error":
-			style = "notification_error"
+			style = "error"
 	
 	var notif = Notification.new()
 	notif.style = style

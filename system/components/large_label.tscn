@@ -2,7 +2,6 @@
 
 [ext_resource path="res://system/components/theme_property_applier.gd" type="Script" id=1]
 
-
 [node name="LargeLabel" type="Label"]
 margin_right = 40.0
 margin_bottom = 14.0
@@ -11,5 +10,5 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 font_values = {
-"font": "large_font"
+"font": "large"
 }

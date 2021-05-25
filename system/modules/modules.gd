@@ -8,6 +8,7 @@ func _ready():
 
 
 func reload():
+	Settings.reset()
 	loaded_components.clear()
 	
 	# Load system module
@@ -22,7 +23,6 @@ func reload():
 		system_component.tags = [Component.TAG_SYSTEM]
 		
 		loaded_components[system_component.id] = system_component
-		print("Adding system exported settings: " + str(system_exports))
 		_load_settings(system_component, system_exports)
 	
 	# Load other modules

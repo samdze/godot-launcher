@@ -23,8 +23,13 @@ type = 9223372036854775806
 [node name="SettingEntry" parent="." instance=ExtResource( 3 )]
 margin_bottom = 34.0
 
+[node name="EditorsContainer" parent="SettingEntry" index="0"]
+margin_bottom = 27.0
+
 [node name="LabelContainer" parent="SettingEntry/EditorsContainer" index="0"]
+margin_top = 3.0
 margin_right = 107.0
+margin_bottom = 17.0
 
 [node name="Label" parent="SettingEntry/EditorsContainer/LabelContainer" index="0"]
 margin_right = 107.0

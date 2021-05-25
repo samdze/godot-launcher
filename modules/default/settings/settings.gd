@@ -109,7 +109,8 @@ func _load_directory(directory, selected_entry = 0):
 	scroll_container.scroll_vertical = 0
 	
 	selected_entry = clamp(selected_entry, 0, options_container.get_child_count() - 1)
-	options_container.get_child(selected_entry).call_deferred("grab_focus")
+	if selected_entry >= 0:
+		options_container.get_child(selected_entry).call_deferred("grab_focus")
 
 
 func move_to_directory(directory : String):

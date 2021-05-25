@@ -41,7 +41,10 @@ margin_bottom = 20.0
 size_flags_horizontal = 3
 size_flags_vertical = 4
 size_flags_stretch_ratio = 0.6
+custom_constants/margin_right = 0
+custom_constants/margin_top = 0
 custom_constants/margin_left = 2
+custom_constants/margin_bottom = 0
 
 [node name="Label" type="Label" parent="EditorsContainer/LabelContainer"]
 margin_left = 2.0

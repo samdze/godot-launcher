@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=49 format=2]
+[gd_resource type="Theme" load_steps=50 format=2]
 
 [ext_resource path="res://modules/default/light_theme/varelaround_regular_large.tres" type="DynamicFont" id=1]
 [ext_resource path="res://modules/default/light_theme/varelaround_regular_medium.tres" type="DynamicFont" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://modules/default/light_theme/default_wallpaper.png" type="Texture" id=6]
 [ext_resource path="res://modules/default/light_theme/varelaround_regular_xxlarge.tres" type="DynamicFont" id=7]
 [ext_resource path="res://modules/default/light_theme/buttons_icons.png" type="Texture" id=8]
+[ext_resource path="res://modules/default/light_theme/varelaround_regular_xlarge.tres" type="DynamicFont" id=9]
 
 [sub_resource type="StyleBoxFlat" id=1]
 content_margin_left = 4.0
@@ -31,12 +32,12 @@ corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
-[sub_resource type="AtlasTexture" id=3]
+[sub_resource type="AtlasTexture" id=13]
 flags = 4
 atlas = ExtResource( 8 )
 region = Rect2( 0, 18, 18, 18 )
 
-[sub_resource type="AtlasTexture" id=4]
+[sub_resource type="AtlasTexture" id=14]
 flags = 4
 atlas = ExtResource( 8 )
 region = Rect2( 18, 18, 18, 18 )
@@ -81,12 +82,12 @@ flags = 4
 atlas = ExtResource( 8 )
 region = Rect2( 54, 0, 18, 18 )
 
-[sub_resource type="AtlasTexture" id=13]
+[sub_resource type="AtlasTexture" id=41]
 flags = 4
 atlas = ExtResource( 8 )
 region = Rect2( 108, 18, 18, 18 )
 
-[sub_resource type="AtlasTexture" id=14]
+[sub_resource type="AtlasTexture" id=42]
 flags = 4
 atlas = ExtResource( 8 )
 region = Rect2( 72, 0, 18, 18 )
@@ -216,6 +217,13 @@ expand_margin_right = 2.0
 expand_margin_top = 2.0
 expand_margin_bottom = 2.0
 
+[sub_resource type="StyleBoxFlat" id=29]
+bg_color = Color( 0.894118, 0.25098, 0.431373, 1 )
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
 [sub_resource type="StyleBoxFlat" id=28]
 content_margin_left = 2.0
 content_margin_right = 2.0
@@ -229,29 +237,8 @@ corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 corner_detail = 4
 
-[sub_resource type="StyleBoxFlat" id=29]
-bg_color = Color( 0.894118, 0.25098, 0.431373, 1 )
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
-
 [sub_resource type="StyleBoxFlat" id=30]
 bg_color = Color( 0.0588235, 0.705882, 0.901961, 1 )
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
-
-[sub_resource type="StyleBoxFlat" id=31]
-bg_color = Color( 0.356863, 0.882353, 0.4, 1 )
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
-
-[sub_resource type="StyleBoxFlat" id=32]
-bg_color = Color( 0.929412, 0.698039, 0.0823529, 1 )
 corner_radius_top_left = 4
 corner_radius_top_right = 4
 corner_radius_bottom_right = 4
@@ -282,6 +269,20 @@ corner_radius_top_right = 12
 corner_radius_bottom_right = 12
 corner_radius_bottom_left = 12
 corner_detail = 4
+
+[sub_resource type="StyleBoxFlat" id=31]
+bg_color = Color( 0.356863, 0.882353, 0.4, 1 )
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id=32]
+bg_color = Color( 0.929412, 0.698039, 0.0823529, 1 )
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
 
 [sub_resource type="StyleBoxFlat" id=35]
 bg_color = Color( 0.952941, 0.952941, 0.952941, 1 )
@@ -343,18 +344,20 @@ corner_radius_bottom_left = 2
 default_font = ExtResource( 2 )
 Button/colors/font_color = Color( 0.32549, 0.32549, 0.32549, 1 )
 Button/colors/font_color_disabled = Color( 0.32549, 0.32549, 0.32549, 1 )
-Button/colors/font_color_hover = Color( 1, 1, 1, 1 )
-Button/colors/font_color_pressed = Color( 1, 1, 1, 1 )
+Button/colors/font_color_hover = Color( 0.32549, 0.32549, 0.32549, 1 )
+Button/colors/font_color_pressed = Color( 0.32549, 0.32549, 0.32549, 1 )
 Button/styles/disabled = SubResource( 1 )
 Button/styles/focus = SubResource( 2 )
 Button/styles/hover = SubResource( 2 )
 Button/styles/normal = SubResource( 1 )
 Button/styles/pressed = SubResource( 2 )
 Control/colors/contrast = Color( 0.32549, 0.32549, 0.32549, 1 )
+Control/colors/error = Color( 0.894118, 0.25098, 0.431373, 1 )
 Control/colors/highlight = Color( 0.0588235, 0.705882, 0.901961, 1 )
 Control/colors/main = Color( 1, 1, 1, 1 )
-Control/icons/button_a = SubResource( 3 )
-Control/icons/button_b = SubResource( 4 )
+Control/colors/success = Color( 0.356863, 0.882353, 0.4, 1 )
+Control/icons/button_a = SubResource( 13 )
+Control/icons/button_b = SubResource( 14 )
 Control/icons/button_down = SubResource( 5 )
 Control/icons/button_home = SubResource( 6 )
 Control/icons/button_left = SubResource( 7 )
@@ -363,8 +366,8 @@ Control/icons/button_nav = SubResource( 9 )
 Control/icons/button_nav_h = SubResource( 10 )
 Control/icons/button_nav_v = SubResource( 11 )
 Control/icons/button_right = SubResource( 12 )
-Control/icons/button_start = SubResource( 13 )
-Control/icons/button_up = SubResource( 14 )
+Control/icons/button_start = SubResource( 41 )
+Control/icons/button_up = SubResource( 42 )
 Control/icons/button_x = SubResource( 15 )
 Control/icons/button_y = SubResource( 16 )
 Control/icons/wallpaper = ExtResource( 6 )
@@ -380,28 +383,29 @@ HSlider/styles/grabber_area_highlight = SubResource( 22 )
 HSlider/styles/slider = SubResource( 23 )
 Label/colors/entry_color = Color( 0, 0, 0, 1 )
 Label/colors/font_color = Color( 0.32549, 0.32549, 0.32549, 1 )
-Label/fonts/large_font = ExtResource( 1 )
-Label/fonts/small_font = ExtResource( 3 )
+Label/fonts/large = ExtResource( 1 )
+Label/fonts/small = ExtResource( 3 )
+Label/fonts/xlarge = ExtResource( 9 )
 Label/fonts/xxlarge = ExtResource( 7 )
 LineEdit/colors/cursor_color = Color( 0.32549, 0.32549, 0.32549, 1 )
 LineEdit/colors/font_color = Color( 0.32549, 0.32549, 0.32549, 1 )
 LineEdit/fonts/font = ExtResource( 1 )
-MarginContainer/constants/margin_bottom = 2
+MarginContainer/constants/margin_bottom = 4
 MarginContainer/constants/margin_left = 4
 MarginContainer/constants/margin_right = 4
-MarginContainer/constants/margin_top = 2
+MarginContainer/constants/margin_top = 4
 OptionButton/icons/arrow = SubResource( 24 )
 Panel/styles/bg = SubResource( 25 )
 Panel/styles/highlighter = SubResource( 26 )
 Panel/styles/panel = SubResource( 27 )
+PanelContainer/styles/error = SubResource( 29 )
 PanelContainer/styles/focus = SubResource( 28 )
-PanelContainer/styles/notification_error = SubResource( 29 )
-PanelContainer/styles/notification_message = SubResource( 30 )
-PanelContainer/styles/notification_success = SubResource( 31 )
-PanelContainer/styles/notification_warning = SubResource( 32 )
+PanelContainer/styles/message = SubResource( 30 )
 PanelContainer/styles/panel = SubResource( 33 )
 PanelContainer/styles/popup = SubResource( 27 )
 PanelContainer/styles/rounded = SubResource( 34 )
+PanelContainer/styles/success = SubResource( 31 )
+PanelContainer/styles/warning = SubResource( 32 )
 PopupPanel/styles/panel = SubResource( 35 )
 ScrollContainer/styles/bg = SubResource( 36 )
 ScrollContainer/styles/no_scroll = SubResource( 36 )

@@ -28,7 +28,6 @@ func _update_audio_volume(value : int):
 
 
 func _audio_volume_changed():
-	print("Audio volume is " + str(Settings.get_value("settings/audio_volume")))
 	volume = clamp(int(Settings.get_value("settings/audio_volume")), 0, 100)
 	_update_audio_volume(volume)
 

@@ -97,7 +97,7 @@ func close():
 	tween.remove_all()
 	tween.interpolate_property(top_bar, "rect_position", top_bar.rect_position, Vector2(top_bar.rect_position.x, - top_bar.rect_size.y), 0.2, Tween.TRANS_QUAD, Tween.EASE_IN)
 	tween.interpolate_property(bot_bar, "rect_position", bot_bar.rect_position, Vector2(bot_bar.rect_position.x, OS.window_size.y), 0.2, Tween.TRANS_QUAD, Tween.EASE_IN)
-	tween.interpolate_callback(self, 0.2, "emit_signal", "_closed")
+	tween.interpolate_callback(self, 0.2, "emit_signal", "closed")
 	tween.start()
 
 
