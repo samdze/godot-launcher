@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://system/components/theme_property_applier.gd" type="Script" id=1]
 [ext_resource path="res://modules/default/welcome_setup/welcome_setup.gd" type="Script" id=2]
@@ -12,7 +12,6 @@
 [ext_resource path="res://modules/default/welcome_setup/press_button_animation.png" type="Texture" id=10]
 [ext_resource path="res://modules/default/welcome_setup/input_verification_step.gd" type="Script" id=11]
 [ext_resource path="res://modules/default/welcome_setup/setup_completed_step.gd" type="Script" id=12]
-[ext_resource path="res://modules/default/welcome_setup/arrow_up_icon.png" type="Texture" id=13]
 
 [sub_resource type="AtlasTexture" id=3]
 flags = 4
@@ -302,15 +301,6 @@ margin_bottom = 18.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="Arrow" type="TextureRect" parent="Configuration/Steps/InputVerification/CenterContainer/IndexContainer/Index"]
-visible = false
-margin_right = 18.0
-margin_bottom = 18.0
-rect_min_size = Vector2( 18, 18 )
-texture = ExtResource( 13 )
-expand = true
-stretch_mode = 6
 
 [node name="ButtonPress" type="TextureRect" parent="Configuration/Steps/InputVerification/CenterContainer/IndexContainer/Index"]
 margin_right = 18.0
