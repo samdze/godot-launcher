@@ -32,12 +32,12 @@ corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
-[sub_resource type="AtlasTexture" id=13]
+[sub_resource type="AtlasTexture" id=3]
 flags = 4
 atlas = ExtResource( 8 )
 region = Rect2( 0, 18, 18, 18 )
 
-[sub_resource type="AtlasTexture" id=14]
+[sub_resource type="AtlasTexture" id=4]
 flags = 4
 atlas = ExtResource( 8 )
 region = Rect2( 18, 18, 18, 18 )
@@ -82,12 +82,12 @@ flags = 4
 atlas = ExtResource( 8 )
 region = Rect2( 54, 0, 18, 18 )
 
-[sub_resource type="AtlasTexture" id=41]
+[sub_resource type="AtlasTexture" id=13]
 flags = 4
 atlas = ExtResource( 8 )
 region = Rect2( 108, 18, 18, 18 )
 
-[sub_resource type="AtlasTexture" id=42]
+[sub_resource type="AtlasTexture" id=14]
 flags = 4
 atlas = ExtResource( 8 )
 region = Rect2( 72, 0, 18, 18 )
@@ -217,14 +217,14 @@ expand_margin_right = 2.0
 expand_margin_top = 2.0
 expand_margin_bottom = 2.0
 
-[sub_resource type="StyleBoxFlat" id=29]
+[sub_resource type="StyleBoxFlat" id=28]
 bg_color = Color( 0.894118, 0.25098, 0.431373, 1 )
 corner_radius_top_left = 4
 corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
-[sub_resource type="StyleBoxFlat" id=28]
+[sub_resource type="StyleBoxFlat" id=29]
 content_margin_left = 2.0
 content_margin_right = 2.0
 content_margin_top = 2.0
@@ -244,7 +244,7 @@ corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
-[sub_resource type="StyleBoxFlat" id=33]
+[sub_resource type="StyleBoxFlat" id=31]
 content_margin_left = 2.0
 content_margin_right = 2.0
 content_margin_top = 2.0
@@ -257,7 +257,7 @@ corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 corner_detail = 4
 
-[sub_resource type="StyleBoxFlat" id=34]
+[sub_resource type="StyleBoxFlat" id=32]
 content_margin_left = 2.0
 content_margin_right = 2.0
 content_margin_top = 2.0
@@ -270,14 +270,14 @@ corner_radius_bottom_right = 12
 corner_radius_bottom_left = 12
 corner_detail = 4
 
-[sub_resource type="StyleBoxFlat" id=31]
+[sub_resource type="StyleBoxFlat" id=33]
 bg_color = Color( 0.356863, 0.882353, 0.4, 1 )
 corner_radius_top_left = 4
 corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
-[sub_resource type="StyleBoxFlat" id=32]
+[sub_resource type="StyleBoxFlat" id=34]
 bg_color = Color( 0.929412, 0.698039, 0.0823529, 1 )
 corner_radius_top_left = 4
 corner_radius_top_right = 4
@@ -356,8 +356,8 @@ Control/colors/error = Color( 0.894118, 0.25098, 0.431373, 1 )
 Control/colors/highlight = Color( 0.0588235, 0.705882, 0.901961, 1 )
 Control/colors/main = Color( 1, 1, 1, 1 )
 Control/colors/success = Color( 0.356863, 0.882353, 0.4, 1 )
-Control/icons/button_a = SubResource( 13 )
-Control/icons/button_b = SubResource( 14 )
+Control/icons/button_a = SubResource( 3 )
+Control/icons/button_b = SubResource( 4 )
 Control/icons/button_down = SubResource( 5 )
 Control/icons/button_home = SubResource( 6 )
 Control/icons/button_left = SubResource( 7 )
@@ -366,8 +366,8 @@ Control/icons/button_nav = SubResource( 9 )
 Control/icons/button_nav_h = SubResource( 10 )
 Control/icons/button_nav_v = SubResource( 11 )
 Control/icons/button_right = SubResource( 12 )
-Control/icons/button_start = SubResource( 41 )
-Control/icons/button_up = SubResource( 42 )
+Control/icons/button_start = SubResource( 13 )
+Control/icons/button_up = SubResource( 14 )
 Control/icons/button_x = SubResource( 15 )
 Control/icons/button_y = SubResource( 16 )
 Control/icons/wallpaper = ExtResource( 6 )
@@ -398,14 +398,14 @@ OptionButton/icons/arrow = SubResource( 24 )
 Panel/styles/bg = SubResource( 25 )
 Panel/styles/highlighter = SubResource( 26 )
 Panel/styles/panel = SubResource( 27 )
-PanelContainer/styles/error = SubResource( 29 )
-PanelContainer/styles/focus = SubResource( 28 )
+PanelContainer/styles/error = SubResource( 28 )
+PanelContainer/styles/focus = SubResource( 29 )
 PanelContainer/styles/message = SubResource( 30 )
-PanelContainer/styles/panel = SubResource( 33 )
+PanelContainer/styles/panel = SubResource( 31 )
 PanelContainer/styles/popup = SubResource( 27 )
-PanelContainer/styles/rounded = SubResource( 34 )
-PanelContainer/styles/success = SubResource( 31 )
-PanelContainer/styles/warning = SubResource( 32 )
+PanelContainer/styles/rounded = SubResource( 32 )
+PanelContainer/styles/success = SubResource( 33 )
+PanelContainer/styles/warning = SubResource( 34 )
 PopupPanel/styles/panel = SubResource( 35 )
 ScrollContainer/styles/bg = SubResource( 36 )
 ScrollContainer/styles/no_scroll = SubResource( 36 )

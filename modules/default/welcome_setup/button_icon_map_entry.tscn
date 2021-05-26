@@ -4,12 +4,12 @@
 [ext_resource path="res://system/components/modulate_applier.gd" type="Script" id=2]
 [ext_resource path="res://modules/default/welcome_setup/press_button_animation.png" type="Texture" id=3]
 
-[sub_resource type="AtlasTexture" id=3]
+[sub_resource type="AtlasTexture" id=1]
 flags = 4
 atlas = ExtResource( 3 )
 region = Rect2( 0, 0, 36, 36 )
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=2]
 resource_name = "loop"
 length = 0.8
 loop = true
@@ -97,7 +97,7 @@ __meta__ = {
 anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 3
-texture = SubResource( 3 )
+texture = SubResource( 1 )
 expand = true
 stretch_mode = 6
 __meta__ = {
@@ -106,7 +106,7 @@ __meta__ = {
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Mapping/ButtonPress"]
 autoplay = "loop"
-anims/loop = SubResource( 4 )
+anims/loop = SubResource( 2 )
 
 [node name="Label" type="Label" parent="Mapping"]
 anchor_right = 1.0

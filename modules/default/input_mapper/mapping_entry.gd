@@ -3,25 +3,24 @@ extends Control
 signal started_listening()
 signal event_received(event)
 
-onready var name_label = $EditorsContainer/LabelContainer/Label
+onready var button_icon = $EditorsContainer/LabelContainer/Icon
 onready var mapping_button : Button = $EditorsContainer/Mapping
 
 
 func _ready():
-	name_label.add_color_override("font_color", get_color("font_color", "Button"))
+	button_icon.modulate = get_color("font_color", "Button")
 	connect("focus_entered", self, "focus")
 	connect("focus_exited", self, "unfocus")
-#	mapping_button.connect("toggled", self, "_toggled")
 
 
 func focus():
 	add_stylebox_override("panel", get_stylebox("focus"))
-	name_label.add_color_override("font_color", get_color("font_color_hover", "Button"))
+	button_icon.modulate = get_color("font_color_hover", "Button")
 
 
 func unfocus():
 	add_stylebox_override("panel", null)
-	name_label.add_color_override("font_color", get_color("font_color", "Button"))
+	button_icon.modulate = get_color("font_color", "Button")
 	mapping_button.pressed = false
 
 

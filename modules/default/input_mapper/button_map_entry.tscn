@@ -12,16 +12,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Name" type="Label" parent="."]
-visible = false
-margin_top = 13.0
-margin_right = 34.0
-margin_bottom = 27.0
-size_flags_horizontal = 3
-text = "Name"
-valign = 1
-clip_text = true
-
 [node name="EditorsContainer" type="HBoxContainer" parent="."]
 margin_left = 7.0
 margin_top = 7.0
@@ -34,27 +24,21 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="LabelContainer" type="MarginContainer" parent="EditorsContainer"]
-margin_top = 6.0
+[node name="LabelContainer" type="CenterContainer" parent="EditorsContainer"]
 margin_right = 101.0
-margin_bottom = 20.0
+margin_bottom = 26.0
 size_flags_horizontal = 3
-size_flags_vertical = 4
+size_flags_vertical = 3
 size_flags_stretch_ratio = 0.6
-custom_constants/margin_right = 0
-custom_constants/margin_top = 0
-custom_constants/margin_left = 2
-custom_constants/margin_bottom = 0
 
-[node name="Label" type="Label" parent="EditorsContainer/LabelContainer"]
-margin_left = 2.0
-margin_right = 101.0
-margin_bottom = 14.0
-rect_min_size = Vector2( 64, 0 )
+[node name="Icon" type="TextureRect" parent="EditorsContainer/LabelContainer"]
+margin_left = 50.0
+margin_top = 13.0
+margin_right = 50.0
+margin_bottom = 13.0
 size_flags_horizontal = 3
-text = "Launcher"
-valign = 1
-autowrap = true
+size_flags_vertical = 3
+stretch_mode = 3
 
 [node name="Mapping" type="Button" parent="EditorsContainer"]
 margin_left = 105.0

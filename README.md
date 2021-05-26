@@ -1,6 +1,5 @@
 <p align="center">
 	<img src="https://i.imgur.com/u8BYcwf.gif" />
-	<img src="https://i.imgur.com/Qw2MiJb.gif" />
 </p>
 
 # Modular Launcher for Linux devices and Single-Board Computers
@@ -43,9 +42,9 @@ Restart the GameShell and you should boot into the Godot launcher.<br>
 You can rollback to the stock launcher selecting "Switch Launcher" inside the Settings app.
 
 #### Other Linux Devices
-On other sbcs, start an X session executing the .xinitrc file.
-Install the required shared libraries and clone the launcher in you home directory.
-Run the launcher as a normal user, the root user is not necessary.
+On other sbcs, start an X session executing the .xinitrc file.<br>
+Install the required shared libraries and clone the launcher in your home directory.<br>
+Run the launcher as a normal user, root access/privileges should not be necessary.
 ```
 sudo apt install libconfig9 libxcursor1 libpulse-dev
 git clone https://github.com/samdze/godot-launcher.git
@@ -58,6 +57,11 @@ Please open an issue if you find bugs or non-functioning features.
 Better documentation will be available in the future.
 
 ## Documentation
+
+<p align="center">
+	<img src="https://i.imgur.com/Qw2MiJb.gif" />
+</p>
+
 The first time you open the launcher, the first boot setup will let you map your inputs and choose the language.
 
 On the GameShell, press SELECT (or any other button you mapped) at any time when an app is open to show the launcher widgets.<br>

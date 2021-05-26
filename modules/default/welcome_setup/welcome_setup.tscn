@@ -13,48 +13,48 @@
 [ext_resource path="res://modules/default/welcome_setup/input_verification_step.gd" type="Script" id=11]
 [ext_resource path="res://modules/default/welcome_setup/setup_completed_step.gd" type="Script" id=12]
 
-[sub_resource type="AtlasTexture" id=3]
+[sub_resource type="AtlasTexture" id=1]
 flags = 4
 atlas = ExtResource( 10 )
 region = Rect2( 0, 0, 36, 36 )
 
+[sub_resource type="Animation" id=2]
+resource_name = "loop"
+length = 0.8
+loop = true
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:texture:region")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.25, 0.3, 0.35, 0.4, 0.45, 0.65, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Rect2( 0, 0, 36, 36 ), Rect2( 36, 0, 36, 36 ), Rect2( 72, 0, 36, 36 ), Rect2( 144, 0, 36, 36 ), Rect2( 108, 0, 36, 36 ), Rect2( 144, 0, 36, 36 ), Rect2( 72, 0, 36, 36 ), Rect2( 36, 0, 36, 36 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "loop"
+length = 0.8
+loop = true
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:texture:region")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.25, 0.3, 0.35, 0.4, 0.45, 0.65, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Rect2( 0, 0, 36, 36 ), Rect2( 36, 0, 36, 36 ), Rect2( 72, 0, 36, 36 ), Rect2( 144, 0, 36, 36 ), Rect2( 108, 0, 36, 36 ), Rect2( 144, 0, 36, 36 ), Rect2( 72, 0, 36, 36 ), Rect2( 36, 0, 36, 36 ) ]
+}
+
 [sub_resource type="Animation" id=4]
-resource_name = "loop"
-length = 0.8
-loop = true
-step = 0.05
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:texture:region")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.25, 0.3, 0.35, 0.4, 0.45, 0.65, 0.7 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ Rect2( 0, 0, 36, 36 ), Rect2( 36, 0, 36, 36 ), Rect2( 72, 0, 36, 36 ), Rect2( 144, 0, 36, 36 ), Rect2( 108, 0, 36, 36 ), Rect2( 144, 0, 36, 36 ), Rect2( 72, 0, 36, 36 ), Rect2( 36, 0, 36, 36 ) ]
-}
-
-[sub_resource type="Animation" id=15]
-resource_name = "loop"
-length = 0.8
-loop = true
-step = 0.05
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:texture:region")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.25, 0.3, 0.35, 0.4, 0.45, 0.65, 0.7 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ Rect2( 0, 0, 36, 36 ), Rect2( 36, 0, 36, 36 ), Rect2( 72, 0, 36, 36 ), Rect2( 144, 0, 36, 36 ), Rect2( 108, 0, 36, 36 ), Rect2( 144, 0, 36, 36 ), Rect2( 72, 0, 36, 36 ), Rect2( 36, 0, 36, 36 ) ]
-}
-
-[sub_resource type="Animation" id=16]
 resource_name = "loop"
 length = 0.8
 loop = true
@@ -143,7 +143,7 @@ margin_right = 288.0
 margin_bottom = 160.0
 rect_min_size = Vector2( 36, 36 )
 size_flags_horizontal = 3
-texture = SubResource( 3 )
+texture = SubResource( 1 )
 expand = true
 stretch_mode = 6
 __meta__ = {
@@ -152,7 +152,7 @@ __meta__ = {
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="WelcomeView/Center/VBoxContainer/ButtonPress"]
 autoplay = "loop"
-anims/loop = SubResource( 4 )
+anims/loop = SubResource( 2 )
 
 [node name="ModulateApplier" type="Node" parent="WelcomeView/Center/VBoxContainer/ButtonPress"]
 script = ExtResource( 9 )
@@ -307,7 +307,7 @@ margin_right = 18.0
 margin_bottom = 18.0
 rect_min_size = Vector2( 18, 18 )
 size_flags_horizontal = 3
-texture = SubResource( 3 )
+texture = SubResource( 1 )
 expand = true
 stretch_mode = 6
 __meta__ = {
@@ -316,7 +316,7 @@ __meta__ = {
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Configuration/Steps/InputVerification/CenterContainer/IndexContainer/Index/ButtonPress"]
 autoplay = "loop"
-anims/loop = SubResource( 15 )
+anims/loop = SubResource( 3 )
 
 [node name="ModulateApplier" type="Node" parent="Configuration/Steps/InputVerification/CenterContainer/IndexContainer/Index/ButtonPress"]
 script = ExtResource( 9 )
@@ -423,7 +423,7 @@ margin_right = 288.0
 margin_bottom = 160.0
 rect_min_size = Vector2( 36, 36 )
 size_flags_horizontal = 3
-texture = SubResource( 3 )
+texture = SubResource( 1 )
 expand = true
 stretch_mode = 6
 __meta__ = {
@@ -432,7 +432,7 @@ __meta__ = {
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Configuration/Steps/SetupCompleted/Center/VBoxContainer/ButtonPress"]
 autoplay = "loop"
-anims/loop = SubResource( 16 )
+anims/loop = SubResource( 4 )
 
 [node name="ModulateApplier" type="Node" parent="Configuration/Steps/SetupCompleted/Center/VBoxContainer/ButtonPress"]
 script = ExtResource( 9 )

@@ -3,14 +3,14 @@ extends App
 const map_entry = preload("button_map_entry.tscn")
 
 var previous_mapping = {}
-var mapping_order = [
-	"A", "B", "X", "Y", "→", "↑", "←", "↓", "MENU", "START", "HOME"
+var mapping_icons = [
+	"button_a", "button_b", "button_x", "button_y", "button_right", "button_up",
+	"button_left", "button_down", "button_menu", "button_start", "button_home"
 ]
 var actions_order = [
 	"ui_accept", "ui_cancel", "ui_button_x", "ui_button_y", "ui_right",
 	"ui_up", "ui_left", "ui_down", "ui_menu", "ui_start", "ui_home"
 ]
-var map_index = 0
 var listening = false
 var last_item_focused = null
 
@@ -18,20 +18,6 @@ onready var list_container = $ScrollContainer/HBoxContainer/ButtonsList
 
 
 func _ready():
-	mapping_order = [
-		"A",
-		"B",
-		"X",
-		"Y",
-		tr("DEFAULT.INPUT_BUTTON_RIGHT"),
-		tr("DEFAULT.INPUT_BUTTON_UP"),
-		tr("DEFAULT.INPUT_BUTTON_LEFT"),
-		tr("DEFAULT.INPUT_BUTTON_DOWN"),
-		"MENU",
-		"START",
-		"HOME"
-	]
-	
 	for c in list_container.get_children():
 		list_container.remove_child(c)
 		c.queue_free()
@@ -43,10 +29,14 @@ func _ready():
 		entry.connect("focus_entered", self, "_entry_focus_entered", [entry])
 		list_container.add_child(entry)
 		
-		entry.name_label.text = mapping_order[i]
+		entry.button_icon.texture = get_icon(mapping_icons[i], "Control")
 		var action_list = InputMap.get_action_list(action)
 		if action_list.size() > 0:
-			entry.mapping_button.text = action_list[0].as_text()
+			var event = action_list[0]
+			if event is InputEventJoypadButton:
+				entry.mapping_button.text = str(event.device) + ":" + str((event as InputEventJoypadButton).button_index)
+			elif event is InputEventKey:
+				entry.mapping_button.text = event.as_text()
 		i += 1
 	# Configure the mapping buttons
 	i = 0
@@ -69,38 +59,27 @@ func _focus():
 	emit_signal("title_change_request", tr("DEFAULT.INPUT_SETTINGS"))
 	emit_signal("display_mode_request", Launcher.Mode.OPAQUE)
 	
-#	previous_mapping.clear()
-#	for a in InputMap.get_actions():
-#		previous_mapping[a] = InputMap.get_action_list(a)
-#		InputMap.action_erase_events(a)
-	
-	map_index = 0
-	
 	if last_item_focused != null:
 		last_item_focused.grab_focus()
 	elif list_container.get_child_count() > 0:
 		list_container.get_child(0).grab_focus()
 	else:
 		grab_focus()
-#	_update_prompt()
 	System.emit_event("prompts", [[Desktop.Input.MOVE_V, tr("DEFAULT.PROMPT_NAVIGATION")], [Desktop.Input.A, tr("DEFAULT.PROMPT_REMAP"), Desktop.Input.B, tr("DEFAULT.PROMPT_BACK")]])
 
 
 func _unfocus():
-	# Restoring the previous mapping if the new mapping is not completed.
-#	if map_index < mapping_order.size():
-#		for action in previous_mapping.keys():
-#			InputMap.action_erase_events(action)
-#			for e in previous_mapping[action]:
-#				InputMap.action_add_event(action, e)
-#	previous_mapping.clear()
+	
 	pass
 
 
 func _event_received(event, entry, action_index):
 	InputMap.action_add_event(actions_order[action_index], event)
 	Settings.set_value("system/input-" + actions_order[action_index], event)
-	entry.mapping_button.text = event.as_text()
+	if event is InputEventJoypadButton:
+		entry.mapping_button.text = str(event.device) + ":" + str((event as InputEventJoypadButton).button_index)
+	elif event is InputEventKey:
+		entry.mapping_button.text = event.as_text()
 	listening = false
 	System.emit_event("prompts", [[Desktop.Input.MOVE_V, tr("DEFAULT.PROMPT_NAVIGATION")], [Desktop.Input.A, tr("DEFAULT.PROMPT_REMAP"), Desktop.Input.B, tr("DEFAULT.PROMPT_BACK")]])
 
@@ -116,37 +95,10 @@ func _entry_focus_entered(entry):
 	last_item_focused = entry
 
 
-#func _update_prompt():
-#	if map_index < list_container.get_child_count():
-#		list_container.get_child(map_index).get_node("Mapping").grab_focus()
-#	if map_index <= mapping_order.size() - 1:
-#		button_label.text = mapping_order[map_index]
-#	else:
-#		button_label.text = "✓"
-
-
 func _app_input(event : InputEvent):
-#	if map_index < mapping_order.size():
-#		if event.is_pressed() and not event.is_echo() and (event is InputEventJoypadButton or event is InputEventKey):
-#			if event is InputEventKey:
-#				var key_event : InputEventKey = event as InputEventKey
-#				print("Event is " + key_event.get_class() + ": " + key_event.as_text()+ " scancode: " + str(key_event.scancode) + " unicode: " + str(key_event.unicode))
-#				if key_event.unicode != 0:
-#					print("Adding event...")
-#					_update_next_mapping(key_event)
-#			elif event is InputEventJoypadButton:
-#				var joy_event : InputEventJoypadButton = event as InputEventJoypadButton
-#				pass
 	if not listening and event.is_action_pressed("ui_cancel"):
 		get_tree().set_input_as_handled()
 		System.get_launcher().app.back_app()
-
-
-#func _update_next_mapping(event):
-#	InputMap.action_add_event(actions_order[map_index], event)
-#	list_container.get_child(map_index).get_node("Mapping").text = event.as_text()
-#	map_index += 1
-#	_update_prompt()
 
 
 # Called when the App is about to be destroyed and freed from memory.

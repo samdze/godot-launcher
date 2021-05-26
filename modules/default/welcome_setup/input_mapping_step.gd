@@ -60,7 +60,10 @@ func _event_received(event : InputEvent, entry, index):
 	
 	events_to_entries[event.as_text()] = entry
 	mapping[actions_order[index]] = event
-	entry.button_label.text = event.as_text()
+	if event is InputEventJoypadButton:
+		entry.button_label.text = str(event.device) + ":" + str((event as InputEventJoypadButton).button_index)
+	elif event is InputEventKey:
+		entry.button_label.text = event.as_text()
 	
 	if index >= entries_container.get_child_count() - 1:
 		# Mapping completed
