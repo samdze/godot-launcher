@@ -22,6 +22,7 @@ func _ready():
 		if widget != null:
 			widgets_container.add_child(widget)
 	
+	connect("resized", self, "_resized")
 	connect("close_request", self, "_close_request")
 	
 	# Configure widgets and title
@@ -102,6 +103,24 @@ func _item_focus_entered(item : Control):
 			widget_controls.hide()
 	else:
 		widget_controls.hide()
+
+
+func _resized():
+	if highligther.visible and get_focus_owner() != null and widgets_container.is_a_parent_of(get_focus_owner()):
+		propagate_notification(NOTIFICATION_SORT_CHILDREN)
+#		notification(NOTIFICATION_SORT_CHILDREN)
+#		$TopPanel/HBoxContainer.notification(NOTIFICATION_SORT_CHILDREN)
+#		widgets_container.notification(NOTIFICATION_SORT_CHILDREN)
+#		tween.interpolate_property(highligther, "rect_global_position:x", highligther.rect_global_position.x, get_focus_owner().rect_global_position.x, 0.1)
+		highligther.rect_global_position.x = get_focus_owner().rect_global_position.x
+		if get_focus_owner() is Widget:
+#			tween.interpolate_property(highligther, "rect_size:x", highligther.rect_size.x, get_focus_owner().rect_size.x, 0.1)
+			highligther.rect_size.x = get_focus_owner().rect_size.x
+		elif get_focus_owner() == title:
+#			tween.interpolate_property(highligther, "rect_size:x", highligther.rect_size.x, min(get_focus_owner().rect_size.x, title_container.rect_size.x), 0.1)
+			highligther.rect_size.x = min(get_focus_owner().rect_size.x, title_container.rect_size.x)
+#		tween.start()
+		widget_controls.rect_global_position.x = get_focus_owner().rect_global_position.x + get_focus_owner().rect_size.x - widget_controls.rect_size.x
 
 
 func _widget_selected(widget : Widget):

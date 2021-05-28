@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://system/components/theme_property_applier.gd" type="Script" id=1]
 [ext_resource path="res://modules/default/welcome_setup/welcome_setup.gd" type="Script" id=2]
@@ -12,65 +12,13 @@
 [ext_resource path="res://modules/default/welcome_setup/press_button_animation.png" type="Texture" id=10]
 [ext_resource path="res://modules/default/welcome_setup/input_verification_step.gd" type="Script" id=11]
 [ext_resource path="res://modules/default/welcome_setup/setup_completed_step.gd" type="Script" id=12]
+[ext_resource path="res://modules/default/welcome_setup/press_button_animation.tres" type="Animation" id=13]
+[ext_resource path="res://system/components/constraint_container.gd" type="Script" id=14]
 
 [sub_resource type="AtlasTexture" id=1]
 flags = 4
 atlas = ExtResource( 10 )
 region = Rect2( 0, 0, 36, 36 )
-
-[sub_resource type="Animation" id=2]
-resource_name = "loop"
-length = 0.8
-loop = true
-step = 0.05
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:texture:region")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.25, 0.3, 0.35, 0.4, 0.45, 0.65, 0.7 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ Rect2( 0, 0, 36, 36 ), Rect2( 36, 0, 36, 36 ), Rect2( 72, 0, 36, 36 ), Rect2( 144, 0, 36, 36 ), Rect2( 108, 0, 36, 36 ), Rect2( 144, 0, 36, 36 ), Rect2( 72, 0, 36, 36 ), Rect2( 36, 0, 36, 36 ) ]
-}
-
-[sub_resource type="Animation" id=3]
-resource_name = "loop"
-length = 0.8
-loop = true
-step = 0.05
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:texture:region")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.25, 0.3, 0.35, 0.4, 0.45, 0.65, 0.7 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ Rect2( 0, 0, 36, 36 ), Rect2( 36, 0, 36, 36 ), Rect2( 72, 0, 36, 36 ), Rect2( 144, 0, 36, 36 ), Rect2( 108, 0, 36, 36 ), Rect2( 144, 0, 36, 36 ), Rect2( 72, 0, 36, 36 ), Rect2( 36, 0, 36, 36 ) ]
-}
-
-[sub_resource type="Animation" id=4]
-resource_name = "loop"
-length = 0.8
-loop = true
-step = 0.05
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:texture:region")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.25, 0.3, 0.35, 0.4, 0.45, 0.65, 0.7 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ Rect2( 0, 0, 36, 36 ), Rect2( 36, 0, 36, 36 ), Rect2( 72, 0, 36, 36 ), Rect2( 144, 0, 36, 36 ), Rect2( 108, 0, 36, 36 ), Rect2( 144, 0, 36, 36 ), Rect2( 72, 0, 36, 36 ), Rect2( 36, 0, 36, 36 ) ]
-}
 
 [node name="WelcomeSetup" type="Control"]
 anchor_right = 1.0
@@ -82,8 +30,16 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="WelcomeView" type="CenterContainer" parent="."]
-visible = false
+[node name="ConstraintContainer" type="Container" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 14 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+constraint_width = true
+
+[node name="WelcomeView" type="CenterContainer" parent="ConstraintContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 focus_neighbour_left = NodePath(".")
@@ -98,7 +54,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Center" type="Control" parent="WelcomeView"]
+[node name="Center" type="Control" parent="ConstraintContainer/WelcomeView"]
 margin_left = 160.0
 margin_top = 120.0
 margin_right = 160.0
@@ -106,7 +62,7 @@ margin_bottom = 120.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="WelcomeView/Center"]
+[node name="VBoxContainer" type="VBoxContainer" parent="ConstraintContainer/WelcomeView/Center"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -121,10 +77,9 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Welcome" type="Label" parent="WelcomeView/Center/VBoxContainer"]
-margin_top = -1.0
+[node name="Welcome" type="Label" parent="ConstraintContainer/WelcomeView/Center/VBoxContainer"]
 margin_right = 288.0
-margin_bottom = 119.0
+margin_bottom = 120.0
 rect_min_size = Vector2( 288, 120 )
 size_flags_horizontal = 3
 size_flags_vertical = 6
@@ -137,7 +92,7 @@ font_values = {
 "font": "xxlarge"
 }
 
-[node name="ButtonPress" type="TextureRect" parent="WelcomeView/Center/VBoxContainer"]
+[node name="ButtonPress" type="TextureRect" parent="ConstraintContainer/WelcomeView/Center/VBoxContainer"]
 margin_top = 124.0
 margin_right = 288.0
 margin_bottom = 160.0
@@ -150,18 +105,18 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="WelcomeView/Center/VBoxContainer/ButtonPress"]
-autoplay = "loop"
-anims/loop = SubResource( 2 )
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ConstraintContainer/WelcomeView/Center/VBoxContainer/ButtonPress"]
+autoplay = "press_button_animation"
+anims/press_button_animation = ExtResource( 13 )
 
-[node name="ModulateApplier" type="Node" parent="WelcomeView/Center/VBoxContainer/ButtonPress"]
+[node name="ModulateApplier" type="Node" parent="ConstraintContainer/WelcomeView/Center/VBoxContainer/ButtonPress"]
 script = ExtResource( 9 )
 apply_to = NodePath("..")
 color_property = "contrast"
 
-[node name="Tween" type="Tween" parent="WelcomeView"]
+[node name="Tween" type="Tween" parent="ConstraintContainer/WelcomeView"]
 
-[node name="Configuration" type="VBoxContainer" parent="."]
+[node name="Configuration" type="VBoxContainer" parent="ConstraintContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 7 )
@@ -169,14 +124,14 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Header" type="MarginContainer" parent="Configuration"]
+[node name="Header" type="MarginContainer" parent="ConstraintContainer/Configuration"]
 margin_right = 320.0
 margin_bottom = 14.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="LargeLabel" parent="Configuration/Header" instance=ExtResource( 6 )]
+[node name="LargeLabel" parent="ConstraintContainer/Configuration/Header" instance=ExtResource( 6 )]
 margin_right = 320.0
 grow_horizontal = 2
 size_flags_horizontal = 3
@@ -188,21 +143,21 @@ font_values = {
 "font": "xlarge"
 }
 
-[node name="StepIndex" type="MarginContainer" parent="Configuration"]
+[node name="StepIndex" type="MarginContainer" parent="ConstraintContainer/Configuration"]
 margin_top = 18.0
 margin_right = 320.0
 margin_bottom = 18.0
 custom_constants/margin_top = 0
 custom_constants/margin_bottom = 0
 
-[node name="StepPanelsContainer" type="HBoxContainer" parent="Configuration/StepIndex"]
+[node name="StepPanelsContainer" type="HBoxContainer" parent="ConstraintContainer/Configuration/StepIndex"]
 margin_right = 320.0
 alignment = 1
 
-[node name="StepHighlighter" type="Control" parent="Configuration/StepIndex"]
+[node name="StepHighlighter" type="Control" parent="ConstraintContainer/Configuration/StepIndex"]
 margin_right = 320.0
 
-[node name="Highlighter" type="Panel" parent="Configuration/StepIndex/StepHighlighter"]
+[node name="Highlighter" type="Panel" parent="ConstraintContainer/Configuration/StepIndex/StepHighlighter"]
 margin_bottom = 6.0
 script = ExtResource( 1 )
 __meta__ = {
@@ -212,7 +167,7 @@ stylebox_values = {
 "panel": "highlighter"
 }
 
-[node name="Steps" type="MarginContainer" parent="Configuration"]
+[node name="Steps" type="MarginContainer" parent="ConstraintContainer/Configuration"]
 margin_top = 22.0
 margin_right = 320.0
 margin_bottom = 240.0
@@ -226,7 +181,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="InputMapper" type="MarginContainer" parent="Configuration/Steps"]
+[node name="InputMapper" type="MarginContainer" parent="ConstraintContainer/Configuration/Steps"]
 visible = false
 margin_right = 320.0
 margin_bottom = 218.0
@@ -242,7 +197,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ScrollContainer" parent="Configuration/Steps/InputMapper" instance=ExtResource( 8 )]
+[node name="ScrollContainer" parent="ConstraintContainer/Configuration/Steps/InputMapper" instance=ExtResource( 8 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 320.0
@@ -252,13 +207,13 @@ size_flags_vertical = 3
 follow_focus = true
 scroll_horizontal_enabled = false
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Configuration/Steps/InputMapper/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="ConstraintContainer/Configuration/Steps/InputMapper/ScrollContainer"]
 margin_right = 320.0
 margin_bottom = 218.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="InputVerification" type="MarginContainer" parent="Configuration/Steps"]
+[node name="InputVerification" type="MarginContainer" parent="ConstraintContainer/Configuration/Steps"]
 visible = false
 margin_right = 320.0
 margin_bottom = 218.0
@@ -274,27 +229,27 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CenterContainer" type="VBoxContainer" parent="Configuration/Steps/InputVerification"]
+[node name="CenterContainer" type="VBoxContainer" parent="ConstraintContainer/Configuration/Steps/InputVerification"]
 margin_right = 320.0
 margin_bottom = 218.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment = 1
 
-[node name="ButtonsIcons" type="HBoxContainer" parent="Configuration/Steps/InputVerification/CenterContainer"]
+[node name="ButtonsIcons" type="HBoxContainer" parent="ConstraintContainer/Configuration/Steps/InputVerification/CenterContainer"]
 margin_top = 98.0
 margin_right = 320.0
 margin_bottom = 98.0
 size_flags_horizontal = 3
 alignment = 1
 
-[node name="IndexContainer" type="Control" parent="Configuration/Steps/InputVerification/CenterContainer"]
+[node name="IndexContainer" type="Control" parent="ConstraintContainer/Configuration/Steps/InputVerification/CenterContainer"]
 margin_top = 102.0
 margin_right = 320.0
 margin_bottom = 120.0
 rect_min_size = Vector2( 0, 18 )
 
-[node name="Index" type="VBoxContainer" parent="Configuration/Steps/InputVerification/CenterContainer/IndexContainer"]
+[node name="Index" type="VBoxContainer" parent="ConstraintContainer/Configuration/Steps/InputVerification/CenterContainer/IndexContainer"]
 margin_left = 117.865
 margin_right = 135.865
 margin_bottom = 18.0
@@ -302,7 +257,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ButtonPress" type="TextureRect" parent="Configuration/Steps/InputVerification/CenterContainer/IndexContainer/Index"]
+[node name="ButtonPress" type="TextureRect" parent="ConstraintContainer/Configuration/Steps/InputVerification/CenterContainer/IndexContainer/Index"]
 margin_right = 18.0
 margin_bottom = 18.0
 rect_min_size = Vector2( 18, 18 )
@@ -314,18 +269,18 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Configuration/Steps/InputVerification/CenterContainer/IndexContainer/Index/ButtonPress"]
-autoplay = "loop"
-anims/loop = SubResource( 3 )
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ConstraintContainer/Configuration/Steps/InputVerification/CenterContainer/IndexContainer/Index/ButtonPress"]
+autoplay = "press_button_animation"
+anims/press_button_animation = ExtResource( 13 )
 
-[node name="ModulateApplier" type="Node" parent="Configuration/Steps/InputVerification/CenterContainer/IndexContainer/Index/ButtonPress"]
+[node name="ModulateApplier" type="Node" parent="ConstraintContainer/Configuration/Steps/InputVerification/CenterContainer/IndexContainer/Index/ButtonPress"]
 script = ExtResource( 9 )
 apply_to = NodePath("..")
 color_property = "contrast"
 
-[node name="Tween" type="Tween" parent="Configuration/Steps/InputVerification"]
+[node name="Tween" type="Tween" parent="ConstraintContainer/Configuration/Steps/InputVerification"]
 
-[node name="LanguageSelector" type="MarginContainer" parent="Configuration/Steps"]
+[node name="LanguageSelector" type="MarginContainer" parent="ConstraintContainer/Configuration/Steps"]
 visible = false
 margin_right = 320.0
 margin_bottom = 218.0
@@ -334,7 +289,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ScrollContainer" parent="Configuration/Steps/LanguageSelector" instance=ExtResource( 8 )]
+[node name="ScrollContainer" parent="ConstraintContainer/Configuration/Steps/LanguageSelector" instance=ExtResource( 8 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 320.0
@@ -344,13 +299,13 @@ size_flags_vertical = 3
 follow_focus = true
 scroll_horizontal_enabled = false
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Configuration/Steps/LanguageSelector/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="ConstraintContainer/Configuration/Steps/LanguageSelector/ScrollContainer"]
 margin_right = 320.0
 margin_bottom = 218.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="SetupCompleted" type="CenterContainer" parent="Configuration/Steps"]
+[node name="SetupCompleted" type="CenterContainer" parent="ConstraintContainer/Configuration/Steps"]
 visible = false
 margin_right = 320.0
 margin_bottom = 218.0
@@ -366,7 +321,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Center" type="Control" parent="Configuration/Steps/SetupCompleted"]
+[node name="Center" type="Control" parent="ConstraintContainer/Configuration/Steps/SetupCompleted"]
 margin_left = 160.0
 margin_top = 109.0
 margin_right = 160.0
@@ -374,7 +329,7 @@ margin_bottom = 109.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Configuration/Steps/SetupCompleted/Center"]
+[node name="VBoxContainer" type="VBoxContainer" parent="ConstraintContainer/Configuration/Steps/SetupCompleted/Center"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -389,10 +344,9 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="SetupCompleted" type="Label" parent="Configuration/Steps/SetupCompleted/Center/VBoxContainer"]
-margin_top = -1.0
+[node name="SetupCompleted" type="Label" parent="ConstraintContainer/Configuration/Steps/SetupCompleted/Center/VBoxContainer"]
 margin_right = 288.0
-margin_bottom = 119.0
+margin_bottom = 120.0
 rect_min_size = Vector2( 288, 120 )
 size_flags_horizontal = 3
 size_flags_vertical = 6
@@ -417,7 +371,7 @@ texture_values = {
 
 }
 
-[node name="ButtonPress" type="TextureRect" parent="Configuration/Steps/SetupCompleted/Center/VBoxContainer"]
+[node name="ButtonPress" type="TextureRect" parent="ConstraintContainer/Configuration/Steps/SetupCompleted/Center/VBoxContainer"]
 margin_top = 124.0
 margin_right = 288.0
 margin_bottom = 160.0
@@ -430,15 +384,15 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Configuration/Steps/SetupCompleted/Center/VBoxContainer/ButtonPress"]
-autoplay = "loop"
-anims/loop = SubResource( 4 )
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ConstraintContainer/Configuration/Steps/SetupCompleted/Center/VBoxContainer/ButtonPress"]
+autoplay = "press_button_animation"
+anims/press_button_animation = ExtResource( 13 )
 
-[node name="ModulateApplier" type="Node" parent="Configuration/Steps/SetupCompleted/Center/VBoxContainer/ButtonPress"]
+[node name="ModulateApplier" type="Node" parent="ConstraintContainer/Configuration/Steps/SetupCompleted/Center/VBoxContainer/ButtonPress"]
 script = ExtResource( 9 )
 apply_to = NodePath("..")
 color_property = "contrast"
 
-[node name="Tween" type="Tween" parent="Configuration"]
+[node name="Tween" type="Tween" parent="ConstraintContainer/Configuration"]
 
 [node name="Tween" type="Tween" parent="."]

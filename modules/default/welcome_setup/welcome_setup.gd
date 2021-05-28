@@ -4,16 +4,17 @@ const step_viewer_panel = preload("step_viewer_panel.tscn")
 const launcher_app = "default/launcher"
 
 var steps = []
+var current_step = 0
 
-onready var welcome_view = $WelcomeView
-onready var configuration_view = $Configuration
+onready var welcome_view = $ConstraintContainer/WelcomeView
+onready var configuration_view = $ConstraintContainer/Configuration
 
-onready var input_mapping_step = $Configuration/Steps/InputMapper
+onready var input_mapping_step = $ConstraintContainer/Configuration/Steps/InputMapper
 
-onready var step_panels_container = $Configuration/StepIndex/StepPanelsContainer
-onready var steps_indexer = $Configuration/StepIndex
-onready var step_highlighter = $Configuration/StepIndex/StepHighlighter/Highlighter
-onready var steps_container = $Configuration/Steps
+onready var step_panels_container = $ConstraintContainer/Configuration/StepIndex/StepPanelsContainer
+onready var steps_indexer = $ConstraintContainer/Configuration/StepIndex
+onready var step_highlighter = $ConstraintContainer/Configuration/StepIndex/StepHighlighter/Highlighter
+onready var steps_container = $ConstraintContainer/Configuration/Steps
 
 onready var tween = $Tween
 
@@ -29,6 +30,13 @@ func _ready():
 		
 		var step_panel = step_viewer_panel.instance()
 		step_panels_container.add_child(step_panel)
+	connect("resized", self, "_resized", [], CONNECT_DEFERRED)
+
+
+func _resized():
+	propagate_notification(Container.NOTIFICATION_SORT_CHILDREN)
+	step_highlighter.rect_position =  step_panels_container.get_child(current_step).rect_position
+	step_highlighter.rect_size =  step_panels_container.get_child(current_step).rect_size
 
 
 func _focus():
@@ -43,6 +51,7 @@ func _focus():
 
 
 func _set_step(index, animate = true):
+	current_step = index
 	var i = 0
 	configuration_view.notification(Container.NOTIFICATION_SORT_CHILDREN)
 	steps_indexer.notification(Container.NOTIFICATION_SORT_CHILDREN)

@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://modules/default/input_mapper/input_mapper.gd" type="Script" id=1]
+[ext_resource path="res://system/components/constraint_container.gd" type="Script" id=2]
 [ext_resource path="res://system/components/scroll_container.tscn" type="PackedScene" id=3]
 
 [node name="InputMapperApp" type="MarginContainer"]
@@ -20,7 +21,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ScrollContainer" parent="." instance=ExtResource( 3 )]
+[node name="ConstraintContainer" type="Container" parent="."]
+margin_right = 320.0
+margin_bottom = 240.0
+script = ExtResource( 2 )
+constraint_width = true
+
+[node name="ScrollContainer" parent="ConstraintContainer" instance=ExtResource( 3 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 320.0
@@ -29,21 +36,13 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 follow_focus = true
 
-[node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="ConstraintContainer/ScrollContainer"]
 margin_right = 320.0
 size_flags_horizontal = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ButtonsList" type="VBoxContainer" parent="ScrollContainer/HBoxContainer"]
+[node name="ButtonsList" type="VBoxContainer" parent="ConstraintContainer/ScrollContainer/HBoxContainer"]
 margin_right = 320.0
 size_flags_horizontal = 3
-
-[node name="PanelContainer" type="PanelContainer" parent="."]
-visible = false
-margin_right = 320.0
-margin_bottom = 240.0
-__meta__ = {
-"_edit_use_anchors_": false
-}

@@ -24,6 +24,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://system/modules/component.gd"
 }, {
+"base": "Container",
+"class": "ConstraintContainer",
+"language": "GDScript",
+"path": "res://system/components/constraint_container.gd"
+}, {
 "base": "Node",
 "class": "Desktop",
 "language": "GDScript",
@@ -88,6 +93,7 @@ _global_script_class_icons={
 "App": "",
 "AppHandler": "",
 "Component": "",
+"ConstraintContainer": "",
 "Desktop": "",
 "Icons": "",
 "Launcher": "",
@@ -133,6 +139,8 @@ window/per_pixel_transparency/allowed=true
 window/per_pixel_transparency/enabled=true
 window/energy_saving/keep_screen_on=false
 window/stretch/aspect="keep_width"
+window/size/resizable.Windows=true
+window/size/resizable.OSX=true
 
 [editor_plugins]
 

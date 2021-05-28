@@ -1,0 +1,19 @@
+[gd_resource type="Animation" format=2]
+
+[resource]
+resource_name = "loop"
+length = 0.8
+loop = true
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:texture:region")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.25, 0.3, 0.35, 0.4, 0.45, 0.65, 0.7, 0.75 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Rect2( 0, 0, 36, 36 ), Rect2( 36, 0, 36, 36 ), Rect2( 72, 0, 36, 36 ), Rect2( 144, 0, 36, 36 ), Rect2( 108, 0, 36, 36 ), Rect2( 144, 0, 36, 36 ), Rect2( 180, 0, 36, 36 ), Rect2( 72, 0, 36, 36 ), Rect2( 36, 0, 36, 36 ) ]
+}

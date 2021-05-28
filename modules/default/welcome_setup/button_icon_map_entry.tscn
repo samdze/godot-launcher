@@ -3,29 +3,12 @@
 [ext_resource path="res://modules/default/welcome_setup/icon_mapping_entry.gd" type="Script" id=1]
 [ext_resource path="res://system/components/modulate_applier.gd" type="Script" id=2]
 [ext_resource path="res://modules/default/welcome_setup/press_button_animation.png" type="Texture" id=3]
+[ext_resource path="res://modules/default/welcome_setup/press_button_animation.tres" type="Animation" id=4]
 
 [sub_resource type="AtlasTexture" id=1]
 flags = 4
 atlas = ExtResource( 3 )
 region = Rect2( 0, 0, 36, 36 )
-
-[sub_resource type="Animation" id=2]
-resource_name = "loop"
-length = 0.8
-loop = true
-step = 0.05
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:texture:region")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.25, 0.3, 0.35, 0.4, 0.45, 0.65, 0.7 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ Rect2( 0, 0, 36, 36 ), Rect2( 36, 0, 36, 36 ), Rect2( 72, 0, 36, 36 ), Rect2( 144, 0, 36, 36 ), Rect2( 108, 0, 36, 36 ), Rect2( 144, 0, 36, 36 ), Rect2( 72, 0, 36, 36 ), Rect2( 36, 0, 36, 36 ) ]
-}
 
 [node name="IconMappingEntry" type="HBoxContainer"]
 margin_left = 7.0
@@ -105,8 +88,8 @@ __meta__ = {
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Mapping/ButtonPress"]
-autoplay = "loop"
-anims/loop = SubResource( 2 )
+autoplay = "press_button_animation"
+anims/press_button_animation = ExtResource( 4 )
 
 [node name="Label" type="Label" parent="Mapping"]
 anchor_right = 1.0

@@ -22,7 +22,7 @@ var should_exit = false
 var operation = null
 var connecting_network : NetworkDetails = null
 
-onready var hotspots_container = $MarginContainer/ScrollContainer/HotspotsContainer
+onready var hotspots_container = $ConstraintContainer/ScrollContainer/HotspotsContainer
 
 
 func _ready():

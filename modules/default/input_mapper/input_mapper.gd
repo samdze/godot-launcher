@@ -14,7 +14,7 @@ var actions_order = [
 var listening = false
 var last_item_focused = null
 
-onready var list_container = $ScrollContainer/HBoxContainer/ButtonsList
+onready var list_container = $ConstraintContainer/ScrollContainer/HBoxContainer/ButtonsList
 
 
 func _ready():

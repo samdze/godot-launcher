@@ -177,8 +177,8 @@ margin_bottom = 28.0
 script = ExtResource( 8 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Overlay/Status/TopContainer/NotificationsBar"]
+anchor_right = 1.0
 margin_top = 28.0
-margin_right = 312.0
 margin_bottom = 42.0
 custom_constants/separation = 0
 __meta__ = {
@@ -187,13 +187,13 @@ __meta__ = {
 
 [node name="LeftSpace" type="Control" parent="Overlay/Status/TopContainer/NotificationsBar/HBoxContainer"]
 margin_right = 12.0
-margin_bottom = 14.0
+margin_bottom = 15.0
 rect_min_size = Vector2( 12, 0 )
 
 [node name="PanelContainer" type="PanelContainer" parent="Overlay/Status/TopContainer/NotificationsBar/HBoxContainer"]
 margin_left = 12.0
 margin_right = 300.0
-margin_bottom = 14.0
+margin_bottom = 15.0
 grow_horizontal = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -204,13 +204,12 @@ __meta__ = {
 
 [node name="MarginContainer" type="MarginContainer" parent="Overlay/Status/TopContainer/NotificationsBar/HBoxContainer/PanelContainer"]
 margin_right = 288.0
-margin_bottom = 14.0
-custom_constants/margin_right = 4
-custom_constants/margin_left = 4
+margin_bottom = 15.0
+custom_constants/margin_top = 0
+custom_constants/margin_bottom = 0
 
 [node name="Label" type="Label" parent="Overlay/Status/TopContainer/NotificationsBar/HBoxContainer/PanelContainer/MarginContainer"]
-margin_left = 4.0
-margin_right = 284.0
+margin_right = 288.0
 margin_bottom = 14.0
 size_flags_horizontal = 3
 custom_colors/font_color = Color( 1, 1, 1, 1 )
@@ -220,7 +219,7 @@ clip_text = true
 [node name="RightSpace" type="Control" parent="Overlay/Status/TopContainer/NotificationsBar/HBoxContainer"]
 margin_left = 300.0
 margin_right = 312.0
-margin_bottom = 14.0
+margin_bottom = 15.0
 rect_min_size = Vector2( 12, 0 )
 
 [node name="Tween" type="Tween" parent="Overlay/Status/TopContainer/NotificationsBar"]

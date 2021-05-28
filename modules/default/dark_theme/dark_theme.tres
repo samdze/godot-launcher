@@ -220,14 +220,14 @@ expand_margin_right = 2.0
 expand_margin_top = 2.0
 expand_margin_bottom = 2.0
 
-[sub_resource type="StyleBoxFlat" id=30]
+[sub_resource type="StyleBoxFlat" id=29]
 bg_color = Color( 0.894118, 0.25098, 0.431373, 1 )
 corner_radius_top_left = 4
 corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
-[sub_resource type="StyleBoxFlat" id=29]
+[sub_resource type="StyleBoxFlat" id=30]
 content_margin_left = 2.0
 content_margin_right = 2.0
 content_margin_top = 2.0
@@ -245,7 +245,7 @@ corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
-[sub_resource type="StyleBoxFlat" id=34]
+[sub_resource type="StyleBoxFlat" id=32]
 content_margin_left = 2.0
 content_margin_right = 2.0
 content_margin_top = 2.0
@@ -256,7 +256,7 @@ corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
-[sub_resource type="StyleBoxFlat" id=35]
+[sub_resource type="StyleBoxFlat" id=33]
 content_margin_left = 4.0
 content_margin_right = 4.0
 content_margin_top = 2.0
@@ -276,7 +276,7 @@ expand_margin_right = 2.0
 expand_margin_top = 2.0
 expand_margin_bottom = 2.0
 
-[sub_resource type="StyleBoxFlat" id=36]
+[sub_resource type="StyleBoxFlat" id=34]
 content_margin_left = 2.0
 content_margin_right = 2.0
 content_margin_top = 2.0
@@ -287,14 +287,14 @@ corner_radius_top_right = 12
 corner_radius_bottom_right = 12
 corner_radius_bottom_left = 12
 
-[sub_resource type="StyleBoxFlat" id=32]
+[sub_resource type="StyleBoxFlat" id=35]
 bg_color = Color( 0.356863, 0.882353, 0.4, 1 )
 corner_radius_top_left = 4
 corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
-[sub_resource type="StyleBoxFlat" id=33]
+[sub_resource type="StyleBoxFlat" id=36]
 bg_color = Color( 0.929412, 0.698039, 0.0823529, 1 )
 corner_radius_top_left = 4
 corner_radius_top_right = 4
@@ -401,6 +401,8 @@ Button/styles/focus = SubResource( 2 )
 Button/styles/hover = SubResource( 2 )
 Button/styles/normal = SubResource( 1 )
 Button/styles/pressed = SubResource( 2 )
+ConstraintContainer/constants/max_height = 320
+ConstraintContainer/constants/max_width = 480
 Control/colors/contrast = Color( 0.8, 0.8, 0.8, 1 )
 Control/colors/error = Color( 0.894118, 0.25098, 0.431373, 1 )
 Control/colors/highlight = Color( 0.0588235, 0.705882, 0.901961, 1 )
@@ -445,14 +447,14 @@ OptionButton/icons/arrow = SubResource( 25 )
 Panel/styles/bg = SubResource( 26 )
 Panel/styles/highlighter = SubResource( 27 )
 Panel/styles/panel = SubResource( 28 )
-PanelContainer/styles/error = SubResource( 30 )
-PanelContainer/styles/focus = SubResource( 29 )
+PanelContainer/styles/error = SubResource( 29 )
+PanelContainer/styles/focus = SubResource( 30 )
 PanelContainer/styles/message = SubResource( 31 )
-PanelContainer/styles/panel = SubResource( 34 )
-PanelContainer/styles/popup = SubResource( 35 )
-PanelContainer/styles/rounded = SubResource( 36 )
-PanelContainer/styles/success = SubResource( 32 )
-PanelContainer/styles/warning = SubResource( 33 )
+PanelContainer/styles/panel = SubResource( 32 )
+PanelContainer/styles/popup = SubResource( 33 )
+PanelContainer/styles/rounded = SubResource( 34 )
+PanelContainer/styles/success = SubResource( 35 )
+PanelContainer/styles/warning = SubResource( 36 )
 PopupPanel/styles/panel = SubResource( 37 )
 ScrollContainer/styles/bg = SubResource( 38 )
 ScrollContainer/styles/no_scroll = SubResource( 39 )
