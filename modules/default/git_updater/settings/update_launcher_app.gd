@@ -31,7 +31,7 @@ func _ready():
 #	OS.execute('cmd', ['/C', "git log -1 --format='%at'"], true, output, true)
 	OS.execute("bash", ["-c", "git log -1 --format='%at' | xargs -I{} date -d @{} +%Y/%m/%d_%H:%M:%S"], true, output, false)
 	if output.size() > 0 and output[0].length() > 0:
-		print(output)
+#		print(output)
 		var pair = output[0].split("_")
 		var ymd = pair[0].split("/")
 		var hms = pair[1].split(":")
@@ -206,11 +206,11 @@ func _thread_function(data):
 			req_semaphore.wait()
 			http.disconnect("request_completed", self, "_request_completed")
 			
-			print("Result of first check is " + str(result))
+#			print("Result of first check is " + str(result))
 			if result[0] == Check.UP_TO_DATE:
 				# Check latest commit instead of version
 				var exit_code = OS.execute("bash", ["-c", "git remote update"], true, output, true)
-				print("Exit code " + str(exit_code) + " for 'git remote update' with result: " + str(output))
+#				print("Exit code " + str(exit_code) + " for 'git remote update' with result: " + str(output))
 				if exit_code != 0:
 					result[0] = Check.ERROR
 				else:
@@ -230,10 +230,10 @@ func _thread_function(data):
 			# Update the launcher
 			var result = FAILED
 			var exit_code = OS.execute("bash", ["-c", "git fetch --all"], true, output, true)
-			print("Fetch (" + str(exit_code) + "): " + str(output))
+#			print("Fetch (" + str(exit_code) + "): " + str(output))
 			if exit_code == 0:
 				exit_code = OS.execute("bash", ["-c", "git reset --hard origin/main"], true, output, true)
-				print("Reset (" + str(exit_code) + "): " + str(output))
+#				print("Reset (" + str(exit_code) + "): " + str(output))
 				if exit_code == 0:
 					result = OK
 			
@@ -244,5 +244,4 @@ func _notification(what):
 	if what == NOTIFICATION_PREDELETE:
 		should_exit = true
 		semaphore.post()
-		print("Waiting thread to finish...")
 		thread.wait_to_finish()

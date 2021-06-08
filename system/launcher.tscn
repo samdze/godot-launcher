@@ -23,7 +23,7 @@ layer = -128
 
 [node name="ThemeApplier" type="Node" parent="BackgroundLayer"]
 script = ExtResource( 13 )
-apply_to = NodePath("../../../Launcher/BackgroundLayer/Background")
+apply_to = NodePath("../Background")
 
 [node name="Background" type="Panel" parent="BackgroundLayer"]
 anchor_right = 1.0

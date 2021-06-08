@@ -30,13 +30,8 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Timer" type="Timer" parent="."]
-wait_time = 2.0
-autostart = true
-
 [node name="ModulateApplier" type="Node" parent="."]
 script = ExtResource( 3 )
 apply_to = NodePath("..")
 modulate_type = 1
 color_property = "contrast"
-[connection signal="timeout" from="Timer" to="." method="_update_status"]

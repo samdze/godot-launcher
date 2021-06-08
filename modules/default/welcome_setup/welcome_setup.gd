@@ -100,8 +100,9 @@ func _setup_completed():
 		Settings.set_value("system/input-" + action, input_mapping_step.mapping[action])
 	# Finally add the home action mapping.
 	InputMap.action_add_event("ui_home", input_mapping_step.mapping["ui_home"])
-	
-	Modules.reload()
 	Settings.set_value("system/launcher_app", launcher_app)
-	var launcher = Modules.get_loaded_component(launcher_app).resource.instance()
-	System.get_launcher().app.add_app(launcher)
+	Modules.reload()
+	get_tree().reload_current_scene()
+#	var launcher = Modules.get_component(launcher_app).resource.instance()
+#	System.get_launcher().app.clear_apps(false)
+#	System.get_launcher().app.add_app(launcher)

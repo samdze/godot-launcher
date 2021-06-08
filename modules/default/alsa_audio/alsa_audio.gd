@@ -1,5 +1,7 @@
 extends Service
 
+signal audio_volume_changed(volume)
+
 var volume : int = 50
 
 
@@ -24,12 +26,12 @@ func _ready():
 func _update_audio_volume(value : int):
 	OS.execute("bash", ["-c", "amixer set Master " + str(value) + "%"], true)
 	
-	System.emit_event("audio_volume_changed", [value])
+	emit_signal("audio_volume_changed", value)
 
 
 func _audio_volume_changed():
 	volume = clamp(int(Settings.get_value("settings/audio_volume")), 0, 100)
-	_update_audio_volume(volume)
+	_update_audio_volume(int(volume))
 
 
 func set_audio_volume(value : int):
@@ -41,20 +43,29 @@ func get_audio_volume() -> int:
 	return volume
 
 
-func _event(name, arguments):
-	match name:
-		"set_audio_volume":
-			set_audio_volume(arguments[0])
-			return true
-		"get_audio_volume":
-			return get_audio_volume()
+#func _event(name, arguments):
+#	match name:
+#		"set_audio_volume":
+#			set_audio_volume(arguments[0])
+#			return true
+#		"get_audio_volume":
+#			return get_audio_volume()
 
 
 static func _get_component_name():
 	return "Alsa Audio"
 
 
-static func _get_settings():
+static func _get_component_tags():
+	return ["audio"]
+
+
+# Override this function to check whether this Component can be used on the device
+static func _is_available():
+	return OS.execute("bash", ["-c", "amixer"], true) == 0
+
+
+static func _get_settings_definitions():
 	return [
 		Setting.create("settings/audio_volume", 50)
 	]

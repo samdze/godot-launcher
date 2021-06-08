@@ -56,7 +56,7 @@ func init(script : LauncherEntry):
 	
 	# Find the entry icon
 #	var icons_path = ProjectSettings.globalize_path("res://icons/default")
-	var icons_path = ProjectSettings.globalize_path(Modules.get_loaded_component_from_settings("system/icons").resource.resource_path.get_base_dir())
+	var icons_path = ProjectSettings.globalize_path(Modules.get_component_from_settings("system/icons").resource.resource_path.get_base_dir())
 	var globalized_project_path = ProjectSettings.globalize_path("res://")
 	# TODO: resolve the icon search folder automatically
 	var apps_path = globalized_project_path.left(globalized_project_path.rfind("/", globalized_project_path.length() - 2))

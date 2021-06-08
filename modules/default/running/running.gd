@@ -5,7 +5,7 @@ var running_app : PackedScene
 
 
 func _ready():
-	running_app = Modules.get_loaded_component_from_settings("system/running_app").resource
+	running_app = Modules.get_component_from_settings("system/running_app").resource
 
 
 func _focus():

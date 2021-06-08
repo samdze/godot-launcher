@@ -56,6 +56,12 @@ Please open an issue if you find bugs or non-functioning features.
 
 Better documentation will be available in the future.
 
+## Troubleshooting
+By default, the launcher generates a file called godot-launcher.log inside your /tmp folder if an execution attempt was successful but the launcher crashed for some reason.<br>
+If no file is to be found, check your files directories, the files execute permissions and to have the required shared libraries installed.<br>
+There could be other libraries currently not listed here that are necessary to run the launcher.<br>
+Be sure to have support for OpenGL ES2.
+
 ## Documentation
 
 <p align="center">

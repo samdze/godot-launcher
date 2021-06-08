@@ -29,7 +29,7 @@ func _ready():
 	if OS.has_feature("x86_64"):
 		menu_directory = "E:\\Documenti\\Git\\apps\\Menu"
 	
-	running_app = Modules.get_loaded_component_from_settings("system/running_app").resource
+	running_app = Modules.get_component_from_settings("system/running_app").resource
 	
 	load_directory(menu_directory)
 
@@ -177,11 +177,15 @@ static func _get_component_tags():
 	return [Component.TAG_LAUNCHER]
 
 
-static func _get_settings():
+static func _get_settings_definitions():
 	return [
 		Setting.create("system/icons", "default/icons"),
 		Setting.create("system/running_app", "default/running"),
-		
+	]
+
+
+static func _get_settings_exports():
+	return [
 		Setting.export(["system/icons"], TranslationServer.translate("DEFAULT.FOLDER_LAUNCHER") + "/" + TranslationServer.translate("DEFAULT.ICONS"), load("res://system/settings/editors/dropdown_icons.tscn")),
 		Setting.export(["system/running_app"], TranslationServer.translate("DEFAULT.FOLDER_LAUNCHER") + "/" + TranslationServer.translate("DEFAULT.RUNNING_APP"), load("res://system/settings/editors/dropdown_running_app.tscn")),
 		Setting.export([], TranslationServer.translate("DEFAULT.SWITCH_LAUNCHER"), load("res://modules/default/launcher/settings/switch_launcher_button.tscn"))

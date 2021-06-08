@@ -17,7 +17,8 @@ func _ready():
 	config = ConfigFile.new()
 	var result = config.load("res://settings.conf")
 	
-	reset()
+	# reset() gets called by Modules at startup
+	#reset()
 
 
 func reset():
@@ -43,8 +44,19 @@ func reset():
 	config.save("res://settings.conf")
 
 
+func get_sections() -> PoolStringArray:
+	return config.get_sections()
+
+
+func get_section_keys(section : String) -> PoolStringArray:
+	return config.get_section_keys(section)
+
+
 func add_settings_definitions(owner, settings : Array):
-	self.settings[owner] = settings
+	if self.settings.has(owner):
+		self.settings[owner] += settings
+	else:
+		self.settings[owner] = settings
 	for s in settings:
 		if settings_definitions.has(s.section_key):
 			printerr("Setting " + s.section_key + " of " + str(owner) + " is already defined by another Component!")
@@ -120,8 +132,16 @@ func get_settings() -> Dictionary:
 	return settings
 
 
+func has_exported_setting(section_key : String) -> bool:
+	return settings_exports.has(section_key)
+
+
 func get_exported_settings() -> Array:
 	return settings_exports
+
+
+func has_defined_settings(section_key : String) -> bool:
+	return settings_definitions.has(section_key)
 
 
 func get_defined_settings() -> Dictionary:

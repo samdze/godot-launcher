@@ -56,5 +56,10 @@ func _notification(what):
 		if controls: controls.queue_free()
 
 
+# Override this function to check whether this Component can be used on the device
+static func _is_available():
+	return OS.get_power_state() != OS.POWERSTATE_NO_BATTERY and OS.get_power_state() != OS.POWERSTATE_UNKNOWN
+
+
 static func _get_component_name():
 	return "Battery Widget"

@@ -1,12 +1,14 @@
 extends Widget
 
+export(Vector2) var atlas_cell_size = Vector2(18, 18)
+
 var output
 
 var controls : Control
 var slider : HSlider
 var label : Label
 
-export(Vector2) var atlas_cell_size = Vector2(18, 18)
+onready var screen_brightness_service = System.get_launcher().get_tagged_service("screen_brightness")
 
 
 func _ready():
@@ -16,7 +18,8 @@ func _ready():
 	slider.connect("gui_input", self, "_controls_gui_input", [slider])
 	label = controls.get_node("MediumLabel")
 	
-	_update_status()
+	screen_brightness_service.connect("screen_brightness_changed", self, "_update_status")
+	_update_status(screen_brightness_service.get_screen_brightness())
 
 
 func _widget_selected():
@@ -32,13 +35,13 @@ func _controls_gui_input(event : InputEvent, control):
 		emit_signal("unfocus_controls_request")
 
 
-func _update_status():
-	var result = System.emit_event("get_brightness")
-	var value = 0
-	if result.size() > 0:
-		value = int(result[0])
-	_update_icon(value)
-	_update_controls(value)
+func _update_status(brightness):
+#	var result = System.emit_event("get_brightness")
+#	var value = 0
+#	if result.size() > 0:
+#		value = int(result[0])
+	_update_icon(brightness)
+	_update_controls(brightness)
 
 
 func _update_icon(value):
@@ -59,14 +62,15 @@ func _update_controls(value):
 
 
 func _value_changed(value):
-	System.emit_event("set_brightness", [value])
+	screen_brightness_service.set_screen_brightness(value)
+#	System.emit_event("set_brightness", [value])
 
 
-func _event(name, arguments):
-	match name:
-		"brightness_changed":
-			_update_status()
-			return true
+#func _event(name, arguments):
+#	match name:
+#		"brightness_changed":
+#			_update_status()
+#			return true
 
 
 func _get_widget_controls():
@@ -76,6 +80,13 @@ func _get_widget_controls():
 func _notification(what):
 	if what == NOTIFICATION_PREDELETE:
 		if controls: controls.queue_free()
+
+
+# Override this function to declare launcher-wide components dependencies
+static func _get_dependencies():
+	return [
+		Component.depend(Component.Type.SERVICE, "screen_brightness")
+	]
 
 
 static func _get_component_name():

@@ -112,7 +112,7 @@ static func _get_component_name():
 
 
 # Override this function to expose user-editable settings to the Settings app
-static func _get_settings():
+static func _get_settings_exports():
 	return [
 		Setting.export([], TranslationServer.translate("DEFAULT.FOLDER_SYSTEM") + "/" + TranslationServer.translate("DEFAULT.INPUT_SETTINGS"), load("res://modules/default/input_mapper/settings/input_map_button.tscn"))
 	]

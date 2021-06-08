@@ -14,7 +14,7 @@ onready var tween = $Tween
 
 func _ready():
 	# Create loaded widgets
-	var widgets = Modules.get_loaded_components(Component.Type.WIDGET)
+	var widgets = Modules.get_components(Component.Type.WIDGET)
 	for w in widgets:
 		var widget = null
 		widget = w.resource.instance()
@@ -78,7 +78,7 @@ func _close_request():
 
 
 func _item_focus_entered(item : Control):
-	print("Widget focused " + item.name)
+#	print("Widget focused " + item.name)
 	tween.remove(highligther, "rect_global_position:x")
 	tween.remove(highligther, "rect_size:x")
 	tween.interpolate_property(highligther, "rect_global_position:x", highligther.rect_global_position.x, item.rect_global_position.x, 0.1)
@@ -124,7 +124,7 @@ func _resized():
 
 
 func _widget_selected(widget : Widget):
-	print("Widget selected " + widget.name)
+#	print("Widget selected " + widget.name)
 	widget._widget_selected()
 
 

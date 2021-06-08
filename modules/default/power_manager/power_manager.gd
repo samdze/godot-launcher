@@ -1,5 +1,8 @@
 extends Service
 
+signal screen_brightness_changed(brightness)
+signal power_mode_changed(mode)
+
 enum Mode {
 	ALWAYS_ON = 0,
 	BALANCED = 1,
@@ -52,7 +55,8 @@ func _input(event):
 
 func _update_power_mode(mode : int):
 	_reset_timers(mode)
-	System.emit_event("power_mode_changed", [mode])
+	emit_signal("power_mode_changed", mode)
+#	System.emit_event("power_mode_changed", [mode])
 
 
 func _power_mode_changed():
@@ -62,12 +66,13 @@ func _power_mode_changed():
 
 func _update_backlight(value : int):
 	OS.execute("bash", ["-c", "echo " + str(value) + " > /proc/driver/backlight"])
-	System.emit_event("brightness_changed", [value])
+	emit_signal("screen_brightness_changed", value)
+#	System.emit_event("brightness_changed", [value])
 
 
 func _brightness_changed():
 	backlight = clamp(int(Settings.get_value("settings/brightness")), 0, 9)
-	_update_backlight(backlight)
+	_update_backlight(int(backlight))
 
 
 func _dim_timeout():
@@ -102,12 +107,12 @@ func _reset_timers(mode):
 	else: shutdown_timer.stop()
 
 
-func set_brightness(value):
+func set_screen_brightness(value):
 	if backlight != value:
 		Settings.set_value("settings/brightness", int(clamp(value, 0, 9)))
 
 
-func get_brightness() -> int:
+func get_screen_brightness() -> int:
 	return backlight
 
 
@@ -120,18 +125,18 @@ func get_power_mode() -> int:
 	return mode
 
 
-func _event(name, arguments):
-	match name:
-		"set_brightness":
-			set_brightness(arguments[0])
-			return true
-		"get_brightness":
-			return get_brightness()
-		"set_power_mode":
-			set_power_mode(arguments[0])
-			return true
-		"get_power_mode":
-			return get_power_mode()
+#func _event(name, arguments):
+#	match name:
+#		"set_brightness":
+#			set_screen_brightness(arguments[0])
+#			return true
+#		"get_brightness":
+#			return get_screen_brightness()
+#		"set_power_mode":
+#			set_power_mode(arguments[0])
+#			return true
+#		"get_power_mode":
+#			return get_power_mode()
 
 
 static func get_localized_name(mode : int):
@@ -142,10 +147,18 @@ static func _get_component_name():
 	return "Power Manager"
 
 
-static func _get_settings():
+static func _get_component_tags():
+	return ["screen_brightness"]
+
+
+static func _get_settings_definitions():
 	return [
 		Setting.create("settings/power_mode", 1),
 		Setting.create("settings/brightness", 5),
-		
+	]
+
+
+static func _get_settings_exports():
+	return [
 		Setting.export(["settings/power_mode"], TranslationServer.translate("DEFAULT.FOLDER_SYSTEM") + "/" + TranslationServer.translate("DEFAULT.POWER_MODE"), load("res://modules/default/power_manager/settings/dropdown_power_mode.tscn"))
 	]

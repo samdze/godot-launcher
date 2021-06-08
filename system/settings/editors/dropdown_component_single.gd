@@ -21,8 +21,8 @@ func _ready():
 	if tags_array.size() == 1 and tags_array[0].empty():
 		tags_array = []
 	var selected_entry = null
-	options = Modules.get_loaded_components(type, tags_array)
-	selected_entry = Modules.get_loaded_component_from_settings(setting_section + "/" + setting_key)
+	options = Modules.get_components(type, tags_array)
+	selected_entry = Modules.get_component_from_settings(setting_section + "/" + setting_key)
 	
 #	print("Returned components: "+str(options))
 	

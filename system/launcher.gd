@@ -6,6 +6,7 @@ enum Mode { OPAQUE, TRANSPARENT }
 var mode = Mode.OPAQUE setget _set_mode
 var fullscreen = true
 
+var tagged_services = {}
 var desktop : Desktop
 var app : AppHandler
 var first_app : PackedScene
@@ -28,14 +29,23 @@ func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	
 	# Create loaded services
-	var services = Modules.get_loaded_components(Component.Type.SERVICE)
+	var services = Modules.get_components(Component.Type.SERVICE)
+	var services_instances = []
+	var service_type_name = Component.get_type_name(Component.Type.SERVICE)
 	for s in services:
 		var service = s.resource.instance()
 		if service != null:
-			services_container.add_child(service)
+			services_instances.append(service)
+			# Assign the service to its tags if it's the selected one.
+			for tag in s.definition._get_component_tags():
+				if Settings.get_value("tags/" + tag + "_" + service_type_name) == s.id:
+					tagged_services[tag] = service
+	# Add services to the tree after tags initialization.
+	for service in services_instances:
+		services_container.add_child(service)
 	
-	desktop = Modules.get_loaded_component_from_settings("system/desktop").resource.instance()
-	first_app = Modules.get_loaded_component_from_settings("system/launcher_app").resource
+	desktop = Modules.get_component_from_settings("system/desktop").resource.instance()
+	first_app = Modules.get_component_from_settings("system/launcher_app").resource
 	
 	# Listen to Desktop signals, when you want to close or kill an app
 	add_child(desktop)
@@ -64,6 +74,12 @@ func get_app_handler() -> AppHandler:
 
 func get_services() -> Array:
 	return services_container.get_children()
+
+
+func get_tagged_service(tag : String) -> Node:
+	if tagged_services.has(tag):
+		return tagged_services[tag]
+	return null
 
 
 func is_fullscreen():
@@ -192,7 +208,19 @@ func emit_event(name, arguments = []):
 	return results
 
 
-static func _get_settings():
+static func _get_dependencies():
+	return []
+
+
+static func _is_available():
+	return true
+
+
+static func _get_settings_definitions():
+	# Also generate settings for existing feature tags.
+	var tags_definitions = []
+	for key in Settings.get_section_keys("tags"):
+		tags_definitions.append(Setting.create("tags/" + key, Settings.get_value("tags/" + key)))
 	return [
 		Setting.create("system/desktop", "default/desktop"),
 		Setting.create("system/launcher_app", "default/welcome_setup"),
@@ -201,4 +229,8 @@ static func _get_settings():
 		Setting.create("system/language", "en"),
 		Setting.create("system/theme", "default/light_theme"),
 		Setting.create("system/about", "default/about")
-	]
+	] + tags_definitions
+
+
+static func _get_settings_exports():
+	return []

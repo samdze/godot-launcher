@@ -198,7 +198,7 @@ static func _get_component_tags():
 	return [Component.TAG_SETTINGS]
 
 
-static func _get_settings():
+static func _get_settings_exports():
 	return [
 		Setting.export(["system/desktop"], TranslationServer.translate("DEFAULT.FOLDER_SYSTEM") + "/" + TranslationServer.translate("DEFAULT.DESKTOP"), load("res://system/settings/editors/dropdown_desktop.tscn")),
 		Setting.export(["system/launcher_app"], TranslationServer.translate("DEFAULT.FOLDER_SYSTEM") + "/" + TranslationServer.translate("DEFAULT.LAUNCHER_APP"), load("res://system/settings/editors/dropdown_launcher_app.tscn")),

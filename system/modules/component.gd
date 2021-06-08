@@ -24,5 +24,37 @@ var id : String				# Unique id of the component
 var name : String			# Developer assigned name of the component
 var module : String			# The name of the module that contains the component (the folder name)
 var resource : Resource 	# Theme resource, scene, etc.
+var definition : Resource	# The object representing the component class
 var tags : Array 			# Array of strings
 var type : int				# Type of the component: APP, WIDGET, THEME, etc.
+
+
+static func get_type_name(type) -> String:
+	match type:
+		Type.SYSTEM:
+			return "system"
+		Type.APP:
+			return "app"
+		Type.WIDGET:
+			return "widget"
+		Type.THEME:
+			return "theme"
+		Type.SERVICE:
+			return "service"
+		Type.ICONS:
+			return "icons"
+		Type.DESKTOP:
+			return "desktop"
+	return ""
+
+
+static func depend(type : int, tag : String) -> Dependency:
+	var dependency = Dependency.new()
+	dependency.type = type
+	dependency.tag = tag
+	return dependency
+
+
+class Dependency extends Reference:
+	var type : int
+	var tag : String
